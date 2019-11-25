@@ -17,23 +17,28 @@ Reunião
 struct Meeting {
     
     //MARK:- Properties
-    private(set) var manager : CKRecord
-    private(set) var duration : Int64 = 0
-    private(set) var employees : [CKRecord.Reference] = []
-    private(set) var limitTopic = 3
-    private(set) var topic : [CKRecord.Reference] = []
-    var finished = false
-    var started = false
+    var manager : CKRecord.Reference?
+    var duration : Int64?
+    var employees : [CKRecord.Reference] = []
+    var limitTopic : Int64?
+    var topic : [CKRecord.Reference] = []
+    var finished : Bool
+    var started : Bool
     var theme : String
-    var date : Date
+    var date : Date?
     
-    //MARK:- Initializer
-    init(date : Date, theme : String, manager : CKRecord){
-        self.date = date
-        self.theme = theme
-        self.manager = manager
+    //MARK: - Initializer
+    init(record : CKRecord) {
+        self.manager = record.value(forKey: "manager") as? CKRecord.Reference
+        self.duration = record.value(forKey: "duration") as? Int64 ?? 40
+        self.employees = record.value(forKey: "employees") as? [CKRecord.Reference] ?? []
+        self.limitTopic = record.value(forKey: "limitTopic") as? Int64 ?? 3
+        self.finished = record.value(forKey: "finished") as? Bool ?? false
+        self.started = record.value(forKey: "started") as? Bool ?? false
+        self.date = record.value(forKey: "date") as? Date
+        self.theme = record.value(forKey: "theme") as? String ?? ""
     }
-    
+        
     //MARK:- Methods
     
     /**
@@ -59,7 +64,7 @@ struct Meeting {
         - parameters: 
             - count : Quantidade de tópicos
      */
-    mutating func changeNumbersOfTopic(count : Int) {
+    mutating func changeNumbersOfTopic(count : Int64) {
         self.limitTopic = count
     }
     
