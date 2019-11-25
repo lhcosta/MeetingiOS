@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		49EB44E223871126002F434D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E123871126002F434D /* AppDelegate.swift */; };
 		49EB44E423871126002F434D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E323871126002F434D /* SceneDelegate.swift */; };
-		49EB44E623871126002F434D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E523871126002F434D /* ViewController.swift */; };
+		49EB44E623871126002F434D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E523871126002F434D /* LoginViewController.swift */; };
 		49EB44E923871126002F434D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44E723871126002F434D /* Main.storyboard */; };
 		49EB44EC23871126002F434D /* MeetingiOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44EA23871126002F434D /* MeetingiOS.xcdatamodeld */; };
 		49EB44EE23871128002F434D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44ED23871128002F434D /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 		49EB44DE23871126002F434D /* MeetingiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EB44E123871126002F434D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49EB44E323871126002F434D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		49EB44E523871126002F434D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49EB44E523871126002F434D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		49EB44E823871126002F434D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49EB44EB23871126002F434D /* MeetingiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MeetingiOS.xcdatamodel; sourceTree = "<group>"; };
 		49EB44ED23871128002F434D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +68,7 @@
 				A4533FF4238C58020089257A /* MeetingiOS.entitlements */,
 				49EB44E123871126002F434D /* AppDelegate.swift */,
 				49EB44E323871126002F434D /* SceneDelegate.swift */,
+				49EB44E523871126002F434D /* LoginViewController.swift */,
 				49EB44E523871126002F434D /* ViewController.swift */,
 				A4533FFA238C67F50089257A /* CloudKit */,
 				49EB44E723871126002F434D /* Main.storyboard */,
@@ -168,6 +169,7 @@
 			files = (
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* ViewController.swift in Sources */,
+				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
 				49EB44EC23871126002F434D /* MeetingiOS.xcdatamodeld in Sources */,
