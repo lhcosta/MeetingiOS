@@ -34,19 +34,30 @@ struct Meeting {
         self.manager = manager
     }
     
-    /**Adicionando novos funcionários à reunião
+    //MARK:- Methods
+    
+    /**
+     Adicionando novos funcionários à reunião
+    - parameters: 
+        - employee: Novo funcionário 
     */
     mutating func addingNewEmployee(_ employee : CKRecord.Reference) {
         self.employees.append(employee)
     }
     
-    /**Adicionando novas pautas
+    /**
+     Adicionando novas pautas
+    - parameters:
+        - topic : Novo tópico
     */
     mutating func addingNewTopic(_ topic : CKRecord.Reference) {
         self.employees.append(topic)
     }
     
-    /**Modificando o limite de pautas
+    /**
+     Modificando o limite de pautas
+        - parameters: 
+            - count : Quantidade de tópicos
      */
     mutating func changeNumbersOfTopic(count : Int) {
         self.limitTopic = count
