@@ -121,20 +121,19 @@ struct Meeting {
     
     /**
      Adicionando novas pautas
-    - parameters:
-        - topic : Novo tópico
-    */
+     - Parameter topic: Novo tópico
+     */
     mutating func addingNewTopic(_ topic : CKRecord.Reference) {
         self.topics.append(topic)
         self.record.setValue(topics, forKey: "topics")
     }
     
     /**
-          Filtragem das pautas de acordo com o author
-            - parameters:
-                    - user : Usuário 
-            - Returns:  
-                    - topics : Tópicos pertencentes ao usuário ou todos caso seja o gerenciador da reunião
+     Filtragem das pautas de acordo com o author
+     - Parameter user: Usuário
+     - Returns:
+            - topics : Tópicos pertencentes ao usuário ou todos caso seja o gerenciador da reunião
+        
      */
     func filteringTopics(user : CKRecord) -> [CKRecord.Reference] {
                 
@@ -153,6 +152,8 @@ struct Meeting {
         
         return topics_owner
     }
+    
+
         
     
 }
