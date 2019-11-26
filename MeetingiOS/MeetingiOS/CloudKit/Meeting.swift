@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 /**
-Struct utilizada para criar um nova reunião ou 
+Struct utilizada para criar um nova reunião, Update de Meeting ou
 utilizar como auxílio de manipulação de CKRecord Meeting
 - Author: Lucas Costa 
  */
@@ -83,11 +83,7 @@ struct Meeting {
     
     //MARK: - Initializer
     init(record : CKRecord) {
-        
-        if record.recordType != CKRecord.RecordType("Meeting") {
-            fatalError("Record diferente do tipo Meeting")
-        }
-            
+   
         self.record = record
         self.manager = record.value(forKey: "manager") as? CKRecord.Reference
         self.duration = record.value(forKey: "duration") as? Int64
