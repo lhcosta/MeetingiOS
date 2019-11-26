@@ -8,6 +8,7 @@
 
 import UIKit
 import AuthenticationServices
+import CloudKit
 
 class LoginViewController: UIViewController {
 
@@ -27,12 +28,14 @@ class LoginViewController: UIViewController {
         // Adiciona o botão na tela
         self.view.addSubview(signInButton)
         
+        signInButton.translatesAutoresizingMaskIntoConstraints = false
+        
         // Auto Layout do botão
         NSLayoutConstraint.activate([
-            signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signInButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            signInButton.widthAnchor.constraint(equalToConstant: 200),
             signInButton.heightAnchor.constraint(equalToConstant: 40),
-            signInButton.widthAnchor.constraint(equalToConstant: 200)
+            signInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            signInButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         ])
     }
     
@@ -60,6 +63,18 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         }
         
         print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
+        
+        let record = CKRecord(recordType: "User")
+
+        var user = User.init(record: record)
+        
+        let givenName = appleIDCredential.fullName?.givenName
+        let familyName = appleIDCredential.fullName?.familyName
+        
+        user.email = String(describing: appleIDCredential.email!)
+        user.name = "\(String(describing: givenName)) \(String(describing: familyName))"
+        
+        
         
     }
     
