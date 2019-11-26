@@ -11,7 +11,7 @@ import CloudKit
 
 /**
 Struct utilizada para criar um nova reunião ou 
-utilizar como auxílio de manipulação de CKRecord
+utilizar como auxílio de manipulação de CKRecord Meeting
 - Author: Lucas Costa 
  */
 
@@ -51,11 +51,7 @@ struct Meeting {
     }
     
     ///Tópicos da reunião
-    var topics : [CKRecord.Reference] {
-        didSet {
-            self.record?.setValue(topics, forKey: "topics")
-        }
-    }
+    private(set) var topics : [CKRecord.Reference]
     
     ///Reunião finalizada
     var finished : Bool {
@@ -136,5 +132,31 @@ struct Meeting {
         self.topics.append(topic)
         self.record?.setValue(topics, forKey: "topics")
     }
+    
+    /**
+          Filtragem das pautas de acordo com o author
+            - parameters:
+                    - user : Usuário 
+            - Returns:  
+                    - topics : Tópicos pertencentes ao usuário ou todos caso seja gerenciador da reunião
+     */
+    func filteringTopics(user : CKRecord) -> [CKRecord.Reference] {
+                
+        if user.value(forKey: "manager") as? Bool ?? false {
+            return self.topics
+        }
+        
+        let topics_owner = self.topics.filter { (topic) -> Bool in
+            
+            if(topic.value(forKey: "author") as? CKRecord.Reference == user) {
+                return true
+            }
+            
+            return false
+        }
+        
+        return topics_owner
+    }
+        
     
 }
