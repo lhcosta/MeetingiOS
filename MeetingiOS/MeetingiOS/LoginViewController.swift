@@ -18,12 +18,16 @@ class LoginViewController: UIViewController {
     }
     
     private func setupSignInButton() {
+        // Criação do Botão como um ASAuthorizationAppleIDButton
         let signInButton = ASAuthorizationAppleIDButton()
+        
+        // Dispara a ação de login do botão chamando o método signInButtonTapped
         signInButton.addTarget(self, action: #selector(LoginViewController.signInButtonTapped), for: .touchDown)
         
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
+        // Adiciona o botão na tela
         self.view.addSubview(signInButton)
         
+        // Auto Layout do botão
         NSLayoutConstraint.activate([
             signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             signInButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -33,10 +37,13 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func signInButtonTapped() {
+        //  Cria o provedor de autorização para obter as informações do Usuário
         let authorizationProvider = ASAuthorizationAppleIDProvider()
         let request = authorizationProvider.createRequest()
+        // Especifíca quais informações pedir autorização
         request.requestedScopes = [.email, .fullName]
         
+        // Cria a controller responsável por efetuar o login
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self as ASAuthorizationControllerDelegate
         authorizationController.presentationContextProvider = self as ASAuthorizationControllerPresentationContextProviding
@@ -46,6 +53,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
     
+    // Após obter a autoriização é possíivel obter as informações necessárias (email, fullname)
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             return
@@ -54,6 +62,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
         
     }
+    
+    // Para tratar erros
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("AppleID Credential failed with error: \(error.localizedDescription)")
     }

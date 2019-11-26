@@ -15,6 +15,7 @@
 		49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44EF23871128002F434D /* LaunchScreen.storyboard */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
+		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				A4533FF8238C67F00089257A /* Meeting.swift */,
+				E26A2BCC238D5BD700A956DE /* User.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 			files = (
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
+				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
