@@ -19,34 +19,34 @@ struct Meeting {
     
     //MARK:- Properties
     
-    ///Record gerenciador dos atributos
-    var record : CKRecord?
+    ///Record do tipo Meeting
+    private(set) var record : CKRecord!
     
     ///Gerenciador da reunião
     var manager : CKRecord.Reference? {
         didSet {
-            self.record?.setValue(manager, forKey: "manager")
+            self.record.setValue(manager, forKey: "manager")
         }
     }
     
     ///Duração da reunião
     var duration : Int64? {
         didSet {
-            self.record?.setValue(duration, forKey: "duration")
+            self.record.setValue(duration, forKey: "duration")
         }
     }
     
     ///Funcionários que participaram da reunião
     var employees : [CKRecord.Reference] {
         didSet {
-            self.record?.setValue(employees, forKey: "employees")
+            self.record.setValue(employees, forKey: "employees")
         }
     }
     
     ///Limite de tópicos de para cada funcionário
     var limitTopic : Int64? {
         didSet {
-            self.record?.setValue(limitTopic, forKey: "limitTopic")
+            self.record.setValue(limitTopic, forKey: "limitTopic")
         }
     }
     
@@ -56,28 +56,28 @@ struct Meeting {
     ///Reunião finalizada
     var finished : Bool {
         didSet {
-            self.record?.setValue(finished, forKey: "finished")
+            self.record.setValue(finished, forKey: "finished")
         }
     }
     
     ///Reunião iniciada
     var started : Bool {
         didSet {
-            self.record?.setValue(started, forKey: "started")
+            self.record.setValue(started, forKey: "started")
         }
     }
     
     ///Tema da reunião
     var theme : String {
         didSet {
-            self.record?.setValue(theme, forKey: "theme")
+            self.record.setValue(theme, forKey: "theme")
         }
     }
     
     ///Data da realização da reunião
     var date : Date? {
         didSet {
-            self.record?.setValue(date, forKey: "date")
+            self.record.setValue(date, forKey: "date")
         }
     }
     
@@ -106,7 +106,7 @@ struct Meeting {
     */
     mutating func addingNewEmployee(_ employee : CKRecord.Reference) {
         self.employees.append(employee)
-        self.record?.setValue(employees, forKey: "employees")
+        self.record.setValue(employees, forKey: "employees")
     }
     
     /**
@@ -116,7 +116,7 @@ struct Meeting {
     */
     mutating func removingEmployee(index : Int) {
         self.employees.remove(at: index)
-        self.record?.setValue(employees, forKey: "employees")
+        self.record.setValue(employees, forKey: "employees")
     }
     
     /**
@@ -126,7 +126,7 @@ struct Meeting {
     */
     mutating func addingNewTopic(_ topic : CKRecord.Reference) {
         self.topics.append(topic)
-        self.record?.setValue(topics, forKey: "topics")
+        self.record.setValue(topics, forKey: "topics")
     }
     
     /**
@@ -134,7 +134,7 @@ struct Meeting {
             - parameters:
                     - user : Usuário 
             - Returns:  
-                    - topics : Tópicos pertencentes ao usuário ou todos caso seja gerenciador da reunião
+                    - topics : Tópicos pertencentes ao usuário ou todos caso seja o gerenciador da reunião
      */
     func filteringTopics(user : CKRecord) -> [CKRecord.Reference] {
                 
