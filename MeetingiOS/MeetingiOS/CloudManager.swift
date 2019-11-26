@@ -9,11 +9,17 @@
 import Foundation
 import CloudKit
 
+/// Classe com métodos genêricos CRUD para CloudKit
 class CloudManager {
     
     static let shared = CloudManager()
     private let database = CKContainer(identifier: "iCloud.com.QuartetoFantastico.Meeting").publicCloudDatabase
     
+    /// Método que cria CKModifyRecordsOperation a partir de container padrao
+    /// - Parameters:
+    ///   - savePolicy: savepolicy da operacao
+    ///   - perRecordCompletion: completion que será executado após cada record
+    ///   - finalCompletion: completion final após final da operação
     private func setOP(savePolicy: CKModifyRecordsOperation.RecordSavePolicy, perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)) -> CKModifyRecordsOperation {
         let operation = CKModifyRecordsOperation()
         operation.savePolicy = savePolicy
@@ -28,7 +34,12 @@ class CloudManager {
         
         return operation
     }
-        
+    
+    /// Método que cria records para salvar
+    /// - Parameters:
+    ///   - records: Array de ckrecords para serem salvos
+    ///   - perRecordCompletion: completion que será executado após cada record
+    ///   - finalCompletion: completion final após final da operação
     func createRecords(records: [CKRecord], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
         let saveOp = setOP(savePolicy: .allKeys, perRecordCompletion: perRecordCompletion, finalCompletion: finalCompletion)
         saveOp.recordsToSave = records
@@ -36,6 +47,11 @@ class CloudManager {
         database.add(saveOp)
     }
     
+    /// Método que faz update nos records
+    /// - Parameters:
+    ///   - records: Array de ckrecords para serem alterados
+    ///   - perRecordCompletion: completion que será executado após cada record
+    ///   - finalCompletion: completion final após final da operação
     func updateRecords(records: [CKRecord], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
         let updateOp = setOP(savePolicy: .changedKeys, perRecordCompletion: perRecordCompletion, finalCompletion: finalCompletion)
         updateOp.recordsToSave = records
@@ -43,6 +59,11 @@ class CloudManager {
         database.add(updateOp)
     }
     
+    /// Método que deleta records do cloudkit
+    /// - Parameters:
+    ///   - recordIDs: array de record ids para serem deletados
+    ///   - perRecordCompletion: completion que será executado após cada record
+    ///   - finalCompletion: completion final após final da operação
     func deleteRecords(recordIDs: [CKRecord.ID], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
         let deleteOp = setOP(savePolicy: .changedKeys, perRecordCompletion: perRecordCompletion, finalCompletion: finalCompletion)
         deleteOp.recordIDsToDelete = recordIDs
@@ -50,6 +71,12 @@ class CloudManager {
         database.add(deleteOp)
     }
     
+    /// Método que faz query para consultar records
+    /// - Parameters:
+    ///   - recorType: string com nome da tabela a ser consultada
+    ///   - predicate: predicate da consulta
+    ///   - perRecordCompletion: completion que será executado após cada record
+    ///   - finalCompletion: completion final após final da operação
     func readRecords(recorType: String, predicate: NSPredicate, perRecordCompletion: @escaping ((CKRecord) -> Void), finalCompletion: @escaping (() -> Void)){
         
         let query = CKQuery(recordType: recorType, predicate: predicate)
@@ -64,5 +91,18 @@ class CloudManager {
         }
         
         database.add(queryOp)
+    }
+    
+    /// Método que faz fetch de record direto pelo record id
+    /// - Parameters:
+    ///   - recordIDs: array de record ids para serem buscadas
+    ///   - finalCompletion: completion para tratar os resultados da busca
+    func fetchRecords(recordIDs: [CKRecord.ID], finalCompletion: @escaping (([CKRecord.ID : CKRecord]?, Error?) -> Void)){
+        let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
+        operation.fetchRecordsCompletionBlock = { (records, error) in
+            finalCompletion(records, error)
+        }
+        
+        database.add(operation)
     }
 }
