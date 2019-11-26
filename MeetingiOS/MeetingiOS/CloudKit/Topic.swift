@@ -10,6 +10,8 @@ import Foundation
 import CloudKit
 
 
+
+/// Struct utilizada na criação de uma pauta, edição desta 
 struct Topic {
     
     //MARK: - Properties
