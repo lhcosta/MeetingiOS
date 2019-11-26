@@ -14,12 +14,12 @@ struct User {
     //MARK: - Properties
     private(set) var record: CKRecord
     
-    var email: String {
+    var email: String? {
         didSet {
             self.record.setValue(email, forKey: "email")
         }
     }
-    var name: String {
+    var name: String? {
         didSet {
             self.record.setValue(name, forKey: "name")
         }
@@ -42,8 +42,8 @@ struct User {
     //MARK: - Initializer
     init(record: CKRecord) {
         self.record = record
-        self.email = record.value(forKey: "email") as! String
-        self.name = record.value(forKey: "name") as! String
+        self.email = record.value(forKey: "email") as? String
+        self.name = record.value(forKey: "name") as? String
         self.invites = record.value(forKey: "invites") as? [CKRecord.Reference]
         self.meetings = record.value(forKey: "meetings") as? [CKRecord.Reference]
     }

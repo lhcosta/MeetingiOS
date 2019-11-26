@@ -64,16 +64,27 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         
         print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
         
-        let record = CKRecord(recordType: "User")
-
-        var user = User.init(record: record)
+        // Criação do Record na tabela de Usuários no Cloud
+        let userRecord = CKRecord(recordType: "User")
+        
+        // Passagem do record no construtor da Struct
+        var user = User.init(record: userRecord)
         
         let givenName = appleIDCredential.fullName?.givenName
         let familyName = appleIDCredential.fullName?.familyName
         
-        user.email = String(describing: appleIDCredential.email!)
-        user.name = "\(String(describing: givenName)) \(String(describing: familyName))"
+        // Pupula o Record na Struct User
+        guard let email = appleIDCredential.email else { return }
+        user.email = String(describing: email)
         
+        user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
+        
+        // Cria o record no Cloud
+        CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
+            print("Successfully created user: ", record["name"]!)
+        }) {
+            print("Done")
+        }
         
         
     }
