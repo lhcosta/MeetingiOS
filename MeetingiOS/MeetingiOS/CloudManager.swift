@@ -77,10 +77,15 @@ class CloudManager {
     ///   - predicate: predicate da consulta
     ///   - perRecordCompletion: completion que será executado após cada record
     ///   - finalCompletion: completion final após final da operação
-    func readRecords(recorType: String, predicate: NSPredicate, perRecordCompletion: @escaping ((CKRecord) -> Void), finalCompletion: @escaping (() -> Void)){
+    ///   - desiredKeys: Array de strings contendo o nome das chaves desejadas na pesquisa (caso queira todas as chaves passe o array como nil
+    func readRecords(recorType: String, predicate: NSPredicate, desiredKeys: [String]?, perRecordCompletion: @escaping ((CKRecord) -> Void), finalCompletion: @escaping (() -> Void)){
         
         let query = CKQuery(recordType: recorType, predicate: predicate)
         let queryOp = CKQueryOperation(query: query)
+        
+        if let keys = desiredKeys, keys.count>0{
+            queryOp.desiredKeys = keys
+        }
         
         queryOp.recordFetchedBlock = { (record) in
             perRecordCompletion(record)
@@ -97,8 +102,14 @@ class CloudManager {
     /// - Parameters:
     ///   - recordIDs: array de record ids para serem buscadas
     ///   - finalCompletion: completion para tratar os resultados da busca
-    func fetchRecords(recordIDs: [CKRecord.ID], finalCompletion: @escaping (([CKRecord.ID : CKRecord]?, Error?) -> Void)){
+    ///   - desiredKeys: Array de strings contendo o nome das chaves desejadas na pesquisa (caso queira todas as chaves passe o array como nil
+    func fetchRecords(recordIDs: [CKRecord.ID], desiredKeys: [String]?, finalCompletion: @escaping (([CKRecord.ID : CKRecord]?, Error?) -> Void)){
         let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
+        
+        if let keys = desiredKeys, keys.count>0{
+            operation.desiredKeys = keys
+        }
+        
         operation.fetchRecordsCompletionBlock = { (records, error) in
             finalCompletion(records, error)
         }
