@@ -9,10 +9,13 @@
 import Foundation
 import CloudKit
 
-
-
 /// Struct utilizada na criação de uma pauta, edição desta 
-struct Topic {
+struct Topic : Encodable {
+    
+    //MARK:- Json keys
+    enum CodingKeys : CodingKey {
+        case record
+    }
     
     //MARK: - Properties
     /// Record do tipo Topic
@@ -26,6 +29,11 @@ struct Topic {
     /// Referência do autor do Topic.
     var author: CKRecord.Reference? {
         didSet { self.record["author"] = author }
+    }
+    
+    /// Nome do autor para espelhamaneto na TV. (não sendo necessária a requisição no servidor)
+    var authorName: String {
+        didSet { self.record["authorName"] = authorName }
     }
     
     /// Se já foi discutida ou não durante a reunião
@@ -45,6 +53,11 @@ struct Topic {
         didSet { self.record["duration"] = duration }
     }
     
+    /// Atributo que decide se o tópico vai ou não para a Meeting, setado peli gerente. (criador da Meeting)
+    var selectedForReunion: Bool {
+        didSet { self.record["selectedForReunion"] = selectedForReunion }
+    }
+    
     
     //MARK: - Initializer
     init(record: CKRecord) {
@@ -52,9 +65,21 @@ struct Topic {
         self.record = record
         self.description = record["description"] as? String ?? ""
         self.author = record["author"] as? CKRecord.Reference
+        self.authorName = record["authorName"] as? String ?? "Desconhecido"
         self.discussed = record["discussed"] as? Bool ?? false
         self.conclusions = record["conclusions"] as? [String] ?? []
         self.duration = record["duration"] as? Date ?? Date()
+        self.selectedForReunion = record["selectedForReunion"] as? Bool ?? false
+    }
+    
+    //MARK:- Encoder
+    func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        let recordData = try NSKeyedArchiver.archivedData(withRootObject: record, requiringSecureCoding: true)
+        
+        try container.encode(recordData, forKey: .record)
     }
     
     
