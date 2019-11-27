@@ -11,6 +11,8 @@ import AuthenticationServices
 import CloudKit
 
 class LoginViewController: UIViewController {
+    
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,12 +84,17 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         // Cria o record no Cloud
         CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
             print("Successfully created user: ", record["name"]!)
+            self.defaults.set(record.recordID.recordName, forKey: "recordName")
+            print(record.recordID.recordName)
         }) {
             print("Done")
         }
         
-        
+        // UserDefaults
+        defaults.set(givenName, forKey: "givenName")
+        defaults.set(email, forKey: "email")
     }
+    
     
     // Para tratar erros
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

@@ -9,19 +9,23 @@
 import UIKit
 import CloudKit
 
+
 class TopicViewController: UIViewController {
 
-    let manager = CloudManager()
     @IBOutlet var descriptionField: UITextField!
     @IBOutlet var tableViewTopics: UITableView!
-    var newTopic: CKRecord!
-    var topics: [Topic] = []
-    let email: String = ""
     
-//    var id: CKRecord.ID
+    var topics: [Topic] = []
+    let defaults = UserDefaults.standard
+    var currMeeting: Meeting!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let meetingRecord = CKRecord(recordType: "Meeting")
+        currMeeting = Meeting(record: meetingRecord)
+        
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
@@ -30,82 +34,62 @@ class TopicViewController: UIViewController {
     
     @IBAction func sendButton(_ sender: Any) {
         
-        newTopic = CKRecord(recordType: "Topic")
-        newTopic["description"] = descriptionField.text!
-//        newTopic["author"] = "Eu"
-//        newTopic["conclusions"] = "Some work here."
+        let topicRecord = CKRecord(recordType: "Topic")
+        var newTopic = Topic(record: topicRecord)
+        newTopic.editDescription(descriptionField.text!)
+        newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
         
-        let myContainer = CKContainer.default()
-        let database = myContainer.publicCloudDatabase
+        currMeeting.addingNewTopic(CKRecord.Reference(recordID: CKRecord.ID(recordName: newTopic.record.recordID.recordName), action: .none))
         
-        database.save(newTopic) { (_, error) in
+        CloudManager.shared.createRecords(records: [newTopic.record, currMeeting.record], perRecordCompletion: { (record, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
-        }
-        
-        let name = ""
-        let predicate = NSPredicate(format: "name == %@", name)
-        
-        let query = CKQuery(recordType: "Topic", predicate: predicate)
-        
-        database.perform(query, inZoneWith: CKRecordZone.default().zoneID) { (results, error) in
-            if let error = error {
-                print(error.localizedDescription)
+        }) {
+            print("Saved!")
+            DispatchQueue.main.async {
+                self.tableViewTopics.reloadData()
             }
-            
         }
     }
     
     
     @IBAction func retrieveButton(_ sender: Any) {
         
-        let predicate = NSPredicate(format: "recordID == %@", self.id)
-        let query = CKQuery(recordType: "Topic", predicate: predicate)
+        self.topics = []
+        let author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
         
-        let container = CKContainer.default()
-        let database = container.publicCloudDatabase
-        
-        database.perform(query, inZoneWith: CKRecordZone.default().zoneID) { (results, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+        for reference in currMeeting.topics {
+            
+            let predicate = NSPredicate(format: "recordID == %@ AND author == %@", reference, author)
+//            let predicate = NSPredicate(format: "author == %@", author)
+            print(reference)
+            
+            CloudManager.shared.readRecords(recorType: "Topic", predicate: predicate, desiredKeys: nil, perRecordCompletion: { (record) in
+                self.topics.append(Topic.init(record: record))
+            }) {
+                print("Done")
+                DispatchQueue.main.async {
+                    print(self.topics)
+                    self.tableViewTopics.reloadData()
+                }
             }
-            
-            guard let results = results else { return }
-            self.topics = results.map(Topic.init)
-        }
-    }
-    
-    
-    func retrieveID(database: CKDatabase) {
-        
-        let predicate = NSPredicate(format: "email == %@", email)
-        let query = CKQuery(recordType: "User", predicate: predicate)
-        
-        database.perform(query, inZoneWith: CKRecordZone.default().zoneID) { (result, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            
-            guard let result = result else { return }
-            
-            let topicResults = result.map(User.init)
-//            self.id = topicResults[0].id
         }
     }
 }
 
 
 extension TopicViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.topics.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TopicsTableCiewCell
+        cell.topicLabel.text = topics[indexPath.row].description
+        return cell
     }
 }

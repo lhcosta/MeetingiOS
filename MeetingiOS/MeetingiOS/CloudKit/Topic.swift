@@ -16,7 +16,7 @@ struct Topic {
     
     //MARK: - Properties
     /// Record do tipo Topic
-    private let record: CKRecord
+    private(set) var record: CKRecord
     
     /// Topico em si.
     var description: String {
@@ -24,7 +24,9 @@ struct Topic {
     }
     
     /// Referência do autor do Topic.
-    let author: CKRecord.Reference?
+    var author: CKRecord.Reference? {
+        didSet { self.record["author"] = author }
+    }
     
     /// Se já foi discutida ou não durante a reunião
     /// Será usada para filtrar as pautas não discutidas e discutidas para a visualização do autor delas.
