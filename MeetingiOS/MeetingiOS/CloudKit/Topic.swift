@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 /// Struct utilizada na criação de uma pauta, edição desta 
-struct Topic : Encodable {
+struct Topic {
     
     //MARK:- Json keys
     enum CodingKeys : CodingKey {
@@ -72,16 +72,7 @@ struct Topic : Encodable {
         self.selectedForReunion = record["selectedForReunion"] as? Bool ?? false
     }
     
-    //MARK:- Encoder
-    func encode(to encoder: Encoder) throws {
-        
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        let recordData = try NSKeyedArchiver.archivedData(withRootObject: record, requiringSecureCoding: true)
-        
-        try container.encode(recordData, forKey: .record)
-    }
-    
+
     
     //MARK: - Methods
     /// Adicionar/editar a pauta do Topic
@@ -107,5 +98,18 @@ struct Topic : Encodable {
     mutating func setDuration(duration: Date) {
         self.duration = duration
         self.record["duration"] = self.duration
+    }
+}
+
+extension Topic : Encodable {
+    
+    //MARK:- Encoder
+    func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        let recordData = try NSKeyedArchiver.archivedData(withRootObject: record, requiringSecureCoding: true)
+        
+        try container.encode(recordData, forKey: .record)
     }
 }

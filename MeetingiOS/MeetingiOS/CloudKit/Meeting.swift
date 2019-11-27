@@ -15,7 +15,7 @@ utilizar como auxílio de manipulação de CKRecord Meeting
 - Author: Lucas Costa 
  */
 
-class Meeting : Encodable {
+struct Meeting {
     
     //MARK:- JSON Keys
     enum CodingKeys : String, CodingKey {
@@ -28,7 +28,7 @@ class Meeting : Encodable {
     private(set) var record : CKRecord!
     
     ///Topicos selecionados
-    private(set) var selected_topics : [Topic] = []
+    var selected_topics : [Topic] = []
         
     ///Gerenciador da reunião
     var manager : CKRecord.Reference? {
@@ -104,40 +104,14 @@ class Meeting : Encodable {
         self.topics = record.value(forKey: "topics") as? [CKRecord.Reference] ?? []
     }
     
-    //MARK:- Encoder
-    func encode(to encoder: Encoder) throws {
-                
-        self.fetchSelectedTopics()
-        
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        if let record = self.record {
-            
-            let recordData = try NSKeyedArchiver.archivedData(withRootObject: record, requiringSecureCoding: true)
-            try container.encode(recordData, forKey: .record)  
-            try container.encode(self.selected_topics, forKey: .selectedTopics)
-        }
-        
-    }
-    
     //MARK:- Methods
-    
-    private func fetchSelectedTopics() {
-        
-        CloudManager.shared.readRecords(recorType: "Topic", predicate: NSPredicate(format: "selectedForReunion = true"), desiredKeys: ["description", "authorName"], perRecordCompletion: { (record) in
-            self.selected_topics.append(Topic(record: record))
-        }) { 
-            print("Finished")
-        }
-        
-    }
     
     /**
      Adicionando novos funcionários à reunião
     - parameters: 
         - employee: Novo funcionário 
     */
-    func addingNewEmployee(_ employee : CKRecord.Reference) {
+    mutating func addingNewEmployee(_ employee : CKRecord.Reference) {
         self.employees.append(employee)
         self.record.setValue(employees, forKey: "employees")
     }
@@ -147,7 +121,7 @@ class Meeting : Encodable {
     - parameters: 
         - index : Indice do funcionário
     */
-    func removingEmployee(index : Int) {
+    mutating func removingEmployee(index : Int) {
         self.employees.remove(at: index)
         self.record.setValue(employees, forKey: "employees")
     }
@@ -156,7 +130,7 @@ class Meeting : Encodable {
      Adicionando novas pautas
      - Parameter topic: Novo tópico
      */
-    func addingNewTopic(_ topic : CKRecord.Reference) {
+    mutating func addingNewTopic(_ topic : CKRecord.Reference) {
         self.topics.append(topic)
         self.record.setValue(topics, forKey: "topics")
     }
@@ -184,5 +158,22 @@ class Meeting : Encodable {
         }
         
         return topics_owner
+    }
+}
+
+//MARK:- Encodable
+extension Meeting : Encodable {
+    
+    func encode(to encoder: Encoder) throws {
+     
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        if let record = self.record {
+            
+            let recordData = try NSKeyedArchiver.archivedData(withRootObject: record, requiringSecureCoding: true)
+            
+            try container.encode(recordData, forKey: .record)  
+            try container.encode(self.selected_topics.self, forKey: .selectedTopics)
+        }
     }
 }
