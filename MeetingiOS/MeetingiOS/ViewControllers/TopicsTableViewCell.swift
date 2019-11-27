@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class TopicsTableCiewCell: UITableViewCell {
+class TopicsTableViewCell: UITableViewCell {
     
     @IBOutlet var topicLabel: UILabel!
 }

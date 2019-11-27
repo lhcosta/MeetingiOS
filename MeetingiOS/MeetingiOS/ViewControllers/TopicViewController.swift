@@ -10,28 +10,39 @@ import UIKit
 import CloudKit
 
 
+/// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
 class TopicViewController: UIViewController {
 
+    //MARK: - Properties
     @IBOutlet var descriptionField: UITextField!
     @IBOutlet var tableViewTopics: UITableView!
     
+    /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
+    
+    /// UserDefaults para pegar a referência do ID do author (usuário).
     let defaults = UserDefaults.standard
+    
+    /// Meeting criada pelo usuário.
     var currMeeting: Meeting!
     
     
+    /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let meetingRecord = CKRecord(recordType: "Meeting")
         currMeeting = Meeting(record: meetingRecord)
         
-        
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
     }
     
     
+    //MARK: - Methods
+    /// Botão que envia o Topic para o Cloud, tanto para a table Topic quando para o atributo topics do Meeting.
+    /// currMeeting ainda será substiuído pela Meeting criada.
+    /// - Parameter sender: default
     @IBAction func sendButton(_ sender: Any) {
         
         let topicRecord = CKRecord(recordType: "Topic")
@@ -48,14 +59,13 @@ class TopicViewController: UIViewController {
             }
         }) {
             print("Saved!")
-            DispatchQueue.main.async {
-                self.tableViewTopics.reloadData()
-            }
+            self.reloadTable()
         }
     }
     
     
-    @IBAction func retrieveButton(_ sender: Any) {
+    /// Atualiza a table view dos Topics adicionados pelo usuário naquela Meeting específica.
+    func reloadTable() {
         
         self.topics = []
         let author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
@@ -63,15 +73,12 @@ class TopicViewController: UIViewController {
         for reference in currMeeting.topics {
             
             let predicate = NSPredicate(format: "recordID == %@ AND author == %@", reference, author)
-//            let predicate = NSPredicate(format: "author == %@", author)
-            print(reference)
             
             CloudManager.shared.readRecords(recorType: "Topic", predicate: predicate, desiredKeys: nil, perRecordCompletion: { (record) in
                 self.topics.append(Topic.init(record: record))
             }) {
                 print("Done")
                 DispatchQueue.main.async {
-                    print(self.topics)
                     self.tableViewTopics.reloadData()
                 }
             }
@@ -80,6 +87,7 @@ class TopicViewController: UIViewController {
 }
 
 
+//MARK: - Table View Delegate/DataSource
 extension TopicViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,7 +96,7 @@ extension TopicViewController: UITableViewDelegate, UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TopicsTableCiewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TopicsTableViewCell
         cell.topicLabel.text = topics[indexPath.row].description
         return cell
     }

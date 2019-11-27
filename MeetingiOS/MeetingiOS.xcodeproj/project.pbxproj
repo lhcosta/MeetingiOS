@@ -60,6 +60,7 @@
 			children = (
 				49EB44E523871126002F434D /* LoginViewController.swift */,
 				235E7B85238DA95300B59855 /* TopicViewController.swift */,
+				23AF97C7238E01A200A3A388 /* TopicsTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -88,7 +89,6 @@
 				A4533FF4238C58020089257A /* MeetingiOS.entitlements */,
 				49EB44E123871126002F434D /* AppDelegate.swift */,
 				49EB44E323871126002F434D /* SceneDelegate.swift */,
-				23AF97C7238E01A200A3A388 /* TopicsTableViewCell.swift */,
 				235E7B84238DA93500B59855 /* ViewControllers */,
 				A4533FFA238C67F50089257A /* CloudKit */,
 				49EB44E723871126002F434D /* Main.storyboard */,
