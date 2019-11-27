@@ -11,8 +11,6 @@ import AuthenticationServices
 import CloudKit
 
 class LoginViewController: UIViewController {
-    
-    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,31 +47,10 @@ class LoginViewController: UIViewController {
         request.requestedScopes = [.email, .fullName]
         
         // Cria a controller responsável por efetuar o login
-
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self as ASAuthorizationControllerDelegate
         authorizationController.presentationContextProvider = self as ASAuthorizationControllerPresentationContextProviding
         authorizationController.performRequests()
-        
-    }
-    
-    func getAppleIDStatus(userIdentifier: String) {
-        
-        let provider = ASAuthorizationAppleIDProvider()
-        provider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
-            switch(credentialState){
-            case .authorized:
-                print("Autorizado")
-                break
-            case .revoked:
-                print("Revogado")
-                break
-            case .notFound:
-                print("Nao Encontrado")
-                break
-            default: break
-            }
-        }
     }
 }
 
@@ -84,8 +61,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
             return
         }
-        
-//        getAppleIDStatus(userIdentifier: appleIDCredential.user)
         
         print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
         
@@ -110,18 +85,14 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 print("Error: \(error)")
             } else {
                 print("Successfully created user: ", record["name"]!)
-                self.defaults.set(record.recordID.recordName, forKey: "recordName")
-                print(record.recordID.recordName)
             }
+            
         }) {
             print("Done")
         }
         
-        // UserDefaults
-        defaults.set(givenName, forKey: "givenName")
-        defaults.set(email, forKey: "email")
+        
     }
-    
     
     // Para tratar erros
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
