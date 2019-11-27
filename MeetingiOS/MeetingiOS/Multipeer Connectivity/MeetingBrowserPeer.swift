@@ -10,11 +10,11 @@ import UIKit
 import MultipeerConnectivity
 
 /// Conexão Multipeer 
-class MeetingConnectionPeer: NSObject {
+class MeetingBrowserPeer: NSObject {
     
     //MARK:- Properties
     
-    /// Sessão para conexã entre os peers
+    /// Sessão para conexão entre os peers
     private var session : MCSession!
     
     /// Nome do tipo do serviço fornecido
@@ -59,7 +59,7 @@ class MeetingConnectionPeer: NSObject {
 }
 
 //MARK:- MCNearbyServiceBrowser
-extension MeetingConnectionPeer : MCNearbyServiceBrowserDelegate {
+extension MeetingBrowserPeer : MCNearbyServiceBrowserDelegate {
         
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         NSLog("%@", "Connection with - \(peerID)")

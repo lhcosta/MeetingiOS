@@ -143,7 +143,7 @@ struct Meeting {
         
         let topics_owner = self.topics.filter { (topic) -> Bool in
             
-            if(topic.value(forKey: "author") as? CKRecord.Reference == user) {
+            if(topic.value(forKey: "author") as? CKRecord.Reference == user.recordID) {
                 return true
             }
             
