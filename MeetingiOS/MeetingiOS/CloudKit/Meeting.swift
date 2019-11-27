@@ -102,7 +102,6 @@ class Meeting : Encodable {
         self.date = record.value(forKey: "date") as? Date
         self.theme = record.value(forKey: "theme") as? String ?? ""
         self.topics = record.value(forKey: "topics") as? [CKRecord.Reference] ?? []
-        
     }
     
     //MARK:- Encoder
@@ -186,8 +185,4 @@ class Meeting : Encodable {
         
         return topics_owner
     }
-    
-
-        
-    
 }
