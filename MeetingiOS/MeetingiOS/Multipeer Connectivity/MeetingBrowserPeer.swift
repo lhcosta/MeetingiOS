@@ -62,8 +62,9 @@ class MeetingBrowserPeer: NSObject {
 extension MeetingBrowserPeer : MCNearbyServiceBrowserDelegate {
         
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        
+        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 30)
         NSLog("%@", "Connection with - \(peerID)")
-        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 15)
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {

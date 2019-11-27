@@ -9,10 +9,13 @@
 import Foundation
 import CloudKit
 
-
-
 /// Struct utilizada na criação de uma pauta, edição desta 
-struct Topic {
+struct Topic : Encodable {
+    
+    //MARK:- Json keys
+    enum CodingKeys : CodingKey {
+        case record
+    }
     
     //MARK: - Properties
     /// Record do tipo Topic
@@ -55,6 +58,16 @@ struct Topic {
         self.discussed = record["discussed"] as? Bool ?? false
         self.conclusions = record["conclusions"] as? [String] ?? []
         self.duration = record["duration"] as? Date ?? Date()
+    }
+    
+    //MARK:- Encoder
+    func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        let recordData = try NSKeyedArchiver.archivedData(withRootObject: record, requiringSecureCoding: true)
+        
+        try container.encode(recordData, forKey: .record)
     }
     
     
