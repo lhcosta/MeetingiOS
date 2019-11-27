@@ -28,6 +28,11 @@ struct Topic {
         didSet { self.record["author"] = author }
     }
     
+    /// Nome do autor para espelhamaneto na TV. (não sendo necessária a requisição no servidor)
+    var authorName: String {
+        didSet { self.record["authorName"] = authorName }
+    }
+    
     /// Se já foi discutida ou não durante a reunião
     /// Será usada para filtrar as pautas não discutidas e discutidas para a visualização do autor delas.
     var discussed: Bool {
@@ -45,6 +50,11 @@ struct Topic {
         didSet { self.record["duration"] = duration }
     }
     
+    /// Atributo que decide se o tópico vai ou não para a Meeting, setado peli gerente. (criador da Meeting)
+    var selectedForReunion: Bool {
+        didSet { self.record["selectedForReunion"] = selectedForReunion }
+    }
+    
     
     //MARK: - Initializer
     init(record: CKRecord) {
@@ -52,9 +62,11 @@ struct Topic {
         self.record = record
         self.description = record["description"] as? String ?? ""
         self.author = record["author"] as? CKRecord.Reference
+        self.authorName = record["authorName"] as? String ?? "Desconhecido"
         self.discussed = record["discussed"] as? Bool ?? false
         self.conclusions = record["conclusions"] as? [String] ?? []
         self.duration = record["duration"] as? Date ?? Date()
+        self.selectedForReunion = record["selectedForReunion"] as? Bool ?? false
     }
     
     

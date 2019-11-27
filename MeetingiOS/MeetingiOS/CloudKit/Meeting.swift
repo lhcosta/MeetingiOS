@@ -94,7 +94,6 @@ struct Meeting {
         self.date = record.value(forKey: "date") as? Date
         self.theme = record.value(forKey: "theme") as? String ?? ""
         self.topics = record.value(forKey: "topics") as? [CKRecord.Reference] ?? []
-        
     }
         
     //MARK:- Methods
@@ -152,8 +151,4 @@ struct Meeting {
         
         return topics_owner
     }
-    
-
-        
-    
 }
