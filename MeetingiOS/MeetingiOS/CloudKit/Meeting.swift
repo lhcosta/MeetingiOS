@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 /**
-Classe utilizada para criar um nova reunião, Update de Meeting ou
+Struct utilizada para criar um nova reunião, Update de Meeting ou
 utilizar como auxílio de manipulação de CKRecord Meeting
 - Author: Lucas Costa 
  */
@@ -29,79 +29,119 @@ struct Meeting {
     
     ///Topicos selecionados
     var selected_topics : [Topic] = []
+    
+    ///Tópicos da reunião
+    var topics : [CKRecord.Reference] {
+        get {
+            self.record.value(forKey: "topics") as? [CKRecord.Reference] ?? []
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "topics")
+        }
+    }
         
     ///Gerenciador da reunião
     var manager : CKRecord.Reference? {
-        didSet {
-            self.record.setValue(manager, forKey: "manager")
+        
+        set {
+            self.record.setValue(newValue, forKey: "manager")
+        }
+        
+        get {
+            return self.record.value(forKey: "manager") as? CKRecord.Reference
         }
     }
     
     ///Duração da reunião
     var duration : Int64? {
-        didSet {
-            self.record.setValue(duration, forKey: "duration")
+        
+        get {
+            self.record.value(forKey: "duration") as? Int64
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "duration")
         }
     }
     
     ///Funcionários que participaram da reunião
     var employees : [CKRecord.Reference] {
-        didSet {
-            self.record.setValue(employees, forKey: "employees")
+        
+        get {
+            return self.record.value(forKey: "employees") as? [CKRecord.Reference] ?? []
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "employees")
         }
     }
     
     ///Limite de tópicos de para cada funcionário
     var limitTopic : Int64? {
-        didSet {
-            self.record.setValue(limitTopic, forKey: "limitTopic")
+        
+        get {
+            self.record.value(forKey: "limitTopic") as? Int64
         }
+        
+        set {
+            self.record.setValue(newValue, forKey: "limitTopic")
+        }
+        
     }
-    
-    ///Tópicos da reunião
-    private(set) var topics : [CKRecord.Reference]
     
     ///Reunião finalizada
     var finished : Bool {
-        didSet {
-            self.record.setValue(finished, forKey: "finished")
+        
+        get {
+            return self.record.value(forKey: "finished") as? Bool ?? false
         }
+        
+        set {
+            self.record.setValue(newValue, forKey: "finished")
+        }
+        
     }
     
     ///Reunião iniciada
     var started : Bool {
-        didSet {
-            self.record.setValue(started, forKey: "started")
+        
+        get {
+            self.record.value(forKey: "started") as? Bool ?? false
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "started")
         }
     }
     
     ///Tema da reunião
     var theme : String {
-        didSet {
-            self.record.setValue(theme, forKey: "theme")
+        
+        get {
+            return self.record.value(forKey: "theme") as? String ?? ""
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "theme")
         }
     }
     
     ///Data da realização da reunião
     var date : Date? {
-        didSet {
-            self.record.setValue(date, forKey: "date")
+        
+        get {
+            return self.record.value(forKey: "date") as? Date
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "date")
         }
     }
     
     //MARK: - Initializer
     init(record : CKRecord) {
-   
         self.record = record
-        self.manager = record.value(forKey: "manager") as? CKRecord.Reference
-        self.duration = record.value(forKey: "duration") as? Int64
-        self.employees = record.value(forKey: "employees") as? [CKRecord.Reference] ?? []
-        self.limitTopic = record.value(forKey: "limitTopic") as? Int64 ?? 3
-        self.finished = record.value(forKey: "finished") as? Bool ?? false
-        self.started = record.value(forKey: "started") as? Bool ?? false
-        self.date = record.value(forKey: "date") as? Date
-        self.theme = record.value(forKey: "theme") as? String ?? ""
-        self.topics = record.value(forKey: "topics") as? [CKRecord.Reference] ?? []
     }
     
     //MARK:- Methods
