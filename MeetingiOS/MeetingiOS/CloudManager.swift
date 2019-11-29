@@ -104,6 +104,7 @@ class CloudManager {
     ///   - finalCompletion: completion para tratar os resultados da busca
     ///   - desiredKeys: Array de strings contendo o nome das chaves desejadas na pesquisa (caso queira todas as chaves passe o array como nil
     func fetchRecords(recordIDs: [CKRecord.ID], desiredKeys: [String]?, finalCompletion: @escaping (([CKRecord.ID : CKRecord]?, Error?) -> Void)){
+        
         let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
         
         if let keys = desiredKeys, keys.count>0{
