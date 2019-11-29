@@ -46,7 +46,7 @@ class MeetingBrowserPeer: NSObject {
     /// - Parameters:
     ///   - data: dados a serem enviados
     ///   - completionHandler: possíveis erros que podem acontecer
-    func sendMeetingForPeer(data : Data, completionHandler: (Error?) -> Void) {
+    func sendMeetingForPeer(data : Data, completionHandler: @escaping (Error?) -> Void) {
        
         do {
             try self.session.send(data, toPeers: self.session.connectedPeers, with: .reliable)
