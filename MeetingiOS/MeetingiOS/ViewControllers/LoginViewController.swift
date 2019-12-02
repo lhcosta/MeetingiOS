@@ -99,6 +99,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         let familyName = appleIDCredential.fullName?.familyName
         
         // Pupula o Record na Struct User
+        user.appleCredential = appleIDCredential.user
         guard let email = appleIDCredential.email else { return }
         user.email = String(describing: email)
         

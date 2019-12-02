@@ -14,6 +14,12 @@ struct User {
     //MARK: - Properties
     private(set) var record: CKRecord
     
+    var appleCredential: String? {
+        didSet {
+            self.record.setValue(appleCredential, forKey: "appleCredential")
+        }
+    }
+    
     var email: String? {
         didSet {
             self.record.setValue(email, forKey: "email")
@@ -42,6 +48,7 @@ struct User {
     //MARK: - Initializer
     init(record: CKRecord) {
         self.record = record
+        self.appleCredential = record.value(forKey: "appleCredential") as? String
         self.email = record.value(forKey: "email") as? String
         self.name = record.value(forKey: "name") as? String
         self.invites = record.value(forKey: "invites") as? [CKRecord.Reference]
