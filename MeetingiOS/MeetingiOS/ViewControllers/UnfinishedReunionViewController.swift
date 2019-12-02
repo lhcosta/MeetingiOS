@@ -11,7 +11,7 @@ import CloudKit
 
 
 /// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
-class TopicViewController: UIViewController {
+class UnfinishedReunionViewController: UIViewController {
 
     //MARK: - Properties
     @IBOutlet var descriptionField: UITextField!
@@ -43,14 +43,15 @@ class TopicViewController: UIViewController {
     /// Botão que envia o Topic para o Cloud, tanto para a table Topic quando para o atributo topics do Meeting.
     /// currMeeting ainda será substiuído pela Meeting criada.
     /// - Parameter sender: default
-    @IBAction func sendButton(_ sender: Any) {
+    @IBAction func createTopicButton(_ sender: Any) {
         
         let topicRecord = CKRecord(recordType: "Topic")
         var newTopic = Topic(record: topicRecord)
         newTopic.editDescription(descriptionField.text!)
         newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
+        newTopic.authorName = defaults.string(forKey: "givenName") ?? "Desconhecido"
         
-        currMeeting.addingNewTopic(CKRecord.Reference(recordID: CKRecord.ID(recordName: newTopic.record.recordID.recordName), action: .none))
+        currMeeting.addingNewTopic(CKRecord.Reference(recordID: CKRecord.ID(recordName: newTopic.record.recordID.recordName), action: .deleteSelf))
         
         CloudManager.shared.createRecords(records: [newTopic.record, currMeeting.record], perRecordCompletion: { (record, error) in
             if let error = error {
@@ -88,7 +89,7 @@ class TopicViewController: UIViewController {
 
 
 //MARK: - Table View Delegate/DataSource
-extension TopicViewController: UITableViewDelegate, UITableViewDataSource {
+extension UnfinishedReunionViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.topics.count
