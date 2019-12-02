@@ -57,6 +57,15 @@ struct User {
     
     //MARK: - Methods
     
+    /// Description: Procura o AppleIDCredential do usuário para caso o usuário tenha logado no app uma vez
+    /// - Parameter credential: credencial vinda do Sign in with apple
+    mutating func searchCredentials(credential: String, record: CKRecord){
+        CloudManager.shared.fetchRecords(recordIDs: [record.recordID], desiredKeys: ["email", "name", "invites", "meetings"]) { (records, error) in
+            let rec = records![record.recordID]
+            User(record: rec!)
+        }
+    }
+    
     // Adiciona o convite no array de convites do Usuario
     mutating func addInvite(invite: CKRecord.Reference){
         self.invites?.append(invite)
