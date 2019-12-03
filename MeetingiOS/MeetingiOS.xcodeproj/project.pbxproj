@@ -23,6 +23,7 @@
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
+		A4EB3BE02395E16A0097857F /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewMeeting.storyboard; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,17 +103,17 @@
 		49EB44E023871126002F434D /* MeetingiOS */ = {
 			isa = PBXGroup;
 			children = (
-				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
 				A4533FF4238C58020089257A /* MeetingiOS.entitlements */,
+				49EB44F223871128002F434D /* Info.plist */,
 				49EB44E123871126002F434D /* AppDelegate.swift */,
 				49EB44E323871126002F434D /* SceneDelegate.swift */,
-				49EB44E723871126002F434D /* Main.storyboard */,
-				235E7B84238DA93500B59855 /* ViewControllers */,
-				2391532523918E2400479BB6 /* TableViewCells */,
-				A4533FFA238C67F50089257A /* CloudKit */,
 				49EB44ED23871128002F434D /* Assets.xcassets */,
+				A4533FFA238C67F50089257A /* CloudKit */,
 				49EB44EF23871128002F434D /* LaunchScreen.storyboard */,
-				49EB44F223871128002F434D /* Info.plist */,
+				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
+				A4EB3BE12395E1700097857F /* Storyboards */,
+				2391532523918E2400479BB6 /* TableViewCells */,
+				235E7B84238DA93500B59855 /* ViewControllers */,
 			);
 			path = MeetingiOS;
 			sourceTree = "<group>";
@@ -141,6 +143,15 @@
 				E26A2BCC238D5BD700A956DE /* User.swift */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		A4EB3BE12395E1700097857F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */,
+				49EB44E723871126002F434D /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +215,7 @@
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
 				49EB44E923871126002F434D /* Main.storyboard in Resources */,
+				A4EB3BE02395E16A0097857F /* NewMeeting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
