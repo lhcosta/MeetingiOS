@@ -19,12 +19,15 @@
 		49EB44E223871126002F434D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E123871126002F434D /* AppDelegate.swift */; };
 		49EB44E423871126002F434D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E323871126002F434D /* SceneDelegate.swift */; };
 		49EB44E623871126002F434D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E523871126002F434D /* LoginViewController.swift */; };
-		49EB44E923871126002F434D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44E723871126002F434D /* Main.storyboard */; };
 		49EB44EE23871128002F434D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44ED23871128002F434D /* Assets.xcassets */; };
 		49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44EF23871128002F434D /* LaunchScreen.storyboard */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
+		A4EB3BE02395E16A0097857F /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */; };
+		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
+		A4EB3BE72395EE3F0097857F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EB3BE62395EE3F0097857F /* Main.storyboard */; };
+		A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +45,6 @@
 		49EB44E123871126002F434D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49EB44E323871126002F434D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		49EB44E523871126002F434D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		49EB44E823871126002F434D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49EB44ED23871128002F434D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49EB44F023871128002F434D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49EB44F223871128002F434D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +52,13 @@
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewMeeting.storyboard; sourceTree = "<group>"; };
+		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMeetingViewController.h; sourceTree = "<group>"; };
+		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
+		A4EB3BE62395EE3F0097857F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A4EB3BE82396011F0097857F /* UIView+SetupBounds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SetupBounds.h"; sourceTree = "<group>"; };
+		A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetupBounds.m"; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,10 +77,13 @@
 		235E7B84238DA93500B59855 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
+				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
 				49EB44E523871126002F434D /* LoginViewController.swift */,
 				235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */,
 				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
 				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
+				A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -118,14 +130,18 @@
 				2379ADB52396D62000EDE8F8 /* Storyboards */,
 				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
 				A4533FF4238C58020089257A /* MeetingiOS.entitlements */,
+				49EB44F223871128002F434D /* Info.plist */,
 				49EB44E123871126002F434D /* AppDelegate.swift */,
 				49EB44E323871126002F434D /* SceneDelegate.swift */,
-				235E7B84238DA93500B59855 /* ViewControllers */,
-				2391532523918E2400479BB6 /* TableViewCells */,
 				A4533FFA238C67F50089257A /* CloudKit */,
 				49EB44ED23871128002F434D /* Assets.xcassets */,
+				A4EB3BEB239607CB0097857F /* Categories - ObjC */,
+				A4533FFA238C67F50089257A /* CloudKit */,
 				49EB44EF23871128002F434D /* LaunchScreen.storyboard */,
-				49EB44F223871128002F434D /* Info.plist */,
+				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
+				A4EB3BE12395E1700097857F /* Storyboards */,
+				2391532523918E2400479BB6 /* TableViewCells */,
+				235E7B84238DA93500B59855 /* ViewControllers */,
 			);
 			path = MeetingiOS;
 			sourceTree = "<group>";
@@ -155,6 +171,24 @@
 				E26A2BCC238D5BD700A956DE /* User.swift */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		A4EB3BE12395E1700097857F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */,
+				A4EB3BE62395EE3F0097857F /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		A4EB3BEB239607CB0097857F /* Categories - ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				A4EB3BE82396011F0097857F /* UIView+SetupBounds.h */,
+				A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */,
+			);
+			path = "Categories - ObjC";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +223,7 @@
 				TargetAttributes = {
 					49EB44DD23871126002F434D = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -218,8 +253,9 @@
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
 				2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
-				49EB44E923871126002F434D /* Main.storyboard in Resources */,
 				2379ADB92396D6A300EDE8F8 /* FinishedMeeting.storyboard in Resources */,
+				A4EB3BE02395E16A0097857F /* NewMeeting.storyboard in Resources */,
+				A4EB3BE72395EE3F0097857F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +271,7 @@
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
+				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
 				23AF97C8238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
@@ -244,20 +281,13 @@
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				2391532723918E7200479BB6 /* FinishedTopicsTableViewCell.swift in Sources */,
+				A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		49EB44E723871126002F434D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49EB44E823871126002F434D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		49EB44EF23871128002F434D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -387,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeetingiOS/MeetingiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3H798M6N3T;
@@ -397,6 +428,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.QuartetoFantastico.Meeting.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MeetingiOS/ViewControllers/MeetingiOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -406,6 +439,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeetingiOS/MeetingiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3H798M6N3T;
@@ -416,6 +450,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.QuartetoFantastico.Meeting.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MeetingiOS/ViewControllers/MeetingiOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
