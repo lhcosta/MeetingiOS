@@ -11,7 +11,7 @@ import CloudKit
 
 
 /// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
-class UnfinishedReunionViewController: UIViewController {
+class UnfinishedMeetingViewController: UIViewController {
 
     //MARK: - Properties
     @IBOutlet var descriptionField: UITextField!
@@ -89,7 +89,7 @@ class UnfinishedReunionViewController: UIViewController {
 
 
 //MARK: - Table View Delegate/DataSource
-extension UnfinishedReunionViewController: UITableViewDelegate, UITableViewDataSource {
+extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.topics.count
