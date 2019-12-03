@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-struct User {
+class User {
     
     //MARK: - Properties
     private(set) var record: CKRecord
@@ -48,7 +48,6 @@ struct User {
     //MARK: - Initializer
     init(record: CKRecord) {
         self.record = record
-        self.appleCredential = record.value(forKey: "appleCredential") as? String
         self.email = record.value(forKey: "email") as? String
         self.name = record.value(forKey: "name") as? String
         self.invites = record.value(forKey: "invites") as? [CKRecord.Reference]
@@ -58,22 +57,29 @@ struct User {
     //MARK: - Methods
     
     /// Description: Procura o AppleIDCredential do usuário para caso o usuário tenha logado no app uma vez
-    /// - Parameter credential: credencial vinda do Sign in with apple
-    mutating func searchCredentials(credential: String, record: CKRecord){
+    /// - Parameter record: credencial vinda do Sign in with apple
+    func searchCredentials(record: CKRecord){
         CloudManager.shared.fetchRecords(recordIDs: [record.recordID], desiredKeys: ["email", "name", "invites", "meetings"]) { (records, error) in
-            let rec = records![record.recordID]
-            User(record: rec!)
+            guard let rec = records?[record.recordID] else {
+                //Criar pessoa do zero
+                return
+
+            }
+            self.email = rec.value(forKey: "email") as? String
+            self.name = rec.value(forKey: "name") as? String
+            self.invites = rec.value(forKey: "invites") as? [CKRecord.Reference]
+            self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference]
         }
     }
     
     // Adiciona o convite no array de convites do Usuario
-    mutating func addInvite(invite: CKRecord.Reference){
+    func addInvite(invite: CKRecord.Reference){
         self.invites?.append(invite)
         self.record.setValue(invites, forKey: "invites")
     }
     
     // Remove o convite do array de convites do Usuario (no caso de aceitar ou recusar um convite)
-    mutating func removeInvite(inviteReference: CKRecord.Reference){
+    func removeInvite(inviteReference: CKRecord.Reference){
         var  i = 0
         for inv in invites! {
             if inv == inviteReference{
@@ -84,7 +90,7 @@ struct User {
     }
     
     // Registra uma reunião no array de reuniões do usuário
-    mutating func registerMeeting(meeting: CKRecord.Reference){
+    func registerMeeting(meeting: CKRecord.Reference){
         self.meetings?.append(meeting)
         self.record.setValue(meetings, forKey: "meetings")
     }
@@ -93,7 +99,7 @@ struct User {
     /// Busca no vetor e deleta reunião do array de reuniões
     /// - Parameter
     /// meetingReference: é o CKRecord.Reference da reunião que deseja deletar do array
-    mutating func removeMeeting(meetingReference: CKRecord.Reference){
+    func removeMeeting(meetingReference: CKRecord.Reference){
         var  i = 0
         for met in meetings! {
             if met == meetingReference{
