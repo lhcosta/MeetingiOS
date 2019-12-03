@@ -31,13 +31,6 @@ class User {
         }
     }
     
-    // convites vindos da entidade Reunião
-    var invites: [CKRecord.Reference]? {
-        didSet {
-            self.record.setValue(invites, forKey: "invites")
-        }
-    }
-    
     // reuniões vindos da entidade Reunião
     var meetings: [CKRecord.Reference]?{
         didSet {
@@ -50,7 +43,6 @@ class User {
         self.record = record
         self.email = record.value(forKey: "email") as? String
         self.name = record.value(forKey: "name") as? String
-        self.invites = record.value(forKey: "invites") as? [CKRecord.Reference]
         self.meetings = record.value(forKey: "meetings") as? [CKRecord.Reference]
     }
     
@@ -67,25 +59,7 @@ class User {
             }
             self.email = rec.value(forKey: "email") as? String
             self.name = rec.value(forKey: "name") as? String
-            self.invites = rec.value(forKey: "invites") as? [CKRecord.Reference]
             self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference]
-        }
-    }
-    
-    // Adiciona o convite no array de convites do Usuario
-    func addInvite(invite: CKRecord.Reference){
-        self.invites?.append(invite)
-        self.record.setValue(invites, forKey: "invites")
-    }
-    
-    // Remove o convite do array de convites do Usuario (no caso de aceitar ou recusar um convite)
-    func removeInvite(inviteReference: CKRecord.Reference){
-        var  i = 0
-        for inv in invites! {
-            if inv == inviteReference{
-                invites?.remove(at: i)
-            }
-            i += 0
         }
     }
     
