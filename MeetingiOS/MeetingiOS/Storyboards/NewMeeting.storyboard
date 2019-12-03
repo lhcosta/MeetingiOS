@@ -1,26 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="skW-mi-HLY">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TA6-3H-rGO">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--New meeting-->
         <scene sceneID="sqp-ln-JyO">
             <objects>
-                <viewController id="skW-mi-HLY" sceneMemberID="viewController">
+                <viewController id="skW-mi-HLY" customClass="NewMeetingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SMX-sm-VbF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="uqP-Ta-EAL">
+                                <rect key="frame" x="25" y="179.33333333333331" width="364" height="537.33333333333348"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0TI-Jb-gmS">
+                                        <rect key="frame" x="0.0" y="0.0" width="364" height="192"/>
+                                        <subviews>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3d7-Ux-t3q">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="95.333333333333329"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3O-fi-DEp">
+                                                <rect key="frame" x="0.0" y="96.333333333333343" width="364" height="95.666666666666657"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="d3O-fi-DEp" firstAttribute="height" secondItem="3d7-Ux-t3q" secondAttribute="height" id="Xuc-8t-g3k"/>
+                                        </constraints>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAe-TU-rRr">
+                                        <rect key="frame" x="0.0" y="220.99999999999997" width="364" height="95.333333333333343"/>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZD9-I3-BH9">
+                                        <rect key="frame" x="0.0" y="345.33333333333326" width="364" height="192"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-13-8YU">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="95.666666666666671"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSn-KU-RVY">
+                                                <rect key="frame" x="0.0" y="96.666666666666742" width="364" height="95.333333333333314"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="YSn-KU-RVY" firstAttribute="height" secondItem="Lah-13-8YU" secondAttribute="height" id="IbE-6X-PER"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="NAe-TU-rRr" firstAttribute="height" secondItem="d3O-fi-DEp" secondAttribute="height" id="fqZ-PJ-z7g"/>
+                                    <constraint firstItem="Lah-13-8YU" firstAttribute="height" secondItem="NAe-TU-rRr" secondAttribute="height" id="yqf-fa-S9R"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="p7F-BQ-Ss1" firstAttribute="trailing" secondItem="uqP-Ta-EAL" secondAttribute="trailing" constant="25" id="EiS-mK-jYG"/>
+                            <constraint firstItem="uqP-Ta-EAL" firstAttribute="centerY" secondItem="SMX-sm-VbF" secondAttribute="centerY" id="IcL-ki-Bqb"/>
+                            <constraint firstItem="uqP-Ta-EAL" firstAttribute="height" secondItem="SMX-sm-VbF" secondAttribute="height" multiplier="0.6" id="p3p-jm-FTX"/>
+                            <constraint firstItem="uqP-Ta-EAL" firstAttribute="leading" secondItem="p7F-BQ-Ss1" secondAttribute="leading" constant="25" id="teY-Ad-huy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="p7F-BQ-Ss1"/>
                     </view>
+                    <navigationItem key="navigationItem" title="New meeting" id="TbK-hl-0ZI">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Xtm-DM-Unt"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="fifthView" destination="YSn-KU-RVY" id="PUE-im-yT9"/>
+                        <outlet property="firstView" destination="3d7-Ux-t3q" id="jYx-yf-Xck"/>
+                        <outlet property="fourthView" destination="Lah-13-8YU" id="KUk-a2-h0F"/>
+                        <outlet property="secondView" destination="d3O-fi-DEp" id="4LA-D4-vVc"/>
+                        <outlet property="thirdView" destination="NAe-TU-rRr" id="2wY-6W-sNl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KfH-Hk-Zdn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-24" y="-19"/>
+            <point key="canvasLocation" x="885.50724637681162" y="-19.419642857142858"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WJY-v9-5bw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TA6-3H-rGO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="7gz-Rf-XC1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="skW-mi-HLY" kind="relationship" relationship="rootViewController" id="qxy-tX-rmH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Y5-Z3-X7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-24.637681159420293" y="-19.419642857142858"/>
         </scene>
     </scenes>
 </document>
