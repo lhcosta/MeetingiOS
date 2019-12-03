@@ -121,6 +121,24 @@ class CloudManager {
         database.add(operation)
     }
     
+    func subscribe(appCredentials: String) {
+        let userReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: appCredentials), action: .none)
+        let predicate = NSPredicate(format: "%@ IN employees", userReference)
+        let subscription = CKQuerySubscription(recordType: "Meeting", predicate: predicate, options: .firesOnRecordCreation)
+        
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.desiredKeys = ["manager", "date", "theme"]
+        notificationInfo.shouldBadge = true
+        
+        //TODO: Definir conteúdo da notificação localized String para internacionalizacao da notificacao
+        
+        subscription.notificationInfo = notificationInfo
+        
+        self.database.save(subscription, completionHandler: { (_,error) in
+            print(error.debugDescription)
+        })
+    }
+    
     //MARK: - MÉTODOS PARA AUXILIAR DESENVOLVIMENTO
     
     /// Método para auxiliar para deletar todos os records de uma tabela
