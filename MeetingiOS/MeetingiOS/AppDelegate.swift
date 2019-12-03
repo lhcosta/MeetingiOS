@@ -8,14 +8,26 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
         // Override point for customization after application launch.
+        let userNotCenter = UNUserNotificationCenter.current()
+        userNotCenter.delegate = self
+        
+        userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
+            print("===>\(permission)/\(String(describing: error))")
+        })
+        
+        DispatchQueue.main.async {
+            application.registerForRemoteNotifications()
+        }
         return true
     }
 
@@ -34,3 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        guard let CloudNot = CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) else { return }
+        
+    }
+}

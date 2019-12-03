@@ -82,6 +82,9 @@ class CloudManager {
         
         let query = CKQuery(recordType: recorType, predicate: predicate)
         let queryOp = CKQueryOperation(query: query)
+        queryOp.queryCompletionBlock = { (xa,az) in
+            
+        }
         
         if let keys = desiredKeys, keys.count>0{
             queryOp.desiredKeys = keys
@@ -116,5 +119,49 @@ class CloudManager {
         }
         
         database.add(operation)
+    }
+    
+    func subscribe(appCredentials: String) {
+        let userReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: appCredentials), action: .none)
+        let predicate = NSPredicate(format: "%@ IN employees", userReference)
+        let subscription = CKQuerySubscription(recordType: "Meeting", predicate: predicate, options: .firesOnRecordCreation)
+        
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.desiredKeys = ["manager", "date", "theme"]
+        notificationInfo.shouldBadge = true
+        
+        //TODO: Definir conteúdo da notificação localized String para internacionalizacao da notificacao
+        
+        subscription.notificationInfo = notificationInfo
+        
+        self.database.save(subscription, completionHandler: { (_,error) in
+            print(error.debugDescription)
+        })
+    }
+    
+    //MARK: - MÉTODOS PARA AUXILIAR DESENVOLVIMENTO
+    
+    /// Método para auxiliar para deletar todos os records de uma tabela
+    /// - Parameter type: Nome da tabela para ser esvaziada
+    func deleteALLRecords(type: String) {
+        let predicate = NSPredicate(value: true)
+        var recordIDs = [CKRecord.ID]()
+        
+        self.readRecords(recorType: type, predicate: predicate, desiredKeys: ["recordID"], perRecordCompletion: { (record) in
+            recordIDs.append(record.recordID)
+        
+        }, finalCompletion: {
+            print(recordIDs.count)
+            let deleteOp = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDs)
+            deleteOp.database = self.database
+            deleteOp.savePolicy = .allKeys
+            deleteOp.modifyRecordsCompletionBlock = { (recordsss, deleted, error) in
+                print("===> \(deleted?.count)")
+                print(error)
+                
+            }
+            
+            OperationQueue().addOperation(deleteOp)
+        })
     }
 }
