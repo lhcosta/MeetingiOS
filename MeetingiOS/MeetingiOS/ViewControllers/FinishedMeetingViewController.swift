@@ -11,7 +11,7 @@ import CloudKit
 
 
 /// Essa View será exibida após a seleção de uma Meeting que já foi encerrada.
-class FinishedReunionViewController: UIViewController {
+class FinishedMeetingViewController: UIViewController {
     
     /// Segmented usado para visualizar os Topics discutidos e não discutidos.
     @IBOutlet var topicsSegmentedControl: UISegmentedControl!
@@ -123,7 +123,7 @@ class FinishedReunionViewController: UIViewController {
 }
 
 
-extension FinishedReunionViewController: UITableViewDelegate, UITableViewDataSource {
+extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

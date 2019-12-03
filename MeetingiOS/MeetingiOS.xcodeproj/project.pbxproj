@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		235E7B83238D9CA900B59855 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B82238D9CA900B59855 /* Topic.swift */; };
-		235E7B86238DA95300B59855 /* UnfinishedReunionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B85238DA95300B59855 /* UnfinishedReunionViewController.swift */; };
-		239153242391883E00479BB6 /* FinishedReunionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239153232391883E00479BB6 /* FinishedReunionViewController.swift */; };
+		235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */; };
+		2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */; };
+		2379ADB92396D6A300EDE8F8 /* FinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2379ADB82396D6A300EDE8F8 /* FinishedMeeting.storyboard */; };
+		239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239153232391883E00479BB6 /* FinishedMeetingViewController.swift */; };
 		2391532723918E7200479BB6 /* FinishedTopicsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2391532623918E7200479BB6 /* FinishedTopicsTableViewCell.swift */; };
 		2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2391532823919F2E00479BB6 /* ConclusionsViewController.swift */; };
 		23AF97C8238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AF97C7238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift */; };
@@ -28,8 +30,10 @@
 
 /* Begin PBXFileReference section */
 		235E7B82238D9CA900B59855 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
-		235E7B85238DA95300B59855 /* UnfinishedReunionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedReunionViewController.swift; sourceTree = "<group>"; };
-		239153232391883E00479BB6 /* FinishedReunionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedReunionViewController.swift; sourceTree = "<group>"; };
+		235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
+		2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnfinishedMeeting.storyboard; sourceTree = "<group>"; };
+		2379ADB82396D6A300EDE8F8 /* FinishedMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FinishedMeeting.storyboard; sourceTree = "<group>"; };
+		239153232391883E00479BB6 /* FinishedMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedMeetingViewController.swift; sourceTree = "<group>"; };
 		2391532623918E7200479BB6 /* FinishedTopicsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedTopicsTableViewCell.swift; sourceTree = "<group>"; };
 		2391532823919F2E00479BB6 /* ConclusionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionsViewController.swift; sourceTree = "<group>"; };
 		23AF97C7238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfinishedTopicsTableViewCell.swift; sourceTree = "<group>"; };
@@ -65,11 +69,21 @@
 			isa = PBXGroup;
 			children = (
 				49EB44E523871126002F434D /* LoginViewController.swift */,
-				235E7B85238DA95300B59855 /* UnfinishedReunionViewController.swift */,
-				239153232391883E00479BB6 /* FinishedReunionViewController.swift */,
+				235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */,
+				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
 				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2379ADB52396D62000EDE8F8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				49EB44E723871126002F434D /* Main.storyboard */,
+				2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */,
+				2379ADB82396D6A300EDE8F8 /* FinishedMeeting.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		2391532523918E2400479BB6 /* TableViewCells */ = {
@@ -101,11 +115,11 @@
 		49EB44E023871126002F434D /* MeetingiOS */ = {
 			isa = PBXGroup;
 			children = (
+				2379ADB52396D62000EDE8F8 /* Storyboards */,
 				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
 				A4533FF4238C58020089257A /* MeetingiOS.entitlements */,
 				49EB44E123871126002F434D /* AppDelegate.swift */,
 				49EB44E323871126002F434D /* SceneDelegate.swift */,
-				49EB44E723871126002F434D /* Main.storyboard */,
 				235E7B84238DA93500B59855 /* ViewControllers */,
 				2391532523918E2400479BB6 /* TableViewCells */,
 				A4533FFA238C67F50089257A /* CloudKit */,
@@ -202,8 +216,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
+				2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
 				49EB44E923871126002F434D /* Main.storyboard in Resources */,
+				2379ADB92396D6A300EDE8F8 /* FinishedMeeting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,9 +232,9 @@
 			files = (
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
-				235E7B86238DA95300B59855 /* UnfinishedReunionViewController.swift in Sources */,
+				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
-				239153242391883E00479BB6 /* FinishedReunionViewController.swift in Sources */,
+				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				23AF97C8238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
