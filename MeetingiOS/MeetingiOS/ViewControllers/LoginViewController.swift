@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
             signInButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         ])
     }
+
     
     @objc private func signInButtonTapped() {
         //  Cria o provedor de autorização para obter as informações do Usuário
