@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		235E7B83238D9CA900B59855 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B82238D9CA900B59855 /* Topic.swift */; };
-		235E7B86238DA95300B59855 /* UnfinishedReunionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B85238DA95300B59855 /* UnfinishedReunionViewController.swift */; };
-		239153242391883E00479BB6 /* FinishedReunionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239153232391883E00479BB6 /* FinishedReunionViewController.swift */; };
+		235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */; };
+		2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */; };
+		2379ADBB2396DC3000EDE8F8 /* FinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2379ADBA2396DC3000EDE8F8 /* FinishedMeeting.storyboard */; };
+		239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239153232391883E00479BB6 /* FinishedMeetingViewController.swift */; };
 		2391532723918E7200479BB6 /* FinishedTopicsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2391532623918E7200479BB6 /* FinishedTopicsTableViewCell.swift */; };
 		2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2391532823919F2E00479BB6 /* ConclusionsViewController.swift */; };
 		23AF97C8238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AF97C7238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift */; };
@@ -31,8 +33,10 @@
 
 /* Begin PBXFileReference section */
 		235E7B82238D9CA900B59855 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
-		235E7B85238DA95300B59855 /* UnfinishedReunionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedReunionViewController.swift; sourceTree = "<group>"; };
-		239153232391883E00479BB6 /* FinishedReunionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedReunionViewController.swift; sourceTree = "<group>"; };
+		235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
+		2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnfinishedMeeting.storyboard; sourceTree = "<group>"; };
+		2379ADBA2396DC3000EDE8F8 /* FinishedMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FinishedMeeting.storyboard; sourceTree = "<group>"; };
+		239153232391883E00479BB6 /* FinishedMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedMeetingViewController.swift; sourceTree = "<group>"; };
 		2391532623918E7200479BB6 /* FinishedTopicsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedTopicsTableViewCell.swift; sourceTree = "<group>"; };
 		2391532823919F2E00479BB6 /* ConclusionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionsViewController.swift; sourceTree = "<group>"; };
 		23AF97C7238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfinishedTopicsTableViewCell.swift; sourceTree = "<group>"; };
@@ -76,8 +80,8 @@
 				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
 				49EB44E523871126002F434D /* LoginViewController.swift */,
-				235E7B85238DA95300B59855 /* UnfinishedReunionViewController.swift */,
-				239153232391883E00479BB6 /* FinishedReunionViewController.swift */,
+				235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */,
+				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
 				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 				A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */,
 			);
@@ -159,6 +163,9 @@
 		A4EB3BE12395E1700097857F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				2379ADBA2396DC3000EDE8F8 /* FinishedMeeting.storyboard */,
+				2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */,
+				A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */,
 				A4EB3BE62395EE3F0097857F /* Main.storyboard */,
 				A4EB3BEC2396D0D50097857F /* NewMeeting.storyboard */,
 			);
@@ -234,7 +241,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
+				2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
+				A4EB3BE02395E16A0097857F /* NewMeeting.storyboard in Resources */,
+				2379ADBB2396DC3000EDE8F8 /* FinishedMeeting.storyboard in Resources */,
 				A4EB3BE72395EE3F0097857F /* Main.storyboard in Resources */,
 				A4EB3BED2396D0D50097857F /* NewMeeting.storyboard in Resources */,
 			);
@@ -249,9 +259,9 @@
 			files = (
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
-				235E7B86238DA95300B59855 /* UnfinishedReunionViewController.swift in Sources */,
+				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
-				239153242391883E00479BB6 /* FinishedReunionViewController.swift in Sources */,
+				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
 				23AF97C8238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
