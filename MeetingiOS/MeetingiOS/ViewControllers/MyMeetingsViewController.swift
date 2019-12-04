@@ -16,9 +16,25 @@ class MyMeetingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaults = UserDefaults.standard
         
         myMeetingsCollectionView.delegate = self
         myMeetingsCollectionView.dataSource = self
+        
+        // MARK: Query no CK
+        /// Testar quando tivermos valores validos (meetings criadas).
+        /// Meetings que o usuário criou.
+//        var predicate = NSPredicate(format:"manager = %@", defaults.string(forKey: "recordName") ?? "")
+//        CloudManager.shared.readRecords(recorType: "Meeting", predicate: predicate, desiredKeys: nil, perRecordCompletion: { record in
+//            self.meetings.append(Meeting.init(record: record))
+//        }) {}
+//        /// Meetings em que o usuário está como convidado.
+//        predicate = NSPredicate(format:"employees CONTAINS %@", defaults.string(forKey: "recordName") ?? "")
+//        CloudManager.shared.readRecords(recorType: "Meeting", predicate: predicate, desiredKeys: nil, perRecordCompletion: { record in
+//            self.meetings.append(Meeting.init(record: record))
+//        }) {
+//            self.myMeetingsCollectionView.reloadData()
+//        }
 
         // MARK: Simulação
         /// Serão substiuídos pelo query no CK.
