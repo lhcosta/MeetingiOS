@@ -40,10 +40,12 @@
                                     <constraint firstAttribute="height" constant="2" id="xb3-ej-sO5"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bgr-m3-m77">
-                                <rect key="frame" x="0.0" y="605" width="414" height="183"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bgr-m3-m77">
+                                <rect key="frame" x="50" y="623.5" width="314" height="183"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="183" id="NGU-Kt-mfH"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iUM-Of-bFy">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -69,14 +71,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Fn1-bC-uxu" firstAttribute="leading" secondItem="0U2-ND-NaL" secondAttribute="leading" id="0so-gq-vEx"/>
+                            <constraint firstItem="bgr-m3-m77" firstAttribute="top" secondItem="Fn1-bC-uxu" secondAttribute="bottom" constant="40" id="BMj-J5-Czi"/>
                             <constraint firstItem="ct6-a4-0RR" firstAttribute="trailing" secondItem="JS2-ww-nJw" secondAttribute="trailing" id="HRm-m7-gKq"/>
                             <constraint firstItem="Fn1-bC-uxu" firstAttribute="centerX" secondItem="0U2-ND-NaL" secondAttribute="centerX" id="LzU-Zg-rgH"/>
                             <constraint firstAttribute="trailing" secondItem="Fn1-bC-uxu" secondAttribute="trailing" id="R3i-rh-QxE"/>
+                            <constraint firstItem="bgr-m3-m77" firstAttribute="leading" secondItem="JS2-ww-nJw" secondAttribute="leading" constant="50" id="fSN-lX-iBD"/>
                             <constraint firstItem="ct6-a4-0RR" firstAttribute="top" secondItem="JS2-ww-nJw" secondAttribute="top" id="i6n-Vp-CXz"/>
                             <constraint firstItem="Fn1-bC-uxu" firstAttribute="centerY" secondItem="0U2-ND-NaL" secondAttribute="centerY" multiplier="1.3" id="lQi-HR-IZC"/>
                             <constraint firstItem="7zg-MI-GCc" firstAttribute="centerY" secondItem="0U2-ND-NaL" secondAttribute="centerY" multiplier="0.85" id="r1W-Pl-w5Q"/>
                             <constraint firstItem="7zg-MI-GCc" firstAttribute="centerX" secondItem="0U2-ND-NaL" secondAttribute="centerX" id="rT3-Sq-d3p"/>
                             <constraint firstItem="ct6-a4-0RR" firstAttribute="leading" secondItem="JS2-ww-nJw" secondAttribute="leading" id="v7J-HP-1c3"/>
+                            <constraint firstItem="bgr-m3-m77" firstAttribute="centerX" secondItem="0U2-ND-NaL" secondAttribute="centerX" id="wdL-lM-1Am"/>
+                            <constraint firstItem="JS2-ww-nJw" firstAttribute="trailing" secondItem="bgr-m3-m77" secondAttribute="trailing" constant="50" id="yQe-pT-hij"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JS2-ww-nJw"/>
                     </view>

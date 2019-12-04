@@ -49,9 +49,8 @@
                                     <segue destination="ipY-ZK-Awj" kind="show" id="YAU-bQ-sDf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1F-Mi-hTD">
-                                <rect key="frame" x="165" y="658" width="84" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1F-Mi-hTD">
+                                <rect key="frame" x="165" y="657" width="84" height="30"/>
                                 <state key="normal" title="Select Color"/>
                                 <connections>
                                     <segue destination="z7q-CL-LLx" kind="show" id="vh4-bI-aN1"/>
@@ -59,6 +58,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="x1F-Mi-hTD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="P5P-fi-8o6"/>
+                            <constraint firstItem="x1F-Mi-hTD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jCc-iJ-bpt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

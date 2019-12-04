@@ -97,7 +97,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TopicsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UnfinishedTopicsTableViewCell
         cell.topicLabel.text = topics[indexPath.row].description
         return cell
     }

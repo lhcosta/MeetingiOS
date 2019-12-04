@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/// View Controllers para criar uma nova reuinao
 @interface NewMeetingViewController : UIViewController
 
-//MARK:- Properties
+//MARK:- IBOutlets
 @property (nonatomic, weak) IBOutlet UIView* firstView;
 @property (nonatomic, weak) IBOutlet UIView* secondView;
 @property (nonatomic, weak) IBOutlet UIView* thirdView;

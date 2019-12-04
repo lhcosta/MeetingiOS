@@ -54,4 +54,22 @@ extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewD
         self.viewColorSelected.backgroundColor = self.arrayColors[indexPath.row]
     }
     
+    
+}
+
+extension SelectColorViewController: UICollectionViewDelegateFlowLayout {
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return collectionView.bounds.width/CGFloat(arrayColors.count)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return collectionView.bounds.height/CGFloat(arrayColors.count)
+    }
+    
 }
