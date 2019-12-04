@@ -20,7 +20,7 @@
     
     ContactCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ContactCollectionCell" forIndexPath:indexPath];
     
-    [cell addContant:_contacts[indexPath.row]];
+    [cell setContact:_contacts[indexPath.item]];
     
     return cell;
 }
