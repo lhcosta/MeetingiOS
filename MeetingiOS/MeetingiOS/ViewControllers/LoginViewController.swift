@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
             signInButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         ])
     }
+
     
     @objc private func signInButtonTapped() {
         //  Cria o provedor de autorização para obter as informações do Usuário
@@ -93,34 +94,38 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         let userRecord = CKRecord(recordType: "User", recordID: CKRecord.ID(recordName: appleIDCredential.user))
         
         // Passagem do record no construtor da Struct
-        var user = User.init(record: userRecord)
+        let user = User.init(record: userRecord)
         
         let givenName = appleIDCredential.fullName?.givenName
         let familyName = appleIDCredential.fullName?.familyName
         
-        // Pupula o Record na Struct User
-        user.appleCredential = appleIDCredential.user
-        guard let email = appleIDCredential.email else { return }
-        user.email = String(describing: email)
-        
-        user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
-        
-        // Cria o record no Cloud
-        CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
-            if let error = error {
-                print("Error: \(error)")
-            } else {
-                print("Successfully created user: ", record["name"]!)
-                self.defaults.set(record.recordID.recordName, forKey: "recordName")
-                print(record.recordID.recordName)
+        // Se email = nil, faz-se o fetch dos dados do Usuário com base no appleIDCredential
+        if let email = appleIDCredential.email {
+            // Popula o Record na Struct User
+            user.email = String(describing: email)
+            
+            user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
+            
+            // Cria o record no Cloud
+            CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
+                if let error = error {
+                    print("Error: \(error)")
+                } else {
+                    print("Successfully created user: ", record["name"]!)
+                    self.defaults.set(record.recordID.recordName, forKey: "recordName")
+                    print(record.recordID.recordName)
+                }
+            }) {
+                print("Done")
             }
-        }) {
-            print("Done")
+            
+        } else {
+            user.searchCredentials(record: userRecord)
         }
         
         // UserDefaults
-        defaults.set(givenName, forKey: "givenName")
-        defaults.set(email, forKey: "email")
+        defaults.set(user.name, forKey: "givenName")
+        defaults.set(user.email, forKey: "email")
     }
     
     
