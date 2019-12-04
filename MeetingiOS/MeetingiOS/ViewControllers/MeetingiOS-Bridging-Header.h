@@ -3,3 +3,5 @@
 //
 
 #import "NewMeetingViewController.h"
+#import "Contact.h"
+#import "ContactCollectionView.h"
