@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 /// Struct utilizada na criação de uma pauta, edição desta 
-struct Topic {
+@objc class Topic: NSObject {
     
     //MARK:- Json keys
     enum CodingKeys : CodingKey {
@@ -22,7 +22,7 @@ struct Topic {
     private(set) var record: CKRecord
     
     /// Topico em si.
-    var description: String {
+    var topicDescription: String {
         set { self.record["description"] = newValue }
         get { return self.record.value(forKey: "description") as? String ?? ""}
     }
@@ -74,16 +74,16 @@ struct Topic {
     //MARK: - Methods
     /// Adicionar/editar a pauta do Topic
     /// - Parameter description: Pauta em si.
-    mutating func editDescription(_ description: String) {
+    func editDescription(_ description: String) {
         
-        self.description = description
-        self.record["description"] = self.description
+        self.topicDescription = description
+        self.record["description"] = self.topicDescription
     }
     
     
     /// Adicionar conclusão nas pautas discutidas.
     /// - Parameter conclusion: Conclusão da pauta.
-    mutating func sendConclusion(_ conclusion: String) {
+    func sendConclusion(_ conclusion: String) {
         
         self.conclusions.append(conclusion)
         self.record["conclusions"] = self.conclusions
@@ -92,7 +92,7 @@ struct Topic {
     
     /// Guardar o tempo final da pauta quando esta é encerrada na reunião.
     /// - Parameter duration: Tempo em Date (dia/mês/ano vazios).
-    mutating func setDuration(duration: Date) {
+    func setDuration(duration: Date) {
         self.duration = duration
         self.record["duration"] = self.duration
     }

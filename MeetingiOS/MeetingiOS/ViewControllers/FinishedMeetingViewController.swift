@@ -138,15 +138,13 @@ extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSou
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FinishedTopicsTableViewCell
         if topicsSegmentedControl.selectedSegmentIndex == 0 {
-            cell.topicDescriptionLabel.text = discussedTopics[indexPath.row].description
+            cell.topicDescriptionLabel.text = discussedTopics[indexPath.row].topicDescription
             cell.authorNameLabel.text = discussedTopics[indexPath.row].authorName
-            cell.thisCellTopic = discussedTopics[indexPath.row]
         } else {
-            cell.topicDescriptionLabel.text = undiscussedTopics[indexPath.row].description
+            cell.topicDescriptionLabel.text = undiscussedTopics[indexPath.row].topicDescription
             cell.authorNameLabel.text = undiscussedTopics[indexPath.row].authorName
-            cell.thisCellTopic = undiscussedTopics[indexPath.row]
         }
-        
+
         return cell
     }
     
