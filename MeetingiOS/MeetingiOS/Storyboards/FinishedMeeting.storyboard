@@ -37,7 +37,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="79" id="DXL-Bz-NCg" customClass="FinishedTopicsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="79" id="DXL-Bz-NCg" customClass="FinishedTopicsTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="374" height="79"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DXL-Bz-NCg" id="gRR-kc-7dP">
@@ -61,8 +61,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="authorNameLabel" destination="4az-Wl-pT2" id="PNf-Iv-jiN"/>
-                                            <outlet property="topicDescriptionLabel" destination="sSd-Dt-yVU" id="RJW-pI-V4x"/>
+                                            <outlet property="authorNameLabel" destination="4az-Wl-pT2" id="Oxf-Gq-flD"/>
+                                            <outlet property="topicDescriptionLabel" destination="sSd-Dt-yVU" id="teI-0K-9wu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
