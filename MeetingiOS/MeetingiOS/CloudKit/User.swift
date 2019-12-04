@@ -52,11 +52,9 @@ class User {
     /// - Parameter record: credencial vinda do Sign in with apple
     func searchCredentials(record: CKRecord){
         CloudManager.shared.fetchRecords(recordIDs: [record.recordID], desiredKeys: ["email", "name", "invites", "meetings"]) { (records, error) in
-            guard let rec = records?[record.recordID] else {
-                //Criar pessoa do zero
-                return
-
-            }
+            guard let rec = records?[record.recordID] else { return }
+            
+            // Atualiza os dados do Usuário
             self.email = rec.value(forKey: "email") as? String
             self.name = rec.value(forKey: "name") as? String
             self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference]
