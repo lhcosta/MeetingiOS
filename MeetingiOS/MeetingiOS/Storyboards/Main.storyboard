@@ -49,6 +49,14 @@
                                     <segue destination="ipY-ZK-Awj" kind="show" id="YAU-bQ-sDf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa1-nN-B6G">
+                                <rect key="frame" x="82" y="350" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="Quk-2B-pOk" kind="show" id="ehG-su-7Hm"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1F-Mi-hTD">
                                 <rect key="frame" x="165" y="657" width="84" height="30"/>
                                 <state key="normal" title="Select Color"/>
@@ -98,6 +106,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52b-Iv-vk4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="986" y="344"/>
+        </scene>
+        <!--MyMeetings-->
+        <scene sceneID="GGu-sA-QVP">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MyMeetings" storyboardName="MyMeetings" referencedIdentifier="MyMeetings" id="Quk-2B-pOk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WRR-Ls-Ebk"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IGt-kW-Bcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792" y="528"/>
         </scene>
     </scenes>
 </document>

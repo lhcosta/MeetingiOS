@@ -7,3 +7,4 @@
 #import "FinishedTopicsTableViewCell.h"
 #import "Contact.h"
 #import "ContactCollectionView.h"
+#import "MyMeetingsCollectionViewCell.h"
