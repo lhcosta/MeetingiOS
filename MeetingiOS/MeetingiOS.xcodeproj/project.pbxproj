@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231AE13C2397E8A80051051C /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */; };
 		235E7B83238D9CA900B59855 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B82238D9CA900B59855 /* Topic.swift */; };
 		235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */; };
 		2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */; };
@@ -31,14 +32,14 @@
 		A4EB3BF123973E330097857F /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EB3BF023973E330097857F /* Contact.storyboard */; };
 		A4EB3BF32397400A0097857F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BF22397400A0097857F /* ContactViewController.swift */; };
 		A4EB3BFD239747640097857F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFC239747640097857F /* Contact.m */; };
-		A4EB3C0E239752260097857F /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C0D239752260097857F /* ContactCollectionViewCell.m */; };
-		A4EB3C102397524B0097857F /* ContactCollectionViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C0C239752260097857F /* ContactCollectionViewCell.h */; };
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
 		A4EB3C1923975F800097857F /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1823975F800097857F /* ContactTableViewCell.m */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
+		231AE13B2397E8A80051051C /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
 		235E7B82238D9CA900B59855 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
 		2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnfinishedMeeting.storyboard; sourceTree = "<group>"; };
@@ -72,8 +73,6 @@
 		A4EB3BF22397400A0097857F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		A4EB3BFB239747640097857F /* Contact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		A4EB3BFC239747640097857F /* Contact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		A4EB3C0C239752260097857F /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
-		A4EB3C0D239752260097857F /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
 		A4EB3C11239754D40097857F /* ContactCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactCollectionView.h; sourceTree = "<group>"; };
 		A4EB3C12239754D40097857F /* ContactCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionView.m; sourceTree = "<group>"; };
 		A4EB3C1723975F800097857F /* ContactTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
@@ -221,8 +220,8 @@
 		A4EB3C0F2397522A0097857F /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				A4EB3C0C239752260097857F /* ContactCollectionViewCell.h */,
-				A4EB3C0D239752260097857F /* ContactCollectionViewCell.m */,
+				231AE13B2397E8A80051051C /* ContactCollectionViewCell.h */,
+				231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -303,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				231AE13C2397E8A80051051C /* ContactCollectionViewCell.m in Sources */,
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				A4EB3C1923975F800097857F /* ContactTableViewCell.m in Sources */,
@@ -311,12 +311,10 @@
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
-				A4EB3C0E239752260097857F /* ContactCollectionViewCell.m in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */,
-				A4EB3C102397524B0097857F /* ContactCollectionViewCell.h in Sources */,
 				A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */,
 				23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
