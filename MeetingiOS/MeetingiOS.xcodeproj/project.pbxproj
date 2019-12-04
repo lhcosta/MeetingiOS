@@ -28,6 +28,8 @@
 		A4EB3BE72395EE3F0097857F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EB3BE62395EE3F0097857F /* Main.storyboard */; };
 		A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */; };
 		A4EB3BED2396D0D50097857F /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EB3BEC2396D0D50097857F /* NewMeeting.storyboard */; };
+		E219ACC32397DE75002CF585 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E219ACC22397DE75002CF585 /* SelectAColor.storyboard */; };
+		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		A4EB3BE82396011F0097857F /* UIView+SetupBounds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SetupBounds.h"; sourceTree = "<group>"; };
 		A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetupBounds.m"; sourceTree = "<group>"; };
 		A4EB3BEC2396D0D50097857F /* NewMeeting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewMeeting.storyboard; sourceTree = "<group>"; };
+		E219ACC22397DE75002CF585 /* SelectAColor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectAColor.storyboard; sourceTree = "<group>"; };
+		E219ACC42397DED5002CF585 /* SelectColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +88,7 @@
 				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
 				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 				A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */,
+				E219ACC42397DED5002CF585 /* SelectColorViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -165,9 +170,9 @@
 			children = (
 				2379ADBA2396DC3000EDE8F8 /* FinishedMeeting.storyboard */,
 				2379ADB62396D64600EDE8F8 /* UnfinishedMeeting.storyboard */,
-				A4EB3BDF2395E16A0097857F /* NewMeeting.storyboard */,
 				A4EB3BE62395EE3F0097857F /* Main.storyboard */,
 				A4EB3BEC2396D0D50097857F /* NewMeeting.storyboard */,
+				E219ACC22397DE75002CF585 /* SelectAColor.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -243,9 +248,9 @@
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
 				2379ADB72396D64600EDE8F8 /* UnfinishedMeeting.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
-				A4EB3BE02395E16A0097857F /* NewMeeting.storyboard in Resources */,
 				2379ADBB2396DC3000EDE8F8 /* FinishedMeeting.storyboard in Resources */,
 				A4EB3BE72395EE3F0097857F /* Main.storyboard in Resources */,
+				E219ACC32397DE75002CF585 /* SelectAColor.storyboard in Resources */,
 				A4EB3BED2396D0D50097857F /* NewMeeting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +268,7 @@
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
+				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				23AF97C8238E01A200A3A388 /* UnfinishedTopicsTableViewCell.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
