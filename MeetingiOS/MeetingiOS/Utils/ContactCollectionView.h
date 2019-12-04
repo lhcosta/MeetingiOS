@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Contact.h"
 #import "ContactCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ContactCollectionView : NSObject 
+@interface ContactCollectionView : NSObject <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 /// Todos os contatos selecionados
-@property (nonatomic) NSMutableArray* contacts;
+@property (nonatomic) NSArray<Contact*>* contacts;
+
 
 @end
 

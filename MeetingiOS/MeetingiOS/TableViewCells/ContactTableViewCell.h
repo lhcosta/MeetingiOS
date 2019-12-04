@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ContactTableViewCell : UITableViewCell
 
 /// Contato
-@property (nonatomic) Contact* contact;
+@property (nonatomic, nullable) Contact* contact;
 
 @end
 

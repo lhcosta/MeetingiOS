@@ -18,10 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isSelected;
 
 /// Nome do Contato
-@property (nonatomic, copy, readonly) NSString* name;
+@property (nonatomic, copy, nullable, readonly) NSString* name;
 
 /// Email do Contato
-@property (nonatomic, copy, readonly) NSString* email;
+@property (nonatomic, copy, nullable, readonly) NSString* email;
 
 /// Inicializar com o CNContact
 -(instancetype) initWithContact:(CNContact*)contact;
