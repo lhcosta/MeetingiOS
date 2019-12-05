@@ -139,6 +139,16 @@ utilizar como auxílio de manipulação de CKRecord Meeting
         }
     }
     
+    var color: String? {
+        get {
+            return self.record.value(forKey: "color") as? String
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "color")
+        }
+    }
+    
     //MARK: - Initializer
     @objc init(record : CKRecord) {
         self.record = record
@@ -198,6 +208,14 @@ utilizar como auxílio de manipulação de CKRecord Meeting
         }
         
         return topics_owner
+    }
+    
+    /// Description: Este método faz a atualização da cor da Reunião
+    /// - Parameter hexColor: hexColor referece ao numero da cor selecionada,
+    /// cada cor tem seu hexadecimal referente no array de cores
+    mutating func editColor(hexColor: String){
+        self.color = hexColor
+        self.record.setValue(color, forKey: "color")
     }
 }
 

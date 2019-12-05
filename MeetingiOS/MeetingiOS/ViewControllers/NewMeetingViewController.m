@@ -44,6 +44,7 @@
     _nameMetting.delegate = self;
 }
 
+
 /// Modificando todas as views presentes na view controller
 - (void) setupView {
     
@@ -112,6 +113,14 @@
     if(name.length == 0) {
         return;
     }
+    
+}
+
+- (void)selectedColor:(NSString *)hex {
+    
+}
+
+- (void)selectedContacts:(NSArray<Contact *> *)contacts {
     
 }
 

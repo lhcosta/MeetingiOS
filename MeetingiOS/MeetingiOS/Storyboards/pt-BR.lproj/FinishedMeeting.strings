@@ -1,0 +1,27 @@
+
+/* Class = "UISegmentedControl"; 3Qn-Nq-EnE.segmentTitles[0] = "Discussed Topics"; ObjectID = "3Qn-Nq-EnE"; */
+"3Qn-Nq-EnE.segmentTitles[0]" = "Discussed Topics";
+
+/* Class = "UISegmentedControl"; 3Qn-Nq-EnE.segmentTitles[1] = "Undiscussed Topics"; ObjectID = "3Qn-Nq-EnE"; */
+"3Qn-Nq-EnE.segmentTitles[1]" = "Undiscussed Topics";
+
+/* Class = "UILabel"; text = "Author"; ObjectID = "4az-Wl-pT2"; */
+"4az-Wl-pT2.text" = "Author";
+
+/* Class = "UILabel"; text = "Author"; ObjectID = "8D6-WP-X1K"; */
+"8D6-WP-X1K.text" = "Author";
+
+/* Class = "UITextField"; placeholder = "Type to Search"; ObjectID = "DER-wn-lGe"; */
+"DER-wn-lGe.placeholder" = "Type to Search";
+
+/* Class = "UILabel"; text = "Time discussed"; ObjectID = "i5Q-t2-2XK"; */
+"i5Q-t2-2XK.text" = "Time discussed";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "pch-dh-B71"; */
+"pch-dh-B71.text" = "00:00";
+
+/* Class = "UILabel"; text = "Topic"; ObjectID = "sSd-Dt-yVU"; */
+"sSd-Dt-yVU.text" = "Topic";
+
+/* Class = "UILabel"; text = "Topic Description"; ObjectID = "x9v-h1-NPe"; */
+"x9v-h1-NPe.text" = "Topic Description";
