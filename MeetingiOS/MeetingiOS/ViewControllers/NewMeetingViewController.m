@@ -30,6 +30,7 @@
     _dateTime.text = [_formatter stringFromDate:NSDate.now];
 }
 
+
 /// Modificando todas as views presentes na view controller
 - (void) setupView {
     
@@ -90,6 +91,14 @@
     
 }
 
+
+- (void)selectedColor:(NSString *)hex {
+    
+}
+
+- (void)selectedContacts:(NSArray<Contact *> *)contacts {
+    
+}
 
 @end
 

@@ -12,3 +12,4 @@
 #import "ContactManager.h"
 #import "ContactTableViewCell.h"
 #import "MyMeetingsCollectionViewCell.h"
+#import "MeetingDelegate.h"

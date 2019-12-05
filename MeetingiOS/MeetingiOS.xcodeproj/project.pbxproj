@@ -103,6 +103,7 @@
 		E219ACC22397DE75002CF585 /* SelectAColor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectAColor.storyboard; sourceTree = "<group>"; };
 		E219ACC42397DED5002CF585 /* SelectColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E2827DA923997BC900055545 /* MeetingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +249,7 @@
 				A4EB3C12239754D40097857F /* ContactCollectionView.m */,
 				A4EB3BFB239747640097857F /* Contact.h */,
 				A4EB3BFC239747640097857F /* Contact.m */,
+				E2827DA923997BC900055545 /* MeetingDelegate.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

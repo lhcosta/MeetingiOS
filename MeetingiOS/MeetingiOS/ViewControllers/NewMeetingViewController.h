@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MeetingDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 
 /// View Controllers para criar uma nova reuinao
-@interface NewMeetingViewController : UIViewController
+@interface NewMeetingViewController : UIViewController  <MeetingDelegate>
 
 //MARK:- IBOutlets
 @property (nonatomic, weak) IBOutlet UIView* firstView;
