@@ -87,7 +87,7 @@ class FinishedMeetingViewController: UIViewController {
     func createTopic(_ description: String, author: String) -> Topic {
         
         let record = CKRecord(recordType: "Topic")
-        var newTopic = Topic(record: record)
+        let newTopic = Topic(record: record)
         newTopic.editDescription(description)
         newTopic.authorName = author
         newTopic.discussed = true
@@ -103,7 +103,7 @@ class FinishedMeetingViewController: UIViewController {
     func createUndiscussedTopic(_ description: String, author: String) -> Topic {
         
         let record = CKRecord(recordType: "Topic")
-        var newTopic = Topic(record: record)
+        let newTopic = Topic(record: record)
         newTopic.editDescription("\(description) (undiscussed)")
         newTopic.authorName = author
         

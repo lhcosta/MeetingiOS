@@ -25,6 +25,9 @@ class ContactViewController: UIViewController {
     private var filteringContacts : [Contact] = []
     private var contactCollectionView : ContactCollectionView?
     private var contactManager : ContactManager?
+    
+    //MARK:- Delegates
+    weak var delegate : MeetingDelegate?
         
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
@@ -225,7 +228,7 @@ extension ContactViewController : UITableViewDelegate {
 
 
 
-//MARK:- Sorting Contacts
+//MARK:- Sorting Contacts and Sending Contacts
 private extension ContactViewController {
     
     /// Ordenar os contatos.
@@ -234,6 +237,26 @@ private extension ContactViewController {
             return lhs.key < rhs.key
         })
     }
+    
+    ///Enviando Contatos
+    @IBAction func sendingContactsToMeeting() {
+        
+        var contactsHaveAccount = [CKRecord.Reference]()
+        
+        guard let allContacts = contactCollectionView?.contacts else {return}
+        
+        for contact in allContacts {
+            
+            CloudManager.shared.readRecords(recorType: "User", predicate: NSPredicate(format: "email = %@", contact.email!), desiredKeys: ["recordName"], perRecordCompletion: { (record) in
+                contactsHaveAccount.append(CKRecord.Reference(record: record, action: .deleteSelf))
+            }) { 
+                self.delegate?.selectedContacts(contactsHaveAccount);
+            }
+        
+        }
+        
+    }
+    
 }
 
 //MARK:- Insert New Contact

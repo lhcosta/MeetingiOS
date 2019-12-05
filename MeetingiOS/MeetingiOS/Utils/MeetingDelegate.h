@@ -7,11 +7,12 @@
 //
 
 #import "Contact.h"
+#import <CloudKit/CloudKit.h>
 
 @protocol MeetingDelegate <NSObject>
 
 @required
 - (void) selectedColor:(NSString*)hex;
-- (void) selectedContacts:(NSArray<Contact*>*)contacts;
+- (void) selectedContacts:(NSArray<CKReference*>*)contacts;
 
 @end

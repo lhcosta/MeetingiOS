@@ -46,7 +46,7 @@ class UnfinishedMeetingViewController: UIViewController {
     @IBAction func createTopicButton(_ sender: Any) {
         
         let topicRecord = CKRecord(recordType: "Topic")
-        var newTopic = Topic(record: topicRecord)
+        let newTopic = Topic(record: topicRecord)
         newTopic.editDescription(descriptionField.text!)
         newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
         newTopic.authorName = defaults.string(forKey: "givenName") ?? "Desconhecido"

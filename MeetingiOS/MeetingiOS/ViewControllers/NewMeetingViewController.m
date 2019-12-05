@@ -9,6 +9,7 @@
 #import "NewMeetingViewController.h"
 #import <MeetingiOS-Swift.h>
 #import "NewMeetingViewController+NameMeetingValidation.h"
+#import "Contact.h"
 
 @interface NewMeetingViewController ()
 
@@ -118,9 +119,15 @@
 
 - (void)selectedColor:(NSString *)hex {
     
+    
+    
 }
 
 - (void)selectedContacts:(NSArray<Contact *> *)contacts {
+    
+    
+    
+    
     
 }
 
