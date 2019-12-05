@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "My Meetings"; ObjectID = "2xu-nZ-hHt"; */
+"2xu-nZ-hHt.text" = "My Meetings";
+
+/* Class = "UILabel"; text = "Autor"; ObjectID = "9I2-nb-649"; */
+"9I2-nb-649.text" = "Autor";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "D3M-XL-cz0"; */
+"D3M-XL-cz0.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "Título"; ObjectID = "Fu9-1c-Nmb"; */
+"Fu9-1c-Nmb.text" = "Título";
