@@ -181,11 +181,22 @@
                         <outlet property="fourthView" destination="Lah-13-8YU" id="KUk-a2-h0F"/>
                         <outlet property="secondView" destination="d3O-fi-DEp" id="4LA-D4-vVc"/>
                         <outlet property="thirdView" destination="NAe-TU-rRr" id="2wY-6W-sNl"/>
+                        <segue destination="4JS-RT-fZ2" kind="show" identifier="SelectContacts" id="E2i-6L-uLy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KfH-Hk-Zdn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="885.50724637681162" y="-19.419642857142858"/>
+        </scene>
+        <!--Contact-->
+        <scene sceneID="gUQ-kz-9hF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Contact" id="4JS-RT-fZ2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="TiU-ic-oBl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCp-U6-6at" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1514" y="-19"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WJY-v9-5bw">

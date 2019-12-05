@@ -42,15 +42,21 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
-    if([self.view pointInside:_thirdView.bounds.origin withEvent:event]) {
+    UITouch* touch = [touches anyObject];
+    
+    if(CGRectContainsPoint(_thirdView.bounds, [touch locationInView:_thirdView])) {
         
         if([self.view.subviews containsObject:_datePicker]) {
             [_datePicker removeFromSuperview];
         } else {
             [self setupDatePicker];   
         }
+        
+    } else if (CGRectContainsPoint(_fourthView.bounds, [touch locationInView:_fourthView])) { 
+        [self performSegueWithIdentifier:@"SelectContacts" sender:nil];
     }
 }
+
 
 /// Modificando o label de data e hora da reuniao
 /// @param datePicker objeto date picker

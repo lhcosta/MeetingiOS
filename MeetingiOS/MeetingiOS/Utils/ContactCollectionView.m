@@ -8,12 +8,17 @@
 
 #import "ContactCollectionView.h"
 
+@implementation ContactCollectionView 
 
-@interface ContactCollectionView() <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-
-@end
-
-@implementation ContactCollectionView
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _contacts = [[NSArray alloc] init];
+    }
+    
+    return self;
+}
 
 //MARK:- UICollectionViewDataSource
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath { 
@@ -32,8 +37,13 @@
 //MARK:- UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    [_contacts[indexPath.item] setIsSelected:NO];
-    [_contacts removeObjectAtIndex:indexPath.item];
+    NSMutableArray<Contact*>* mutableContacts = [_contacts mutableCopy];
+    
+    [mutableContacts[indexPath.item] setIsSelected:NO];
+
+    [mutableContacts removeObjectAtIndex:indexPath.item];
+    _contacts = [mutableContacts copy];
+    
     [collectionView deleteItemsAtIndexPaths:@[indexPath]];
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"RemoveContact" object:nil];

@@ -15,7 +15,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLm-hB-M6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="239" y="-371"/>
+            <point key="canvasLocation" x="877" y="90"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -85,7 +85,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yPt-oO-8yK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009" y="-98"/>
+            <point key="canvasLocation" x="905" y="123"/>
         </scene>
         <!--SelectAColor-->
         <scene sceneID="F7R-58-6N3">
@@ -105,7 +105,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52b-Iv-vk4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="986" y="344"/>
+            <point key="canvasLocation" x="894" y="157"/>
         </scene>
         <!--MyMeetings-->
         <scene sceneID="GGu-sA-QVP">

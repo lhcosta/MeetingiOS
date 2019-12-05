@@ -36,6 +36,9 @@
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AS-ZA-sK1">
                                         <rect key="frame" x="349" y="3" width="25" height="24"/>
+                                        <connections>
+                                            <action selector="addingNewContact:" destination="i1y-NM-6sX" eventType="touchUpInside" id="lL1-8N-QSV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -76,7 +79,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="bAh-oA-3db" customClass="ContactCollectionViewCell" customModule="MeetingiOS" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="bAh-oA-3db" customClass="ContactCollectionViewCell">
                                                 <rect key="frame" x="0.0" y="8.5" width="102" height="83"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NCD-b8-oOr">
@@ -86,7 +89,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="un1-Kh-oHb">
                                                             <rect key="frame" x="0.0" y="0.0" width="102" height="83"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="plus.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HR4-dz-kYS">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person.crop.circle.fill.badge.xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HR4-dz-kYS">
                                                                     <rect key="frame" x="21" y="0.5" width="60" height="59"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="60" id="549-qa-vVY"/>
@@ -111,7 +114,7 @@
                                                 </collectionViewCellContentView>
                                                 <size key="customSize" width="102" height="83"/>
                                                 <connections>
-                                                    <outlet property="email" destination="fIu-XI-Dgq" id="hqU-1I-K9H"/>
+                                                    <outlet property="email" destination="fIu-XI-Dgq" id="CcI-vy-Nig"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -122,7 +125,7 @@
                                 <rect key="frame" x="0.0" y="158" width="414" height="704"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableCell" textLabel="cP1-Jp-aUc" detailTextLabel="pjF-xz-D2g" style="IBUITableViewCellStyleSubtitle" id="qyy-Ov-4Mr" customClass="ContactTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableCell" textLabel="cP1-Jp-aUc" detailTextLabel="pjF-xz-D2g" style="IBUITableViewCellStyleSubtitle" id="qyy-Ov-4Mr" customClass="ContactTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qyy-Ov-4Mr" id="zrc-SO-OEl">
@@ -199,6 +202,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="person.crop.circle.fill.badge.xmark" catalog="system" width="64" height="50"/>
     </resources>
 </document>

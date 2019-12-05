@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (SetupBounds)
 
+///  Arrendondado as bordas de uma view.
+/// @param maskCorners quais são as bordas.
 - (void)setupBounds:(CACornerMask)maskCorners;
 
 @end
