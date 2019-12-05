@@ -2,11 +2,21 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--NewMeeting-->
+        <scene sceneID="YGk-Rb-cj6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewMeeting" id="ipY-ZK-Awj" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="H9u-l9-PYy"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OLm-hB-M6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="877" y="90"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -20,7 +30,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Meeting não finalizada"/>
                                 <connections>
-                                    <segue destination="siA-qL-24V" kind="show" id="Vfh-KR-YKy"/>
+                                    <segue destination="Cy6-iH-B7s" kind="show" id="aYc-qq-p5i"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGg-KY-Z3s">
@@ -28,7 +38,23 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Meeting finalizada"/>
                                 <connections>
-                                    <segue destination="ERv-wl-gMN" kind="show" id="UrU-eZ-KIL"/>
+                                    <segue destination="vgm-Qf-pqo" kind="show" id="hmi-nK-51l"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovS-pD-kkA">
+                                <rect key="frame" x="168" y="127" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="ipY-ZK-Awj" kind="show" id="YAU-bQ-sDf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa1-nN-B6G">
+                                <rect key="frame" x="82" y="350" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="Quk-2B-pOk" kind="show" id="ehG-su-7Hm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -41,24 +67,34 @@
             <point key="canvasLocation" x="137.68115942028987" y="122.54464285714285"/>
         </scene>
         <!--unfinishedMeeting-->
-        <scene sceneID="6mX-7J-Hyu">
+        <scene sceneID="Ijx-sS-ZIp">
             <objects>
-                <viewControllerPlaceholder storyboardName="UnfinishedMeeting" referencedIdentifier="unfinishedMeeting" id="siA-qL-24V" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="k5e-0n-Hjp"/>
+                <viewControllerPlaceholder storyboardName="UnfinishedMeeting" referencedIdentifier="unfinishedMeeting" id="Cy6-iH-B7s" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="QKB-EO-krL"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QSb-8Q-okp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yPt-oO-8yK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1064" y="-127"/>
+            <point key="canvasLocation" x="905" y="123"/>
         </scene>
         <!--finishedMeeting-->
-        <scene sceneID="5lT-ps-dRg">
+        <scene sceneID="boF-Y8-PJT">
             <objects>
-                <viewControllerPlaceholder storyboardName="FinishedMeeting" referencedIdentifier="finishedMeeting" id="ERv-wl-gMN" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="QiA-UH-Y5g"/>
+                <viewControllerPlaceholder storyboardName="FinishedMeeting" referencedIdentifier="finishedMeeting" id="vgm-Qf-pqo" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WHk-p0-g8Y"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rzO-JE-BCv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52b-Iv-vk4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="372"/>
+            <point key="canvasLocation" x="894" y="157"/>
+        </scene>
+        <!--MyMeetings-->
+        <scene sceneID="GGu-sA-QVP">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MyMeetings" storyboardName="MyMeetings" referencedIdentifier="MyMeetings" id="Quk-2B-pOk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WRR-Ls-Ebk"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IGt-kW-Bcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792" y="528"/>
         </scene>
     </scenes>
 </document>
