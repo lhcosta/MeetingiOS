@@ -139,9 +139,9 @@ struct Meeting {
         }
     }
     
-    var color: Int? {
+    var color: String? {
         get {
-            return self.record.value(forKey: "color") as? Int
+            return self.record.value(forKey: "color") as? String
         }
         
         set {
@@ -211,10 +211,10 @@ struct Meeting {
     }
     
     /// Description: Este método faz a atualização da cor da Reunião
-    /// - Parameter numColor: numColor referece ao numero da cor selecionada,
-    /// cada cor tem seu númerov referente ao indice do array de cores (isto pode ser futuramente alterado)
-    mutating func editColor(numColor: Int){
-        self.color = numColor
+    /// - Parameter hexColor: hexColor referece ao numero da cor selecionada,
+    /// cada cor tem seu hexadecimal referente no array de cores
+    mutating func editColor(hexColor: String){
+        self.color = hexColor
         self.record.setValue(color, forKey: "color")
     }
 }
