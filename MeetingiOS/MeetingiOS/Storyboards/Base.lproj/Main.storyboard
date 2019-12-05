@@ -7,16 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--NewMeeting-->
-        <scene sceneID="YGk-Rb-cj6">
-            <objects>
-                <viewControllerPlaceholder storyboardName="NewMeeting" id="ipY-ZK-Awj" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="H9u-l9-PYy"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OLm-hB-M6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="877" y="90"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -30,7 +20,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Meeting não finalizada"/>
                                 <connections>
-                                    <segue destination="Cy6-iH-B7s" kind="show" id="aYc-qq-p5i"/>
+                                    <segue destination="MEz-Ph-QjA" kind="show" id="QNo-gt-csN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGg-KY-Z3s">
@@ -38,7 +28,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Meeting finalizada"/>
                                 <connections>
-                                    <segue destination="vgm-Qf-pqo" kind="show" id="hmi-nK-51l"/>
+                                    <segue destination="TOI-SA-6Zb" kind="show" id="p1w-BO-DRt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovS-pD-kkA">
@@ -46,7 +36,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="ipY-ZK-Awj" kind="show" id="YAU-bQ-sDf"/>
+                                    <segue destination="NDF-W7-IdJ" kind="show" id="jye-uz-t9u"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa1-nN-B6G">
@@ -54,7 +44,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="Quk-2B-pOk" kind="show" id="ehG-su-7Hm"/>
+                                    <segue destination="gBz-ge-pjZ" kind="show" id="mi9-LB-Qay"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -66,35 +56,45 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="122.54464285714285"/>
         </scene>
-        <!--unfinishedMeeting-->
-        <scene sceneID="Ijx-sS-ZIp">
+        <!--NewMeeting-->
+        <scene sceneID="Sy9-Z5-emo">
             <objects>
-                <viewControllerPlaceholder storyboardName="UnfinishedMeeting" referencedIdentifier="unfinishedMeeting" id="Cy6-iH-B7s" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="QKB-EO-krL"/>
+                <viewControllerPlaceholder storyboardName="NewMeeting" id="gBz-ge-pjZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WQO-Jq-pUY"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yPt-oO-8yK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xxe-aE-Hej" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="123"/>
-        </scene>
-        <!--finishedMeeting-->
-        <scene sceneID="boF-Y8-PJT">
-            <objects>
-                <viewControllerPlaceholder storyboardName="FinishedMeeting" referencedIdentifier="finishedMeeting" id="vgm-Qf-pqo" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="WHk-p0-g8Y"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="52b-Iv-vk4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="894" y="157"/>
+            <point key="canvasLocation" x="725" y="-48"/>
         </scene>
         <!--MyMeetings-->
-        <scene sceneID="GGu-sA-QVP">
+        <scene sceneID="Ne5-lU-nJC">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="MyMeetings" storyboardName="MyMeetings" referencedIdentifier="MyMeetings" id="Quk-2B-pOk" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="WRR-Ls-Ebk"/>
+                <viewControllerPlaceholder storyboardName="MyMeetings" id="NDF-W7-IdJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zuh-PN-Ux6"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IGt-kW-Bcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ctL-Ed-fzd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="792" y="528"/>
+            <point key="canvasLocation" x="775" y="5"/>
+        </scene>
+        <!--UnfinishedMeeting-->
+        <scene sceneID="RyH-0b-vEa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UnfinishedMeeting" id="MEz-Ph-QjA" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="5bD-eW-8H6"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X9L-oZ-J6I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="775" y="185"/>
+        </scene>
+        <!--FinishedMeeting-->
+        <scene sceneID="UUm-97-QfW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FinishedMeeting" id="TOI-SA-6Zb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BxC-e4-6c1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M2i-RP-a5l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759" y="265"/>
         </scene>
     </scenes>
 </document>

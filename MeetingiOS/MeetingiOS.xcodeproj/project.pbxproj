@@ -23,13 +23,13 @@
 		49EB44E623871126002F434D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E523871126002F434D /* LoginViewController.swift */; };
 		49EB44EE23871128002F434D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44ED23871128002F434D /* Assets.xcassets */; };
 		49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44EF23871128002F434D /* LaunchScreen.storyboard */; };
-		49F09A572399819500B7DFD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A592399819500B7DFD3 /* Localizable.strings */; };
-		49F09A5E2399824500B7DFD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A602399824500B7DFD3 /* Main.storyboard */; };
-		49F09A682399827100B7DFD3 /* MyMeetings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */; };
-		49F09A70239982A600B7DFD3 /* FinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A72239982A600B7DFD3 /* FinishedMeeting.storyboard */; };
-		49F09A78239982C600B7DFD3 /* UnfinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */; };
-		49F09A80239982FA00B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
-		49F09A882399831800B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
+		49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A602399824500B7DFD3 /* Main.storyboard */; };
+		49F09ACB2399A1BA00B7DFD3 /* MyMeetings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */; };
+		49F09ACC2399A1BE00B7DFD3 /* FinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A72239982A600B7DFD3 /* FinishedMeeting.storyboard */; };
+		49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */; };
+		49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
+		49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
+		49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
@@ -46,7 +46,6 @@
 		A4EB3C22239854A00097857F /* MeetingiOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */; };
 		A4EB3C232398555D0097857F /* ContactCollectionView.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C11239754D40097857F /* ContactCollectionView.h */; };
 		A4EB3C24239855640097857F /* ContactManager.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1D2397EAF60097857F /* ContactManager.h */; };
-		E219ACC32397DE75002CF585 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E219ACC22397DE75002CF585 /* SelectAColor.storyboard */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +98,16 @@
 		49F09A8B2399831D00B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewMeeting.storyboard; sourceTree = "<group>"; };
 		49F09A8D2399832300B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/NewMeeting.strings"; sourceTree = "<group>"; };
 		49F09A8F2399832500B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NewMeeting.strings; sourceTree = "<group>"; };
+		49F09AB72399A14300B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		49F09AB92399A14A00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyMeetings.strings; sourceTree = "<group>"; };
+		49F09ABB2399A16900B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FinishedMeeting.strings; sourceTree = "<group>"; };
+		49F09ABD2399A16E00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UnfinishedMeeting.strings; sourceTree = "<group>"; };
+		49F09ABF2399A17100B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
+		49F09AC12399A17400B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewMeeting.strings; sourceTree = "<group>"; };
+		49F09AC42399A18500B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SelectAColor.storyboard; sourceTree = "<group>"; };
+		49F09AC62399A18700B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SelectAColor.strings"; sourceTree = "<group>"; };
+		49F09AC82399A18800B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SelectAColor.strings; sourceTree = "<group>"; };
+		49F09ACA2399A1B100B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SelectAColor.strings; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -119,7 +128,6 @@
 		A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NewFeatures.m"; sourceTree = "<group>"; };
 		A4EB3C1D2397EAF60097857F /* ContactManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactManager.h; sourceTree = "<group>"; };
 		A4EB3C1E2397EAF60097857F /* ContactManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
-		E219ACC22397DE75002CF585 /* SelectAColor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectAColor.storyboard; sourceTree = "<group>"; };
 		E219ACC42397DED5002CF585 /* SelectColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,7 +249,7 @@
 				49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */,
 				49F09A82239982FA00B7DFD3 /* Contact.storyboard */,
 				49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */,
-				E219ACC22397DE75002CF585 /* SelectAColor.storyboard */,
+				49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -344,14 +352,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */,
+				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
+				49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */,
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
-				49F09A78239982C600B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
+				49F09ACB2399A1BA00B7DFD3 /* MyMeetings.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
-				2379ADBB2396DC3000EDE8F8 /* FinishedMeeting.storyboard in Resources */,
-				A4EB3BE72395EE3F0097857F /* Main.storyboard in Resources */,
-				A4EB3BED2396D0D50097857F /* NewMeeting.storyboard in Resources */,
-				231AE13E2397EB500051051C /* MyMeetings.storyboard in Resources */,
-				A4EB3BF123973E330097857F /* Contact.storyboard in Resources */,
+				49F09ACC2399A1BE00B7DFD3 /* FinishedMeeting.storyboard in Resources */,
+				49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */,
+				49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +437,7 @@
 				49F09A642399825900B7DFD3 /* pt-BR */,
 				49F09A662399825A00B7DFD3 /* es */,
 				49F09A672399826800B7DFD3 /* Base */,
+				49F09AB72399A14300B7DFD3 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -438,6 +448,7 @@
 				49F09A6C2399827600B7DFD3 /* pt-BR */,
 				49F09A6E2399827700B7DFD3 /* es */,
 				49F09A6F2399827800B7DFD3 /* Base */,
+				49F09AB92399A14A00B7DFD3 /* en */,
 			);
 			name = MyMeetings.storyboard;
 			sourceTree = "<group>";
@@ -448,6 +459,7 @@
 				49F09A73239982AF00B7DFD3 /* Base */,
 				49F09A75239982BB00B7DFD3 /* pt-BR */,
 				49F09A77239982BC00B7DFD3 /* es */,
+				49F09ABB2399A16900B7DFD3 /* en */,
 			);
 			name = FinishedMeeting.storyboard;
 			sourceTree = "<group>";
@@ -458,6 +470,7 @@
 				49F09A7B239982CF00B7DFD3 /* Base */,
 				49F09A7D239982D400B7DFD3 /* pt-BR */,
 				49F09A7F239982D500B7DFD3 /* es */,
+				49F09ABD2399A16E00B7DFD3 /* en */,
 			);
 			name = UnfinishedMeeting.storyboard;
 			sourceTree = "<group>";
@@ -468,6 +481,7 @@
 				49F09A83239982FF00B7DFD3 /* Base */,
 				49F09A852399830400B7DFD3 /* pt-BR */,
 				49F09A872399830500B7DFD3 /* es */,
+				49F09ABF2399A17100B7DFD3 /* en */,
 			);
 			name = Contact.storyboard;
 			sourceTree = "<group>";
@@ -478,8 +492,20 @@
 				49F09A8B2399831D00B7DFD3 /* Base */,
 				49F09A8D2399832300B7DFD3 /* pt-BR */,
 				49F09A8F2399832500B7DFD3 /* es */,
+				49F09AC12399A17400B7DFD3 /* en */,
 			);
 			name = NewMeeting.storyboard;
+			sourceTree = "<group>";
+		};
+		49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49F09AC42399A18500B7DFD3 /* Base */,
+				49F09AC62399A18700B7DFD3 /* pt-BR */,
+				49F09AC82399A18800B7DFD3 /* es */,
+				49F09ACA2399A1B100B7DFD3 /* en */,
+			);
+			name = SelectAColor.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
