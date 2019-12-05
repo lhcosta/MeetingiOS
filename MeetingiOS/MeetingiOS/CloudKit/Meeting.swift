@@ -10,12 +10,12 @@ import Foundation
 import CloudKit
 
 /**
-Struct utilizada para criar um nova reunião, Update de Meeting ou
+Classe utilizada para criar um nova reunião, Update de Meeting ou
 utilizar como auxílio de manipulação de CKRecord Meeting
 - Author: Lucas Costa 
  */
 
-struct Meeting {
+@objc class Meeting: NSObject {
     
     //MARK:- JSON Keys
     enum CodingKeys : String, CodingKey {
@@ -25,13 +25,13 @@ struct Meeting {
     //MARK:- Properties
     
     ///Record do tipo Meeting
-    private(set) var record : CKRecord!
+    @objc private(set) var record : CKRecord!
     
     ///Topicos selecionados
-    var selected_topics : [Topic] = []
+    @objc var selected_topics : [Topic] = []
     
     ///Tópicos da reunião
-    var topics : [CKRecord.Reference] {
+    @objc var topics : [CKRecord.Reference] {
         get {
             self.record.value(forKey: "topics") as? [CKRecord.Reference] ?? []
         }
@@ -42,7 +42,7 @@ struct Meeting {
     }
         
     ///Gerenciador da reunião
-    var manager : CKRecord.Reference? {
+    @objc var manager : CKRecord.Reference? {
         
         set {
             self.record.setValue(newValue, forKey: "manager")
@@ -54,10 +54,10 @@ struct Meeting {
     }
     
     ///Duração da reunião
-    var duration : Int64? {
+    @objc var duration : Int64 {
         
         get {
-            self.record.value(forKey: "duration") as? Int64
+            self.record.value(forKey: "duration") as? Int64 ?? 0
         }
         
         set {
@@ -66,7 +66,7 @@ struct Meeting {
     }
     
     ///Funcionários que participaram da reunião
-    var employees : [CKRecord.Reference] {
+    @objc var employees : [CKRecord.Reference] {
         
         get {
             return self.record.value(forKey: "employees") as? [CKRecord.Reference] ?? []
@@ -78,10 +78,10 @@ struct Meeting {
     }
     
     ///Limite de tópicos de para cada funcionário
-    var limitTopic : Int64? {
+    @objc var limitTopic : Int64 {
         
         get {
-            self.record.value(forKey: "limitTopic") as? Int64
+            self.record.value(forKey: "limitTopic") as? Int64 ?? 0
         }
         
         set {
@@ -91,7 +91,7 @@ struct Meeting {
     }
     
     ///Reunião finalizada
-    var finished : Bool {
+    @objc var finished : Bool {
         
         get {
             return self.record.value(forKey: "finished") as? Bool ?? false
@@ -104,7 +104,7 @@ struct Meeting {
     }
     
     ///Reunião iniciada
-    var started : Bool {
+    @objc var started : Bool {
         
         get {
             self.record.value(forKey: "started") as? Bool ?? false
@@ -116,7 +116,7 @@ struct Meeting {
     }
     
     ///Tema da reunião
-    var theme : String {
+    @objc var theme : String {
         
         get {
             return self.record.value(forKey: "theme") as? String ?? ""
@@ -128,7 +128,7 @@ struct Meeting {
     }
     
     ///Data da realização da reunião
-    var date : Date? {
+    @objc var date : Date? {
         
         get {
             return self.record.value(forKey: "date") as? Date
@@ -140,7 +140,7 @@ struct Meeting {
     }
     
     //MARK: - Initializer
-    init(record : CKRecord) {
+    @objc init(record : CKRecord) {
         self.record = record
     }
     
@@ -151,7 +151,7 @@ struct Meeting {
     - parameters: 
         - employee: Novo funcionário 
     */
-    mutating func addingNewEmployee(_ employee : CKRecord.Reference) {
+    @objc func addingNewEmployee(_ employee : CKRecord.Reference) {
         self.employees.append(employee)
         self.record.setValue(employees, forKey: "employees")
     }
@@ -161,7 +161,7 @@ struct Meeting {
     - parameters: 
         - index : Indice do funcionário
     */
-    mutating func removingEmployee(index : Int) {
+    @objc func removingEmployee(index : Int) {
         self.employees.remove(at: index)
         self.record.setValue(employees, forKey: "employees")
     }
@@ -170,7 +170,7 @@ struct Meeting {
      Adicionando novas pautas
      - Parameter topic: Novo tópico
      */
-    mutating func addingNewTopic(_ topic : CKRecord.Reference) {
+    @objc func addingNewTopic(_ topic : CKRecord.Reference) {
         self.topics.append(topic)
         self.record.setValue(topics, forKey: "topics")
     }
@@ -182,7 +182,7 @@ struct Meeting {
             - topics : Tópicos pertencentes ao usuário ou todos caso seja o gerenciador da reunião
         
      */
-    func filteringTopics(user : CKRecord) -> [CKRecord.Reference] {
+    @objc func filteringTopics(user : CKRecord) -> [CKRecord.Reference] {
                 
         if user.value(forKey: "manager") as? Bool ?? false {
             return self.topics

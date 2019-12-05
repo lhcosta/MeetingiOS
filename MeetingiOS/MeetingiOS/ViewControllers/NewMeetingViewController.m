@@ -7,14 +7,19 @@
 //
 
 #import "NewMeetingViewController.h"
-#import "UIView+SetupBounds.h"
+#import <MeetingiOS-Swift.h>
+#import "NewMeetingViewController+NameMeetingValidation.h"
 
 @interface NewMeetingViewController ()
 
 @property (nonatomic) NSDateFormatter* formatter;
 @property (nonatomic, nullable) UIDatePicker* datePicker;
+@property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
+@property (nonatomic) Meeting* meeting;
+@property (nonatomic) CKRecord* record;
 
 - (void) setupDatePicker;
+- (void) createMeetingInCloud;
 
 @end
 
@@ -26,8 +31,17 @@
     [self setupView];    
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"MMM, dd yyyy  h:mm a";
-    
     _dateTime.text = [_formatter stringFromDate:NSDate.now];
+    
+    _contactCollectionView = [[ContactCollectionView alloc] init];
+    _collectionView.allowsSelection = NO;
+    _collectionView.delegate = _contactCollectionView;
+    _collectionView.dataSource = _contactCollectionView;
+    
+    _record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
+    _meeting = [[Meeting alloc] initWithRecord:_record];
+    
+    _nameMetting.delegate = self;
 }
 
 /// Modificando todas as views presentes na view controller
@@ -86,10 +100,20 @@
         
     [_datePicker setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-     [_datePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents:UIControlEventValueChanged];    
+    [_datePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents:UIControlEventValueChanged];    
     
 }
 
+///Criando a reunião no Cloud Kit
+-(void) createMeetingInCloud {
+    
+    NSString* name =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    
+    if(name.length == 0) {
+        return;
+    }
+    
+}
 
 @end
 

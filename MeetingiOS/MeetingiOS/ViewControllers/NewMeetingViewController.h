@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+SetupBounds.h"
+#import "ContactCollectionView.h"
+#import <CloudKit/CloudKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIView* fourthView;
 @property (nonatomic, weak) IBOutlet UIView* fifthView;
 @property (nonatomic, weak) IBOutlet UILabel* dateTime;
+@property (nonatomic, weak) IBOutlet UICollectionView* collectionView;
+@property (nonatomic, weak) IBOutlet UITextField* nameMetting;
 
 @end
 
