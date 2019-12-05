@@ -139,6 +139,16 @@ struct Meeting {
         }
     }
     
+    var color: Int? {
+        get {
+            return self.record.value(forKey: "color") as? Int
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "color")
+        }
+    }
+    
     //MARK: - Initializer
     init(record : CKRecord) {
         self.record = record
@@ -198,6 +208,14 @@ struct Meeting {
         }
         
         return topics_owner
+    }
+    
+    /// Description: Este método faz a atualização da cor da Reunião
+    /// - Parameter numColor: numColor referece ao numero da cor selecionada,
+    /// cada cor tem seu númerov referente ao indice do array de cores (isto pode ser futuramente alterado)
+    mutating func editColor(numColor: Int){
+        self.color = numColor
+        self.record.setValue(color, forKey: "color")
     }
 }
 

@@ -21,7 +21,11 @@
                                 <color key="backgroundColor" red="0.96077269320000003" green="0.96077829599999998" blue="0.96079295870000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <items>
                                     <navigationItem title="Pick a color" id="Ikk-cF-HPL">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="D8h-wL-8OU"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="D8h-wL-8OU">
+                                            <connections>
+                                                <action selector="saveColor:" destination="akh-QK-HWq" id="jPx-6b-6yg"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
