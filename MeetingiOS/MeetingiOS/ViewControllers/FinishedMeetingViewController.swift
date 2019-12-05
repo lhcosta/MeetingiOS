@@ -11,7 +11,7 @@ import CloudKit
 
 
 /// Essa View será exibida após a seleção de uma Meeting que já foi encerrada.
-class FinishedReunionViewController: UIViewController {
+class FinishedMeetingViewController: UIViewController {
     
     /// Segmented usado para visualizar os Topics discutidos e não discutidos.
     @IBOutlet var topicsSegmentedControl: UISegmentedControl!
@@ -123,7 +123,7 @@ class FinishedReunionViewController: UIViewController {
 }
 
 
-extension FinishedReunionViewController: UITableViewDelegate, UITableViewDataSource {
+extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -138,15 +138,13 @@ extension FinishedReunionViewController: UITableViewDelegate, UITableViewDataSou
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FinishedTopicsTableViewCell
         if topicsSegmentedControl.selectedSegmentIndex == 0 {
-            cell.topicDescriptionLabel.text = discussedTopics[indexPath.row].description
+            cell.topicDescriptionLabel.text = discussedTopics[indexPath.row].topicDescription
             cell.authorNameLabel.text = discussedTopics[indexPath.row].authorName
-            cell.thisCellTopic = discussedTopics[indexPath.row]
         } else {
-            cell.topicDescriptionLabel.text = undiscussedTopics[indexPath.row].description
+            cell.topicDescriptionLabel.text = undiscussedTopics[indexPath.row].topicDescription
             cell.authorNameLabel.text = undiscussedTopics[indexPath.row].authorName
-            cell.thisCellTopic = undiscussedTopics[indexPath.row]
         }
-        
+
         return cell
     }
     

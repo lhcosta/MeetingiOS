@@ -4,3 +4,11 @@
 
 #import "NewMeetingViewController.h"
 #import "EventManager.h"
+#import "UnfinishedTopicsTableViewCell.h"
+#import "FinishedTopicsTableViewCell.h"
+#import "Contact.h"
+#import "ContactCollectionView.h"
+#import "NSString+NewFeatures.h"
+#import "ContactManager.h"
+#import "ContactTableViewCell.h"
+#import "MyMeetingsCollectionViewCell.h"
