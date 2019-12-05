@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -39,14 +40,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Meeting's name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9m1-i5-8bZ">
-                                                                <rect key="frame" x="85.999999999999986" y="0.0" width="210.66666666666663" height="65.333333333333329"/>
+                                                                <rect key="frame" x="86" y="0.0" width="248" height="65.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1R-HF-CAk">
-                                                                <rect key="frame" x="316.66666666666669" y="0.0" width="17.333333333333314" height="65.333333333333329"/>
-                                                                <state key="normal" image="mic.fill" catalog="system"/>
-                                                            </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -60,7 +57,61 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3O-fi-DEp">
                                                 <rect key="frame" x="0.0" y="96.333333333333343" width="364" height="95.666666666666657"/>
+                                                <subviews>
+                                                    <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YFH-7i-u3a">
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="95.666666666666671"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iX1-KN-kgr">
+                                                            <size key="itemSize" width="61" height="80"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="IeW-Yk-qSa" customClass="ContactCollectionViewCell">
+                                                                <rect key="frame" x="0.0" y="0.0" width="61" height="80"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lza-ch-yAX">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="61" height="80"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vdU-f9-33Z">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="80"/>
+                                                                            <subviews>
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-df-c47">
+                                                                                    <rect key="frame" x="0.0" y="0.99999999999999645" width="61" height="58.333333333333329"/>
+                                                                                </imageView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glQ-Jv-IwL">
+                                                                                    <rect key="frame" x="0.0" y="59.666666666666664" width="61" height="20.333333333333336"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="vdU-f9-33Z" firstAttribute="top" secondItem="Lza-ch-yAX" secondAttribute="top" id="GTD-eY-AUX"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="vdU-f9-33Z" secondAttribute="bottom" id="ba2-6C-o0E"/>
+                                                                        <constraint firstItem="vdU-f9-33Z" firstAttribute="leading" secondItem="Lza-ch-yAX" secondAttribute="leading" id="gQj-Ug-zcZ"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="vdU-f9-33Z" secondAttribute="trailing" id="pCO-mj-Twb"/>
+                                                                    </constraints>
+                                                                </collectionViewCellContentView>
+                                                                <size key="customSize" width="61" height="80"/>
+                                                                <connections>
+                                                                    <outlet property="email" destination="glQ-Jv-IwL" id="zvP-U9-2Ti"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                    </collectionView>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="YFH-7i-u3a" firstAttribute="leading" secondItem="d3O-fi-DEp" secondAttribute="leading" id="Ohz-L1-Ldp"/>
+                                                    <constraint firstItem="YFH-7i-u3a" firstAttribute="top" secondItem="d3O-fi-DEp" secondAttribute="top" id="ZEQ-RR-DPm"/>
+                                                    <constraint firstAttribute="bottom" secondItem="YFH-7i-u3a" secondAttribute="bottom" id="eQk-5U-Y9t"/>
+                                                    <constraint firstAttribute="trailing" secondItem="YFH-7i-u3a" secondAttribute="trailing" id="iTP-du-D9c"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -175,10 +226,12 @@
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Xtm-DM-Unt"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="YFH-7i-u3a" id="2mE-iX-nNg"/>
                         <outlet property="dateTime" destination="yRB-lI-7pP" id="gcb-Uj-Awq"/>
                         <outlet property="fifthView" destination="YSn-KU-RVY" id="PUE-im-yT9"/>
                         <outlet property="firstView" destination="3d7-Ux-t3q" id="jYx-yf-Xck"/>
                         <outlet property="fourthView" destination="Lah-13-8YU" id="KUk-a2-h0F"/>
+                        <outlet property="nameMetting" destination="9m1-i5-8bZ" id="Htj-83-dnA"/>
                         <outlet property="secondView" destination="d3O-fi-DEp" id="4LA-D4-vVc"/>
                         <outlet property="thirdView" destination="NAe-TU-rRr" id="2wY-6W-sNl"/>
                         <segue destination="4JS-RT-fZ2" kind="show" identifier="SelectContacts" id="E2i-6L-uLy"/>
@@ -209,6 +262,9 @@
                         <color key="barTintColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SUv-Xv-lw9">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="skW-mi-HLY" kind="relationship" relationship="rootViewController" id="qxy-tX-rmH"/>
                     </connections>
@@ -220,6 +276,6 @@
     </scenes>
     <resources>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
-        <image name="mic.fill" catalog="system" width="54" height="64"/>
+        <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>

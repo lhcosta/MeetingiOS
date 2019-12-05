@@ -13,6 +13,8 @@ class SelectColorViewController: UIViewController {
 
     @IBOutlet weak var viewColorSelected: UIView!
     
+    weak var delegate: MeetingDelegate?
+    
     // Precisa receber a meeting a ser atualizada com a cor
     var meetingRecord = CKRecord(recordType: "Meeting")
     
@@ -30,7 +32,6 @@ class SelectColorViewController: UIViewController {
                                    "#9BCEB6"]
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +44,7 @@ class SelectColorViewController: UIViewController {
     
     @IBAction func saveColor(_ sender: Any) {
         // Mandar a String da cor para a tela de criação da Reunião
+        delegate?.selectedColor(selectedColor)
     }
 
 }

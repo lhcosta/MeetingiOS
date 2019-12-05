@@ -66,7 +66,7 @@ class ContactViewController: UIViewController {
     
 }
 
-//MARK:- Fetching Contacts
+//MARK:- Fetching Contacts and Sending Contacts
 private extension ContactViewController {
     
     func fetchingContacts(completionHandler : @escaping () -> Void) {
@@ -96,6 +96,7 @@ private extension ContactViewController {
         
         completionHandler()
     }
+    
     
 }
 
