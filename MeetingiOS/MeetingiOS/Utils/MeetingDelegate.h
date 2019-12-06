@@ -12,7 +12,11 @@
 @protocol MeetingDelegate <NSObject>
 
 @required
+
+/// Enviando a cor selecionado.
 - (void) selectedColor:(NSString*)hex;
-- (void) selectedContacts:(NSArray<CKReference*>*)contacts;
+
+/// Enviando todos os contatos selecionados para criar reunião.
+- (void) selectedContacts:(NSArray<Contact*>*)contacts;
 
 @end

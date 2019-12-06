@@ -12,8 +12,8 @@
 #import <CloudKit/CloudKit.h>
 #import "MeetingDelegate.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
+NS_ASSUME_NONNULL_BEGIN
 
 /// View Controllers para criar uma nova reuinao
 @interface NewMeetingViewController : UIViewController  <MeetingDelegate>
@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UILabel* dateTime;
 @property (nonatomic, weak) IBOutlet UICollectionView* collectionView;
 @property (nonatomic, weak) IBOutlet UITextField* nameMetting;
+@property (nonatomic, weak) IBOutlet UIButton* colorMetting;
+
+///Selecionando a cor do ícone da reunião.
+- (IBAction) chooseColorMeeting:(id)sender;
 
 @end
 

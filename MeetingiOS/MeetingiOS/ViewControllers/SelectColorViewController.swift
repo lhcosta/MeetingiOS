@@ -9,11 +9,11 @@
 import UIKit
 import CloudKit
 
-class SelectColorViewController: UIViewController {
+@objc class SelectColorViewController: UIViewController {
 
     @IBOutlet weak var viewColorSelected: UIView!
     
-    weak var delegate: MeetingDelegate?
+    @objc weak var delegate: MeetingDelegate?
     
     // Precisa receber a meeting a ser atualizada com a cor
     var meetingRecord = CKRecord(recordType: "Meeting")
@@ -45,8 +45,9 @@ class SelectColorViewController: UIViewController {
     @IBAction func saveColor(_ sender: Any) {
         // Mandar a String da cor para a tela de criação da Reunião
         delegate?.selectedColor(selectedColor)
+        self.navigationController?.popViewController(animated: true)
     }
-
+    
 }
 
 extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewDataSource{

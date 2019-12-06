@@ -42,12 +42,12 @@ class MyMeetingsViewController: UIViewController {
         // MARK: Simulação
         /// Serão substiuídos pelo query no CK.
         for i in 0...2 {
-            var m1 = Meeting(record: CKRecord(recordType: "Meeting"))
+            let m1 = Meeting(record: CKRecord(recordType: "Meeting"))
             m1.theme = "unfinished Theme: \(i)"
             meetings.append(m1)
         }
         for i in 0...2 {
-            var m1 = Meeting(record: CKRecord(recordType: "Meeting"))
+            let m1 = Meeting(record: CKRecord(recordType: "Meeting"))
             m1.theme = "finished Theme: \(i)"
             m1.finished = true
             meetings.append(m1)

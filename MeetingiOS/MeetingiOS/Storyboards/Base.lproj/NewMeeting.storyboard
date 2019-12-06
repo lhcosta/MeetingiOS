@@ -38,6 +38,9 @@
                                                                         <integer key="value" value="10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="chooseColorMeeting:" destination="skW-mi-HLY" eventType="touchUpInside" id="fYE-Fe-6Xe"/>
+                                                                </connections>
                                                             </button>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Meeting's name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9m1-i5-8bZ">
                                                                 <rect key="frame" x="86" y="0.0" width="248" height="65.333333333333329"/>
@@ -61,7 +64,7 @@
                                                     <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YFH-7i-u3a">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="95.666666666666671"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iX1-KN-kgr">
+                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iX1-KN-kgr">
                                                             <size key="itemSize" width="61" height="80"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -69,7 +72,7 @@
                                                         </collectionViewFlowLayout>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="IeW-Yk-qSa" customClass="ContactCollectionViewCell">
-                                                                <rect key="frame" x="0.0" y="0.0" width="61" height="80"/>
+                                                                <rect key="frame" x="0.0" y="8" width="61" height="80"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lza-ch-yAX">
                                                                     <rect key="frame" x="0.0" y="0.0" width="61" height="80"/>
@@ -227,6 +230,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="YFH-7i-u3a" id="2mE-iX-nNg"/>
+                        <outlet property="colorMetting" destination="tBW-JC-OGe" id="IQ7-fD-GjU"/>
                         <outlet property="dateTime" destination="yRB-lI-7pP" id="gcb-Uj-Awq"/>
                         <outlet property="fifthView" destination="YSn-KU-RVY" id="PUE-im-yT9"/>
                         <outlet property="firstView" destination="3d7-Ux-t3q" id="jYx-yf-Xck"/>
@@ -235,11 +239,22 @@
                         <outlet property="secondView" destination="d3O-fi-DEp" id="4LA-D4-vVc"/>
                         <outlet property="thirdView" destination="NAe-TU-rRr" id="2wY-6W-sNl"/>
                         <segue destination="4JS-RT-fZ2" kind="show" identifier="SelectContacts" id="E2i-6L-uLy"/>
+                        <segue destination="OsY-CL-hb7" kind="show" identifier="SelectColor" id="We0-qj-vQc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KfH-Hk-Zdn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="885.50724637681162" y="-19.419642857142858"/>
+        </scene>
+        <!--SelectAColor-->
+        <scene sceneID="rJP-cu-jjD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SelectAColor" id="OsY-CL-hb7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Vbz-fT-0TH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MK2-wv-P2f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1575" y="-129"/>
         </scene>
         <!--Contact-->
         <scene sceneID="gUQ-kz-9hF">

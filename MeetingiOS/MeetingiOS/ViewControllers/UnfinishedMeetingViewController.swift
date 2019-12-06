@@ -19,6 +19,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
+    /// Será usada para diferenciar os Topics selecionados pelo gerente (No caso de usrIsManager == true)
+    var selectedTopics: [Topic] = []
     
     /// UserDefaults para pegar a referência do ID do author (usuário).
     let defaults = UserDefaults.standard
@@ -26,13 +28,27 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Meeting criada pelo usuário.
     var currMeeting: Meeting!
     
+    /// Booleano identificando se o usuário foi quem criou a reunião
+    var usrIsManager = false
+    
+    /// Títulos das sections da tableView.
+    let headerTitles = ["Topics added for Meeting", "Topics to be added"]
+    
     
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Simulando
         let meetingRecord = CKRecord(recordType: "Meeting")
         currMeeting = Meeting(record: meetingRecord)
+        /// Simulamos que a meeting selecionada foi criada pelo usuário.
+        currMeeting.manager = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? ""), action: .deleteSelf)
+        
+        /// Verificamos se a meeting selecionada
+        if CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? "") == currMeeting.manager?.recordID {
+            usrIsManager = true
+        }
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
@@ -69,14 +85,26 @@ class UnfinishedMeetingViewController: UIViewController {
     func reloadTable() {
         
         self.topics = []
+        self.selectedTopics = []
         let author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
         
         for reference in currMeeting.topics {
             
-            let predicate = NSPredicate(format: "recordID == %@ AND author == %@", reference, author)
+            var predicate: NSPredicate
+            if usrIsManager {
+                predicate = NSPredicate(format: "recordID == %@", reference)
+            } else {
+                predicate = NSPredicate(format: "recordID == %@ AND author == %@", reference, author)
+            }
             
             CloudManager.shared.readRecords(recorType: "Topic", predicate: predicate, desiredKeys: nil, perRecordCompletion: { (record) in
-                self.topics.append(Topic.init(record: record))
+                
+                let topic = Topic.init(record: record)
+                if topic.selectedForMeeting {
+                    self.selectedTopics.append(topic)
+                } else {
+                    self.topics.append(topic)
+                }
             }) {
                 print("Done")
                 DispatchQueue.main.async {
@@ -92,13 +120,58 @@ class UnfinishedMeetingViewController: UIViewController {
 extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.topics.count
+        if section == 0 {
+            return self.selectedTopics.count
+        } else {
+            return self.topics.count
+        }
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if usrIsManager {
+            return 2
+        }
+        return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headerTitles[section]
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UnfinishedTopicsTableViewCell
-        cell.topicLabel.text = topics[indexPath.row].description
+        if indexPath.section == 0 {
+            cell.topicLabel.text = selectedTopics[indexPath.row].topicDescription
+        } else {
+            cell.topicLabel.text = topics[indexPath.row].topicDescription
+        }
+        
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if usrIsManager {
+            if indexPath.section == 0 {
+                
+                selectedTopics[indexPath.row].selectedForMeeting = false
+                CloudManager.shared.updateRecords(records: [selectedTopics[indexPath.row].record], perRecordCompletion: { (record, error) in
+                    if let error = error { print(error.localizedDescription) }
+                }) { }
+                topics.append(selectedTopics.remove(at: indexPath.row))
+            } else {
+                
+                topics[indexPath.row].selectedForMeeting = true
+                CloudManager.shared.updateRecords(records: [topics[indexPath.row].record], perRecordCompletion: { (record, error) in
+                    if let error = error { print(error.localizedDescription) }
+                }) { }
+                selectedTopics.append(topics.remove(at: indexPath.row))
+            }
+            tableView.reloadData()
+        }
     }
 }
