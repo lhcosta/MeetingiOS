@@ -128,6 +128,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         // UserDefaults
         defaults.set(user.name, forKey: "givenName")
         defaults.set(user.email, forKey: "email")
+        
+        self.performSegue(withIdentifier: "nextScreen", sender: nil)
     }
     
     

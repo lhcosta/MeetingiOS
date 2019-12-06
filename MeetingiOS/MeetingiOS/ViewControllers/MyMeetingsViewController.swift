@@ -21,6 +21,9 @@ class MyMeetingsViewController: UIViewController {
         myMeetingsCollectionView.delegate = self
         myMeetingsCollectionView.dataSource = self
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(nextScreen))
+        self.navigationItem.title = "My Meetings"
+        
         // MARK: Query no CK
         /// Testar quando tivermos valores validos (meetings criadas).
         /// Meetings que o usuário criou.
@@ -49,6 +52,10 @@ class MyMeetingsViewController: UIViewController {
             m1.finished = true
             meetings.append(m1)
         }
+    }
+    
+    @objc func nextScreen() {
+        self.performSegue(withIdentifier: "nextScreen", sender: nil)
     }
 }
 

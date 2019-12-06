@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TA6-3H-rGO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="skW-mi-HLY">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -11,7 +11,7 @@
         <!--New meeting-->
         <scene sceneID="sqp-ln-JyO">
             <objects>
-                <viewController id="skW-mi-HLY" customClass="NewMeetingViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="skW-mi-HLY" customClass="NewMeetingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SMX-sm-VbF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,28 +250,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DCp-U6-6at" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1514" y="-19"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="WJY-v9-5bw">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TA6-3H-rGO" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="7gz-Rf-XC1">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SUv-Xv-lw9">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="skW-mi-HLY" kind="relationship" relationship="rootViewController" id="qxy-tX-rmH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Y5-Z3-X7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-24.637681159420293" y="-19.419642857142858"/>
         </scene>
     </scenes>
     <resources>
