@@ -46,6 +46,8 @@
     _participants = [[NSMutableArray alloc] init];
     
     _nameMetting.delegate = self;
+    
+    [self.navigationItem setTitle:@"New meeting"];
         
 }
 

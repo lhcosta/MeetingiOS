@@ -53,6 +53,12 @@ import Contacts
         self.setupSearchBar()
         self.setupContactCollectionView()
         
+        
+        //MARK:- Navigation
+        self.navigationItem.title = "Contacts"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
         self.fetchingContacts { 
@@ -95,9 +101,10 @@ private extension ContactViewController {
                     }
                 })
             }
+            
+            completionHandler()
         }
         
-        completionHandler()
     }
     
     
@@ -239,7 +246,7 @@ private extension ContactViewController {
     }
     
     ///Enviando Contatos
-    @IBAction func sendingContactsToMeeting() {
+    @objc func sendingContactsToMeeting() {
         
         if let allContacts = contactCollectionView?.contacts {
             self.contactDelegate?.selectedContacts(allContacts)

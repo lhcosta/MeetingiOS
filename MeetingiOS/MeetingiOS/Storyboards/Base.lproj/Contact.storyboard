@@ -168,11 +168,7 @@
                         <viewLayoutGuide key="safeArea" id="o3b-St-xTb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Contacts" id="PK8-p5-6WV">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="YLD-nO-8vG">
-                            <connections>
-                                <action selector="sendingContactsToMeeting" destination="i1y-NM-6sX" id="PRZ-79-Gn3"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="YLD-nO-8vG"/>
                     </navigationItem>
                     <connections>
                         <outlet property="addNewContact" destination="8AS-ZA-sK1" id="WgE-jm-zJF"/>
