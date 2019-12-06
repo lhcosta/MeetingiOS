@@ -136,11 +136,14 @@
 ///Criando a reunião no Cloud Kit.
 -(void) createMeetingInCloud {
     
-    NSString* name =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     
-    if(name.length == 0) {
+    if(theme.length == 0) {
         return;
     }
+    
+    [_meeting setTheme:theme];
+    
     
 }
 
@@ -149,6 +152,8 @@
 }
 
 - (void)selectedColor:(NSString *)hex {
+    
+    //Pegar cor de acordo com o hex
     _colorMetting.backgroundColor = [UIColor colorNamed:hex];
 }
 
