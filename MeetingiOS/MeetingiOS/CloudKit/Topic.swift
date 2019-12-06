@@ -60,7 +60,7 @@ import CloudKit
     }
     
     /// Atributo que decide se o tópico vai ou não para a Meeting, setado peli gerente. (criador da Meeting)
-    var selectedForReunion: Bool {
+    var selectedForMeeting: Bool {
         set { self.record["selectedForReunion"] = newValue }
         get { return self.record.value(forKey: "selectedForReunion") as? Bool ?? false}
     }

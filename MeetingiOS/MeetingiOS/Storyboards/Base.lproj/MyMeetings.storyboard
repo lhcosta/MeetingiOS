@@ -8,26 +8,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Meetings View Controller-->
+        <!--MyMeetingsViewController-->
         <scene sceneID="Gzg-nY-hfr">
             <objects>
-                <viewController storyboardIdentifier="MyMeetings" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dcg-jt-bSn" customClass="MyMeetingsViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyMeetings" title="MyMeetingsViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dcg-jt-bSn" customClass="MyMeetingsViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H9D-fS-AW6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Meetings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xu-nZ-hHt">
-                                <rect key="frame" x="20" y="69" width="374" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="D3M-XL-cz0">
-                                <rect key="frame" x="0.0" y="116" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RTW-bU-FhY">
                                 <rect key="frame" x="20" y="193" width="374" height="669"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -94,6 +82,7 @@
                         <outlet property="myMeetingsCollectionView" destination="RTW-bU-FhY" id="voj-au-oEW"/>
                         <segue destination="p8j-8A-NPN" kind="show" identifier="finishedMeeting" id="Q88-9u-Gbe"/>
                         <segue destination="S76-Th-kPX" kind="show" identifier="unfinishedMeeting" id="0R0-Nv-dzE"/>
+                        <segue destination="Iqt-xa-Jii" kind="show" identifier="nextScreen" id="vWQ-e9-Txs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu9-4R-dug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,6 +108,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwy-Qa-D3o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="376" y="-124"/>
+        </scene>
+        <!--NewMeeting-->
+        <scene sceneID="SUH-nP-vTt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewMeeting" id="Iqt-xa-Jii" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JM4-6y-0en"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xk1-LS-NDS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="309" y="60"/>
         </scene>
     </scenes>
     <resources>

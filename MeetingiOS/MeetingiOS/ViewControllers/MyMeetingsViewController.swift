@@ -21,6 +21,9 @@ class MyMeetingsViewController: UIViewController {
         myMeetingsCollectionView.delegate = self
         myMeetingsCollectionView.dataSource = self
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(nextScreen))
+        self.navigationItem.title = "My Meetings"
+        
         // MARK: Query no CK
         /// Testar quando tivermos valores validos (meetings criadas).
         /// Meetings que o usuário criou.
@@ -39,16 +42,20 @@ class MyMeetingsViewController: UIViewController {
         // MARK: Simulação
         /// Serão substiuídos pelo query no CK.
         for i in 0...2 {
-            var m1 = Meeting(record: CKRecord(recordType: "Meeting"))
+            let m1 = Meeting(record: CKRecord(recordType: "Meeting"))
             m1.theme = "unfinished Theme: \(i)"
             meetings.append(m1)
         }
         for i in 0...2 {
-            var m1 = Meeting(record: CKRecord(recordType: "Meeting"))
+            let m1 = Meeting(record: CKRecord(recordType: "Meeting"))
             m1.theme = "finished Theme: \(i)"
             m1.finished = true
             meetings.append(m1)
         }
+    }
+    
+    @objc func nextScreen() {
+        self.performSegue(withIdentifier: "nextScreen", sender: nil)
     }
 }
 
