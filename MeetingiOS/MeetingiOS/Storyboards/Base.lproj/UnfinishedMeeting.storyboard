@@ -10,7 +10,7 @@
         <!--Unfinished Meeting View Controller-->
         <scene sceneID="N7c-RC-Ypd">
             <objects>
-                <viewController storyboardIdentifier="unfinishedMeeting" id="ID9-zH-FfA" customClass="UnfinishedMeetingViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="unfinishedMeeting" modalPresentationStyle="fullScreen" id="ID9-zH-FfA" customClass="UnfinishedMeetingViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p7q-fI-btO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

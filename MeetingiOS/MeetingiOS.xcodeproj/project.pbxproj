@@ -30,9 +30,8 @@
 		49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
 		49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
 		49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */; };
-		A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */; };
 		A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE32395E3820097857F /* NewMeetingViewController.h */; };
-		49F09A572399819500B7DFD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A592399819500B7DFD3 /* Localizable.strings */; };
+		A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
@@ -101,8 +100,6 @@
 		49F09A8B2399831D00B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewMeeting.storyboard; sourceTree = "<group>"; };
 		49F09A8D2399832300B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/NewMeeting.strings"; sourceTree = "<group>"; };
 		49F09A8F2399832500B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NewMeeting.strings; sourceTree = "<group>"; };
-		A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+NameMeetingValidation.h"; sourceTree = "<group>"; };
-		A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+NameMeetingValidation.m"; sourceTree = "<group>"; };
 		49F09AB72399A14300B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		49F09AB92399A14A00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyMeetings.strings; sourceTree = "<group>"; };
 		49F09ABB2399A16900B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FinishedMeeting.strings; sourceTree = "<group>"; };
@@ -113,6 +110,8 @@
 		49F09AC62399A18700B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SelectAColor.strings"; sourceTree = "<group>"; };
 		49F09AC82399A18800B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SelectAColor.strings; sourceTree = "<group>"; };
 		49F09ACA2399A1B100B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SelectAColor.strings; sourceTree = "<group>"; };
+		A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+NameMeetingValidation.h"; sourceTree = "<group>"; };
+		A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+NameMeetingValidation.m"; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
