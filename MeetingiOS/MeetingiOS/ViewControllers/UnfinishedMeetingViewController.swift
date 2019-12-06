@@ -81,6 +81,14 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
+    // MARK: Multipeer Aqui.
+    /// Botão que o gerente apertará para espelhar a Meeting na TV
+    /// - Parameter sender: Default.
+    @IBAction func espelharMeeting(_ sender: Any) {
+    }
+    
+    
+    
     /// Atualiza a table view dos Topics adicionados pelo usuário naquela Meeting específica.
     func reloadTable() {
         
