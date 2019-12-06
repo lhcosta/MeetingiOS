@@ -50,14 +50,19 @@ class User {
     
     /// Description: Procura o AppleIDCredential do usuário para caso o usuário tenha logado no app uma vez
     /// - Parameter record: credencial vinda do Sign in with apple
-    func searchCredentials(record: CKRecord){
-        CloudManager.shared.fetchRecords(recordIDs: [record.recordID], desiredKeys: ["email", "name", "invites", "meetings"]) { (records, error) in
+    func searchCredentials(record: CKRecord, compleetion: @escaping ((Bool) -> Void)){
+        CloudManager.shared.fetchRecords(recordIDs: [record.recordID], desiredKeys: ["email", "name", "meetings"]) { (records, error) in
+            print("Error: \(error)")
             guard let rec = records?[record.recordID] else { return }
             
             // Atualiza os dados do Usuário
             self.email = rec.value(forKey: "email") as? String
             self.name = rec.value(forKey: "name") as? String
             self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference]
+            
+            print("\(String(describing: rec.value(forKey: "email") as? String))")
+            
+            compleetion(true)
         }
     }
     

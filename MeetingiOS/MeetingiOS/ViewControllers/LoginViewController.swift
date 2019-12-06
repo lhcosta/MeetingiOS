@@ -120,7 +120,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
             
         } else {
-            user.searchCredentials(record: userRecord)
+            user.searchCredentials(record: userRecord){ _ in
+                print("User Email: \(String(describing: user.email))")
+            }
         }
         
         // UserDefaults
