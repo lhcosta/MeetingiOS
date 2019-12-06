@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wAp-nF-S1M">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i1y-NM-6sX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ezt-3f-9a3">
-                                <rect key="frame" x="20" y="108" width="374" height="30"/>
+                                <rect key="frame" x="20" y="64" width="374" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94S-lU-dV8">
                                         <rect key="frame" x="0.0" y="3" width="30.5" height="24"/>
@@ -37,7 +37,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AS-ZA-sK1">
                                         <rect key="frame" x="349" y="3" width="25" height="24"/>
                                         <connections>
-                                            <action selector="addingNewContact:" destination="i1y-NM-6sX" eventType="touchUpInside" id="lL1-8N-QSV"/>
+                                            <action selector="addingNewContact:" destination="i1y-NM-6sX" eventType="touchUpInside" id="4Zm-Hb-s71"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -46,7 +46,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yRR-Mq-mEO">
-                                <rect key="frame" x="0.0" y="158" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="114" width="414" height="0.0"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3b-6L-v6C">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -122,7 +122,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lsV-DH-OdQ">
-                                <rect key="frame" x="0.0" y="158" width="414" height="704"/>
+                                <rect key="frame" x="0.0" y="114" width="414" height="748"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableCell" textLabel="cP1-Jp-aUc" detailTextLabel="pjF-xz-D2g" style="IBUITableViewCellStyleSubtitle" id="qyy-Ov-4Mr" customClass="ContactTableViewCell">
@@ -168,7 +168,11 @@
                         <viewLayoutGuide key="safeArea" id="o3b-St-xTb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Contacts" id="PK8-p5-6WV">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="YLD-nO-8vG"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="YLD-nO-8vG">
+                            <connections>
+                                <action selector="sendingContactsToMeeting" destination="i1y-NM-6sX" id="PRZ-79-Gn3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addNewContact" destination="8AS-ZA-sK1" id="WgE-jm-zJF"/>
@@ -180,25 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcH-SH-39J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4208.695652173913" y="-8.0357142857142847"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nm9-jV-Cub">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wAp-nF-S1M" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fdJ-0L-4df">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="i1y-NM-6sX" kind="relationship" relationship="rootViewController" id="zk2-YQ-1Q6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cOq-pJ-fpc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3298.5507246376815" y="-8.0357142857142847"/>
+            <point key="canvasLocation" x="3632" y="-8"/>
         </scene>
     </scenes>
     <resources>

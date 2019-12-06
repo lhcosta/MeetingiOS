@@ -10,9 +10,9 @@ import Foundation
 import CloudKit
 
 /// Classe com métodos genêricos CRUD para CloudKit
-class CloudManager {
+@objc class CloudManager : NSObject {
     
-    static let shared = CloudManager()
+    @objc static let shared = CloudManager()
     private let database = CKContainer(identifier: "iCloud.com.QuartetoFantastico.Meeting").publicCloudDatabase
     
     /// Método que cria CKModifyRecordsOperation a partir de container padrao
@@ -78,10 +78,11 @@ class CloudManager {
     ///   - perRecordCompletion: completion que será executado após cada record
     ///   - finalCompletion: completion final após final da operação
     ///   - desiredKeys: Array de strings contendo o nome das chaves desejadas na pesquisa (caso queira todas as chaves passe o array como nil
-    func readRecords(recorType: String, predicate: NSPredicate, desiredKeys: [String]?, perRecordCompletion: @escaping ((CKRecord) -> Void), finalCompletion: @escaping (() -> Void)){
+    @objc func readRecords(recorType: String, predicate: NSPredicate, desiredKeys: [String]?, perRecordCompletion: @escaping ((_ record : CKRecord) -> Void), finalCompletion: @escaping (() -> Void)){
         
         let query = CKQuery(recordType: recorType, predicate: predicate)
         let queryOp = CKQueryOperation(query: query)
+        
         queryOp.queryCompletionBlock = { (xa,az) in
             
         }

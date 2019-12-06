@@ -23,4 +23,10 @@
     return updateText.length <= lenght;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 @end

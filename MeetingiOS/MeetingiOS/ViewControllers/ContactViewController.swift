@@ -10,7 +10,7 @@ import UIKit
 import Contacts
 
 /// View Controller para selecionar os contatos para reunião
-class ContactViewController: UIViewController {
+@objc class ContactViewController: UIViewController {
     
     //MARK:- IBOutlets
     @IBOutlet private weak var tableView : UITableView!
@@ -27,7 +27,7 @@ class ContactViewController: UIViewController {
     private var contactManager : ContactManager?
     
     //MARK:- Delegates
-    weak var delegate : MeetingDelegate?
+    @objc weak var contactDelegate : MeetingDelegate?
         
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
@@ -241,20 +241,11 @@ private extension ContactViewController {
     ///Enviando Contatos
     @IBAction func sendingContactsToMeeting() {
         
-        var contactsHaveAccount = [CKRecord.Reference]()
-        
-        guard let allContacts = contactCollectionView?.contacts else {return}
-        
-        for contact in allContacts {
-            
-            CloudManager.shared.readRecords(recorType: "User", predicate: NSPredicate(format: "email = %@", contact.email!), desiredKeys: ["recordName"], perRecordCompletion: { (record) in
-                contactsHaveAccount.append(CKRecord.Reference(record: record, action: .deleteSelf))
-            }) { 
-                self.delegate?.selectedContacts(contactsHaveAccount);
-            }
-        
+        if let allContacts = contactCollectionView?.contacts {
+            self.contactDelegate?.selectedContacts(allContacts)
         }
         
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
