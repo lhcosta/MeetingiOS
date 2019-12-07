@@ -48,7 +48,9 @@
     _nameMetting.delegate = self;
     
     [self.navigationItem setTitle:@"New meeting"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
         
+    
 }
 
 /// Atribuindo o delegate da view controller
