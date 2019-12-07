@@ -14,6 +14,7 @@
 @property (nonatomic) CNContactFetchRequest* fetchRequest;
 @property (nonatomic) NSMutableDictionary<NSString*, NSArray<Contact*>*>* contacts;
 
+@property (nonatomic) NSPredicate* predicate;
 @end
 
 @implementation ContactManager
@@ -28,7 +29,11 @@
         NSArray<id<CNKeyDescriptor>> *keysToFetch = @[CNContactGivenNameKey, CNContactEmailAddressesKey];
         _contactsStore = [[CNContactStore alloc] init];
         _fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keysToFetch];
+        
+        [_fetchRequest setUnifyResults:YES];
+        [_fetchRequest setSortOrder:CNContactSortOrderGivenName];
     }
+    
     return self;
 }
 
@@ -57,11 +62,6 @@
                 }
                 
                 [contact_aux addObject:newContact];
-                
-                ///Sorting Contacts
-                NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-                
-                [contact_aux sortUsingDescriptors:@[sortDescriptor]];
                 
                 [self.contacts setValue:[contact_aux copy] forKey:key];
             }            

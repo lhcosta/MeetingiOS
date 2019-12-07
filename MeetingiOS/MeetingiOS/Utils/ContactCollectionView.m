@@ -7,6 +7,7 @@
 //
 
 #import "ContactCollectionView.h"
+#import "NewMeetingViewController.h"
 
 @implementation ContactCollectionView 
 

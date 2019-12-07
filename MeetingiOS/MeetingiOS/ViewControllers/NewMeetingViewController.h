@@ -24,10 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIView* thirdView;
 @property (nonatomic, weak) IBOutlet UIView* fourthView;
 @property (nonatomic, weak) IBOutlet UIView* fifthView;
-@property (nonatomic, weak) IBOutlet UILabel* dateTime;
+@property (nonatomic, weak) IBOutlet UILabel* startsDateTime;
+@property (nonatomic, weak) IBOutlet UILabel* endesDateTime;
 @property (nonatomic, weak) IBOutlet UICollectionView* collectionView;
 @property (nonatomic, weak) IBOutlet UITextField* nameMetting;
 @property (nonatomic, weak) IBOutlet UIButton* colorMetting;
+@property (nonatomic, weak) IBOutlet UILabel* numbersOfTopics;
 
 ///Selecionando a cor do ícone da reunião.
 - (IBAction) chooseColorMeeting:(id)sender;

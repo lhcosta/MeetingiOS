@@ -128,14 +128,26 @@ utilizar como auxílio de manipulação de CKRecord Meeting
     }
     
     ///Data da realização da reunião
-    @objc var date : Date? {
+    @objc var initialDate : Date? {
         
         get {
-            return self.record.value(forKey: "date") as? Date
+            return self.record.value(forKey: "initialDate") as? Date
         }
         
         set {
-            self.record.setValue(newValue, forKey: "date")
+            self.record.setValue(newValue, forKey: "initialDate")
+        }
+    }
+    
+    ///Data da realização da reunião
+    @objc var finalDate : Date? {
+        
+        get {
+            return self.record.value(forKey: "finalDate") as? Date
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "finalDate")
         }
     }
    
