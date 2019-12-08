@@ -156,7 +156,7 @@ extension ContactViewController : UITableViewDataSource {
         } else {
             cell.contact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }
-        
+            
         if cell.contact?.isSelected ?? false {
             cell.accessoryType = .checkmark
             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)

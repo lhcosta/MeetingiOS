@@ -14,18 +14,25 @@
 
 @interface NewMeetingViewController ()
 
+/// Definir o tempo inicial ou final da reuniao
+typedef enum Time {
+    Start,
+    Finish,
+} Time;
+
+//MARK:- Properties
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
 @property (nonatomic, nullable) UIDatePicker* datePicker;
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
-@property (nonatomic, nonnull) CKRecord* record;
-@property (nonatomic, nonnull) NSMutableArray<CKReference*>* participants;
+@property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
 @property (nonatomic, nonnull, copy) NSString* nameColor;
 @property (nonatomic, nullable) UIPickerView* pickerView;
 
 
+//MARK:- Methods
 /// Criando e inicializando o date picker.
-- (void) setupDatePicker;
+- (void)setupDatePicker: (Time)time;
 
 ///Criando a reunião no Cloud Kit.
 - (void) createMeetingInCloud;
@@ -41,17 +48,18 @@
     [super viewDidLoad];
     
     [self setupView];    
+
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"MMM, dd yyyy  h:mm a";
-    _startsDateTime.text = [_formatter stringFromDate:NSDate.now];
-    
+    _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
+
     _contactCollectionView = [[ContactCollectionView alloc] init];
     _collectionView.allowsSelection = NO;
     _collectionView.delegate = _contactCollectionView;
     _collectionView.dataSource = _contactCollectionView;
     
-    _record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
-    _meeting = [[Meeting alloc] initWithRecord:_record];
+    CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
+    _meeting = [[Meeting alloc] initWithRecord:record];
     
     _participants = [[NSMutableArray alloc] init];
     
@@ -101,12 +109,20 @@
     
     UITouch* touch = [touches anyObject];
     
-    if(CGRectContainsPoint(_thirdView.bounds, [touch locationInView:_thirdView])) {
+    if(CGRectContainsPoint(_secondView.bounds, [touch locationInView:_secondView])) {
         
         if([self.view.subviews containsObject:_datePicker]) {
             [_datePicker removeFromSuperview];
         } else {
-            [self setupDatePicker];   
+            [self setupDatePicker:Start];   
+        }
+        
+    } else if(CGRectContainsPoint(_thirdView.bounds, [touch locationInView:_thirdView])) {
+        
+        if([self.view.subviews containsObject:_datePicker]) {
+            [_datePicker removeFromSuperview];
+        } else {
+            [self setupDatePicker:Finish];   
         }
         
     } else if (CGRectContainsPoint(_fourthView.bounds, [touch locationInView:_fourthView])) { 
@@ -119,26 +135,27 @@
         } else {
             [self pickerForNumberOfTopics];
         }
+        
     }
+    
 }
 
 
 /// Modificando o label de data e hora da reuniao
 /// @param datePicker objeto date picker
 - (void) modifieDateTimeLabel:(UIDatePicker*)datePicker {
-    _startsDateTime.text = [_formatter stringFromDate:datePicker.date];
-} 
+    _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:datePicker.date];
+}
 
-- (void)setupDatePicker {
+/// Modificando o label de hora final da reuniao
+/// @param datePicker objeto date picker
+- (void) modifieTimeLabel:(UIDatePicker*)datePicker {
+    _endesDateTime.text = [_formatter stringFromDate:datePicker.date];
+}
+
+- (void)setupDatePicker: (Time)time{
     
     _datePicker = [[UIDatePicker alloc] init];
-    
-    _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    _datePicker.minimumDate = NSDate.now;
-    
-    if([_formatter dateFromString:_startsDateTime.text] != NSDate.now) {
-        _datePicker.date = [_formatter dateFromString:_startsDateTime.text];
-    } 
     
     _datePicker.backgroundColor = UIColor.opaqueSeparatorColor;
     
@@ -150,8 +167,24 @@
         
     [_datePicker setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    [_datePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents:UIControlEventValueChanged];    
-    
+    if(time == Start) {
+        
+        _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        _datePicker.minimumDate = NSDate.now;
+        
+        if([_formatter dateFromString:_startsDateTime.text] != NSDate.now) {
+           _datePicker.date = [_formatter dateFromString:_startsDateTime.text];
+        } 
+        
+        [_datePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents: UIControlEventValueChanged];
+        
+    } else {
+        
+        _datePicker.datePickerMode = UIDatePickerModeTime;
+        _datePicker.minimumDate = [_formatter dateFromString:_startsDateTime.text];
+        
+        [_datePicker addTarget:self action:@selector(modifieTimeLabel:) forControlEvents:UIControlEventValueChanged];
+    }
 }
 
 -(void) createMeetingInCloud {
@@ -163,10 +196,34 @@
     }
     
     [_meeting setTheme:theme];
-    [_meeting setEmployees:[_participants copy]];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
     [_meeting setColor:_nameColor];
+    [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
+    
+    for(CKRecord* record in _participants) {
+        
+        User* user = [[User alloc] initWithRecord:record];
+        
+        [user registerMeetingWithMeeting:[[CKReference alloc] initWithRecord:_meeting.record action:CKReferenceActionNone]];
+        [_meeting addingNewEmployee:[[CKReference alloc]initWithRecord:record action:CKReferenceActionNone]];
+    }
+    
+    [CloudManager.shared createRecordsWithRecords:@[_meeting.record] perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Create -> %@", [error userInfo]);
+        }
+    } finalCompletion:^{
+        NSLog(@"Create Record");
+        
+        [CloudManager.shared updateRecordsWithRecords:self.participants perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
+            if(error) {
+                NSLog(@"Update -> %@", [error userInfo]);
+            }
+        } finalCompletion:^{
+            NSLog(@"Update Users");
+        }];
+    }];
     
 }
 
@@ -184,23 +241,23 @@
 - (void)selectedContacts:(NSArray<Contact *> *)contacts {
     
     NSMutableArray<NSString*>* allEmails = [[NSMutableArray alloc] init];
+    NSMutableArray<CKRecord*>* participants_aux = [[NSMutableArray alloc] init];
     NSPredicate* predicate;
     
     for (Contact* contact in contacts) {
         [allEmails addObject:contact.email];
     }
     
-    predicate = [NSPredicate predicateWithFormat:@"@email IN %@", allEmails];
+    predicate = [NSPredicate predicateWithFormat:@"email IN %@", allEmails];
 
     [CloudManager.shared readRecordsWithRecorType:@"User" predicate:predicate desiredKeys:@[@"recordName"] perRecordCompletion:^(CKRecord * _Nonnull record) {
-        
-        CKReference* reference = [[CKReference alloc]initWithRecord:record action:CKReferenceActionNone];
-        
-        [self.participants addObject:reference];
+                    
+        [participants_aux addObject:record];
         
     } finalCompletion:^{
         
         [self.contactCollectionView setContacts:contacts];
+        self.participants = [participants_aux copy];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
@@ -212,6 +269,7 @@
 - (void)pickerForNumberOfTopics {
     
     _pickerView = [[UIPickerView alloc] init];
+    //UITabBar* tabBar = [[UITabBar alloc] init];
     
     [_pickerView setDataSource:self];
     [_pickerView setDelegate:self];
@@ -224,7 +282,7 @@
     [[_pickerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
     
     [[_pickerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.2] setActive:YES];
-    
+        
     [_pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
 }

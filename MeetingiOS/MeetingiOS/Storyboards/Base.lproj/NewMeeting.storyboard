@@ -126,7 +126,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="364" height="89.666666666666671"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mkp-08-epa">
-                                                        <rect key="frame" x="15" y="34.333333333333314" width="334" height="21"/>
+                                                        <rect key="frame" x="15" y="33.666666666666629" width="334" height="22"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Add participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="t9c-Q0-B1j">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311.66666666666669" height="20.333333333333332"/>
@@ -135,7 +135,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZJ-Hm-x4I">
-                                                                <rect key="frame" x="321.66666666666669" y="-1" width="12.333333333333314" height="22"/>
+                                                                <rect key="frame" x="321.66666666666669" y="0.0" width="12.333333333333314" height="22"/>
                                                                 <state key="normal" image="chevron.right" catalog="system"/>
                                                             </button>
                                                         </subviews>
@@ -198,7 +198,7 @@
                                                 <rect key="frame" x="0.0" y="181.66666666666669" width="364" height="90"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="oZz-hW-yyn">
-                                                        <rect key="frame" x="15" y="34.333333333333258" width="334" height="21.333333333333329"/>
+                                                        <rect key="frame" x="15" y="34" width="334" height="22"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Topic per person" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Ln-US-Ppa">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128.66666666666666" height="20.333333333333332"/>
@@ -213,7 +213,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFY-iQ-yJI">
-                                                                <rect key="frame" x="321.66666666666669" y="-0.66666666666662877" width="12.333333333333314" height="22"/>
+                                                                <rect key="frame" x="321.66666666666669" y="0.0" width="12.333333333333314" height="22"/>
                                                                 <state key="normal" image="chevron.right" catalog="system"/>
                                                             </button>
                                                         </subviews>

@@ -11,6 +11,7 @@
 @implementation ContactTableViewCell
 
 - (void)setContact:(Contact *)contact {
+    _contact = contact;
     [self.textLabel setText:contact.name];
     [self.detailTextLabel setText:contact.email];
 }
