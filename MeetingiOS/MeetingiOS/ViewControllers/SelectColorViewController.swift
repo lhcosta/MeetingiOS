@@ -39,7 +39,7 @@ import CloudKit
         
         // Arredonda a view e seta como cor inicial a primeira cor do array
         self.viewColorSelected.layer.cornerRadius = 20
-        self.viewColorSelected.backgroundColor = UIColor(named: self.arrayColors[0])
+        self.viewColorSelected.backgroundColor = UIColor(hexString: self.arrayColors[0])
     }
     
     @IBAction func saveColor(_ sender: Any) {
@@ -60,14 +60,14 @@ extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colectionCell", for: indexPath)
         
         // Adiciona a cor a celula da collection de acordo com o array de cores
-        cell.backgroundColor = UIColor(named: self.arrayColors[indexPath.row])
+        cell.backgroundColor = UIColor(hexString: self.arrayColors[indexPath.row])
         cell.layer.cornerRadius = cell.frame.size.width/2
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.viewColorSelected.backgroundColor = UIColor(named: self.arrayColors[indexPath.row])
+        self.viewColorSelected.backgroundColor = UIColor(hexString: self.arrayColors[indexPath.row])
         selectedColor = self.arrayColors[indexPath.row]
     }
     
@@ -88,4 +88,33 @@ extension SelectColorViewController: UICollectionViewDelegateFlowLayout {
         return collectionView.bounds.height/CGFloat(arrayColors.count)
     }
     
+}
+
+extension UIColor {
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
+    }
 }
