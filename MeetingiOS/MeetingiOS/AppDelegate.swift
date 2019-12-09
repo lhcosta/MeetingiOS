@@ -20,18 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-//        if let _ = UserDefaults.standard.string(forKey: "recordName") {
-//            let storyboard = UIStoryboard(name: "MyMeetings", bundle: nil)
-//            let rootVC = storyboard.instantiateInitialViewController() as! MyMeetingsViewController
-//            let navController = UINavigationController(rootViewController: rootVC)
-//            self.window?.rootViewController = navController
-//        } else {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let rootVC = storyboard.instantiateInitialViewController() as! LoginViewController
-//            let navController = UINavigationController(rootViewController: rootVC)
-//            self.window?.rootViewController = navController
-//        }
-//        
+        
+        
         self.window?.makeKeyAndVisible()
         
         // Override point for customization after application launch.
