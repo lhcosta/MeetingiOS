@@ -195,12 +195,14 @@ extension ContactViewController : UITableViewDelegate {
         let indexPath = IndexPath(item: self.contactCollectionView!.contacts.count - 1, section: 0)
             
         self.collectionView.insertItems(at: [indexPath])
-        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)        
         
         if isFiltering {
-            self.searchName.resignFirstResponder()
-            self.searchName.text = nil
-            self.tableView.reloadData()
+            UIView.animate(withDuration: 1, delay: 0.5, options: .curveEaseIn, animations: { 
+                self.searchName.resignFirstResponder()
+                self.searchName.text = nil
+                self.tableView.reloadData()
+            }, completion: nil)
         }
     }
     

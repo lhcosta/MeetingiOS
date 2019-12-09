@@ -35,7 +35,7 @@
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
-		A4BAEB28239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAEB27239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.m */; };
+		A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */; };
 		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
 		A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */; };
 		A4EB3BF32397400A0097857F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BF22397400A0097857F /* ContactViewController.swift */; };
@@ -117,8 +117,8 @@
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
-		A4BAEB26239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+PickerNumberOfTopics.h"; sourceTree = "<group>"; };
-		A4BAEB27239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+PickerNumberOfTopics.m"; sourceTree = "<group>"; };
+		A4BAEB2B239DD16300800277 /* NewMeetingViewController+SettingPickers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+SettingPickers.h"; sourceTree = "<group>"; };
+		A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+SettingPickers.m"; sourceTree = "<group>"; };
 		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = NewMeetingViewController.h; sourceTree = "<group>"; };
 		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
@@ -265,8 +265,8 @@
 		A4EB3BEB239607CB0097857F /* Categories - ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				A4BAEB26239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.h */,
-				A4BAEB27239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.m */,
+				A4BAEB2B239DD16300800277 /* NewMeetingViewController+SettingPickers.h */,
+				A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */,
 				A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */,
 				A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */,
 				A4EB3C1A2397DF9A0097857F /* NSString+NewFeatures.h */,
@@ -413,9 +413,9 @@
 				23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
 				A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */,
-				A4BAEB28239C56B300800277 /* NewMeetingViewController+PickerNumberOfTopics.m in Sources */,
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
 				231AE14A239828170051051C /* MyMeetingsViewController.swift in Sources */,
+				A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */,
 				231AE144239802490051051C /* MyMeetingsCollectionViewCell.m in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				A4EB3BFD239747640097857F /* Contact.m in Sources */,

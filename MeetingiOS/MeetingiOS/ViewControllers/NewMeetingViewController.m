@@ -9,36 +9,20 @@
 #import "NewMeetingViewController.h"
 #import <MeetingiOS-Swift.h>
 #import "NewMeetingViewController+NameMeetingValidation.h"
-#import "NewMeetingViewController+PickerNumberOfTopics.h"
 #import "Contact.h"
+#import "NewMeetingViewController+SettingPickers.h"
 
 @interface NewMeetingViewController ()
 
-/// Definir o tempo inicial ou final da reuniao
-typedef enum Time {
-    Start,
-    Finish,
-} Time;
-
 //MARK:- Properties
-@property (nonatomic, nonnull) NSDateFormatter* formatter;
-@property (nonatomic, nullable) UIDatePicker* datePicker;
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
 @property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
 @property (nonatomic, nonnull, copy) NSString* nameColor;
-@property (nonatomic, nullable) UIPickerView* pickerView;
-
 
 //MARK:- Methods
-/// Criando e inicializando o date picker.
-- (void)setupDatePicker: (Time)time;
-
 ///Criando a reunião no Cloud Kit.
 - (void) createMeetingInCloud;
-
-/// Criando picker para selecionar o número de tópicos por pessoa.
-- (void) pickerForNumberOfTopics;
 
 @end
 
@@ -89,11 +73,8 @@ typedef enum Time {
         if(nextViewController) {
             [nextViewController setDelegate:self];
         }
-        
     }
-    
 }
-
 
 /// Modificando todas as views presentes na view controller
 - (void) setupView {
@@ -140,60 +121,24 @@ typedef enum Time {
     
 }
 
-
-/// Modificando o label de data e hora da reuniao
-/// @param datePicker objeto date picker
-- (void) modifieDateTimeLabel:(UIDatePicker*)datePicker {
-    _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:datePicker.date];
-}
-
-/// Modificando o label de hora final da reuniao
-/// @param datePicker objeto date picker
-- (void) modifieTimeLabel:(UIDatePicker*)datePicker {
-    _endesDateTime.text = [_formatter stringFromDate:datePicker.date];
-}
-
-- (void)setupDatePicker: (Time)time{
-    
-    _datePicker = [[UIDatePicker alloc] init];
-    
-    _datePicker.backgroundColor = UIColor.opaqueSeparatorColor;
-    
-    [self.view addSubview:_datePicker];
-    
-    [[_datePicker.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
-    [[_datePicker.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[_datePicker.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-        
-    [_datePicker setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    if(time == Start) {
-        
-        _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        _datePicker.minimumDate = NSDate.now;
-        
-        if([_formatter dateFromString:_startsDateTime.text] != NSDate.now) {
-           _datePicker.date = [_formatter dateFromString:_startsDateTime.text];
-        } 
-        
-        [_datePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents: UIControlEventValueChanged];
-        
-    } else {
-        
-        _datePicker.datePickerMode = UIDatePickerModeTime;
-        _datePicker.minimumDate = [_formatter dateFromString:_startsDateTime.text];
-        
-        [_datePicker addTarget:self action:@selector(modifieTimeLabel:) forControlEvents:UIControlEventValueChanged];
-    }
-}
-
 -(void) createMeetingInCloud {
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     
     if(theme.length == 0) {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Meeting" message:@"Choose a name for create a meeting." preferredStyle:UIAlertControllerStyleAlert];
+    
+        UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:action];                    
+    
+        [self presentViewController:alert animated:YES completion:nil];
+        
         return;
     }
+    
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
     [_meeting setTheme:theme];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
@@ -222,6 +167,10 @@ typedef enum Time {
             }
         } finalCompletion:^{
             NSLog(@"Update Users");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];  
+            });
         }];
     }];
     
@@ -259,32 +208,16 @@ typedef enum Time {
         [self.contactCollectionView setContacts:contacts];
         self.participants = [participants_aux copy];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-            [self.collectionView setHidden:NO];
-        });
+        if(self.contactCollectionView.contacts.count != 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:0.5 animations:^{
+                    [self.collectionView reloadData];
+                    [self.collectionView setHidden:NO];
+                    [self.view layoutIfNeeded];
+                }];
+            });
+        }
     }];
-}
-
-- (void)pickerForNumberOfTopics {
-    
-    _pickerView = [[UIPickerView alloc] init];
-    //UITabBar* tabBar = [[UITabBar alloc] init];
-    
-    [_pickerView setDataSource:self];
-    [_pickerView setDelegate:self];
-    [_pickerView setBackgroundColor: UIColor.opaqueSeparatorColor];
-    
-    [self.view addSubview:_pickerView];
-    
-    [[_pickerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[_pickerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
-    [[_pickerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-    
-    [[_pickerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.2] setActive:YES];
-        
-    [_pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
 }
 
 @end

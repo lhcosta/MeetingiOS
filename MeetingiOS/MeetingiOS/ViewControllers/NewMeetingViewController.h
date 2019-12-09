@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// View Controllers para criar uma nova reuinao
 @interface NewMeetingViewController : UIViewController  <MeetingDelegate>
 
+/// Definir o tempo inicial ou final da reuniao
+typedef enum Time {
+    Start,
+    Finish,
+} Time;
+
 //MARK:- IBOutlets
 @property (nonatomic, weak) IBOutlet UIView* firstView;
 @property (nonatomic, weak) IBOutlet UIView* secondView;
@@ -30,6 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UITextField* nameMetting;
 @property (nonatomic, weak) IBOutlet UIButton* colorMetting;
 @property (nonatomic, weak) IBOutlet UILabel* numbersOfTopics;
+@property (nonatomic, nullable) UIPickerView* pickerView;
+@property (nonatomic, nullable) UIDatePicker* datePicker;
+@property (nonatomic, nonnull) NSDateFormatter* formatter;
 
 ///Selecionando a cor do ícone da reunião.
 - (IBAction) chooseColorMeeting:(id)sender;
