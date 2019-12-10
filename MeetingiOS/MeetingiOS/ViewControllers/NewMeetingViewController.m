@@ -162,10 +162,10 @@
     }
     
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
-
-    CKRecordID* recordIdOwner = [NSUserDefaults.standardUserDefaults valueForKey:@"recordName"];
-    CKReference* reference = [[CKReference alloc] initWithRecordID:recordIdOwner action:CKReferenceActionNone];
     
+    CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
+    CKReference* reference = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
+        
     [_meeting setManager:reference];
     [_meeting setTheme:theme];
     [_meeting setColor: _colorMetting.backgroundColor.toHexString];
@@ -176,7 +176,6 @@
     for(CKRecord* record in _participants) {
         
         User* user = [[User alloc] initWithRecord:record];
-        
         [user registerMeetingWithMeeting:[[CKReference alloc] initWithRecord:_meeting.record action:CKReferenceActionNone]];
         [_meeting addingNewEmployee:[[CKReference alloc]initWithRecord:record action:CKReferenceActionNone]];
     }
@@ -212,13 +211,13 @@
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
 }
 
-- (void)selectedContacts:(NSArray<Contact *> *)contacts {
+- (void)getRecordForSelectedUsers {
     
     NSMutableArray<NSString*>* allEmails = [[NSMutableArray alloc] init];
     NSMutableArray<CKRecord*>* participants_aux = [[NSMutableArray alloc] init];
     NSPredicate* predicate;
     
-    for (Contact* contact in contacts) {
+    for (Contact* contact in [_contactCollectionView contacts]) {
         [allEmails addObject:contact.email];
     }
         

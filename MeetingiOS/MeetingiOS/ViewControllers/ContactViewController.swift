@@ -64,7 +64,7 @@ import Contacts
             for contant in self.selectedContacts {
                 if(self.contacts[String(contant.name!.first!)]?.contains(where: {
                     return contant.email == $0.email}) ?? false){
-                    contant.isSelected = true
+                    
                 }
             }
             
@@ -73,9 +73,8 @@ import Contacts
                 self.tableView.reloadData()
             }
         }
-        
     }
-    
+ 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated) 
@@ -265,6 +264,7 @@ private extension ContactViewController {
     
     ///Enviando Contatos
     @objc func sendingContactsToMeeting() {
+        self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
     }
     
