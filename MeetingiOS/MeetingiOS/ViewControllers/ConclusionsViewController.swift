@@ -60,7 +60,10 @@ class ConclusionsViewController: UIViewController {
             } else {
                 print("Conclusion Successifuly added!")
                 
-                self.presentingViewController?.dismiss(animated: false, completion:nil)
+                DispatchQueue.main.async {
+                    self.navigationController!.popViewController(animated: true)
+                    
+                }
             }
         }) {
             print("Done Request")
