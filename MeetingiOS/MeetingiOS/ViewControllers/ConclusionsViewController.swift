@@ -36,9 +36,17 @@ class ConclusionsViewController: UIViewController {
         conclusionsTableView.dataSource = self
         
         // Arredondando bordas da View
-        viewTopic.layer.cornerRadius = 10
-        viewAuthor.layer.cornerRadius = 10
-        viewTimer.layer.cornerRadius = 10
+        viewTopic.layer.cornerRadius = 14
+        viewAuthor.layer.cornerRadius = 14
+        viewTimer.layer.cornerRadius = 14
+        
+        setShadow(view: viewTopic)
+        setShadow(view: viewAuthor)
+        setShadow(view: viewTimer)
+        
+        setShadow(view: conclusionsTableView)
+        
+        conclusionsTableView.layer.cornerRadius = 14
         
         //Reconhece o gesto e o adiciona na tela
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -48,6 +56,13 @@ class ConclusionsViewController: UIViewController {
         // Dispara as funções de manipulação do teclado
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func setShadow (view: UIView){
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset  = CGSize(width: 0.0, height: 3.0)
+        view.layer.shadowRadius = 3
     }
     
     // Ação do botão Done para mandar a conclusiona para o Cloud
@@ -117,11 +132,6 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return "Conclusion"
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
