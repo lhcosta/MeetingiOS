@@ -18,11 +18,12 @@ class ConclusionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         conclusionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         conclusionsTableView.delegate = self
         conclusionsTableView.dataSource = self
     }
+    
+    
 }
 
 
@@ -34,9 +35,10 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.numberOfLines = 3
-        cell.textLabel?.text = topicToPresentConclusions.conclusions[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "conCell", for: indexPath) as! ConclusionTableViewCell
+        
+        
+        
         return cell
     }
     
