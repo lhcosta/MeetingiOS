@@ -22,15 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let _ = UserDefaults.standard.string(forKey: "recordName") {
             let storyboard = UIStoryboard(name: "MyMeetings", bundle: nil)
             let rootVC = storyboard.instantiateInitialViewController() as! MyMeetingsViewController
-            let navController = UINavigationController(rootViewController: rootVC)
-            self.window?.rootViewController = navController
+            setRootVC(rootVC: rootVC)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let rootVC = storyboard.instantiateInitialViewController() as! LoginViewController
-            let navController = UINavigationController(rootViewController: rootVC)
-            self.window?.rootViewController = navController
+            setRootVC(rootVC: rootVC)
         }
-        
+    }
+    
+    private func setRootVC(rootVC: UIViewController) {
+        let navController = UINavigationController(rootViewController: rootVC)
+        navController.navigationBar.prefersLargeTitles = true
+        self.window?.rootViewController = navController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

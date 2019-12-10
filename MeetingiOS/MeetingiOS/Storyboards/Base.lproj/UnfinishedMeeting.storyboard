@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,26 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1n-x8-A8Q">
-                                <rect key="frame" x="63" y="166" width="93" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFG-BD-RzF">
-                                <rect key="frame" x="57" y="210" width="300" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRP-Ja-rTr">
-                                <rect key="frame" x="148" y="252" width="118" height="30"/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="createTopicButton:" destination="ID9-zH-FfA" eventType="touchUpInside" id="qZK-KR-6To"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
-                                <rect key="frame" x="20" y="290" width="374" height="483"/>
+                                <rect key="frame" x="20" y="44" width="374" height="729"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="0Vh-IY-nnt" customClass="UnfinishedTopicsTableViewCell">
@@ -84,31 +66,17 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="yFG-BD-RzF" secondAttribute="trailing" constant="57" id="0lH-uw-hnK"/>
-                            <constraint firstItem="NRP-Ja-rTr" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="148" id="2b4-BZ-Qgq"/>
-                            <constraint firstItem="NRP-Ja-rTr" firstAttribute="top" secondItem="yFG-BD-RzF" secondAttribute="bottom" constant="8" id="3EP-nO-V5B"/>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="PVt-DO-0Fx" secondAttribute="trailing" constant="20" id="BNs-6A-qT9"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="D1n-x8-A8Q" secondAttribute="trailing" constant="258" id="E56-i0-pSx"/>
-                            <constraint firstItem="yFG-BD-RzF" firstAttribute="top" secondItem="D1n-x8-A8Q" secondAttribute="bottom" constant="23" id="HQb-Md-Jy5"/>
                             <constraint firstAttribute="bottom" secondItem="PVt-DO-0Fx" secondAttribute="bottom" constant="23.5" id="Lav-nS-UaC"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="NRP-Ja-rTr" secondAttribute="trailing" constant="148" id="R6F-D7-ELc"/>
-                            <constraint firstItem="D1n-x8-A8Q" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" constant="122" id="XOW-ja-QBy"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="NRP-Ja-rTr" secondAttribute="bottom" constant="8" id="dVY-7E-68m"/>
+                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" id="Mj0-q0-6kN"/>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="die-tg-Jft"/>
-                            <constraint firstItem="NRP-Ja-rTr" firstAttribute="top" secondItem="yFG-BD-RzF" secondAttribute="bottom" constant="8" id="eCa-h3-oFu"/>
                             <constraint firstItem="PVt-DO-0Fx" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" constant="30" id="i6w-p1-kOQ"/>
-                            <constraint firstItem="D1n-x8-A8Q" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="63" id="jSH-Gl-bei"/>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="lFv-I9-rAE"/>
-                            <constraint firstItem="yFG-BD-RzF" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="57" id="nYA-wI-s0V"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="NRP-Ja-rTr" secondAttribute="bottom" constant="8" id="p83-hC-rFA"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="NRP-Ja-rTr" secondAttribute="bottom" constant="8" id="xl8-kW-vae"/>
-                            <constraint firstItem="yFG-BD-RzF" firstAttribute="top" secondItem="D1n-x8-A8Q" secondAttribute="bottom" constant="23" id="yaY-JD-N0F"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
-                        <outlet property="descriptionField" destination="yFG-BD-RzF" id="0mW-RT-Scb"/>
                         <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                     </connections>

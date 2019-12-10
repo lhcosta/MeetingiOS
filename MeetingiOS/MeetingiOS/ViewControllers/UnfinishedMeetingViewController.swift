@@ -14,7 +14,6 @@ import CloudKit
 class UnfinishedMeetingViewController: UIViewController {
 
     //MARK: - Properties
-    @IBOutlet var descriptionField: UITextField!
     @IBOutlet var tableViewTopics: UITableView!
     
     @IBOutlet var mirrorButton: UIButton!
@@ -89,31 +88,6 @@ class UnfinishedMeetingViewController: UIViewController {
     
     
     //MARK: - Methods
-    /// Botão que envia o Topic para o Cloud, tanto para a table Topic quando para o atributo topics do Meeting.
-    /// currMeeting ainda será substiuído pela Meeting criada.
-    /// - Parameter sender: default
-    @IBAction func createTopicButton(_ sender: Any) {
-        
-//        let topicRecord = CKRecord(recordType: "Topic")
-//        let newTopic = Topic(record: topicRecord)
-//        newTopic.editDescription(descriptionField.text!)
-//        newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
-//        newTopic.authorName = defaults.string(forKey: "givenName") ?? "Desconhecido"
-//
-//        currMeeting.addingNewTopic(CKRecord.Reference(recordID: CKRecord.ID(recordName: newTopic.record.recordID.recordName), action: .deleteSelf))
-//
-//        CloudManager.shared.createRecords(records: [newTopic.record, currMeeting.record], perRecordCompletion: { (record, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//        }) {
-//            print("Saved!")
-//            self.reloadTable()
-//        }
-    }
-    
-    
     func createTopic(description: String) -> Topic {
         
         let topicRecord = CKRecord(recordType: "Topic")
