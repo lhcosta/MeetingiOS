@@ -11,87 +11,150 @@ import CloudKit
 
 class MyMeetingsViewController: UIViewController {
     
-    var meetings: [Meeting] = []
-    @IBOutlet var myMeetingsCollectionView: UICollectionView!
+    var meetings = [[Meeting]]()
+    let cloud = CloudManager.shared
+    let defaults = UserDefaults.standard
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        myMeetingsCollectionView.delegate = self
-        myMeetingsCollectionView.dataSource = self
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(nextScreen))
+
+        //Nav Controller settings
         self.navigationItem.title = "My Meetings"
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.largeTitleDisplayMode = .always
         
         // MARK: Query no CK
-        /// Testar quando tivermos valores validos (meetings criadas).
-        /// Meetings que o usuário criou.
-//        var predicate = NSPredicate(format:"manager = %@", defaults.string(forKey: "recordName") ?? "")
-//        CloudManager.shared.readRecords(recorType: "Meeting", predicate: predicate, desiredKeys: nil, perRecordCompletion: { record in
-//            self.meetings.append(Meeting.init(record: record))
-//        }) {}
-//        /// Meetings em que o usuário está como convidado.
-//        predicate = NSPredicate(format:"employees CONTAINS %@", defaults.string(forKey: "recordName") ?? "")
-//        CloudManager.shared.readRecords(recorType: "Meeting", predicate: predicate, desiredKeys: nil, perRecordCompletion: { record in
-//            self.meetings.append(Meeting.init(record: record))
-//        }) {
-//            self.myMeetingsCollectionView.reloadData()
-//        }
-
-        // MARK: Simulação
-        /// Serão substiuídos pelo query no CK.
-        for i in 0...2 {
-            let m1 = Meeting(record: CKRecord(recordType: "Meeting"))
-            m1.theme = "unfinished Theme: \(i)"
-            meetings.append(m1)
+        guard let recordName = defaults.string(forKey: "recordName") else { return }
+        let userReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: recordName), action: .none)
+        let predicateManager = NSPredicate(format:"manager = %@", userReference)
+        let predicateEmployee = NSPredicate(format:"employees CONTAINS %@", userReference)
+        
+        var notMyMeetings: [Meeting] = []
+        
+        cloud.readRecords(recorType: "Meeting", predicate: predicateEmployee, desiredKeys: nil, perRecordCompletion: { record in
+            notMyMeetings.append(Meeting.init(record: record))
+        }) {
+            let recordIDs = notMyMeetings.map({$0.record.recordID})
+            
+            self.cloud.fetchRecords(recordIDs: recordIDs, desiredKeys: ["name"]) { (records, _) in
+                guard let userNames = records else { return }
+                
+                for meeting in notMyMeetings {
+                    if let name = userNames[meeting.manager!.recordID]?.value(forKey: "name") as? String{
+                        meeting.managerName = name
+                    }
+                    self.appendMeeting(meeting: meeting)
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
-        for i in 0...2 {
-            let m1 = Meeting(record: CKRecord(recordType: "Meeting"))
-            m1.theme = "finished Theme: \(i)"
-            m1.finished = true
-            meetings.append(m1)
+        
+        cloud.readRecords(recorType: "Meeting", predicate: predicateManager, desiredKeys: nil, perRecordCompletion: { record in
+            let meeting = Meeting.init(record: record)
+            meeting.managerName = self.defaults.string(forKey: "givenName")
+            self.appendMeeting(meeting: meeting)
+        }) {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
-    @objc func nextScreen() {
-        self.performSegue(withIdentifier: "nextScreen", sender: nil)
+    private func appendMeeting(meeting: Meeting){
+        if let finalDate = meeting.finalDate, finalDate < Date(timeIntervalSinceNow: 0){
+            self.meetings[0].append(meeting)
+        } else {
+            self.meetings[1].append(meeting)
+        }
+    }
+    
+    @IBAction func didChangeControl(_ sender: Any) {
+        tableView.reloadData()
     }
 }
 
-
-extension MyMeetingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    // MARK: - Data Source
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        meetings[segmentedControl.selectedSegmentIndex].count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MyMeetingsCollectionViewCell
-        cell.meetingTittleLabel.text = meetings[indexPath.row].theme
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyMeetingsTableViewCell
+        
+        let meetingsToShow = meetings[segmentedControl.selectedSegmentIndex]
+        cell.meetingName.text = meetingsToShow[indexPath.row].theme
+        cell.managerName.text = meetingsToShow[indexPath.row].managerName
+        
         return cell
     }
     
-    
-    // MARK: - Delegate
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if meetings[indexPath.row].finished {
-            performSegue(withIdentifier: "finishedMeeting", sender: self)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let meetingsToShow = meetings[segmentedControl.selectedSegmentIndex]
+
+        if meetingsToShow[indexPath.row].finished {
+            performSegue(withIdentifier: "finishedMeeting", sender: meetingsToShow[indexPath.row])
         } else {
-            performSegue(withIdentifier: "unfinishedMeeting", sender: self)
+            performSegue(withIdentifier: "unfinishedMeeting", sender: meetingsToShow[indexPath.row])
         }
     }
     
-    
-    // MARK: - Flow Layout
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height * 0.2)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "finishedMeeting" {
+            let viewDestination = segue.destination as! FinishedMeetingViewController
+            viewDestination.currMeeting = sender as? Meeting
+        } else if segue.identifier == "unfinishedMeeting"{
+            let viewDestination = segue.destination as! UnfinishedMeetingViewController
+            viewDestination.currMeeting = sender as? Meeting
+        }
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return collectionView.frame.size.height * 0.05
-    }
-    
 }
+
+//extension MyMeetingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//
+//    // MARK: - Data Source
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return meetings.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MyMeetingsCollectionViewCell
+//        cell.meetingTittleLabel.text = meetings[indexPath.row].theme
+//        cell.managerName.text = meetings[indexPath.row].managerName
+//
+//        return cell
+//    }
+//
+//    // MARK: - Delegate
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//
+//        if meetings[indexPath.row].finished {
+//            performSegue(withIdentifier: "finishedMeeting", sender: self)
+//        } else {
+//            performSegue(withIdentifier: "unfinishedMeeting", sender: meetings[indexPath.row])
+//        }
+//    }
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "finishedMeeting" {
+//            let viewDestination = segue.destination as! UnfinishedMeetingViewController
+//            viewDestination.currMeeting = sender as? Meeting
+//        }
+//    }
+//
+//
+//    // MARK: - Flow Layout
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height * 0.2)
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return collectionView.frame.size.height * 0.05
+//    }
+//
+//}

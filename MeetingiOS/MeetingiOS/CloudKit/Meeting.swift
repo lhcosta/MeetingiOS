@@ -22,6 +22,9 @@ utilizar como auxílio de manipulação de CKRecord Meeting
         case record, selectedTopics
     }
     
+    let defaults = UserDefaults.standard
+    let cloud = CloudManager.shared
+    
     //MARK:- Properties
     
     ///Record do tipo Meeting
@@ -40,6 +43,8 @@ utilizar como auxílio de manipulação de CKRecord Meeting
             self.record.setValue(newValue, forKey: "topics")
         }
     }
+    
+    @objc var managerName : String?
         
     ///Gerenciador da reunião
     @objc var manager : CKRecord.Reference? {

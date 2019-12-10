@@ -15,25 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        //Pular tela login caso usuário já esteja logado
-        
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-//        if let _ = UserDefaults.standard.string(forKey: "recordName") {
-//            let storyboard = UIStoryboard(name: "MyMeetings", bundle: nil)
-//            let rootVC = storyboard.instantiateInitialViewController() as! MyMeetingsViewController
-//            let navController = UINavigationController(rootViewController: rootVC)
-//            self.window?.rootViewController = navController
-//        } else {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let rootVC = storyboard.instantiateInitialViewController() as! LoginViewController
-//            let navController = UINavigationController(rootViewController: rootVC)
-//            self.window?.rootViewController = navController
-//        }
-//        
-        self.window?.makeKeyAndVisible()
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         // Override point for customization after application launch.
         let userNotCenter = UNUserNotificationCenter.current()
         userNotCenter.delegate = self
