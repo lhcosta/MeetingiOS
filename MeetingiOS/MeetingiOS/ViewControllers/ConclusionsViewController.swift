@@ -31,7 +31,7 @@ class ConclusionsViewController: UIViewController {
         navigationItem.title = "Details"
         
         // Configruração da TableView
-        conclusionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "conCell")
+//        conclusionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         conclusionsTableView.delegate = self
         conclusionsTableView.dataSource = self
         
@@ -39,6 +39,15 @@ class ConclusionsViewController: UIViewController {
         viewTopic.layer.cornerRadius = 10
         viewAuthor.layer.cornerRadius = 10
         viewTimer.layer.cornerRadius = 10
+        
+        //Reconhece o gesto e o adiciona na tela
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+
+        view.addGestureRecognizer(tap)
+        
+        // Dispara as funções de manipulação do teclado
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // Ação do botão Done para mandar a conclusiona para o Cloud
@@ -46,6 +55,26 @@ class ConclusionsViewController: UIViewController {
         print("Done")
     }
     
+    // Remove o teclado da tela
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // Eleva a tela para o teclado aparecer
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    // Volta a tela para o normal sem o teclado
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
     
 }
 
