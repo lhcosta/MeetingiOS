@@ -42,6 +42,9 @@ class UnfinishedMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableViewTopics.delegate = self
+        tableViewTopics.dataSource = self
+        
         // MARK: Simulando
         let meetingRecord = CKRecord(recordType: "Meeting")
         currMeeting = Meeting(record: meetingRecord)
