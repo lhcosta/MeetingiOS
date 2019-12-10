@@ -59,7 +59,9 @@
         self.datePicker.minimumDate = [self.formatter dateFromString:self.startsDateTime.text];
         
         [self.datePicker addTarget:self action:@selector(modifieTimeLabel:) forControlEvents:UIControlEventValueChanged];
+        
     }
+    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {

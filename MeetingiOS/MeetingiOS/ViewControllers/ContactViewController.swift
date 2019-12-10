@@ -69,11 +69,11 @@ import Contacts
             }
             
             self.sortingContacts()  
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
     
     

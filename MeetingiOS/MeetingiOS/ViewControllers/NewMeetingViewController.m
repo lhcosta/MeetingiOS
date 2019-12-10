@@ -162,8 +162,13 @@
     }
     
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
+
+    CKRecordID* recordIdOwner = [NSUserDefaults.standardUserDefaults valueForKey:@"recordName"];
+    CKReference* reference = [[CKReference alloc] initWithRecordID:recordIdOwner action:CKReferenceActionNone];
     
+    [_meeting setManager:reference];
     [_meeting setTheme:theme];
+    [_meeting setColor: _colorMetting.backgroundColor.toHexString];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
