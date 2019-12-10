@@ -12,13 +12,15 @@
 #import "Contact.h"
 #import "NewMeetingViewController+SettingPickers.h"
 
+
+#define TITLE_NAV @"New meeting"
+
 @interface NewMeetingViewController ()
 
 //MARK:- Properties
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
 @property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
-@property (nonatomic, nonnull, copy) NSString* nameColor;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -49,10 +51,30 @@
     
     _nameMetting.delegate = self;
     
-    [self.navigationItem setTitle:@"New meeting"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
-        
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#88A896" alpha:1];
     
+    [self.navigationItem setTitle:TITLE_NAV];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if([_contactCollectionView.contacts count] != 0) {
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [UIView animateWithDuration:0.5 animations:^{
+                 [self.collectionView setHidden:NO];
+                 [self.collectionView reloadData];
+                 [self.view layoutIfNeeded];
+             }];
+         });
+     } else {
+         [UIView animateWithDuration:0.5 animations:^{
+             [self.collectionView setHidden:YES];
+             [self.view layoutIfNeeded];
+         }];
+     }
+
 }
 
 /// Atribuindo o delegate da view controller
@@ -60,10 +82,11 @@
         
     if ([segue.identifier isEqualToString:@"SelectContacts"]) {
                 
-        ContactViewController* nextViewController = [segue destinationViewController];
+        ContactViewController* contactViewController = [segue destinationViewController];
         
-        if(nextViewController) {
-            [nextViewController setContactDelegate:self];
+        if(contactViewController) {
+            [contactViewController setContactDelegate:self];
+            [contactViewController setContactCollectionView:_contactCollectionView];
         }
         
     } else if ([segue.identifier isEqualToString:@"SelectColor"]) {
@@ -86,7 +109,7 @@
     [_fifthView setupBounds:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
     UITouch* touch = [touches anyObject];
     
@@ -143,7 +166,6 @@
     [_meeting setTheme:theme];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
-    [_meeting setColor:_nameColor];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
     
     for(CKRecord* record in _participants) {
@@ -181,10 +203,8 @@
 }
 
 - (void)selectedColor:(NSString *)hex {
-    
-    //Pegar cor de acordo com o hex
-    _nameColor = hex;
-    _colorMetting.backgroundColor = [UIColor colorNamed:hex];
+    //Pegar cor de acordo com o hex    
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
 }
 
 - (void)selectedContacts:(NSArray<Contact *> *)contacts {
@@ -196,7 +216,7 @@
     for (Contact* contact in contacts) {
         [allEmails addObject:contact.email];
     }
-    
+        
     predicate = [NSPredicate predicateWithFormat:@"email IN %@", allEmails];
 
     [CloudManager.shared readRecordsWithRecorType:@"User" predicate:predicate desiredKeys:@[@"recordName"] perRecordCompletion:^(CKRecord * _Nonnull record) {
@@ -204,19 +224,7 @@
         [participants_aux addObject:record];
         
     } finalCompletion:^{
-        
-        [self.contactCollectionView setContacts:contacts];
         self.participants = [participants_aux copy];
-        
-        if(self.contactCollectionView.contacts.count != 0) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [UIView animateWithDuration:0.5 animations:^{
-                    [self.collectionView reloadData];
-                    [self.collectionView setHidden:NO];
-                    [self.view layoutIfNeeded];
-                }];
-            });
-        }
     }];
 }
 
