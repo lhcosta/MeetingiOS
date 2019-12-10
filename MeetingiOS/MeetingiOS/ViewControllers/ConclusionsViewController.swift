@@ -53,6 +53,18 @@ class ConclusionsViewController: UIViewController {
     // Ação do botão Done para mandar a conclusiona para o Cloud
     @objc func doneAction() {
         print("Done")
+        
+        CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
+            if let error = error {
+                print("Error Cloud: \(error)")
+            } else {
+                print("Conclusion Successifuly added!")
+                
+                self.presentingViewController?.dismiss(animated: false, completion:nil)
+            }
+        }) {
+            print("Done Request")
+        }
     }
     
     // Remove o teclado da tela
