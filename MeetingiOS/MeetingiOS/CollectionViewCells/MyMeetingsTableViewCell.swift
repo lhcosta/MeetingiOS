@@ -10,6 +10,9 @@ import UIKit
 
 class MyMeetingsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var meetingName: UILabel!
+    @IBOutlet weak var managerName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

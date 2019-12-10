@@ -39,6 +39,9 @@ class UnfinishedMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableViewTopics.delegate = self
+        tableViewTopics.dataSource = self
+        
         // MARK: Simulando
         let meetingRecord = CKRecord(recordType: "Meeting")
         currMeeting = Meeting(record: meetingRecord)
@@ -49,9 +52,6 @@ class UnfinishedMeetingViewController: UIViewController {
         if CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? "") == currMeeting.manager?.recordID {
             usrIsManager = true
         }
-        
-        tableViewTopics.delegate = self
-        tableViewTopics.dataSource = self
     }
     
     
