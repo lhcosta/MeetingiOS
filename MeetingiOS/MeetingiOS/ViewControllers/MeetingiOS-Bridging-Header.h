@@ -5,6 +5,7 @@
 #import "NewMeetingViewController.h"
 #import "EventManager.h"
 #import "UnfinishedTopicsTableViewCell.h"
+#import "ConclusionTableViewCell.h"
 #import "FinishedTopicsTableViewCell.h"
 #import "Contact.h"
 #import "ContactCollectionView.h"
