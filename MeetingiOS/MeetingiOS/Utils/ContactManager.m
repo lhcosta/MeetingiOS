@@ -13,11 +13,22 @@
 @property (nonatomic) CNContactStore* contactsStore;
 @property (nonatomic) CNContactFetchRequest* fetchRequest;
 @property (nonatomic) NSMutableDictionary<NSString*, NSArray<Contact*>*>* contacts;
-
 @property (nonatomic) NSPredicate* predicate;
 @end
 
 @implementation ContactManager
+
++ (instancetype)shared {
+    
+    static ContactManager* shared = nil;
+    static dispatch_once_t oncePredicate;
+    
+    dispatch_once(&oncePredicate, ^{
+        shared = [[self alloc] init];
+    });
+    
+    return shared;
+}
 
 - (instancetype)init
 {
@@ -32,6 +43,7 @@
         
         [_fetchRequest setUnifyResults:YES];
         [_fetchRequest setSortOrder:CNContactSortOrderGivenName];
+        
     }
     
     return self;
@@ -43,8 +55,11 @@
     
     if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) {
         
-        if([_contactsStore enumerateContactsWithFetchRequest:_fetchRequest error:&error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+        if(_contacts.count) {
+            allContacts(_contacts, Nil);
         
+        } else if([_contactsStore enumerateContactsWithFetchRequest:_fetchRequest error:&error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+            
             if(!stop) {
                 return;
             }
@@ -54,7 +69,7 @@
                 NSMutableArray<Contact*> *contact_aux;
                 Contact* newContact = [[Contact alloc] initWithContact:contact];
                 NSString* key = [contact.givenName substringToIndex:1];
-                                
+                
                 if([self.contacts objectForKey:key]) {
                     contact_aux = [[self.contacts valueForKey:key] mutableCopy];
                 } else {
@@ -63,16 +78,15 @@
                 
                 [contact_aux addObject:newContact];
                 
-                [self.contacts setValue:[contact_aux copy] forKey:key];
+                [self.contacts setValue:[contact_aux copy] forKey:key];                
             }            
             
         }]) {
-            allContacts(_contacts, Nil);
+            allContacts(_contacts, Nil);            
         } else {
             allContacts(Nil, error);
         }
     }
 }
-
 
 @end

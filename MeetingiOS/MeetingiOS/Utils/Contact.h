@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Inicializar apenas com o email
 -(instancetype) initWithEmail:(NSString*)email;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

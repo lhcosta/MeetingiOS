@@ -70,7 +70,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Nov, 28 2019  3:00 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRB-lI-7pP">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Nov, 28 2019  3:00 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bc-MR-fRE">
                                                                 <rect key="frame" x="56" y="0.0" width="278" height="20.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -149,7 +149,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YFH-7i-u3a">
-                                                <rect key="frame" x="0.0" y="108.66666666666663" width="364" height="135"/>
+                                                <rect key="frame" x="0.0" y="108.66666666666663" width="364" height="108"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iX1-KN-kgr">
                                                     <size key="itemSize" width="62" height="69"/>
@@ -159,7 +159,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="IeW-Yk-qSa" customClass="ContactCollectionViewCell">
-                                                        <rect key="frame" x="0.0" y="33" width="62" height="69"/>
+                                                        <rect key="frame" x="0.0" y="19.666666666666668" width="62" height="69"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lza-ch-yAX">
                                                             <rect key="frame" x="0.0" y="0.0" width="62" height="69"/>
@@ -168,11 +168,15 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vdU-f9-33Z">
                                                                     <rect key="frame" x="0.0" y="0.0" width="62" height="69"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-df-c47">
-                                                                            <rect key="frame" x="0.0" y="0.99999999999999822" width="62" height="19"/>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-df-c47">
+                                                                            <rect key="frame" x="0.0" y="1" width="62" height="48.666666666666671"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="50" id="VNz-28-9Jf"/>
+                                                                                <constraint firstAttribute="height" constant="50" id="baS-Gr-6Xt"/>
+                                                                            </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glQ-Jv-IwL">
-                                                                            <rect key="frame" x="0.0" y="20.333333333333332" width="62" height="48.666666666666671"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="glQ-Jv-IwL">
+                                                                            <rect key="frame" x="0.0" y="50" width="62" height="19"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -229,7 +233,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Lah-13-8YU" firstAttribute="height" secondItem="YSn-KU-RVY" secondAttribute="height" id="kve-eq-ndj"/>
-                                            <constraint firstItem="Lah-13-8YU" firstAttribute="height" secondItem="YFH-7i-u3a" secondAttribute="height" multiplier="0.8" id="qyI-om-7jk"/>
+                                            <constraint firstItem="Lah-13-8YU" firstAttribute="height" secondItem="YFH-7i-u3a" secondAttribute="height" id="qyI-om-7jk"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -261,7 +265,7 @@
                         <outlet property="nameMetting" destination="9m1-i5-8bZ" id="Htj-83-dnA"/>
                         <outlet property="numbersOfTopics" destination="qxA-aE-ujJ" id="tqH-FV-QmO"/>
                         <outlet property="secondView" destination="NAe-TU-rRr" id="ZyU-Vv-jmW"/>
-                        <outlet property="startsDateTime" destination="yRB-lI-7pP" id="7UO-eD-M4H"/>
+                        <outlet property="startsDateTime" destination="9Bc-MR-fRE" id="UvX-He-cUd"/>
                         <outlet property="thirdView" destination="tAC-FD-cB3" id="Kqx-2N-vfs"/>
                         <segue destination="4JS-RT-fZ2" kind="show" identifier="SelectContacts" id="E2i-6L-uLy"/>
                         <segue destination="OsY-CL-hb7" kind="show" identifier="SelectColor" id="We0-qj-vQc"/>
@@ -279,7 +283,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MK2-wv-P2f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536" y="-106"/>
+            <point key="canvasLocation" x="1441" y="33"/>
         </scene>
         <!--Contact-->
         <scene sceneID="gUQ-kz-9hF">
@@ -289,7 +293,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DCp-U6-6at" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1535" y="50"/>
+            <point key="canvasLocation" x="1417" y="-60"/>
         </scene>
     </scenes>
     <resources>

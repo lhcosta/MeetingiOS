@@ -16,7 +16,6 @@ class MyMeetingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = UserDefaults.standard
         
         myMeetingsCollectionView.delegate = self
         myMeetingsCollectionView.dataSource = self
