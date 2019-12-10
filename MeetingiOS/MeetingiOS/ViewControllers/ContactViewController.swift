@@ -23,12 +23,14 @@ import Contacts
     private var contacts : [String : [Contact]] = [:]
     private var sortedContacts : [(key : String, value : [Contact])] = []
     private var filteringContacts : [Contact] = []
-    private var contactCollectionView : ContactCollectionView?
-    private var contactManager : ContactManager?
+    private var contactManager = ContactManager.shared()
+    private var selectedContacts : [Contact] = []
+    private var cache : NSCache<NSString, NSData>!
+    @objc var contactCollectionView : ContactCollectionView?
     
     //MARK:- Delegates
     @objc weak var contactDelegate : MeetingDelegate?
-        
+    
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
         let notHaveName = searchName.text?.isEmpty ?? true 
@@ -48,25 +50,47 @@ import Contacts
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        self.setupTableView()
-        self.setupSearchBar()
-        self.setupContactCollectionView()
         
+        self.cache = NSCache<NSString, NSData>()
+        self.cache.evictsObjectsWithDiscardedContent = true
+        
+        self.setupTableView()
+        self.setupSearchBar()        
         
         //MARK:- Navigation
         self.navigationItem.title = "Contacts"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
-        self.fetchingContacts { 
-            DispatchQueue.main.async {
-                self.sortingContacts()
-                self.tableView.reloadData()
+        self.fetchingContacts {
+            
+            for contant in self.selectedContacts {
+                if(self.contacts[String(contant.name!.first!)]?.contains(where: {
+                    return contant.email == $0.email}) ?? false){
+                    contant.isSelected = true
+                }
             }
+            
+            self.sortingContacts()  
         }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated) 
+        
+        self.collectionView.delegate = contactCollectionView
+        self.collectionView.dataSource = contactCollectionView
+        
+        if(contactCollectionView?.contacts.count != 0) {
+            animateCollection(.show)
+        }
+        
     }
     
     deinit {
@@ -76,9 +100,9 @@ import Contacts
 }
 
 //MARK:- Fetching Contacts and Sending Contacts
-private extension ContactViewController {
+extension ContactViewController {
     
-    func fetchingContacts(completionHandler : @escaping () -> Void) {
+    private func fetchingContacts(completionHandler : @escaping () -> Void) {
         
         CNContactStore().requestAccess(for: .contacts) { (acess, error) in
             if let error = error {
@@ -88,9 +112,7 @@ private extension ContactViewController {
             
             if acess {
                 
-                self.contactManager = ContactManager()
-                
-                self.contactManager?.fetchContacts(email: { (contacts, error) in
+                self.contactManager.fetchContacts(email: { (contacts, error) in
                     if let error = error {
                         NSLog("%@", "\(error)")
                         return
@@ -104,9 +126,7 @@ private extension ContactViewController {
             
             completionHandler()
         }
-        
     }
-    
     
 }
 
@@ -150,13 +170,13 @@ extension ContactViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableCell", for: indexPath) as! ContactTableViewCell 
-    
+        
         if isFiltering {
             cell.contact = self.filteringContacts[indexPath.row]
         } else {
             cell.contact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }
-            
+        
         if cell.contact?.isSelected ?? false {
             cell.accessoryType = .checkmark
             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
@@ -189,11 +209,11 @@ extension ContactViewController : UITableViewDelegate {
         if self.collectionView.isHidden {
             self.animateCollection(.show)
         }
-               
-        self.contactCollectionView?.contacts.append(selectedContact)
         
-        let indexPath = IndexPath(item: self.contactCollectionView!.contacts.count - 1, section: 0)
-            
+        self.contactCollectionView?.addContact(selectedContact)
+        
+        let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
+        
         self.collectionView.insertItems(at: [indexPath])
         self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)        
         
@@ -218,7 +238,7 @@ extension ContactViewController : UITableViewDelegate {
         }  
         
         let index = self.contactCollectionView?.contacts.firstIndex(where: { (contact) -> Bool in
-            return contact == selectedContact
+            return contact.email == selectedContact.email
         })
         
         cell?.accessoryType = .none
@@ -226,7 +246,7 @@ extension ContactViewController : UITableViewDelegate {
         
         let indexPath = IndexPath(item: index!, section: 0)
         
-        self.contactCollectionView?.contacts.remove(at: index!)
+        self.contactCollectionView?.removeContactIndex(indexPath.item)
         self.collectionView.deleteItems(at: [indexPath])  
         
         if self.contactCollectionView?.contacts.count == 0 {
@@ -249,11 +269,6 @@ private extension ContactViewController {
     
     ///Enviando Contatos
     @objc func sendingContactsToMeeting() {
-        
-        if let allContacts = contactCollectionView?.contacts {
-            self.contactDelegate?.selectedContacts(allContacts)
-        }
-        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -265,8 +280,10 @@ private extension ContactViewController {
     @IBAction func addingNewContact(_ button : UIButton) {
         
         let contact = Contact(email: self.searchName.text!)
+        contact.isSelected = true
         
-        self.contactCollectionView?.contacts.append(contact)
+        self.contactCollectionView?.addContact(contact)
+        
         self.collectionView.insertItems(at: [IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)])
         
         if self.collectionView.isHidden {
@@ -281,20 +298,12 @@ private extension ContactViewController {
 }
 
 //MARK:- UICollectionView
-private extension ContactViewController {
+extension ContactViewController {
     
     enum Animation {
         case show
         case notShow
     }
-    
-    /// Setup a collection view dos contatos selecionados.
-    func setupContactCollectionView() {
-        self.contactCollectionView = ContactCollectionView()
-        self.collectionView.dataSource = contactCollectionView
-        self.collectionView.delegate = contactCollectionView
-    }
-    
     
     /// Animando a collection view. 
     /// - Parameter direction: mostrar ou esconder.

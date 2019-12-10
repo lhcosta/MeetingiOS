@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UnfinishedTopicsTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *topicLabel;
+@property (strong, nonatomic) IBOutlet UITextField *topicTextField;
 
 @end
 

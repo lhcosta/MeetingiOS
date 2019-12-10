@@ -21,6 +21,30 @@
     return self;
 }
 
+- (void)addContact:(Contact *)contact {
+    
+    NSMutableArray<Contact*>* contacts = [_contacts mutableCopy];
+    
+    [contacts addObject:contact];
+    
+    _contacts = [contacts copy];
+}
+
+- (void) addContacts : (NSArray<Contact*>*) contacts {
+    _contacts = [contacts copy];
+}
+
+- (void)removeContactIndex:(NSInteger)index{
+    
+    NSMutableArray<Contact*>* contacts = [_contacts mutableCopy];
+    
+    [contacts removeObjectAtIndex:index];
+    
+    _contacts = [contacts copy];
+}
+
+
+
 //MARK:- UICollectionViewDataSource
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath { 
     
@@ -39,20 +63,22 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSMutableArray<Contact*>* mutableContacts = [_contacts mutableCopy];
-    
-    [mutableContacts[indexPath.item] setIsSelected:NO];
 
+    Contact* contact = [mutableContacts objectAtIndex:indexPath.item];
+    contact.isSelected = NO;
+    
     [mutableContacts removeObjectAtIndex:indexPath.item];
     _contacts = [mutableContacts copy];
     
     [collectionView deleteItemsAtIndexPaths:@[indexPath]];
     
     [NSNotificationCenter.defaultCenter postNotificationName:@"RemoveContact" object:nil];
+    
 }
 
 //MARK:- UICollectionViewDelegateFlowLayout
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 30, 10, 30);
+    return UIEdgeInsetsMake(0, 10, 10, 30);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

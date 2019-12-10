@@ -49,7 +49,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        guard let CloudNot = CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) else { return }
+        guard CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) != nil else { return }
         
     }
 }
