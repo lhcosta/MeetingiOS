@@ -40,7 +40,7 @@ import CloudKit
     ///   - records: Array de ckrecords para serem salvos
     ///   - perRecordCompletion: completion que será executado após cada record
     ///   - finalCompletion: completion final após final da operação
-    func createRecords(records: [CKRecord], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
+    @objc func createRecords(records: [CKRecord], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
         let saveOp = setOP(savePolicy: .allKeys, perRecordCompletion: perRecordCompletion, finalCompletion: finalCompletion)
         saveOp.recordsToSave = records
 
@@ -52,7 +52,7 @@ import CloudKit
     ///   - records: Array de ckrecords para serem alterados
     ///   - perRecordCompletion: completion que será executado após cada record
     ///   - finalCompletion: completion final após final da operação
-    func updateRecords(records: [CKRecord], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
+    @objc func updateRecords(records: [CKRecord], perRecordCompletion: @escaping ((CKRecord, Error?) -> Void), finalCompletion: @escaping (() -> Void)){
         let updateOp = setOP(savePolicy: .changedKeys, perRecordCompletion: perRecordCompletion, finalCompletion: finalCompletion)
         updateOp.recordsToSave = records
         
@@ -157,7 +157,7 @@ import CloudKit
             deleteOp.database = self.database
             deleteOp.savePolicy = .allKeys
             deleteOp.modifyRecordsCompletionBlock = { (recordsss, deleted, error) in
-                print("===> \(deleted?.count)")
+                print("===> \(String(describing: deleted?.count))")
                 print(error)
                 
             }

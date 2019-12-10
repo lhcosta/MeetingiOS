@@ -9,41 +9,59 @@
 import Foundation
 import CloudKit
 
-class User {
+@objc class User : NSObject {
     
     //MARK: - Properties
     private(set) var record: CKRecord
     
     var appleCredential: String? {
-        didSet {
-            self.record.setValue(appleCredential, forKey: "appleCredential")
+        get {
+            return self.record.value(forKey: "appCredential") as? String
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "appCredential")
         }
     }
     
     var email: String? {
-        didSet {
-            self.record.setValue(email, forKey: "email")
+        
+        get {
+            return self.record.value(forKey: "email") as? String
         }
-    }
-    var name: String? {
-        didSet {
-            self.record.setValue(name, forKey: "name")
+        
+        set {
+            self.record.setValue(newValue, forKey: "email")
         }
     }
     
+    var name: String? {
+        
+        get {
+            return self.record.value(forKey: "name") as? String
+        }
+        
+        set {
+            self.record.setValue(newValue, forKey: "name")
+        }
+    }
+    
+    
     // reuniões vindos da entidade Reunião
-    var meetings: [CKRecord.Reference]?{
-        didSet {
-            self.record.setValue(meetings, forKey: "meetings")
+    var meetings: [CKRecord.Reference]{
+        get {
+            return self.record.value(forKey: "meetings") as? [CKRecord.Reference] ?? []
+        }
+        
+        set {
+            print(newValue)
+            self.record.setValue(newValue, forKey: "meetings")
         }
     }
     
     //MARK: - Initializer
-    init(record: CKRecord) {
+    @objc init(record: CKRecord) {
         self.record = record
-        self.email = record.value(forKey: "email") as? String
-        self.name = record.value(forKey: "name") as? String
-        self.meetings = record.value(forKey: "meetings") as? [CKRecord.Reference]
     }
     
     //MARK: - Methods
@@ -58,7 +76,7 @@ class User {
             // Atualiza os dados do Usuário
             self.email = rec.value(forKey: "email") as? String
             self.name = rec.value(forKey: "name") as? String
-            self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference]
+            self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference] ?? []
             
             print("\(String(describing: rec.value(forKey: "email") as? String))")
             
@@ -67,20 +85,18 @@ class User {
     }
     
     // Registra uma reunião no array de reuniões do usuário
-    func registerMeeting(meeting: CKRecord.Reference){
-        self.meetings?.append(meeting)
-        self.record.setValue(meetings, forKey: "meetings")
+    @objc func registerMeeting(meeting: CKRecord.Reference){
+        self.meetings.append(meeting)  
     }
-    
     
     /// Busca no vetor e deleta reunião do array de reuniões
     /// - Parameter
     /// meetingReference: é o CKRecord.Reference da reunião que deseja deletar do array
     func removeMeeting(meetingReference: CKRecord.Reference){
         var  i = 0
-        for met in meetings! {
+        for met in meetings {
             if met == meetingReference{
-                meetings?.remove(at: i)
+                meetings.remove(at: i)
             }
             i += 0
         }

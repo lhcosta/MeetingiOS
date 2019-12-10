@@ -53,6 +53,12 @@ import Contacts
         self.setupSearchBar()
         self.setupContactCollectionView()
         
+        
+        //MARK:- Navigation
+        self.navigationItem.title = "Contacts"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
         self.fetchingContacts { 
@@ -95,9 +101,10 @@ private extension ContactViewController {
                     }
                 })
             }
+            
+            completionHandler()
         }
         
-        completionHandler()
     }
     
     
@@ -149,7 +156,7 @@ extension ContactViewController : UITableViewDataSource {
         } else {
             cell.contact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }
-        
+            
         if cell.contact?.isSelected ?? false {
             cell.accessoryType = .checkmark
             self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
@@ -188,12 +195,14 @@ extension ContactViewController : UITableViewDelegate {
         let indexPath = IndexPath(item: self.contactCollectionView!.contacts.count - 1, section: 0)
             
         self.collectionView.insertItems(at: [indexPath])
-        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)        
         
         if isFiltering {
-            self.searchName.resignFirstResponder()
-            self.searchName.text = nil
-            self.tableView.reloadData()
+            UIView.animate(withDuration: 1, delay: 0.5, options: .curveEaseIn, animations: { 
+                self.searchName.resignFirstResponder()
+                self.searchName.text = nil
+                self.tableView.reloadData()
+            }, completion: nil)
         }
     }
     
@@ -239,7 +248,7 @@ private extension ContactViewController {
     }
     
     ///Enviando Contatos
-    @IBAction func sendingContactsToMeeting() {
+    @objc func sendingContactsToMeeting() {
         
         if let allContacts = contactCollectionView?.contacts {
             self.contactDelegate?.selectedContacts(allContacts)

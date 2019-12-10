@@ -122,6 +122,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         } else {
             user.searchCredentials(record: userRecord){ _ in
                 print("User Email: \(String(describing: user.email))")
+                self.defaults.set(userRecord.recordID.recordName, forKey: "recordName")
             }
         }
         
