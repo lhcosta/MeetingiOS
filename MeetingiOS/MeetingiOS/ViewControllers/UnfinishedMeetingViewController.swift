@@ -194,9 +194,9 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if usrIsManager {
-            return 2
-        }
+//        if usrIsManager {
+//            return 2
+//        }
         return 1
     }
     
@@ -270,10 +270,6 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         
         var temp: [Int] = []
         for i in 0...selectedTopics.count-1 {
-//            let cell = tableViewTopics.cellForRow(at: IndexPath(row: i, section: 0)) as! UnfinishedTopicsTableViewCell
-//            if cell.topicTextField.text!.isEmpty {
-//                temp.append(i)
-//            }
             if selectedTopics[i].topicDescription.isEmpty {
                 temp.append(i)
             }
