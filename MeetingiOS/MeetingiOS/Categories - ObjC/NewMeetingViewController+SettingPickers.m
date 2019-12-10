@@ -13,22 +13,19 @@
 - (void)pickerForNumberOfTopics {
     
     self.pickerView = [[UIPickerView alloc] init];
-    //UITabBar* tabBar = [[UITabBar alloc] init];
-    
+        
+    [self.view addSubview:self.pickerView];  
+
     [self.pickerView setDataSource:self];
     [self.pickerView setDelegate:self];
     [self.pickerView setBackgroundColor: UIColor.opaqueSeparatorColor];
-    
-    [self.view addSubview:self.pickerView];
-    
+        
     [[self.pickerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
     [[self.pickerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
     [[self.pickerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-    
-    [[self.pickerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.2] setActive:YES];
+    [[self.pickerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.175] setActive:YES];
         
     [self.pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
 }
 
 - (void)setupDatePicker: (Time)time{
@@ -87,6 +84,10 @@
 
 - (void) modifieTimeLabel:(UIDatePicker*)datePicker {
     self.endesDateTime.text = [self.formatter stringFromDate:datePicker.date];
+}
+
+- (void) dismissPicker {
+    
 }
 
 @end

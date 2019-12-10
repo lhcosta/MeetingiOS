@@ -70,7 +70,12 @@ import CloudKit
     /// - Parameter record: credencial vinda do Sign in with apple
     func searchCredentials(record: CKRecord, compleetion: @escaping ((Bool) -> Void)){
         CloudManager.shared.fetchRecords(recordIDs: [record.recordID], desiredKeys: ["email", "name", "meetings"]) { (records, error) in
-            print("Error: \(error)")
+            
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
             guard let rec = records?[record.recordID] else { return }
             
             // Atualiza os dados do Usuário

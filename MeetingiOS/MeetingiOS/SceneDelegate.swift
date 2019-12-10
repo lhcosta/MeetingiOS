@@ -24,14 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let rootVC = storyboard.instantiateInitialViewController() as! MyMeetingsViewController
             let navController = UINavigationController(rootViewController: rootVC)
             self.window?.rootViewController = navController
-            print("MyMeetings")
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let rootVC = storyboard.instantiateInitialViewController() as! LoginViewController
             let navController = UINavigationController(rootViewController: rootVC)
             self.window?.rootViewController = navController
-            print("MyMeetings")
         }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

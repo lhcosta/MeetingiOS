@@ -12,13 +12,23 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+//    [_topicTextField becomeFirstResponder];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+
+- (BOOL)becomeFirstResponder {
+    return self.topicTextField.becomeFirstResponder;
 }
 
 @end

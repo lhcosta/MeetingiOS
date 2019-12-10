@@ -27,7 +27,8 @@ class FinishedMeetingViewController: UIViewController {
     var discussedTopics: [Topic] = []
     /// Topic selecionado na tableView, será mandado para a ConclusionsViewController que exibirá suas conclusions.
     var currSelectedTopic: Topic?
-    
+    /// Meeting criada pelo usuário.
+    var currMeeting: Meeting!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -83,18 +83,18 @@ import CloudKit
         let query = CKQuery(recordType: recorType, predicate: predicate)
         let queryOp = CKQueryOperation(query: query)
         
-        queryOp.queryCompletionBlock = { (xa,az) in
-            
-        }
-        
         if let keys = desiredKeys, keys.count>0{
             queryOp.desiredKeys = keys
+        }
+        
+        queryOp.queryCompletionBlock = { (_, error) in
+            print(error)
         }
         
         queryOp.recordFetchedBlock = { (record) in
             perRecordCompletion(record)
         }
-        
+
         queryOp.completionBlock = {
             finalCompletion()
         }
@@ -158,7 +158,11 @@ import CloudKit
             deleteOp.savePolicy = .allKeys
             deleteOp.modifyRecordsCompletionBlock = { (recordsss, deleted, error) in
                 print("===> \(String(describing: deleted?.count))")
-                print(error)
+                
+                if let error = error {
+                    print(error)
+                    return
+                }
                 
             }
             
