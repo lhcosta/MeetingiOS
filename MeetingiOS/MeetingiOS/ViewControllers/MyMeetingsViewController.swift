@@ -11,6 +11,7 @@ import CloudKit
 
 class MyMeetingsViewController: UIViewController {
     
+    
     var meetings: [Meeting] = []
     @IBOutlet var myMeetingsCollectionView: UICollectionView!
     

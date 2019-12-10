@@ -20,7 +20,7 @@ class ConclusionsViewController: UIViewController {
     @IBOutlet var conclusionsTableView: UITableView!
     
     var topicToPresentConclusions: Topic!
-    var testTopics = [String()]
+    var testConclusion = [""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +54,14 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testTopics.count
+        return testConclusion.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conCell", for: indexPath) as! ConclusionTableViewCell
         
-        cell.textConclusion.text = testTopics[indexPath.row]
+        cell.textConclusion.text = testConclusion[indexPath.row]
         cell.textConclusion.delegate = self
         
         return cell
@@ -76,11 +76,34 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
         
         return "Conclusion"
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row != self.testConclusion.count-1 {
+            if (editingStyle == UITableViewCell.EditingStyle.delete) {
+                print("Index Pathhhh: \(indexPath.row)")
+                self.testConclusion.remove(at: indexPath.row)
+                self.conclusionsTableView.reloadData()
+            }
+        }
+    }
 }
 
 extension ConclusionsViewController: UITextFieldDelegate{
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        self.testTopics.append(textField.text ?? "Empty")
+        
+        guard let cell = textField.superview?.superview as? ConclusionTableViewCell else { return }
+                    let indexPath = conclusionsTableView.indexPath(for: cell)
+        
+        print("AE: \(self.testConclusion[indexPath!.row]).")
+        
+        if self.testConclusion[indexPath!.row] == ""{
+            self.testConclusion[indexPath!.row] = textField.text!
+            self.testConclusion.append(String())
+        } else {
+            self.testConclusion[indexPath!.row] = textField.text!
+        }
+        
         self.conclusionsTableView.reloadData()
     }
     
