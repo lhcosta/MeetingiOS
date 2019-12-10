@@ -40,11 +40,16 @@ import CloudKit
         // Arredonda a view e seta como cor inicial a primeira cor do array
         self.viewColorSelected.layer.cornerRadius = 20
         self.viewColorSelected.backgroundColor = UIColor(hexString: self.arrayColors[0])
+        
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendSelectedColor))
+        self.navigationItem.rightBarButtonItem = done
     }
     
-    @IBAction func saveColor(_ sender: Any) {
-        // Mandar a String da cor para a tela de criação da Reunião
-        delegate?.selectedColor(selectedColor)
+ 
+    
+    /// Enviando a cor selecionado por meio do delegate 
+    @objc func sendSelectedColor() {
+        self.delegate?.selectedColor(selectedColor)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -90,8 +95,9 @@ extension SelectColorViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension UIColor {
-    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+@objc extension UIColor {
+    
+    @objc convenience init(hexString: String, alpha: CGFloat = 1.0) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
         if (hexString.hasPrefix("#")) {
@@ -108,7 +114,8 @@ extension UIColor {
         let blue  = CGFloat(b) / 255.0
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
-    func toHexString() -> String {
+    
+    @objc func toHexString() -> String {
         var r:CGFloat = 0
         var g:CGFloat = 0
         var b:CGFloat = 0

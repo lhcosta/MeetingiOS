@@ -25,7 +25,6 @@ import Contacts
     private var filteringContacts : [Contact] = []
     private var contactManager = ContactManager.shared()
     private var selectedContacts : [Contact] = []
-    private var cache : NSCache<NSString, NSData>!
     @objc var contactCollectionView : ContactCollectionView?
     
     //MARK:- Delegates
@@ -50,10 +49,7 @@ import Contacts
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.cache = NSCache<NSString, NSData>()
-        self.cache.evictsObjectsWithDiscardedContent = true
-        
+                
         self.setupTableView()
         self.setupSearchBar()        
         

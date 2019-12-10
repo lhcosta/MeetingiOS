@@ -21,7 +21,6 @@
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
 @property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
-@property (nonatomic, nonnull, copy) NSString* nameColor;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -52,9 +51,10 @@
     
     _nameMetting.delegate = self;
     
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#88A896" alpha:1];
+    
     [self.navigationItem setTitle:TITLE_NAV];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
-        
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -166,7 +166,6 @@
     [_meeting setTheme:theme];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
-    [_meeting setColor:_nameColor];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
     
     for(CKRecord* record in _participants) {
@@ -204,10 +203,8 @@
 }
 
 - (void)selectedColor:(NSString *)hex {
-    
-    //Pegar cor de acordo com o hex
-    _nameColor = hex;
-    _colorMetting.backgroundColor = [UIColor colorNamed:hex];
+    //Pegar cor de acordo com o hex    
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
 }
 
 - (void)selectedContacts:(NSArray<Contact *> *)contacts {
