@@ -25,6 +25,7 @@ class MyMeetingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         meetings.append([Meeting]())
         meetings.append([Meeting]())
         
