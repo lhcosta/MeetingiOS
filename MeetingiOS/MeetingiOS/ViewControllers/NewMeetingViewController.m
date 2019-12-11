@@ -57,6 +57,8 @@
     _chooseStartTime = NO;
     _chooseEndTime = NO;
     
+    [self setupDatePicker];
+    
     [self.navigationItem setTitle:TITLE_NAV];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
     [self.navigationController.navigationBar setPrefersLargeTitles:YES];
@@ -83,6 +85,15 @@
 
 }
 
+- (void)dealloc
+{
+    //Deselecionando todos os contatos que foram selecionados, pois está sendo usado
+    //uma classe singleton para realizar o fetch dos contatos. 
+    for (Contact* contact in _contactCollectionView.contacts) {
+        contact.isSelected = false;
+    }
+}
+
 
 //MARK:- TableView
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -102,13 +113,9 @@
             switch (indexPath.row) {
                 case 0:
                     _chooseStartTime = !_chooseStartTime;
-                    [tableView beginUpdates];
-                    [tableView endUpdates];
                     break;
                 case 2:
                     _chooseEndTime = !_chooseEndTime;
-                    [tableView beginUpdates];
-                    [tableView endUpdates];
                 default:
                     break;
             }
@@ -122,13 +129,16 @@
         case 3:
             if(indexPath.row == 0) {
                 _chooseNumberOfTopics = !_chooseNumberOfTopics;      
-                [tableView beginUpdates];
-                [tableView endUpdates];
             }
             break;
         default:
             break;
     }
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,12 +148,26 @@
             switch (indexPath.row) {
                 case 1:
                     if(!_chooseStartTime) {
+                        
+                        [UIView animateWithDuration:0.5 animations:^{
+                            [self.startDatePicker setHidden:YES];
+                        }];
+                        
                         return 0;
+                    } else {
+                        [self.startDatePicker setHidden:NO];
                     }
                     break;
                 case 3:
                     if(!_chooseEndTime) {
+                        
+                        [UIView animateWithDuration:0.5 animations:^{
+                            [self.finishDatePicker setHidden:YES];
+                        }];
+                        
                         return 0;
+                    } else {
+                        [self.finishDatePicker setHidden:NO];
                     }
                 default:
                     break;
@@ -157,7 +181,7 @@
         case 3:
             if(indexPath.row == 1 && !_chooseNumberOfTopics) {
                 return 0;
-            } 
+            }
             break;
         default:
             break;
@@ -244,7 +268,6 @@
             });
         }];
     }];
-    
 }
 
 - (void)chooseColorMeeting:(id)sender{

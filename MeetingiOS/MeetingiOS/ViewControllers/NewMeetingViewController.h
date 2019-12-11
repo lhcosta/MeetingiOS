@@ -18,12 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// View Controllers para criar uma nova reuinao
 @interface NewMeetingViewController : UITableViewController<MeetingDelegate>
 
-/// Definir o tempo inicial ou final da reuniao
-typedef enum Time {
-    Start,
-    Finish,
-} Time;
-
 //MARK:- IBOutlets
 @property (nonatomic, weak) IBOutlet UILabel* startsDateTime;
 @property (nonatomic, weak) IBOutlet UILabel* endesDateTime;
@@ -32,7 +26,8 @@ typedef enum Time {
 @property (nonatomic, weak) IBOutlet UIButton* colorMetting;
 @property (nonatomic, weak) IBOutlet UILabel* numbersOfTopics;
 @property (nonatomic, weak) IBOutlet UIPickerView* pickerView;
-@property (nonatomic, nullable) UIDatePicker* datePicker;
+@property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
+@property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
 
 ///Selecionando a cor do ícone da reunião.

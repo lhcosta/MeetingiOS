@@ -13,8 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NewMeetingViewController (SettingPickers)<UIPickerViewDataSource, UIPickerViewDelegate>
 
 /// Criar date picker para selecionar datas da reunião.
-/// @param time inicial ou final.
-- (void)setupDatePicker: (Time)time;
+- (void)setupDatePicker;
 
 /// Modificando o label de data e hora da reunião.
 /// @param datePicker objeto date picker
