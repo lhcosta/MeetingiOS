@@ -14,7 +14,6 @@ import CloudKit
 class UnfinishedMeetingViewController: UIViewController {
 
     //MARK: - Properties
-    @IBOutlet var descriptionField: UITextField!
     @IBOutlet var tableViewTopics: UITableView!
     
     @IBOutlet var mirrorButton: UIButton!

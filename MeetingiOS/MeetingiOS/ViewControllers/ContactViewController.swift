@@ -25,7 +25,6 @@ import Contacts
     private var filteringContacts : [Contact] = []
     private var contactManager = ContactManager.shared()
     private var selectedContacts : [Contact] = []
-    private var cache : NSCache<NSString, NSData>!
     @objc var contactCollectionView : ContactCollectionView?
     
     //MARK:- Delegates
@@ -50,10 +49,7 @@ import Contacts
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.cache = NSCache<NSString, NSData>()
-        self.cache.evictsObjectsWithDiscardedContent = true
-        
+                
         self.setupTableView()
         self.setupSearchBar()        
         
@@ -68,18 +64,17 @@ import Contacts
             for contant in self.selectedContacts {
                 if(self.contacts[String(contant.name!.first!)]?.contains(where: {
                     return contant.email == $0.email}) ?? false){
-                    contant.isSelected = true
+                    
                 }
             }
             
             self.sortingContacts()  
-        }
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
-    
+ 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated) 
@@ -269,6 +264,7 @@ private extension ContactViewController {
     
     ///Enviando Contatos
     @objc func sendingContactsToMeeting() {
+        self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
     }
     

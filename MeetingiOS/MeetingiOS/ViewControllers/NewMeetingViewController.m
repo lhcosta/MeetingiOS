@@ -21,7 +21,6 @@
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
 @property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
-@property (nonatomic, nonnull, copy) NSString* nameColor;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -52,9 +51,10 @@
     
     _nameMetting.delegate = self;
     
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#88A896" alpha:1];
+    
     [self.navigationItem setTitle:TITLE_NAV];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
-        
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -163,16 +163,19 @@
     
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
+    CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
+    CKReference* reference = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
+        
+    [_meeting setManager:reference];
     [_meeting setTheme:theme];
+    [_meeting setColor: _colorMetting.backgroundColor.toHexString];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
-    [_meeting setColor:_nameColor];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
     
     for(CKRecord* record in _participants) {
         
         User* user = [[User alloc] initWithRecord:record];
-        
         [user registerMeetingWithMeeting:[[CKReference alloc] initWithRecord:_meeting.record action:CKReferenceActionNone]];
         [_meeting addingNewEmployee:[[CKReference alloc]initWithRecord:record action:CKReferenceActionNone]];
     }
@@ -204,19 +207,17 @@
 }
 
 - (void)selectedColor:(NSString *)hex {
-    
-    //Pegar cor de acordo com o hex
-    _nameColor = hex;
-    _colorMetting.backgroundColor = [UIColor colorNamed:hex];
+    //Pegar cor de acordo com o hex    
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
 }
 
-- (void)selectedContacts:(NSArray<Contact *> *)contacts {
+- (void)getRecordForSelectedUsers {
     
     NSMutableArray<NSString*>* allEmails = [[NSMutableArray alloc] init];
     NSMutableArray<CKRecord*>* participants_aux = [[NSMutableArray alloc] init];
     NSPredicate* predicate;
     
-    for (Contact* contact in contacts) {
+    for (Contact* contact in [_contactCollectionView contacts]) {
         [allEmails addObject:contact.email];
     }
         

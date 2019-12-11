@@ -11,21 +11,27 @@ import CloudKit
 
 class MyMeetingsViewController: UIViewController {
     
-    var meetings = [[Meeting]]()
-    let cloud = CloudManager.shared
-    let defaults = UserDefaults.standard
+    fileprivate var filtered = [Meeting]()
+    fileprivate var filterring = false
+    
+    //MARK:- Properties
+    private var meetings = [[Meeting]]()
+    private var meetingsToShow = [Meeting]()
+    private let cloud = CloudManager.shared
+    private let defaults = UserDefaults.standard
+    
+    //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         meetings.append([Meeting]())
         meetings.append([Meeting]())
-
-        //Nav Controller settings
+        
+        // MARK: Nav Controller Settings
         self.navigationItem.title = "My Meetings"
         self.navigationItem.hidesBackButton = true
-        self.navigationItem.largeTitleDisplayMode = .always
+        setUpSearchBar()
         
         // MARK: Query no CK
         guard let recordName = defaults.string(forKey: "recordName") else { return }
@@ -38,13 +44,19 @@ class MyMeetingsViewController: UIViewController {
         cloud.readRecords(recorType: "Meeting", predicate: predicateEmployee, desiredKeys: nil, perRecordCompletion: { record in
             notMyMeetings.append(Meeting.init(record: record))
         }) {
-            let recordIDs = notMyMeetings.map({$0.record.recordID})
+            guard let recordIDs = notMyMeetings.map({$0.manager?.recordID}) as? [CKRecord.ID] else {
+                notMyMeetings.forEach { meeting in
+                    self.appendMeeting(meeting: meeting)
+                }
+                return
+            }
             
             self.cloud.fetchRecords(recordIDs: recordIDs, desiredKeys: ["name"]) { (records, _) in
                 guard let userNames = records else { return }
+                print(userNames)
                 
                 for meeting in notMyMeetings {
-                    if let name = userNames[meeting.manager!.recordID]?.value(forKey: "name") as? String{
+                    if let name = userNames[meeting.manager!.recordID]?.value(forKey: "name") as? String {
                         meeting.managerName = name
                     }
                     self.appendMeeting(meeting: meeting)
@@ -68,40 +80,47 @@ class MyMeetingsViewController: UIViewController {
     }
     
     private func appendMeeting(meeting: Meeting){
-        if let finalDate = meeting.finalDate, finalDate < Date(timeIntervalSinceNow: 0){
+
+        if let finalDate = meeting.finalDate, finalDate > Date(timeIntervalSinceNow: 0){
             self.meetings[0].append(meeting)
         } else {
             self.meetings[1].append(meeting)
         }
     }
-    
-    @IBAction func didChangeControl(_ sender: Any) {
-        tableView.reloadData()
-    }
 }
 
+//MARK: - Table View Delegate/DataSource
 extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        meetings[segmentedControl.selectedSegmentIndex].count
+        return self.filterring ? self.filtered.count : self.meetingsToShow.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyMeetingsTableViewCell
         
-        let meetingsToShow = meetings[segmentedControl.selectedSegmentIndex]
-        cell.meetingName.text = meetingsToShow[indexPath.row].theme
-        cell.managerName.text = meetingsToShow[indexPath.row].managerName
+        let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
+        
+        cell.meetingName.text = meetingsArray[indexPath.row].theme
+        cell.managerName.text = meetingsArray[indexPath.row].managerName
+        
+        cell.colorView.layer.cornerRadius = 30
+        if let colorHex = meetingsArray[indexPath.row].color {
+            let color = UIColor(hexString: colorHex)
+            cell.colorView.backgroundColor = color
+        }
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let meetingsToShow = meetings[segmentedControl.selectedSegmentIndex]
+        
+        let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
 
-        if meetingsToShow[indexPath.row].finished {
-            performSegue(withIdentifier: "finishedMeeting", sender: meetingsToShow[indexPath.row])
+        if meetingsArray[indexPath.row].finished {
+            performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.row])
         } else {
-            performSegue(withIdentifier: "unfinishedMeeting", sender: meetingsToShow[indexPath.row])
+            performSegue(withIdentifier: "unfinishedMeeting", sender: self.meetingsToShow[indexPath.row])
         }
     }
     
@@ -115,3 +134,35 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+//MARK: - Search Settings
+extension MyMeetingsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        self.meetingsToShow = meetings[searchController.searchBar.selectedScopeButtonIndex]
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            
+            self.filtered = self.meetingsToShow.filter({ (meeting) -> Bool in
+
+                return (meeting.theme.lowercased().contains(text.lowercased()) || meeting.managerName?.lowercased().contains(text.lowercased()) ?? false)
+            })
+            
+            self.filterring = true
+        } else {
+            self.filterring = false
+            self.filtered = [Meeting]()
+        }
+        
+        self.tableView.reloadData()
+    }
+        
+    private func setUpSearchBar(){
+        let search = UISearchController(searchResultsController: nil)
+        search.hidesNavigationBarDuringPresentation = false
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchResultsUpdater = self
+        search.searchBar.scopeButtonTitles = ["Future meetings","Past meetings"]
+        search.searchBar.showsScopeBar = true
+        self.navigationItem.searchController = search
+    }
+}
+

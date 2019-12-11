@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81r-5o-ZG0">
-                                <rect key="frame" x="0.0" y="90" width="414" height="721"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81r-5o-ZG0">
+                                <rect key="frame" x="0.0" y="44" width="414" height="767"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="120" id="7fe-wl-nNI" customClass="MyMeetingsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
@@ -26,47 +26,63 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-Ox-BoK">
-                                                    <rect key="frame" x="20" y="31.666666666666668" width="332" height="56.666666666666657"/>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYs-sG-GIS">
+                                                    <rect key="frame" x="10" y="0.0" width="394" height="105"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nks-1Y-QJY">
-                                                            <rect key="frame" x="0.0" y="0.0" width="332" height="20.333333333333332"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chefe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCi-Lc-uLc">
-                                                            <rect key="frame" x="0.0" y="36.333333333333329" width="332" height="20.333333333333329"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qJI-An-doC">
+                                                            <rect key="frame" x="20" y="22.333333333333332" width="354" height="60.666666666666671"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-Ox-BoK" userLabel="Labels SV">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="312" height="60.666666666666664"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nks-1Y-QJY">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="20.333333333333332"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chefe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCi-Lc-uLc">
+                                                                            <rect key="frame" x="0.0" y="40.333333333333329" width="312" height="20.333333333333329"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="nks-1Y-QJY" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="CPt-Rn-uzy"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="xCi-Lc-uLc" secondAttribute="trailing" id="KKz-M7-c5D"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="nks-1Y-QJY" secondAttribute="trailing" id="aex-gh-od5"/>
+                                                                        <constraint firstItem="xCi-Lc-uLc" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="hsT-Fn-PBp"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uex-T0-ASk">
+                                                                    <rect key="frame" x="332" y="19.333333333333332" width="22" height="21.999999999999996"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="22" id="Bxg-o7-TJG"/>
+                                                                        <constraint firstAttribute="width" constant="22" id="uVS-a1-olG"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button" image="info.circle" catalog="system"/>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="nks-1Y-QJY" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="CPt-Rn-uzy"/>
-                                                        <constraint firstAttribute="trailing" secondItem="xCi-Lc-uLc" secondAttribute="trailing" id="KKz-M7-c5D"/>
-                                                        <constraint firstAttribute="trailing" secondItem="nks-1Y-QJY" secondAttribute="trailing" id="aex-gh-od5"/>
-                                                        <constraint firstItem="xCi-Lc-uLc" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="hsT-Fn-PBp"/>
+                                                        <constraint firstItem="qJI-An-doC" firstAttribute="leading" secondItem="UYs-sG-GIS" secondAttribute="leading" constant="20" id="UGI-2N-XNa"/>
+                                                        <constraint firstItem="qJI-An-doC" firstAttribute="centerY" secondItem="UYs-sG-GIS" secondAttribute="centerY" id="Ymy-v7-eUG"/>
+                                                        <constraint firstAttribute="trailing" secondItem="qJI-An-doC" secondAttribute="trailing" constant="20" id="pxf-cG-bwP"/>
                                                     </constraints>
-                                                </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uex-T0-ASk">
-                                                    <rect key="frame" x="372" y="49" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="Bxg-o7-TJG"/>
-                                                        <constraint firstAttribute="width" constant="22" id="uVS-a1-olG"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="info.circle" catalog="system"/>
-                                                </button>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="uex-T0-ASk" firstAttribute="centerY" secondItem="b41-Ck-Xgl" secondAttribute="centerY" id="Pqt-NR-9Xh"/>
-                                                <constraint firstAttribute="trailing" secondItem="uex-T0-ASk" secondAttribute="trailing" constant="20" id="Qi1-Yd-vwu"/>
-                                                <constraint firstItem="uex-T0-ASk" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="trailing" constant="20" id="VLm-Oc-oBN"/>
-                                                <constraint firstItem="bhE-Ox-BoK" firstAttribute="leading" secondItem="b41-Ck-Xgl" secondAttribute="leading" constant="20" id="h4J-3D-QEd"/>
-                                                <constraint firstItem="bhE-Ox-BoK" firstAttribute="centerY" secondItem="b41-Ck-Xgl" secondAttribute="centerY" id="rDE-pe-gfd"/>
+                                                <constraint firstItem="UYs-sG-GIS" firstAttribute="top" secondItem="b41-Ck-Xgl" secondAttribute="top" id="9Gu-ND-Phk"/>
+                                                <constraint firstAttribute="trailing" secondItem="UYs-sG-GIS" secondAttribute="trailing" constant="10" id="D82-Ft-0Kt"/>
+                                                <constraint firstItem="UYs-sG-GIS" firstAttribute="leading" secondItem="b41-Ck-Xgl" secondAttribute="leading" constant="10" id="Tez-tm-8Nf"/>
+                                                <constraint firstAttribute="bottom" secondItem="UYs-sG-GIS" secondAttribute="bottom" constant="15" id="rpx-8I-kSp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="colorView" destination="UYs-sG-GIS" id="K1z-pC-gRw"/>
                                             <outlet property="managerName" destination="xCi-Lc-uLc" id="Gd5-s4-gRS"/>
                                             <outlet property="meetingName" destination="nks-1Y-QJY" id="Jaj-1M-pad"/>
                                         </connections>
@@ -82,39 +98,27 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="8hq-kF-t0C"/>
                                 </constraints>
-                                <state key="normal" title="New Meeting" image="plus.circle.fill" catalog="system"/>
+                                <state key="normal" title="      New Meeting" image="plus.circle.fill" catalog="system">
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="Iqt-xa-Jii" kind="show" id="a5S-fL-LnF"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pqf-7W-Lxt">
-                                <rect key="frame" x="20" y="44" width="374" height="32"/>
-                                <segments>
-                                    <segment title="Future meetings"/>
-                                    <segment title="Past meetings"/>
-                                </segments>
-                                <connections>
-                                    <action selector="didChangeControl:" destination="dcg-jt-bSn" eventType="valueChanged" id="UGU-OB-FHz"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="yPO-qO-NlB" firstAttribute="trailing" secondItem="GcE-6K-nxn" secondAttribute="trailing" id="FRE-hI-KUm"/>
                             <constraint firstItem="yPO-qO-NlB" firstAttribute="leading" secondItem="GcE-6K-nxn" secondAttribute="leading" id="Nbw-Ts-X7f"/>
-                            <constraint firstItem="Pqf-7W-Lxt" firstAttribute="top" secondItem="GcE-6K-nxn" secondAttribute="top" id="Ra6-sn-oRi"/>
                             <constraint firstItem="yPO-qO-NlB" firstAttribute="top" secondItem="81r-5o-ZG0" secondAttribute="bottom" id="Spm-Wl-oev"/>
-                            <constraint firstItem="Pqf-7W-Lxt" firstAttribute="leading" secondItem="GcE-6K-nxn" secondAttribute="leading" constant="20" id="UXa-xk-D1H"/>
                             <constraint firstItem="yPO-qO-NlB" firstAttribute="bottom" secondItem="GcE-6K-nxn" secondAttribute="bottom" id="bU7-Xu-a0H"/>
-                            <constraint firstItem="81r-5o-ZG0" firstAttribute="top" secondItem="Pqf-7W-Lxt" secondAttribute="bottom" constant="15" id="dbh-Um-hfh"/>
-                            <constraint firstItem="GcE-6K-nxn" firstAttribute="trailing" secondItem="Pqf-7W-Lxt" secondAttribute="trailing" constant="20" id="kEa-0H-UKU"/>
                             <constraint firstItem="81r-5o-ZG0" firstAttribute="trailing" secondItem="GcE-6K-nxn" secondAttribute="trailing" id="w12-na-B2i"/>
                             <constraint firstItem="81r-5o-ZG0" firstAttribute="leading" secondItem="GcE-6K-nxn" secondAttribute="leading" id="xqy-UJ-1C2"/>
+                            <constraint firstItem="81r-5o-ZG0" firstAttribute="top" secondItem="GcE-6K-nxn" secondAttribute="top" id="zl6-0p-Rh0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GcE-6K-nxn"/>
                     </view>
                     <connections>
-                        <outlet property="segmentedControl" destination="Pqf-7W-Lxt" id="1ky-QC-0lO"/>
                         <outlet property="tableView" destination="81r-5o-ZG0" id="cbH-Qx-Vnr"/>
                         <segue destination="p8j-8A-NPN" kind="show" identifier="finishedMeeting" id="Q88-9u-Gbe"/>
                         <segue destination="S76-Th-kPX" kind="show" identifier="unfinishedMeeting" id="0R0-Nv-dzE"/>
