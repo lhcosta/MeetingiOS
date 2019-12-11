@@ -10,24 +10,6 @@
 
 @implementation NewMeetingViewController (SettingPickers)
 
-- (void)pickerForNumberOfTopics {
-    
-    self.pickerView = [[UIPickerView alloc] init];
-        
-    [self.view addSubview:self.pickerView];  
-
-    [self.pickerView setDataSource:self];
-    [self.pickerView setDelegate:self];
-    [self.pickerView setBackgroundColor: UIColor.opaqueSeparatorColor];
-        
-    [[self.pickerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[self.pickerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
-    [[self.pickerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-    [[self.pickerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.175] setActive:YES];
-        
-    [self.pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-}
-
 - (void)setupDatePicker: (Time)time{
     
     self.datePicker = [[UIDatePicker alloc] init];
@@ -69,7 +51,7 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 10;
+    return 5;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -86,10 +68,6 @@
 
 - (void) modifieTimeLabel:(UIDatePicker*)datePicker {
     self.endesDateTime.text = [self.formatter stringFromDate:datePicker.date];
-}
-
-- (void) dismissPicker {
-    
 }
 
 @end

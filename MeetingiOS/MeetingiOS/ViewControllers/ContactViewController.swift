@@ -60,15 +60,7 @@ import Contacts
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
         self.fetchingContacts {
-            
-            for contant in self.selectedContacts {
-                if(self.contacts[String(contant.name!.first!)]?.contains(where: {
-                    return contant.email == $0.email}) ?? false){
-                    
-                }
-            }
-            
-            self.sortingContacts()  
+            self.sortingContacts()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

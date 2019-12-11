@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// View Controllers para criar uma nova reuinao
-@interface NewMeetingViewController : UIViewController  <MeetingDelegate>
+@interface NewMeetingViewController : UITableViewController<MeetingDelegate>
 
 /// Definir o tempo inicial ou final da reuniao
 typedef enum Time {
@@ -25,18 +25,13 @@ typedef enum Time {
 } Time;
 
 //MARK:- IBOutlets
-@property (nonatomic, weak) IBOutlet UIView* firstView;
-@property (nonatomic, weak) IBOutlet UIView* secondView;
-@property (nonatomic, weak) IBOutlet UIView* thirdView;
-@property (nonatomic, weak) IBOutlet UIView* fourthView;
-@property (nonatomic, weak) IBOutlet UIView* fifthView;
 @property (nonatomic, weak) IBOutlet UILabel* startsDateTime;
 @property (nonatomic, weak) IBOutlet UILabel* endesDateTime;
 @property (nonatomic, weak) IBOutlet UICollectionView* collectionView;
 @property (nonatomic, weak) IBOutlet UITextField* nameMetting;
 @property (nonatomic, weak) IBOutlet UIButton* colorMetting;
 @property (nonatomic, weak) IBOutlet UILabel* numbersOfTopics;
-@property (nonatomic, nullable) UIPickerView* pickerView;
+@property (nonatomic, weak) IBOutlet UIPickerView* pickerView;
 @property (nonatomic, nullable) UIDatePicker* datePicker;
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
 

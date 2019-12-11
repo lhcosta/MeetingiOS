@@ -12,7 +12,6 @@
 #import "Contact.h"
 #import "NewMeetingViewController+SettingPickers.h"
 
-
 #define TITLE_NAV @"New meeting"
 
 @interface NewMeetingViewController ()
@@ -21,6 +20,9 @@
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
 @property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
+@property (nonatomic) BOOL chooseNumberOfTopics;
+@property (nonatomic) BOOL chooseStartTime;
+@property (nonatomic) BOOL chooseEndTime;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -33,8 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupView];    
-
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"MMM, dd yyyy  h:mm a";
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
@@ -50,11 +50,16 @@
     _participants = [[NSMutableArray alloc] init];
     
     _nameMetting.delegate = self;
+    _pickerView.delegate = self;
     
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#88A896" alpha:1];
+    _chooseNumberOfTopics = NO;
+    _chooseStartTime = NO;
+    _chooseEndTime = NO;
     
     [self.navigationItem setTitle:TITLE_NAV];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
+    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,19 +68,104 @@
     if([_contactCollectionView.contacts count] != 0) {
          dispatch_async(dispatch_get_main_queue(), ^{
              [UIView animateWithDuration:0.5 animations:^{
-                 [self.collectionView setHidden:NO];
+                 [self.tableView beginUpdates];
+                 [self.tableView endUpdates];
                  [self.collectionView reloadData];
-                 [self.view layoutIfNeeded];
              }];
          });
      } else {
          [UIView animateWithDuration:0.5 animations:^{
-             [self.collectionView setHidden:YES];
+             [self.tableView beginUpdates];
+             [self.tableView endUpdates];
              [self.view layoutIfNeeded];
          }];
      }
 
 }
+
+
+//MARK:- TableView
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 25;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView* view = [[UIView alloc] init];
+    [view setBackgroundColor:UIColor.clearColor];
+    return view;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch (indexPath.section) {
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    _chooseStartTime = !_chooseStartTime;
+                    [tableView beginUpdates];
+                    [tableView endUpdates];
+                    break;
+                case 2:
+                    _chooseEndTime = !_chooseEndTime;
+                    [tableView beginUpdates];
+                    [tableView endUpdates];
+                default:
+                    break;
+            }
+            
+            break;
+        case 2:
+            if(indexPath.row == 0) {
+                [self performSegueWithIdentifier:@"SelectContacts" sender:nil];
+            }
+            break;
+        case 3:
+            if(indexPath.row == 0) {
+                _chooseNumberOfTopics = !_chooseNumberOfTopics;      
+                [tableView beginUpdates];
+                [tableView endUpdates];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+    switch (indexPath.section) {
+        case 1:
+            switch (indexPath.row) {
+                case 1:
+                    if(!_chooseStartTime) {
+                        return 0;
+                    }
+                    break;
+                case 3:
+                    if(!_chooseEndTime) {
+                        return 0;
+                    }
+                default:
+                    break;
+            }
+            break;
+        case 2:
+            if(indexPath.row == 1 && _contactCollectionView.contacts.count == 0) {
+                return 0;
+            }
+            break;
+        case 3:
+            if(indexPath.row == 1 && !_chooseNumberOfTopics) {
+                return 0;
+            } 
+            break;
+        default:
+            break;
+    }
+    
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
 
 /// Atribuindo o delegate da view controller
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -99,51 +189,6 @@
     }
 }
 
-/// Modificando todas as views presentes na view controller
-- (void) setupView {
-    
-    [_firstView setupBounds:kCALayerMaxXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner];
-    [_secondView setupBounds:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
-    [_thirdView setupBounds: kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-    [_fourthView setupBounds:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
-    [_fifthView setupBounds:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
-    UITouch* touch = [touches anyObject];
-    
-    if(CGRectContainsPoint(_secondView.bounds, [touch locationInView:_secondView])) {
-        
-        if([self.view.subviews containsObject:_datePicker]) {
-            [_datePicker removeFromSuperview];
-        } else {
-            [self setupDatePicker:Start];   
-        }
-        
-    } else if(CGRectContainsPoint(_thirdView.bounds, [touch locationInView:_thirdView])) {
-        
-        if([self.view.subviews containsObject:_datePicker]) {
-            [_datePicker removeFromSuperview];
-        } else {
-            [self setupDatePicker:Finish];   
-        }
-        
-    } else if (CGRectContainsPoint(_fourthView.bounds, [touch locationInView:_fourthView])) { 
-        [self performSegueWithIdentifier:@"SelectContacts" sender:nil];
-        
-    } else if (CGRectContainsPoint(_fifthView.bounds, [touch locationInView:_fifthView])) {
-        
-        if([self.view.subviews containsObject:_pickerView]) {
-            [_pickerView removeFromSuperview];
-        } else {
-            [self pickerForNumberOfTopics];
-        }
-        
-    }
-    
-}
-
 -(void) createMeetingInCloud {
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
@@ -164,9 +209,9 @@
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
-    CKReference* reference = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
+    CKReference* manager = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
         
-    [_meeting setManager:reference];
+    [_meeting setManager:manager];
     [_meeting setTheme:theme];
     [_meeting setColor: _colorMetting.backgroundColor.toHexString];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
