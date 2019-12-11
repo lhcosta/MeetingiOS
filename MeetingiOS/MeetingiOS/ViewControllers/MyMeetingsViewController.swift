@@ -11,28 +11,29 @@ import CloudKit
 
 class MyMeetingsViewController: UIViewController {
     
-    fileprivate var filtered = [Meeting]()
-    fileprivate var filterring = false
-    
     //MARK:- Properties
     private var meetings = [[Meeting]]()
     private var meetingsToShow = [Meeting]()
     private let cloud = CloudManager.shared
     private let defaults = UserDefaults.standard
+    fileprivate var filtered = [Meeting]()
+    fileprivate var filterring = false
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         meetings.append([Meeting]())
         meetings.append([Meeting]())
+        meetingsToShow = meetings[0]
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = "My Meetings"
         self.navigationItem.hidesBackButton = true
-        setUpSearchBar()
+        self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
         
         // MARK: Query no CK
         guard let recordName = defaults.string(forKey: "recordName") else { return }
@@ -42,8 +43,9 @@ class MyMeetingsViewController: UIViewController {
         
         var notMyMeetings: [Meeting] = []
         
+        //Realiza o fetch das reunioes que nao sao suas e atribui o nome do manager
         cloud.readRecords(recorType: "Meeting", predicate: predicateEmployee, desiredKeys: nil, perRecordCompletion: { record in
-            notMyMeetings.append(Meeting.init(record: record))
+            notMyMeetings.append(Meeting(record: record))
         }) {
             guard let recordIDs = notMyMeetings.map({$0.manager?.recordID}) as? [CKRecord.ID] else {
                 notMyMeetings.forEach { meeting in
@@ -64,24 +66,26 @@ class MyMeetingsViewController: UIViewController {
                 }
                 
                 DispatchQueue.main.async {
+                    self.meetingsToShow = self.meetings[0]
                     self.tableView.reloadData()
                 }
             }
         }
         
+        //Realiza o fetch das reunioes que sao suas
         cloud.readRecords(recorType: "Meeting", predicate: predicateManager, desiredKeys: nil, perRecordCompletion: { record in
             let meeting = Meeting.init(record: record)
             meeting.managerName = self.defaults.string(forKey: "givenName")
             self.appendMeeting(meeting: meeting)
         }) {
             DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[0]
                 self.tableView.reloadData()
             }
         }
     }
     
     private func appendMeeting(meeting: Meeting){
-
         if let finalDate = meeting.finalDate, finalDate > Date(timeIntervalSinceNow: 0){
             self.meetings[0].append(meeting)
         } else {
@@ -155,15 +159,4 @@ extension MyMeetingsViewController: UISearchResultsUpdating {
         
         self.tableView.reloadData()
     }
-        
-    private func setUpSearchBar(){
-        let search = UISearchController(searchResultsController: nil)
-        search.hidesNavigationBarDuringPresentation = false
-        search.obscuresBackgroundDuringPresentation = false
-        search.searchResultsUpdater = self
-        search.searchBar.scopeButtonTitles = ["Future meetings","Past meetings"]
-        search.searchBar.showsScopeBar = true
-        self.navigationItem.searchController = search
-    }
 }
-
