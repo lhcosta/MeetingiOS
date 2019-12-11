@@ -15,6 +15,7 @@
 		2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2391532823919F2E00479BB6 /* ConclusionsViewController.swift */; };
 		23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */; };
 		23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */; };
+		492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C04FF23A1587C00442814 /* ViewController+SearchController.swift */; };
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
 		49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */; };
 		49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */; };
@@ -66,6 +67,7 @@
 		23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnfinishedTopicsTableViewCell.m; sourceTree = "<group>"; };
 		23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedTopicsTableViewCell.h; sourceTree = "<group>"; };
 		23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinishedTopicsTableViewCell.m; sourceTree = "<group>"; };
+		492C04FF23A1587C00442814 /* ViewController+SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+SearchController.swift"; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		2391532523918E2400479BB6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
 				23E7E12C2397D46900B99A09 /* UnfinishedTopicsTableViewCell.h */,
 				23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */,
 				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
@@ -293,6 +296,7 @@
 				A4EB3BFB239747640097857F /* Contact.h */,
 				A4EB3BFC239747640097857F /* Contact.m */,
 				E2827DA923997BC900055545 /* MeetingDelegate.h */,
+				492C04FF23A1587C00442814 /* ViewController+SearchController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -302,7 +306,6 @@
 			children = (
 				231AE13B2397E8A80051051C /* ContactCollectionViewCell.h */,
 				231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */,
-				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
+				492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */,
 				A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */,
 				A4BAEB2E239F124100800277 /* ContactViewController.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,

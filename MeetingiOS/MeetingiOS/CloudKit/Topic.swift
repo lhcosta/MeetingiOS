@@ -89,7 +89,6 @@ import CloudKit
         self.record["conclusions"] = self.conclusions
     }
     
-    
     /// Guardar o tempo final da pauta quando esta é encerrada na reunião.
     /// - Parameter duration: Tempo em Date (dia/mês/ano vazios).
     func setDuration(duration: Date) {
