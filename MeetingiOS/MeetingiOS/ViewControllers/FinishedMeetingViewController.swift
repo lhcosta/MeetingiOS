@@ -52,11 +52,11 @@ class FinishedMeetingViewController: UIViewController {
                 } else {
                     self.topics[1].append(topic)
                 }
-                
-                DispatchQueue.main.async {
-                    self.topicsToShow = self.topics[0]
-                    self.topicsTableView.reloadData()
-                }
+            }
+            
+            DispatchQueue.main.async {
+                self.topicsToShow = self.topics[0]
+                self.topicsTableView.reloadData()
             }
         }
     }
@@ -85,7 +85,7 @@ extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FinishedTopicsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FinishedTopicsTableViewCell
         
         let topicsArray = self.filterring ? self.filtered : self.topicsToShow
         
