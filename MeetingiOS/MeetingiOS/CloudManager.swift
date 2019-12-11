@@ -158,7 +158,11 @@ import CloudKit
             deleteOp.savePolicy = .allKeys
             deleteOp.modifyRecordsCompletionBlock = { (recordsss, deleted, error) in
                 print("===> \(String(describing: deleted?.count))")
-                print(error)
+                
+                if let error = error {
+                    print(error)
+                    return
+                }
                 
             }
             

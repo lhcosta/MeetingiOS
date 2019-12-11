@@ -36,9 +36,9 @@
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
 		A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */; };
+		A4BAEB2E239F124100800277 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BF22397400A0097857F /* ContactViewController.swift */; };
 		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
 		A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */; };
-		A4EB3BF32397400A0097857F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BF22397400A0097857F /* ContactViewController.swift */; };
 		A4EB3BFD239747640097857F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFC239747640097857F /* Contact.m */; };
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
 		A4EB3C1923975F800097857F /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1823975F800097857F /* ContactTableViewCell.m */; };
@@ -392,11 +392,11 @@
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */,
+				A4BAEB2E239F124100800277 /* ContactViewController.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
 				A4EB3C1923975F800097857F /* ContactTableViewCell.m in Sources */,
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				A4EB3C232398555D0097857F /* ContactCollectionView.h in Sources */,
-				A4EB3BF32397400A0097857F /* ContactViewController.swift in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				A4EB3C24239855640097857F /* ContactManager.h in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,

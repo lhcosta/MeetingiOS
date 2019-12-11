@@ -19,6 +19,8 @@ class MyMeetingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        meetings.append([Meeting]())
+        meetings.append([Meeting]())
 
         //Nav Controller settings
         self.navigationItem.title = "My Meetings"
@@ -113,48 +115,3 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-//extension MyMeetingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//
-//    // MARK: - Data Source
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return meetings.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MyMeetingsCollectionViewCell
-//        cell.meetingTittleLabel.text = meetings[indexPath.row].theme
-//        cell.managerName.text = meetings[indexPath.row].managerName
-//
-//        return cell
-//    }
-//
-//    // MARK: - Delegate
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        if meetings[indexPath.row].finished {
-//            performSegue(withIdentifier: "finishedMeeting", sender: self)
-//        } else {
-//            performSegue(withIdentifier: "unfinishedMeeting", sender: meetings[indexPath.row])
-//        }
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "finishedMeeting" {
-//            let viewDestination = segue.destination as! UnfinishedMeetingViewController
-//            viewDestination.currMeeting = sender as? Meeting
-//        }
-//    }
-//
-//
-//    // MARK: - Flow Layout
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height * 0.2)
-//    }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return collectionView.frame.size.height * 0.05
-//    }
-//
-//}
