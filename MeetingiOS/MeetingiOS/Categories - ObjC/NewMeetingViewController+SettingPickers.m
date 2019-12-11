@@ -10,58 +10,21 @@
 
 @implementation NewMeetingViewController (SettingPickers)
 
-- (void)pickerForNumberOfTopics {
+- (void)setupDatePicker {
     
-    self.pickerView = [[UIPickerView alloc] init];
-        
-    [self.view addSubview:self.pickerView];  
-
-    [self.pickerView setDataSource:self];
-    [self.pickerView setDelegate:self];
-    [self.pickerView setBackgroundColor: UIColor.opaqueSeparatorColor];
-        
-    [[self.pickerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[self.pickerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
-    [[self.pickerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-    [[self.pickerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.175] setActive:YES];
-        
-    [self.pickerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-}
-
-- (void)setupDatePicker: (Time)time{
+    self.startDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    self.startDatePicker.minimumDate = NSDate.now;
     
-    self.datePicker = [[UIDatePicker alloc] init];
+    if([self.formatter dateFromString:self.startsDateTime.text] != NSDate.now) {
+        self.startDatePicker.date = [self.formatter dateFromString:self.startsDateTime.text];
+    } 
     
-    self.datePicker.backgroundColor = UIColor.opaqueSeparatorColor;
+    [self.startDatePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents: UIControlEventValueChanged];
     
-    [self.view addSubview:self.datePicker];
     
-    [[self.datePicker.rightAnchor constraintEqualToAnchor:self.view.rightAnchor] setActive:YES];
-    [[self.datePicker.leftAnchor constraintEqualToAnchor:self.view.leftAnchor] setActive:YES];
-    [[self.datePicker.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor] setActive:YES];
-        
-    [self.datePicker setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    if(time == Start) {
-        
-        self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-        self.datePicker.minimumDate = NSDate.now;
-        
-        if([self.formatter dateFromString:self.startsDateTime.text] != NSDate.now) {
-           self.datePicker.date = [self.formatter dateFromString:self.startsDateTime.text];
-        } 
-        
-        [self.datePicker addTarget:self action:@selector(modifieDateTimeLabel:) forControlEvents: UIControlEventValueChanged];
-        
-    } else {
-        
-        self.datePicker.datePickerMode = UIDatePickerModeTime;
-        self.datePicker.minimumDate = [self.formatter dateFromString:self.startsDateTime.text];
-        
-        [self.datePicker addTarget:self action:@selector(modifieTimeLabel:) forControlEvents:UIControlEventValueChanged];
-        
-    }
-    
+    self.finishDatePicker.datePickerMode = UIDatePickerModeTime;
+    self.finishDatePicker.minimumDate = [self.formatter dateFromString:self.startsDateTime.text];
+    [self.finishDatePicker addTarget:self action:@selector(modifieTimeLabel:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -69,7 +32,7 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 10;
+    return 5;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -86,10 +49,6 @@
 
 - (void) modifieTimeLabel:(UIDatePicker*)datePicker {
     self.endesDateTime.text = [self.formatter stringFromDate:datePicker.date];
-}
-
-- (void) dismissPicker {
-    
 }
 
 @end

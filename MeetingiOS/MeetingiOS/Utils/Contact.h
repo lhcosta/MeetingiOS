@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Contato para serem escolhidos para reunião
+
 @interface Contact : NSObject
 
 /// Contato selecionada para reunião
@@ -28,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Inicializar apenas com o email
 -(instancetype) initWithEmail:(NSString*)email;
-
 
 @end
 
