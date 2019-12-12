@@ -169,7 +169,7 @@ utilizar como auxílio de manipulação de CKRecord Meeting
     
     //MARK: - Initializer
     @objc init(record : CKRecord) {
-        self.record = record
+        self.record = record        
     }
     
     //MARK:- Methods

@@ -33,6 +33,7 @@ class MyMeetingsViewController: UIViewController {
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         meetings.append([Meeting]())
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]

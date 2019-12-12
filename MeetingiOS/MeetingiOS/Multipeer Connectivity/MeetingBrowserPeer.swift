@@ -26,6 +26,9 @@ class MeetingBrowserPeer: NSObject {
     /// Identificação do Peer
     private var peer : MCPeerID!
     
+    //Data para ser enviado através dos peers
+    private var data : Data!
+    
     //MARK:- Initializer
     override init() {
         super.init()
@@ -34,19 +37,14 @@ class MeetingBrowserPeer: NSObject {
         self.serviceBrowser = MCNearbyServiceBrowser(peer: self.peer, serviceType: serviceType)
         self.serviceBrowser.delegate = self
         self.session = MCSession(peer: self.peer, securityIdentity: nil, encryptionPreference: .required)
-        
-        self.serviceBrowser.startBrowsingForPeers()
+        self.session.delegate = self
     }
-    
-    deinit {
-        self.serviceBrowser.stopBrowsingForPeers()
-    }
-    
+
     /// Data para ser enviado para o outro peer
     /// - Parameters:
     ///   - data: dados a serem enviados
     ///   - completionHandler: possíveis erros que podem acontecer
-    func sendMeetingForPeer(data : Data, completionHandler: @escaping (Error?) -> Void) {
+    private func sendMeetingForPeer(data : Data, completionHandler: @escaping (Error?) -> Void) {
        
         do {
             try self.session.send(data, toPeers: self.session.connectedPeers, with: .reliable)
@@ -56,14 +54,31 @@ class MeetingBrowserPeer: NSObject {
         }        
     }
     
+    
+    /// Dados a serem enviados para o peer
+    /// - Parameter data: data
+    func sendingDataFromPeer(data : Data) {
+        self.data = data
+        self.serviceBrowser.startBrowsingForPeers()        
+    }
+    
+    /// Parar a busca de peers.
+    func stoppingBrowserPeer() {
+        self.serviceBrowser.stopBrowsingForPeers()
+        NSLog("%@", "Stop Browser peer")
+    }
+    
 }
 
 //MARK:- MCNearbyServiceBrowser
 extension MeetingBrowserPeer : MCNearbyServiceBrowserDelegate {
-        
+
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        NSLog("%@", "Did not start connection - \(error)")
+    }
+    
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        
-        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 30)
+        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
         NSLog("%@", "Connection with - \(peerID)")
     }
     
@@ -73,4 +88,45 @@ extension MeetingBrowserPeer : MCNearbyServiceBrowserDelegate {
     
 }
 
+extension MeetingBrowserPeer : MCSessionDelegate {
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+            case .connected:
+                self.sendMeetingForPeer(data: data) { (error) in
+                    if let error = error {
+                        print("Error - > \(error)")
+                    }
+            }
+            
+                self.stoppingBrowserPeer()
+            case .notConnected:
+                NSLog("%@", "Did not connect")
+                self.serviceBrowser.startBrowsingForPeers()
+                break
+            default:
+            break
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        //
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        //
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        //
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        //
+    }
+    
+    
+    
+    
+}
 
