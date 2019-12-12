@@ -30,19 +30,23 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Booleano identificando se o usuário foi quem criou a reunião
     var usrIsManager = false
     
-    /// Títulos das sections da tableView.
-    let headerTitles = ["Topics added for Meeting", "Topics to be added"]
-    
+    /// Barra de pesquisa dos Topics
     @IBOutlet var searchBar: UISearchBar!
     
+    /// Nome da imagem de fundo do botão de check dos Topics ("square" ou "checkmark.square.fill")
     var bgButtonImg: String!
     
+    /// IndexPath utilizado para iniciar uma cell fora do delegate da tableView
     var indexPath: IndexPath!
     
-    var searchedTopics: [Topic] = []
-    
+    /// Quando o usuário está em modo de pesquisa, utilizando a seaarchBar
     var isSearching = false
     
+    /// Array temporário criado para armazenar os tópicos quando o usuário está em modo de pesquisa. (Para não desorganizar o array principal)
+    var searchedTopics: [Topic] = []
+    
+    /// String que guardará a descrição do Topic selecionado quando em modo de pesquisa.
+    /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
     
@@ -59,25 +63,40 @@ class UnfinishedMeetingViewController: UIViewController {
         self.navigationItem.title = "Meeting"
         self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: nil, action: nil), animated: true)
         
-        topics.append(Topic(record: CKRecord(recordType: "Topic")))
+        // Pegar Topics do Cloud.
+        var tempIDs: [CKRecord.ID] = []
+        for i in currMeeting.topics {
+            tempIDs.append(i.recordID)
+        }
+        CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            for i in records! {
+                self.topics.append(Topic(record: i.value))
+            }
+            let newTopic = self.creatingTopicInstance()
+            self.topics.insert(newTopic, at: 0)
+            
+            DispatchQueue.main.async {
+                self.tableViewTopics.reloadData()
+            }
+        }
         
-        // MARK: Simulando
-        let meetingRecord = CKRecord(recordType: "Meeting")
-        currMeeting = Meeting(record: meetingRecord)
-        /// Simulamos que a meeting selecionada foi criada pelo usuário.
-        currMeeting.manager = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? ""), action: .deleteSelf)
-        
-        /// Verificamos se a meeting selecionada foi criada pelo usuário
+        // Verificamos se a meeting selecionada foi criada pelo usuário
         if CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? "") == currMeeting.manager?.recordID {
             usrIsManager = true
         }
         
+        // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
+        // Conforme o usuário foi quem criou ou não a Meeting.
         if usrIsManager {
             mirrorButton.isHidden = false
             self.bgButtonImg = "checkmark.square.fill"
         } else {
             mirrorButton.isHidden = true
-            self.bgButtonImg = "square."
+//            self.bgButtonImg = "square."
         }
         
         tableViewTopics.delegate = self
@@ -85,17 +104,27 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
-//    func createNewCell() -> UnfinishedTopicsTableViewCell {
-//
-//        selectedTopics.append(Topic(record: CKRecord(recordType: "Topic")))
-//        tableViewTopics.reloadData()
-//        let newTopicCell = tableViewTopics.cellForRow(at: IndexPath(row: selectedTopics.count-1, section: 0)) as! UnfinishedTopicsTableViewCell
-//        newTopicCell.topicTextField.becomeFirstResponder()
-//
-//        return newTopicCell
-//    }
+    /// Criamos um Topic com os dados do Usuário.
+    func creatingTopicInstance() -> Topic {
+        
+        let record = CKRecord(recordType: "Topic")
+        let newTopic = Topic(record: record)
+        
+        newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
+        newTopic.authorName = defaults.string(forKey: "givenName")
+        newTopic.discussed = false
+        
+        if usrIsManager {
+            newTopic.selectedForMeeting = true
+        } else {
+            newTopic.selectedForMeeting = false
+        }
+        return newTopic
+    }
     
     
+    /// Botão que cria um novo Topic (__Deprecated__)
+    /// - Parameter sender: UIButton
     @IBAction func createNewTopic(_ sender: Any) {
         
         self.indexPath = IndexPath(row: 0, section: 0)
@@ -103,143 +132,71 @@ class UnfinishedMeetingViewController: UIViewController {
         
         if let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as? UnfinishedTopicsTableViewCell {
             if self.indexPath.section != 0 {
-                topics.append(Topic(record: CKRecord(recordType: "Topic")))
+                let newTopic = creatingTopicInstance()
+                topics.append(newTopic)
                 tableViewTopics.reloadData()
             }
-            newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
+            if usrIsManager {
+                newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
+            }
             newTopicCell.topicTextField.becomeFirstResponder()
         }
     }
-    
 
     
+    /// Check mark, só para o gerente, que decide se o Topic atual irá para a Meeting.
+    /// - Parameter sender: UIButton
     @IBAction func selectTopicButton(_ sender: Any) {
        
         guard let button = sender as? UIButton else { return }
         guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         let indexPath = tableViewTopics.indexPath(for: cell)
         
-        if topics[indexPath!.row].discussed {
+        if topics[indexPath!.section].discussed {
             button.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
-            topics[indexPath!.row].discussed = false
+            topics[indexPath!.section].discussed = false
         } else {
             button.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-            topics[indexPath!.row].discussed = true
+            topics[indexPath!.section].discussed = true
         }
     }
     
     
-    //MARK: - Methods
-    /// Botão que envia o Topic para o Cloud, tanto para a table Topic quando para o atributo topics do Meeting.
-    /// currMeeting ainda será substiuído pela Meeting criada.
-    /// - Parameter sender: default
-    @IBAction func createTopicButton(_ sender: Any) {
-        
-//        let topicRecord = CKRecord(recordType: "Topic")
-//        let newTopic = Topic(record: topicRecord)
-//        newTopic.editDescription(descriptionField.text!)
-//        newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
-//        newTopic.authorName = defaults.string(forKey: "givenName") ?? "Desconhecido"
-//
-//        currMeeting.addingNewTopic(CKRecord.Reference(recordID: CKRecord.ID(recordName: newTopic.record.recordID.recordName), action: .deleteSelf))
-//
-//        CloudManager.shared.createRecords(records: [newTopic.record, currMeeting.record], perRecordCompletion: { (record, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//        }) {
-//            print("Saved!")
-//            self.reloadTable()
-//        }
-    }
-    
-    
-//    func createTopic(description: String) -> Topic {
-//
-//        let topicRecord = CKRecord(recordType: "Topic")
-//        let newTopic = Topic(record: topicRecord)
-//        newTopic.editDescription(description)
-//        newTopic.author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
-//        newTopic.authorName = defaults.string(forKey: "givenName") ?? "Desconhecido"
-//
-//        currMeeting.addingNewTopic(CKRecord.Reference(recordID: CKRecord.ID(recordName: newTopic.record.recordID.recordName), action: .deleteSelf))
-//
-//        CloudManager.shared.createRecords(records: [newTopic.record, currMeeting.record], perRecordCompletion: { (record, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//        }) {
-//            print("Saved!")
-////            self.reloadTable()
-//        }
-//        return newTopic
-//    }
-    
-    
     // MARK: Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
-    /// - Parameter sender: Default.
+    /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
     }
-    
-    
-    
-    /// Atualiza a table view dos Topics adicionados pelo usuário naquela Meeting específica.
-//    func reloadTable() {
-//
-//        self.topics = []
-//        self.topics = []
-//        let author = CKRecord.Reference(recordID: CKRecord.ID(recordName: defaults.string(forKey: "recordName")!), action: .none)
-//
-//        for reference in currMeeting.topics {
-//
-//            var predicate: NSPredicate
-//            if usrIsManager {
-//                predicate = NSPredicate(format: "recordID == %@", reference)
-//            } else {
-//                predicate = NSPredicate(format: "recordID == %@ AND author == %@", reference, author)
-//            }
-//
-//            CloudManager.shared.readRecords(recorType: "Topic", predicate: predicate, desiredKeys: nil, perRecordCompletion: { (record) in
-//
-//                let topic = Topic.init(record: record)
-//                if topic.selectedForMeeting {
-//                    self.topics.append(topic)
-//                } else {
-//                    self.topics.append(topic)
-//                }
-//            }) {
-//                print("Done")
-//                DispatchQueue.main.async {
-//                    self.tableViewTopics.reloadData()
-//                }
-//            }
-//        }
-//    }
 }
 
 
 //MARK: - Table View Delegate/DataSource
 extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
     
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        
-        topics.append(Topic(record: CKRecord(recordType: "Topic")))
-        tableViewTopics.reloadData()
-        let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as! UnfinishedTopicsTableViewCell
-        newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
-        newTopicCell.topicTextField.becomeFirstResponder()
-    }
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//
+//        let newTopic = creatingTopicInstance()
+//        topics.append(newTopic)
+//        tableViewTopics.reloadData()
+//
+//        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//        }) { }
+//        let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as! UnfinishedTopicsTableViewCell
+//        newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
+//        newTopicCell.topicTextField.becomeFirstResponder()
+//    }
     
 
+    /// Usamos apenas uma Cell em cada Section.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     
+    /// A quantidade de dados será exibida em cada Section e não nas Cells.
     func numberOfSections(in tableView: UITableView) -> Int {
         if isSearching {
             return searchedTopics.count
@@ -248,11 +205,13 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     }
     
     
+    /// Espaçamento de cada section.
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableView.frame.height * 0.03
     }
     
     
+    /// Setamos o Header da section para .clear
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = .clear
@@ -265,14 +224,24 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UnfinishedTopicsTableViewCell
         cell.topicTextField.delegate = self
+        
+        // Se não for gerente, não faz sentido termos o botão de check.
+        if !usrIsManager {
+            cell.checkButton.isHidden = true
+        }
+        
+        // Verificamos se o usuário está em modo de pesquisa.
         if isSearching {
+            // Pegamos os dados da Array do modo de pesquisa.
             cell.topicTextField.text = searchedTopics[indexPath.section].topicDescription
+            // Verificamos o estado do Topic para alterar o botão de check (selectedForMeeting true ou false)
             if searchedTopics[indexPath.section].selectedForMeeting {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             } else {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
             }
         } else {
+            // Pegamos os dados da Array principal.
             cell.topicTextField.text = topics[indexPath.section].topicDescription
             if topics[indexPath.section].selectedForMeeting {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
@@ -280,7 +249,6 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
             }
         }
-        
         return cell
     }
     
@@ -288,64 +256,61 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.size.height * 0.2
     }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        let cell = tableView.cellForRow(at: indexPath) as! UnfinishedTopicsTableViewCell
-//        cell.topicTextField.isHidden = false
-//        var teste = cell.topicTextField.becomeFirstResponder()
-//        var teste = cell.becomeFirstResponder()
-//        cell.topicTextField.delegate = self
-        
-//        if usrIsManager {
-//            if indexPath.section == 0 {
-//
-//                selectedTopics[indexPath.row].selectedForMeeting = false
-//                CloudManager.shared.updateRecords(records: [selectedTopics[indexPath.row].record], perRecordCompletion: { (record, error) in
-//                    if let error = error { print(error.localizedDescription) }
-//                }) { }
-//                topics.append(selectedTopics.remove(at: indexPath.row))
-//            } else {
-//
-//                topics[indexPath.row].selectedForMeeting = true
-//                CloudManager.shared.updateRecords(records: [topics[indexPath.row].record], perRecordCompletion: { (record, error) in
-//                    if let error = error { print(error.localizedDescription) }
-//                }) { }
-//                selectedTopics.append(topics.remove(at: indexPath.row))
-//            }
-//            tableView.reloadData()
-//        }
-    }
-    
-    
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
 }
 
 
+//MARK: - TextField delegate
+// Text Field de cada Topic (editar e criar Tópicos)
 extension UnfinishedMeetingViewController: UITextFieldDelegate {
     
+    /// Chamado toda vez que clicamos em um textField.
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        /// Se estamos em modo de pesquisa, salvamos o valor original do Topic para então subtituí-lo na Array principal.
         if isSearching {
             topicToBeEditedOnSearch = textField.text
         }
     }
     
     
+    /// Chamado quando o botão return do teclado é pressionado (quando editando o textField)
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
+        // Verificamos se estamos no modo de pesquisa.
         if isSearching {
             
+            // Fazemos uma varredura no array de topics principal para procurarmos o topic que foi editado
+            // no array de pesquisa (Salvamos o valor original do Topic editado anteriormente)
             for i in 0...topics.count-1 {
                 if topics[i].topicDescription == topicToBeEditedOnSearch {
+                    // Quando achamos o Topic editado no array principal, substituimos ele pelo textField
                     topics[i].topicDescription = textField.text!
+                    // Verificamos se a edição não foi uma exclusão.
+                    if topics[i].topicDescription != "" {
+                        
+                        // Retiramos o Topic alterado do Array de Topics da Meeting.
+                        // Como a array de Topic da Meeting são References, não podemos alterar diretamente
+                        // o seu Topic.description, por isso excluímos e adicionamos denovo.
+                        for ii in 0...currMeeting.topics.count-1 {
+                            if currMeeting.topics[ii].recordID == topics[i].record.recordID {
+                                currMeeting.topics.remove(at: ii)
+                            }
+                        }
+                        // Adicionamos o Topic editado.
+                        currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[i].record.recordID, action: .deleteSelf))
+                        // Damos Update da Meeting e do Topic no Cloud
+                        CloudManager.shared.updateRecords(records: [topics[i].record, currMeeting.record], perRecordCompletion: { (_, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }) { }
+                    }
                 }
             }
-            
+            // Quando o usuário aperta Return em modo de pesquisa, saímos desse modo.
             isSearching = false
             searchBar.text = ""
+            
+            // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
             for i in 0...topics.count-1 {
                 if topics[i].topicDescription.isEmpty && i != 0 {
@@ -355,16 +320,30 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             for i in temp {
                 topics.remove(at: i)
             }
+            
             tableViewTopics.reloadData()
             return true
         } else {
-            
+            // Quando não estamos no modo de pesquisa, nós alteramos a array de Topics principal diretamente
+            // Instanciamos uma tableViewCell a partir da superview do textField utilizado.
             guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
             let indexPath = tableViewTopics.indexPath(for: cell)
             topics[indexPath!.section].topicDescription = textField.text!
+            // Se a edição não resultou em um Topic vazio, adicionamos ele no Cloud.
+            if topics[indexPath!.section].topicDescription != "" {
+                // Adicionamos o Topic na Meeting.
+                currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath!.section].record.recordID, action: .deleteSelf))
+                // Damos update na Meeting e no Topic criado.
+                CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }) { }
+            }
             
+            // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
             for i in 0...topics.count-1 {
                 if topics[i].topicDescription.isEmpty && i != 0 {
@@ -376,9 +355,13 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             }
             tableViewTopics.reloadData()
             
+            // Verificamos se o novo Topic não foi vazio e criamos um novo espaço na tbleView para a criação
+            // de outro Topic.
             if !textField.text!.isEmpty {
+                // Apenas inserimos um espaço para o novo Topic se ele já não existir.
+                // (se a edição foi feita em outra Cell)
                 if indexPath!.section == 0 {
-                    topics.insert(Topic(record: CKRecord(recordType: "Topic")), at: 0)
+                    topics.insert(self.creatingTopicInstance(), at: 0)
                 }
                 tableViewTopics.reloadData()
                 let cell = tableViewTopics.cellForRow(at: IndexPath(row: 0, section: 0)) as! UnfinishedTopicsTableViewCell
@@ -390,10 +373,13 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
 }
 
 
+//MARK: - SearchBar Delegate
 extension UnfinishedMeetingViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        // Array sorted com o texto da searchBar.
+        // é se o Topic contém, como prefixo, sufixo ou por inteiro, o texto escrito na searchBar.
         let sorted = topics.sorted {
             if $0.topicDescription.isEmpty || $1.topicDescription.isEmpty {
                 return false
@@ -419,6 +405,8 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
         }
         
         searchedTopics = sorted
+        // Um dos Topics é apenas um espaço em branco para adicionar um novo,
+        // esse Topic não é necessário no modo de pesquisa.
         searchedTopics.remove(at: 0)
         tableViewTopics.reloadData()
     }
