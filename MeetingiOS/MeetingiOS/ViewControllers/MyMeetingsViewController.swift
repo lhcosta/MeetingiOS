@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class MyMeetingsViewController: UIViewController {
+@objc class MyMeetingsViewController: UIViewController {
     
     //MARK:- Properties
     private var meetings = [[Meeting]]()
@@ -18,7 +18,7 @@ class MyMeetingsViewController: UIViewController {
     private let defaults = UserDefaults.standard
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
-    var newMeeting: Meeting?
+    @objc var newMeeting: Meeting?
     lazy var refreshControl: UIRefreshControl = {
           let refreshControl = UIRefreshControl()
           refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
@@ -43,11 +43,24 @@ class MyMeetingsViewController: UIViewController {
         // MARK: Nav Controller Settings
         self.navigationItem.title = "My Meetings"
         self.navigationItem.hidesBackButton = true
+        let profileImg = UIImage(systemName: "person.cirlce")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: profileImg, style: .plain, target: self, action: #selector(goToProfile))
         self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
         
         // MARK: Query no CK
         
-        self.refreshMeetings()
+        self.refreshMeetings(predicateFormat: "manager = %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+            }
+        }
+        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +81,10 @@ class MyMeetingsViewController: UIViewController {
             
             if !recordIDs.contains(newMeeting.record.recordID.recordName) {
                 self.appendMeeting(meeting: newMeeting)
+                DispatchQueue.main.async {
+                    self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                    self.tableView.reloadData()
+                }
             }
             self.newMeeting = nil
         }
@@ -95,44 +112,32 @@ class MyMeetingsViewController: UIViewController {
         }
     }
     
-    /// Método que faz fetch de reunioes nas quais o usuario nao é o adm
-    /// - Parameter completion: completion da task
-    private func refreshNotMyMeetings(completion: @escaping (() -> Void)) {
-        Meeting.fetchNotMyMeetings{ (fetchedMeetings) in
-            fetchedMeetings.forEach{ meeting in
-                self.appendMeeting(meeting: meeting)
-            }
-            
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-                completion()
-            }
-        }
-    }
-    
     /// Método que faz fetch de todas as reunioes
-    private func refreshMeetings() {
-        self.refreshNotMyMeetings {
-            print("Fetch finished")
-        }
-        
-        Meeting.fetchMyMeetings(perRecordCompletion: { (fetchedMeeting) in
-            self.appendMeeting(meeting: fetchedMeeting)
-        }) {
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-        }
+    /// - Parameters:
+    ///   - predicateFormat: formato do predicate a ser realizado
+    ///   - completion: completion final
+    private func refreshMeetings(predicateFormat: String, completion: @escaping (() -> Void)) {
+        Meeting.fetchMeetings(predicateFormat: predicateFormat, perRecordCompletion: { (meeting) in
+            self.appendMeeting(meeting: meeting)
+        }, finalCompletion: {
+            completion()
+        })
     }
     
     /// Método para fazer refresh da table view
     /// - Parameter refreshControl: default
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.refreshNotMyMeetings {
-            refreshControl.endRefreshing()
+        self.refreshMeetings(predicateFormat: "employees CONTAINS %@") {
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+                refreshControl.endRefreshing()
+            }
         }
+    }
+    
+    @objc func goToProfile() {
+      
     }
 }
 
@@ -140,7 +145,21 @@ class MyMeetingsViewController: UIViewController {
 extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.filterring ? self.filtered.count : self.meetingsToShow.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 18
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,15 +167,25 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
         
-        cell.meetingName.text = meetingsArray[indexPath.row].theme
-        cell.managerName.text = meetingsArray[indexPath.row].managerName
+        cell.meetingName.text = meetingsArray[indexPath.section].theme
         
-        cell.colorView.layer.cornerRadius = 30
-        if let colorHex = meetingsArray[indexPath.row].color {
-            let color = UIColor(hexString: colorHex)
-            cell.colorView.backgroundColor = color
+        if let date = meetingsArray[indexPath.section].initialDate{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EE MMM dd yyyy"
+            let formattedDate = dateFormatter.string(from: date)
+            cell.meetingDate.text = formattedDate
+        } else {
+           cell.meetingDate.text = ""
         }
-        cell.selectionStyle = .none
+        
+        cell.contentView.layer.cornerRadius = 5
+        var color = UIColor()
+        if let colorHex = meetingsArray[indexPath.section].color {
+            color = UIColor(hexString: colorHex)
+        } else {
+            color = UIColor(hexString: "93CCB2")
+        }
+        cell.contentView.backgroundColor = color
         
         return cell
     }
@@ -165,10 +194,10 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
 
-        if meetingsArray[indexPath.row].finished {
-            performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.row])
+        if meetingsArray[indexPath.section].finished {
+            performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.section])
         } else {
-            performSegue(withIdentifier: "unfinishedMeeting", sender: self.meetingsToShow[indexPath.row])
+            performSegue(withIdentifier: "unfinishedMeeting", sender: self.meetingsToShow[indexPath.section])
         }
     }
     
