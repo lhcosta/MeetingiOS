@@ -13,14 +13,12 @@
 /// Validando o número de caracteres do nome da reunião.
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    NSUInteger lenght = 20;
-    NSString* currenText = textField.text;
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    NSRange nameRange = NSRangeFromString(currenText);
+    if(newString.length > 20)
+        return NO;
     
-    NSString* updateText = [currenText stringByReplacingCharactersInRange:nameRange withString:string];
-    
-    return updateText.length <= lenght;
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -28,5 +26,7 @@
     
     return YES;
 }
+
+
 
 @end
