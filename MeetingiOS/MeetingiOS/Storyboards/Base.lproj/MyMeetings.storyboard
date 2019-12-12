@@ -29,48 +29,35 @@
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYs-sG-GIS">
                                                     <rect key="frame" x="10" y="0.0" width="394" height="105"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qJI-An-doC">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-Ox-BoK" userLabel="Labels SV">
                                                             <rect key="frame" x="20" y="22.333333333333332" width="354" height="60.666666666666671"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-Ox-BoK" userLabel="Labels SV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="312" height="60.666666666666664"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nks-1Y-QJY">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="20.333333333333332"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chefe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCi-Lc-uLc">
-                                                                            <rect key="frame" x="0.0" y="40.333333333333329" width="312" height="20.333333333333329"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="nks-1Y-QJY" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="CPt-Rn-uzy"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="xCi-Lc-uLc" secondAttribute="trailing" id="KKz-M7-c5D"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="nks-1Y-QJY" secondAttribute="trailing" id="aex-gh-od5"/>
-                                                                        <constraint firstItem="xCi-Lc-uLc" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="hsT-Fn-PBp"/>
-                                                                    </constraints>
-                                                                </stackView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uex-T0-ASk">
-                                                                    <rect key="frame" x="332" y="19.333333333333332" width="22" height="21.999999999999996"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="22" id="Bxg-o7-TJG"/>
-                                                                        <constraint firstAttribute="width" constant="22" id="uVS-a1-olG"/>
-                                                                    </constraints>
-                                                                    <state key="normal" title="Button" image="info.circle" catalog="system"/>
-                                                                </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nks-1Y-QJY">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="354" height="20.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chefe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCi-Lc-uLc">
+                                                                    <rect key="frame" x="0.0" y="40.333333333333329" width="354" height="20.333333333333329"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="nks-1Y-QJY" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="CPt-Rn-uzy"/>
+                                                                <constraint firstAttribute="trailing" secondItem="xCi-Lc-uLc" secondAttribute="trailing" id="KKz-M7-c5D"/>
+                                                                <constraint firstAttribute="trailing" secondItem="nks-1Y-QJY" secondAttribute="trailing" id="aex-gh-od5"/>
+                                                                <constraint firstItem="xCi-Lc-uLc" firstAttribute="leading" secondItem="bhE-Ox-BoK" secondAttribute="leading" id="hsT-Fn-PBp"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="qJI-An-doC" firstAttribute="leading" secondItem="UYs-sG-GIS" secondAttribute="leading" constant="20" id="UGI-2N-XNa"/>
-                                                        <constraint firstItem="qJI-An-doC" firstAttribute="centerY" secondItem="UYs-sG-GIS" secondAttribute="centerY" id="Ymy-v7-eUG"/>
-                                                        <constraint firstAttribute="trailing" secondItem="qJI-An-doC" secondAttribute="trailing" constant="20" id="pxf-cG-bwP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bhE-Ox-BoK" secondAttribute="trailing" constant="20" id="OgL-DE-45F"/>
+                                                        <constraint firstItem="bhE-Ox-BoK" firstAttribute="leading" secondItem="UYs-sG-GIS" secondAttribute="leading" constant="20" id="Tco-wm-e7h"/>
+                                                        <constraint firstItem="bhE-Ox-BoK" firstAttribute="centerY" secondItem="UYs-sG-GIS" secondAttribute="centerY" id="WKW-6b-Sxm"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -160,7 +147,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="info.circle" catalog="system" width="64" height="60"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>

@@ -60,15 +60,7 @@ import Contacts
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
         self.fetchingContacts {
-            
-            for contant in self.selectedContacts {
-                if(self.contacts[String(contant.name!.first!)]?.contains(where: {
-                    return contant.email == $0.email}) ?? false){
-                    
-                }
-            }
-            
-            self.sortingContacts()  
+            self.sortingContacts()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -210,7 +202,8 @@ extension ContactViewController : UITableViewDelegate {
         let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
         
         self.collectionView.insertItems(at: [indexPath])
-        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)        
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)  
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         if isFiltering {
             UIView.animate(withDuration: 1, delay: 0.5, options: .curveEaseIn, animations: { 

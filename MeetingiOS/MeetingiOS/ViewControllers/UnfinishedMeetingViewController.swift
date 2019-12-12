@@ -49,10 +49,25 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
+    var multipeer : MeetingBrowserPeer?
+    
+    var meetingTeste : Meeting?
+    
     
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
+            
+        
+        //SO TESTE 
+        self.multipeer = MeetingBrowserPeer()
+        
+        CloudManager.shared.fetchRecords(recordIDs: [CKRecord.ID(recordName: "431476BA-2555-4205-A500-282A7C9CC3A1")], desiredKeys: nil) { (record, error) in
+            if let record = record?.values.first {
+                self.meetingTeste = Meeting(record: record)
+            }
+        }
+        
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
@@ -166,6 +181,15 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
+        
+        let encoder = JSONEncoder()
+        
+        do {
+            let data = try encoder.encode(self.meetingTeste)
+            self.multipeer?.sendingDataFromPeer(data: data)
+        } catch {
+            print(error)
+        }
     }
 }
 

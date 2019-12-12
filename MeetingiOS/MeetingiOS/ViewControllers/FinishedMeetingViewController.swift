@@ -12,61 +12,54 @@ import CloudKit
 
 /// Essa View será exibida após a seleção de uma Meeting que já foi encerrada.
 class FinishedMeetingViewController: UIViewController {
-    
-    /// Segmented usado para visualizar os Topics discutidos e não discutidos.
-    @IBOutlet var topicsSegmentedControl: UISegmentedControl!
-    
-    /// TableView com as Topics da Meeting.
+
+    //MARK:- IBOutlets
     @IBOutlet var topicsTableView: UITableView!
     
-    /// Topics da Meeting que serão exibidos (sendo passados como Topic não Reference)
-    var topics: [Topic] = []
-    /// Topics marcados como não discutidos (será inicializado na call da função organizeTopics)
-    var undiscussedTopics: [Topic] = []
-    /// Topics marcados como discutidos (será inicializado na call da função organizeTopics)
-    var discussedTopics: [Topic] = []
-    /// Topic selecionado na tableView, será mandado para a ConclusionsViewController que exibirá suas conclusions.
-    var currSelectedTopic: Topic?
-    /// Meeting criada pelo usuário.
+    //MARK:- Properties
+    var topics = [[Topic]]()
+    var topicsToShow = [Topic]()
     var currMeeting: Meeting!
     
+    fileprivate var filtered = [Topic]()
+    fileprivate var filterring = false
+    
+    private let cloud = CloudManager.shared
+    
+    //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        topics.append([Topic]())
+        topics.append([Topic]())
         
-        topicsTableView.delegate = self
-        topicsTableView.dataSource = self
+        // MARK: Nav Controller Settings
+        self.navigationItem.title = self.currMeeting.theme
+        self.setUpSearchBar(segmentedControlTitles: ["Discussed", "Not discussed"])
         
-        // MARK: SIMULAÇÃO
-        for i in 0...14 {
-            topics.append(createTopic("Description \(i)", author: "Author \(i)"))
-        }
-        for i in 0...3 {
-            topics.append(createUndiscussedTopic("Description \(i)", author: "Author \(i)"))
-        }
+        // MARK: Fetch dos topicos
+        let topicIDs = currMeeting.topics.map({ (topic) -> CKRecord.ID in
+            return topic.recordID
+        })
         
-        organizeTopics()
-    }
-    
-    
-    /// Atualizamos a tableView de quando alteramos o SegmentedControl
-    /// - Parameter sender: Default.
-    @IBAction func segmentedAction(_ sender: Any) {
-        
-        topicsTableView.reloadData()
-    }
-    
-    
-    /// Separamos os Topics recebidos em se eles foram Discutidos ou não (através do atributo discussed: Bool).
-    func organizeTopics() {
-        for i in self.topics {
-            if i.discussed {
-                self.discussedTopics.append(i)
-            } else {
-                self.undiscussedTopics.append(i)
+        cloud.fetchRecords(recordIDs: topicIDs, desiredKeys: nil) { (recordsDic, _) in
+            guard let topicsDic = recordsDic else { return }
+            
+            for (_, value) in topicsDic {
+                let topic = Topic(record: value)
+                
+                if topic.discussed {
+                    self.topics[0].append(topic)
+                } else {
+                    self.topics[1].append(topic)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.topicsToShow = self.topics[0]
+                self.topicsTableView.reloadData()
             }
         }
     }
-    
     
     /// Identificamos a passagem dessa ViewController para a ConclusionViewController e passamos o Topic selecionado na TableView
     ///  para então exibirmos suas Conclusions na ConclusionsViewController.
@@ -76,93 +69,59 @@ class FinishedMeetingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "conclusions" {
             let vc = segue.destination as! ConclusionsViewController
-            vc.topicToPresentConclusions = currSelectedTopic
+            vc.topicToPresentConclusions = sender as? Topic
         }
-    }
-    
-    
-    /// Método de testes para criar Topics discutidos.
-    /// - Parameters:
-    ///   - description: Título do Topic.
-    ///   - author: Nome do author do Topic.
-    func createTopic(_ description: String, author: String) -> Topic {
-        
-        let record = CKRecord(recordType: "Topic")
-        let newTopic = Topic(record: record)
-        newTopic.editDescription(description)
-        newTopic.authorName = author
-        newTopic.discussed = true
-        
-        return newTopic
-    }
-    
-    
-    /// Método de testes para criar Topics não discutidos.
-    /// - Parameters:
-    ///   - description: Título do Topic.
-    ///   - author: Nome do author do Topic.
-    func createUndiscussedTopic(_ description: String, author: String) -> Topic {
-        
-        let record = CKRecord(recordType: "Topic")
-        let newTopic = Topic(record: record)
-        newTopic.editDescription("\(description) (undiscussed)")
-        newTopic.authorName = author
-        
-        return newTopic
-    }
-    
-    
-    /// Método de testes para a criação de Conclusions do Topic
-    /// - Parameter qtd: Quantidade de Conclusions.
-    func createConclusions(qtd: Int) -> [String] {
-        var conclusions: [String] = []
-        for i in 0...qtd {
-            conclusions.append("Conclusion\nNumber\n\(i)")
-        }
-        return conclusions
     }
 }
 
-
+//MARK: - Table View Settings
 extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if topicsSegmentedControl.selectedSegmentIndex == 0 {
-            return self.discussedTopics.count
-        }
-        return self.undiscussedTopics.count
+
+        return self.filterring ? self.filtered.count : self.topicsToShow.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FinishedTopicsTableViewCell
-        if topicsSegmentedControl.selectedSegmentIndex == 0 {
-            cell.topicDescriptionLabel.text = discussedTopics[indexPath.row].topicDescription
-            cell.authorNameLabel.text = discussedTopics[indexPath.row].authorName
-        } else {
-            cell.topicDescriptionLabel.text = undiscussedTopics[indexPath.row].topicDescription
-            cell.authorNameLabel.text = undiscussedTopics[indexPath.row].authorName
-        }
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FinishedTopicsTableViewCell
+        
+        let topicsArray = self.filterring ? self.filtered : self.topicsToShow
+        
+        cell.authorNameLabel.text = topicsArray[indexPath.row].authorName
+        cell.topicDescriptionLabel.text = topicsArray[indexPath.row].topicDescription
+        
         return cell
     }
     
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if topicsSegmentedControl.selectedSegmentIndex == 0 {
-            self.currSelectedTopic = discussedTopics[indexPath.row]
-        } else {
-            self.currSelectedTopic = undiscussedTopics[indexPath.row]
-        }
-        currSelectedTopic?.conclusions = createConclusions(qtd: 9)
-        performSegue(withIdentifier: "conclusions", sender: self)
+        let topicsArray = self.filterring ? self.filtered : self.topicsToShow
+
+        self.performSegue(withIdentifier: "conclusions", sender: topicsArray[indexPath.row])
     }
 }
+
+//MARK: - Search Settings
+extension FinishedMeetingViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        self.topicsToShow = topics[searchController.searchBar.selectedScopeButtonIndex]
+        
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            
+            self.filtered = self.topicsToShow.filter({ (topic) -> Bool in
+                
+                return (topic.topicDescription.lowercased().contains(text.lowercased()) || topic.authorName?.lowercased().contains(text.lowercased()) ?? false)
+            })
+            
+            self.filterring = true
+        } else {
+            self.filterring = false
+            self.filtered = [Topic]()
+        }
+        
+        self.topicsTableView.reloadData()
+    }
+}
+

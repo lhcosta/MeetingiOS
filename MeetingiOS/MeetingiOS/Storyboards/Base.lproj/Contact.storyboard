@@ -90,14 +90,14 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="102" height="83"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person.crop.circle.fill.badge.xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HR4-dz-kYS">
-                                                                    <rect key="frame" x="26" y="0.5" width="50" height="49"/>
+                                                                    <rect key="frame" x="23" y="0.5" width="56" height="64"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="50" id="549-qa-vVY"/>
-                                                                        <constraint firstAttribute="height" constant="50" id="9rN-iR-TdB"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="56" id="549-qa-vVY"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9rN-iR-TdB"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="fIu-XI-Dgq">
-                                                                    <rect key="frame" x="32.5" y="50" width="37.5" height="33"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="fIu-XI-Dgq">
+                                                                    <rect key="frame" x="32.5" y="65" width="37.5" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -180,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pcH-SH-39J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3632" y="-8"/>
+            <point key="canvasLocation" x="3631.884057971015" y="-8.0357142857142847"/>
         </scene>
     </scenes>
     <resources>
