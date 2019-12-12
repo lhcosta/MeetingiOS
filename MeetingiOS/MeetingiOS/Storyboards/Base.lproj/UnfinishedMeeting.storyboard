@@ -15,8 +15,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
                                 <rect key="frame" x="20" y="241" width="374" height="532"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -74,29 +75,17 @@
                                     <action selector="espelharMeeting:" destination="ID9-zH-FfA" eventType="touchUpInside" id="b6N-2b-fX4"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="94Y-2H-YKX">
-                                <rect key="frame" x="0.0" y="150" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="PVt-DO-0Fx" secondAttribute="trailing" constant="20" id="BNs-6A-qT9"/>
-                            <constraint firstItem="94Y-2H-YKX" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="IOx-rp-jhX"/>
                             <constraint firstAttribute="bottom" secondItem="PVt-DO-0Fx" secondAttribute="bottom" constant="23.5" id="Lav-nS-UaC"/>
-                            <constraint firstItem="94Y-2H-YKX" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" constant="106" id="MTA-59-KUM"/>
-                            <constraint firstItem="94Y-2H-YKX" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="NQN-Oi-CZK"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="94Y-2H-YKX" secondAttribute="bottom" constant="35" id="URE-Tx-HMs"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="die-tg-Jft"/>
-                            <constraint firstItem="PVt-DO-0Fx" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" constant="30" id="i6w-p1-kOQ"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="lFv-I9-rAE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
                         <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
-                        <outlet property="searchBar" destination="94Y-2H-YKX" id="dcr-zB-d17"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                     </connections>
                 </viewController>

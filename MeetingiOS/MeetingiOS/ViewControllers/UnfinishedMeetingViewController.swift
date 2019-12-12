@@ -30,9 +30,6 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Booleano identificando se o usuário foi quem criou a reunião
     var usrIsManager = false
     
-    /// Barra de pesquisa dos Topics
-    @IBOutlet var searchBar: UISearchBar!
-    
     /// Nome da imagem de fundo do botão de check dos Topics ("square" ou "checkmark.square.fill")
     var bgButtonImg: String!
     
@@ -57,7 +54,12 @@ class UnfinishedMeetingViewController: UIViewController {
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
+        // SearchBar
+        self.setUpSearchBar(segmentedControlTitles: nil)
+        self.navigationItem.searchController?.searchBar.delegate = self
+        self.navigationItem.searchController?.searchBar.showsCancelButton = true
+        self.navigationItem.searchController?.searchBar.returnKeyType = .done
         
         //SO TESTE 
         self.multipeer = MeetingBrowserPeer()
@@ -70,9 +72,6 @@ class UnfinishedMeetingViewController: UIViewController {
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
-        searchBar.delegate = self
-        searchBar.showsCancelButton = true
-        searchBar.returnKeyType = .done
         
         self.navigationItem.title = "Meeting"
         self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: nil, action: nil), animated: true)
@@ -360,7 +359,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             }
             // Quando o usuário aperta Return em modo de pesquisa, saímos desse modo.
             isSearching = false
-            searchBar.text = ""
+            self.navigationItem.searchController?.searchBar.text = ""
             
             // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
