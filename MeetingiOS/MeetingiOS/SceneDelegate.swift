@@ -33,6 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func setRootVC(rootVC: UIViewController) {
         let navController = UINavigationController(rootViewController: rootVC)
         navController.navigationBar.prefersLargeTitles = true
+        navController.hidesBarsWhenKeyboardAppears = false
         self.window?.rootViewController = navController
     }
 

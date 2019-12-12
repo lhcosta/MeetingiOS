@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Finished Meeting View Controller-->
+        <!--FinishedMeetingsViewController-->
         <scene sceneID="jcS-o2-Tu0">
             <objects>
-                <viewController storyboardIdentifier="finishedMeeting" id="mcd-M6-zaN" customClass="FinishedMeetingViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="finishedMeeting" title="FinishedMeetingsViewController" modalPresentationStyle="fullScreen" id="mcd-M6-zaN" customClass="FinishedMeetingViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GUq-cv-ACf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

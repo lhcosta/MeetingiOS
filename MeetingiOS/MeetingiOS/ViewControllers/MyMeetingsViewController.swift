@@ -18,6 +18,14 @@ class MyMeetingsViewController: UIViewController {
     private let defaults = UserDefaults.standard
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
+    var newMeeting: Meeting?
+    lazy var refreshControl: UIRefreshControl = {
+          let refreshControl = UIRefreshControl()
+          refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = .gray
+          
+          return refreshControl
+      }()
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -30,72 +38,107 @@ class MyMeetingsViewController: UIViewController {
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]
         
+        self.tableView.addSubview(refreshControl)
+        
         // MARK: Nav Controller Settings
         self.navigationItem.title = "My Meetings"
         self.navigationItem.hidesBackButton = true
         self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
         
         // MARK: Query no CK
-        guard let recordName = defaults.string(forKey: "recordName") else { return }
-        let userReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: recordName), action: .none)
-        let predicateManager = NSPredicate(format:"manager = %@", userReference)
-        let predicateEmployee = NSPredicate(format:"employees CONTAINS %@", userReference)
         
-        var notMyMeetings: [Meeting] = []
+        self.refreshMeetings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesSearchBarWhenScrolling = true
+        self.showNewMeeting()
+    }
+    
+    //MARK:- Methods
+    /// Método para mostrar adicionar reunião que acabou de ser criada localmente
+    private func showNewMeeting(){
+        var allMeetings = [Meeting]()
+        allMeetings.append(contentsOf: meetings[0])
+        allMeetings.append(contentsOf: meetings[1])
         
-        //Realiza o fetch das reunioes que nao sao suas e atribui o nome do manager
-        cloud.readRecords(recorType: "Meeting", predicate: predicateEmployee, desiredKeys: nil, perRecordCompletion: { record in
-            notMyMeetings.append(Meeting(record: record))
-        }) {
-            guard let recordIDs = notMyMeetings.map({$0.manager?.recordID}) as? [CKRecord.ID] else {
-                notMyMeetings.forEach { meeting in
-                    self.appendMeeting(meeting: meeting)
-                }
-                return
+        if let newMeeting = self.newMeeting {
+            let recordIDs = allMeetings.map({$0.record.recordID.recordName})
+            
+            if !recordIDs.contains(newMeeting.record.recordID.recordName) {
+                self.appendMeeting(meeting: newMeeting)
+            }
+            self.newMeeting = nil
+        }
+    }
+    
+    /// Método para fazer append a array correto de reuniao valindando se essa reuniao ja esta no array
+    /// - Parameter meeting: reuniao a ser adicionado
+    private func appendMeeting(meeting: Meeting){
+        if let finalDate = meeting.finalDate, finalDate > Date(timeIntervalSinceNow: 0) {
+            self.validateMeeting(arrayIndex: 0, meeting: meeting)
+        } else {
+            self.validateMeeting(arrayIndex: 1, meeting: meeting)
+        }
+    }
+    
+    /// Método utilizado para validar se reuniao esta no array
+    /// - Parameters:
+    ///   - arrayIndex: 0 ou 1 indicando array de reuniao futura ou passada
+    ///   - meeting: reuniao a ser verificada
+    private func validateMeeting(arrayIndex: Int, meeting: Meeting){
+        let recordIDs = meetings[arrayIndex].map({$0.record.recordID.recordName})
+        
+        if !recordIDs.contains(meeting.record.recordID.recordName) {
+            self.meetings[arrayIndex].append(meeting)
+        }
+    }
+    
+    /// Método que faz fetch de reunioes nas quais o usuario nao é o adm
+    /// - Parameter completion: completion da task
+    private func refreshNotMyMeetings(completion: @escaping (() -> Void)) {
+        Meeting.fetchNotMyMeetings{ (fetchedMeetings) in
+            fetchedMeetings.forEach{ meeting in
+                self.appendMeeting(meeting: meeting)
             }
             
-            self.cloud.fetchRecords(recordIDs: recordIDs, desiredKeys: ["name"]) { (records, _) in
-                guard let userNames = records else { return }
-                print(userNames)
-                
-                for meeting in notMyMeetings {
-                    if let name = userNames[meeting.manager!.recordID]?.value(forKey: "name") as? String {
-                        meeting.managerName = name
-                    }
-                    self.appendMeeting(meeting: meeting)
-                }
-                
-                DispatchQueue.main.async {
-                    self.meetingsToShow = self.meetings[0]
-                    self.tableView.reloadData()
-                }
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+                completion()
             }
         }
+    }
+    
+    /// Método que faz fetch de todas as reunioes
+    private func refreshMeetings() {
+        self.refreshNotMyMeetings {
+            print("Fetch finished")
+        }
         
-        //Realiza o fetch das reunioes que sao suas
-        cloud.readRecords(recorType: "Meeting", predicate: predicateManager, desiredKeys: nil, perRecordCompletion: { record in
-            let meeting = Meeting.init(record: record)
-            meeting.managerName = self.defaults.string(forKey: "givenName")
-            self.appendMeeting(meeting: meeting)
+        Meeting.fetchMyMeetings(perRecordCompletion: { (fetchedMeeting) in
+            self.appendMeeting(meeting: fetchedMeeting)
         }) {
             DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[0]
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
                 self.tableView.reloadData()
             }
         }
     }
     
-    private func appendMeeting(meeting: Meeting){
-        if let finalDate = meeting.finalDate, finalDate > Date(timeIntervalSinceNow: 0){
-            self.meetings[0].append(meeting)
-        } else {
-            self.meetings[1].append(meeting)
+    /// Método para fazer refresh da table view
+    /// - Parameter refreshControl: default
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.refreshNotMyMeetings {
+            refreshControl.endRefreshing()
         }
     }
 }
 
 //MARK: - Table View Delegate/DataSource
 extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filterring ? self.filtered.count : self.meetingsToShow.count
     }
@@ -144,6 +187,7 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
 extension MyMeetingsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         self.meetingsToShow = meetings[searchController.searchBar.selectedScopeButtonIndex]
+        
         if let text = searchController.searchBar.text, !text.isEmpty {
             
             self.filtered = self.meetingsToShow.filter({ (meeting) -> Bool in

@@ -22,8 +22,8 @@ utilizar como auxílio de manipulação de CKRecord Meeting
         case record, selectedTopics
     }
     
-    let defaults = UserDefaults.standard
-    let cloud = CloudManager.shared
+    private static let defaults = UserDefaults.standard
+    private static let cloud = CloudManager.shared
     
     //MARK:- Properties
     
@@ -234,6 +234,65 @@ utilizar como auxílio de manipulação de CKRecord Meeting
     @objc func editColor(hexColor: String){
         self.color = hexColor
         self.record.setValue(color, forKey: "color")
+    }
+    
+    /// Método que cria predicate para fetch ou query de reunioes a partir do record name do usueraio
+    /// - Parameter predicateFormat: formato do predicate
+    private static func getUserPredicate(predicateFormat: String) -> NSPredicate? {
+        guard let recordName = defaults.string(forKey: "recordName") else {
+            return nil
+        }
+        
+        let userReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: recordName), action: .none)
+        return NSPredicate(format: predicateFormat, userReference)
+    }
+    
+    /// Método que faz fetch de reunioes do cloud nas quais o usuarioa é adm
+    /// - Parameters:
+    ///   - perRecordCompletion: completion para cada record recuperado
+    ///   - finalCompletion: completion final depois de conclusão
+    static func fetchMyMeetings(perRecordCompletion: @escaping ((Meeting) -> Void), finalCompletion: @escaping (() -> Void)){
+        guard let predicateManager = getUserPredicate(predicateFormat: "manager = %@") else { return }
+        
+        //Realiza o fetch das reunioes que sao suas
+        cloud.readRecords(recorType: "Meeting", predicate: predicateManager, desiredKeys: nil, perRecordCompletion: { record in
+            let meeting = Meeting.init(record: record)
+            meeting.managerName = self.defaults.string(forKey: "givenName")
+            perRecordCompletion(meeting)
+        }) {
+            finalCompletion()
+        }
+    }
+    
+    /// Método que faz fetch de reunioes do cloud nas quais o usuarioa nao é adm
+    /// - Parameter taskCompletion: completion final com array de reunioes
+    static func fetchNotMyMeetings(taskCompletion: @escaping (([Meeting]) -> Void)) {
+        guard let predicateEmployee = getUserPredicate(predicateFormat: "employees CONTAINS %@") else { return }
+        
+        var notMyMeetings: [Meeting] = []
+        
+        //Realiza o fetch das reunioes que nao sao suas e atribui o nome do manager
+        cloud.readRecords(recorType: "Meeting", predicate: predicateEmployee, desiredKeys: nil, perRecordCompletion: { record in
+            notMyMeetings.append(Meeting(record: record))
+        }) {
+            guard let recordIDs = notMyMeetings.map({$0.manager?.recordID}) as? [CKRecord.ID] else {
+                taskCompletion(notMyMeetings)
+                return
+            }
+            
+            self.cloud.fetchRecords(recordIDs: recordIDs, desiredKeys: ["name"]) { (records, _) in
+                guard let userNames = records else { return }
+                print(userNames)
+                
+                for meeting in notMyMeetings {
+                    if let name = userNames[meeting.manager!.recordID]?.value(forKey: "name") as? String {
+                        meeting.managerName = name
+                    }
+                }
+                
+                taskCompletion(notMyMeetings)
+            }
+        }
     }
 }
 

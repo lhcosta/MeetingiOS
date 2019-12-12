@@ -35,30 +35,36 @@ class FinishedMeetingViewController: UIViewController {
         // MARK: Nav Controller Settings
         self.navigationItem.title = self.currMeeting.theme
         self.setUpSearchBar(segmentedControlTitles: ["Discussed", "Not discussed"])
+
         
         // MARK: Fetch dos topicos
         let topicIDs = currMeeting.topics.map({ (topic) -> CKRecord.ID in
             return topic.recordID
         })
-        
+
         cloud.fetchRecords(recordIDs: topicIDs, desiredKeys: nil) { (recordsDic, _) in
             guard let topicsDic = recordsDic else { return }
-            
+
             for (_, value) in topicsDic {
                 let topic = Topic(record: value)
-                
+
                 if topic.discussed {
                     self.topics[0].append(topic)
                 } else {
                     self.topics[1].append(topic)
                 }
             }
-            
+
             DispatchQueue.main.async {
                 self.topicsToShow = self.topics[0]
                 self.topicsTableView.reloadData()
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesSearchBarWhenScrolling = true
     }
     
     /// Identificamos a passagem dessa ViewController para a ConclusionViewController e passamos o Topic selecionado na TableView

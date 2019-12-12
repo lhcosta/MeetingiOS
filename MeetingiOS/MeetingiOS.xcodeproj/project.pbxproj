@@ -16,6 +16,10 @@
 		23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */; };
 		23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */; };
 		492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C04FF23A1587C00442814 /* ViewController+SearchController.swift */; };
+		492C050423A1818500442814 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C050323A1818500442814 /* ProfileViewController.swift */; };
+		492C050523A1819F00442814 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492C050723A1819F00442814 /* Profile.storyboard */; };
+		492C051023A2904800442814 /* OnBoarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492C051223A2904800442814 /* OnBoarding.storyboard */; };
+		492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C051923A2907A00442814 /* OnBoardingViewController.swift */; };
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
 		49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */; };
 		49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */; };
@@ -68,6 +72,16 @@
 		23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedTopicsTableViewCell.h; sourceTree = "<group>"; };
 		23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinishedTopicsTableViewCell.m; sourceTree = "<group>"; };
 		492C04FF23A1587C00442814 /* ViewController+SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+SearchController.swift"; sourceTree = "<group>"; };
+		492C050323A1818500442814 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		492C050623A1819F00442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
+		492C050923A181A600442814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Profile.strings; sourceTree = "<group>"; };
+		492C050B23A181A700442814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Profile.strings"; sourceTree = "<group>"; };
+		492C050D23A181A700442814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Profile.strings; sourceTree = "<group>"; };
+		492C051123A2904800442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OnBoarding.storyboard; sourceTree = "<group>"; };
+		492C051423A2904900442814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
+		492C051623A2904A00442814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
+		492C051823A2904B00442814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
+		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -169,6 +183,8 @@
 				231AE149239828170051051C /* MyMeetingsViewController.swift */,
 				A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */,
 				E219ACC42397DED5002CF585 /* SelectColorViewController.swift */,
+				492C050323A1818500442814 /* ProfileViewController.swift */,
+				492C051923A2907A00442814 /* OnBoardingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -265,6 +281,8 @@
 				49F09A82239982FA00B7DFD3 /* Contact.storyboard */,
 				49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */,
 				49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */,
+				492C050723A1819F00442814 /* Profile.storyboard */,
+				492C051223A2904800442814 /* OnBoarding.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -371,8 +389,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492C051023A2904800442814 /* OnBoarding.storyboard in Resources */,
 				49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */,
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
+				492C050523A1819F00442814 /* Profile.storyboard in Resources */,
 				49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */,
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
 				49F09ACB2399A1BA00B7DFD3 /* MyMeetings.storyboard in Resources */,
@@ -409,6 +429,7 @@
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
+				492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */,
 				A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */,
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
@@ -426,6 +447,7 @@
 				231AE14A239828170051051C /* MyMeetingsViewController.swift in Sources */,
 				A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
+				492C050423A1818500442814 /* ProfileViewController.swift in Sources */,
 				A4EB3BFD239747640097857F /* Contact.m in Sources */,
 				A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */,
 			);
@@ -434,6 +456,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		492C050723A1819F00442814 /* Profile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				492C050623A1819F00442814 /* Base */,
+				492C050923A181A600442814 /* en */,
+				492C050B23A181A700442814 /* pt-BR */,
+				492C050D23A181A700442814 /* es */,
+			);
+			name = Profile.storyboard;
+			sourceTree = "<group>";
+		};
+		492C051223A2904800442814 /* OnBoarding.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				492C051123A2904800442814 /* Base */,
+				492C051423A2904900442814 /* en */,
+				492C051623A2904A00442814 /* pt-BR */,
+				492C051823A2904B00442814 /* es */,
+			);
+			name = OnBoarding.storyboard;
+			sourceTree = "<group>";
+		};
 		49EB44EF23871128002F434D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
