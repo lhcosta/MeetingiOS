@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param contacts array de contatos
 - (void) addContacts : (NSArray<Contact*>*) contacts;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

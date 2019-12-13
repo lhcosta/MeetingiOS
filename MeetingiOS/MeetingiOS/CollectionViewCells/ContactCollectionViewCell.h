@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ContactCollectionViewCell : UICollectionViewCell
 
 /// Email do contato
-@property (nonatomic, weak) IBOutlet UILabel* email;
+@property (nonatomic, weak) IBOutlet UILabel* name;
 
 /// Contato
 @property (nonatomic) Contact* contact;
