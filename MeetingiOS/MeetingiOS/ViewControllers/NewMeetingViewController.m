@@ -263,8 +263,14 @@
         } finalCompletion:^{
             NSLog(@"Update Users");
             
+           
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];  
+                NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
+                NSUInteger vcCount = [self.navigationController.viewControllers count];
+                MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
+                previousVC.newMeeting = self->_meeting;
+                [self.navigationController popViewControllerAnimated:YES];
             });
         }];
     }];
