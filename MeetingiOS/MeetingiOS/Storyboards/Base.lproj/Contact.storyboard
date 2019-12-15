@@ -28,21 +28,21 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lvz-i0-AtW">
                                                     <rect key="frame" x="20" y="20" width="374" height="80"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vtb-Km-S2H">
-                                                        <size key="itemSize" width="76" height="76"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vtb-Km-S2H">
+                                                        <size key="itemSize" width="80" height="80"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="Pm2-SP-da2" customClass="ContactCollectionViewCell">
-                                                            <rect key="frame" x="0.0" y="0.0" width="78" height="76"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="q9y-dp-Jzj">
-                                                                <rect key="frame" x="0.0" y="0.0" width="78" height="76"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </collectionViewCellContentView>
-                                                            <size key="customSize" width="78" height="76"/>
+                                                            <size key="customSize" width="80" height="80"/>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -65,6 +65,33 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dIC-tp-rho" id="qbD-DQ-v7D">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BT1-mh-8FK">
+                                                    <rect key="frame" x="10" y="0.0" width="394" height="61"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TmI-JZ-aHJ">
+                                                            <rect key="frame" x="0.0" y="8.5" width="45" height="44"/>
+                                                            <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Te9-w8-vuq"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="nea-0Z-c1Y"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="New Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq5-AU-fcs">
+                                                            <rect key="frame" x="50" y="23.5" width="344" height="14"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BT1-mh-8FK" firstAttribute="top" secondItem="qbD-DQ-v7D" secondAttribute="top" id="8gb-zE-qsa"/>
+                                                <constraint firstItem="BT1-mh-8FK" firstAttribute="leading" secondItem="qbD-DQ-v7D" secondAttribute="leading" constant="10" id="dDZ-G5-z2Y"/>
+                                                <constraint firstAttribute="bottom" secondItem="BT1-mh-8FK" secondAttribute="bottom" id="jZs-m7-iJw"/>
+                                                <constraint firstAttribute="trailing" secondItem="BT1-mh-8FK" secondAttribute="trailing" constant="10" id="lwj-av-Ls2"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -106,7 +133,10 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCz-Us-nzl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4146" y="-240"/>
+            <point key="canvasLocation" x="4144.927536231884" y="-240.40178571428569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="person.crop.circle.fill.badge.plus" catalog="system" width="64" height="50"/>
+    </resources>
 </document>

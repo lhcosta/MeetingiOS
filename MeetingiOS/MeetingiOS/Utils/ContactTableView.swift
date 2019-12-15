@@ -9,6 +9,11 @@
 import Foundation
 import Contacts
 
+protocol ContactTableViewDelegate : AnyObject {
+    func addContact(contact : Contact)
+    func removeContact(contact : Contact)
+}
+
 class ContactTableView : NSObject {
     
     //MARK:- UITableViewController
@@ -20,11 +25,13 @@ class ContactTableView : NSObject {
     var contactManager = ContactManager.shared()
     var selectedContacts : [Contact] = []
     
+    //MARK:- Delegates 
+    private weak var delegate : ContactTableViewDelegate?
+    
     init(_ viewController : ContactTableViewController) {
         self.contactViewController = viewController
+        self.delegate = viewController
     }
-    
-        
     
 }
 
@@ -45,18 +52,8 @@ extension ContactTableView : UITableViewDelegate {
         cell.imageSelect.tintColor = UIColor(hexString: "#507EFE", alpha: 1)
         selectedContact.isSelected = true
         
-//        if self.collectionView.isHidden {
-//            self.animateCollection(.show)
-//        }
-//        
-//        self.contactCollectionView?.addContact(selectedContact)
-//        
-//        let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
-        
-        contactViewController.collectionView.insertItems(at: [indexPath])
-        contactViewController.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)  
-        contactViewController.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
+        self.delegate?.addContact(contact: selectedContact)
+    
         if contactViewController.isFiltering {
             UIView.animate(withDuration: 1, delay: 0.5, options: .curveEaseIn, animations: { 
                 tableView.reloadData()
@@ -74,22 +71,11 @@ extension ContactTableView : UITableViewDelegate {
         } else {
             selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }  
-//        
-//        let index = self.contactCollectionView?.contacts.firstIndex(where: { (contact) -> Bool in
-//            return contact.email == selectedContact.email
-//        })
-//        
+            
         cell.imageSelect.tintColor = UIColor(hexString: "#E3E3E3", alpha: 1)
         selectedContact.isSelected = false
         
-//        let indexPath = IndexPath(item: index!, section: 0)
-        
-//        self.contactCollectionView?.removeContactIndex(indexPath.item)
-//        self.collectionView.deleteItems(at: [indexPath])  
-        
-//        if self.contactCollectionView?.contacts.count == 0 {
-//            self.animateCollection(.notShow)
-//        }
+        self.delegate?.removeContact(contact: selectedContact)
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -186,7 +172,7 @@ extension ContactTableView {
     }
 }
 
-//MARK:- Sorting Contacts and Sending Contacts
+//MARK:- Sorting Contacts
 private extension ContactTableView {
     
     /// Ordenar os contatos.
@@ -195,11 +181,4 @@ private extension ContactTableView {
             return lhs.key < rhs.key
         })
     }
-    
-//    ///Enviando Contatos
-//    @objc func sendingContactsToMeeting() {
-//        self.contactDelegate?.getRecordForSelectedUsers()
-//        self.navigationController?.popViewController(animated: true)
-//    }
-    
 }

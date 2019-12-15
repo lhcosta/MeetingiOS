@@ -21,11 +21,10 @@ import Contacts
     
     @objc var contactCollectionView : ContactCollectionView?
     
-//        
-//    //MARK:- Delegates
+   //MARK:- Delegates
     @objc weak var contactDelegate : MeetingDelegate?
-//    
-//    //MARK:- Computed Properties
+    
+    //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
         self.navigationItem.searchController?.searchBar.text?.isEmpty ?? true
     }
@@ -58,6 +57,8 @@ import Contacts
                 self.tableView.reloadData()
             }
         }
+        
+        self.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
@@ -66,10 +67,7 @@ import Contacts
         
         self.collectionView.delegate = contactCollectionView
         self.collectionView.dataSource = contactCollectionView
-        
-        if(contactCollectionView?.contacts.count != 0) {
-            animateCollection(.show)
-        }
+        self.animateCollection()
     }
     
     
@@ -92,16 +90,11 @@ import Contacts
 //MARK:- UICollectionView
 extension ContactTableViewController {
     
-    enum Animation {
-        case show
-        case notShow
-    }
-    
     /// Animando a collection view. 
-    /// - Parameter direction: mostrar ou esconder.
-    func animateCollection(_ type : Animation) {
+    func animateCollection() {
         UIView.animate(withDuration: 0.5) { 
-            self.collectionView.isHidden = type == .show ? false : true 
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
             self.view.layoutIfNeeded()
         }
     }
@@ -109,12 +102,8 @@ extension ContactTableViewController {
     
     /// Deselecionar um contanto que foi removido.
     @objc func deselectContactInRow() {
-        
         self.contactTableView.reloadData()
-        
-        if self.contactCollectionView?.contacts.count == 0 {
-            self.animateCollection(.notShow)
-        }
+        self.animateCollection()
     }
 }
 
@@ -144,6 +133,52 @@ extension ContactTableViewController : UISearchResultsUpdating {
 extension ContactTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if contactCollectionView?.contacts.count == 0 && section == 0 {
+            return 0
+        }
+        
         return section == 0 ? 44 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if contactCollectionView?.contacts.count == 0 && indexPath.section == 0 {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
+}
+
+//MARK:- ContactTableViewDelegate {
+extension ContactTableViewController : ContactTableViewDelegate {
+    
+    func addContact(contact: Contact) {
+                
+        self.contactCollectionView?.addContact(contact)
+        
+        let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
+                            
+        self.animateCollection()
+        
+        self.collectionView.insertItems(at: [indexPath])
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)  
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
+    }
+    
+    func removeContact(contact: Contact) {
+        
+        let index = self.contactCollectionView?.contacts.firstIndex(where: {
+            return $0.email == contact.email
+        })
+        
+        let indexPath = IndexPath(item: index!, section: 0)
+        
+        self.contactCollectionView?.removeContactIndex(indexPath.item)
+        self.collectionView.deleteItems(at: [indexPath])  
+     
+        self.animateCollection()
     }
 }

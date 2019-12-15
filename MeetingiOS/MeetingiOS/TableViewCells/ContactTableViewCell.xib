@@ -20,28 +20,28 @@
                         <rect key="frame" x="10" y="10" width="298" height="52"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DXj-hy-DpY">
-                                <rect key="frame" x="0.0" y="6.5" width="268" height="39"/>
+                                <rect key="frame" x="0.0" y="6" width="268" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-pq-fHR">
-                                        <rect key="frame" x="0.0" y="-2" width="39" height="43"/>
+                                        <rect key="frame" x="0.0" y="-2" width="40" height="44"/>
                                         <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="2O9-n7-lkC"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="39" id="34b-2B-Uwy"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="2O9-n7-lkC"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="34b-2B-Uwy"/>
                                         </constraints>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="6ll-M7-i6d">
-                                        <rect key="frame" x="44" y="4" width="224" height="31"/>
+                                        <rect key="frame" x="45" y="4.5" width="223" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1k-WW-Wmq">
-                                                <rect key="frame" x="0.0" y="0.0" width="224" height="14"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="223" height="14"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySp-Ie-dfC">
-                                                <rect key="frame" x="0.0" y="17" width="224" height="14"/>
+                                                <rect key="frame" x="0.0" y="17" width="223" height="14"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
