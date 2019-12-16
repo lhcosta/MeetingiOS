@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import ContactsUI
 
 /// View Controller para selecionar os contatos para reunião
 @objc class ContactTableViewController: UITableViewController {
@@ -23,6 +24,8 @@ import Contacts
     
    //MARK:- Delegates
     @objc weak var contactDelegate : MeetingDelegate?
+    
+    var newContactController : CNContactViewController!
     
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
@@ -46,19 +49,17 @@ import Contacts
 
         //MARK:- Navigation
         self.navigationItem.title = "Add participants"
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
         
         self.setUpSearchBar(segmentedControlTitles: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
-        self.contactTableViewManager.fetchingContacts {
+        self.contactTableViewManager.fetchingContacts { 
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.contactTableView.reloadData()
             }
-        }
-        
-        self.view.translatesAutoresizingMaskIntoConstraints = false
+        }        
     }
     
     
@@ -83,6 +84,11 @@ import Contacts
         self.contactTableView.allowsMultipleSelection = true
         self.contactTableView.allowsMultipleSelectionDuringEditing = true
         self.contactTableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
+    }
+    
+    @objc func sendingContactsToMeeting() {
+        self.contactDelegate?.getRecordForSelectedUsers()
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -134,11 +140,19 @@ extension ContactTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if contactCollectionView?.contacts.count == 0 && section == 0 {
-            return 0
+        switch section {
+            case 0:
+                if contactCollectionView?.contacts.count == 0 {
+                    return 0
+                }
+                return 44
+            case 2:
+                return 0
+            default:
+            break
         }
         
-        return section == 0 ? 44 : 0
+        return super.tableView(tableView, heightForHeaderInSection: section)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -150,9 +164,27 @@ extension ContactTableViewController {
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
+//FIXME:- Fazer novo contato
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        if indexPath.section == 1 && indexPath.row == 0 {
+//            
+//            newContactController = CNContactViewController(forNewContact: nil) 
+//            newContactController.hidesBottomBarWhenPushed = true
+//            newContactController.allowsActions = true
+//            newContactController.view.layoutIfNeeded()
+//            
+//            let navigation = UINavigationController(rootViewController: newContactController)
+//            
+//            
+//
+//        }
+//        
+//    }
+    
 }
 
-//MARK:- ContactTableViewDelegate {
+//MARK:- ContactTableViewDelegate 
 extension ContactTableViewController : ContactTableViewDelegate {
     
     func addContact(contact: Contact) {
@@ -178,7 +210,19 @@ extension ContactTableViewController : ContactTableViewDelegate {
         
         self.contactCollectionView?.removeContactIndex(indexPath.item)
         self.collectionView.deleteItems(at: [indexPath])  
-     
+        self.collectionView.layoutIfNeeded()
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
+
         self.animateCollection()
     }
 }
+
+//MARK:- CNContactViewControllerDelegate
+extension ContactTableViewController : CNContactViewControllerDelegate {
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+}
+
+

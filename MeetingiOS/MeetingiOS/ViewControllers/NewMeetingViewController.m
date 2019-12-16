@@ -97,7 +97,12 @@
 
 //MARK:- TableView
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 25;
+    
+    if (section == 0) {
+        return 15;
+    }
+    
+    return 30;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -105,6 +110,7 @@
     [view setBackgroundColor:UIColor.clearColor];
     return view;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -262,8 +268,6 @@
             }
         } finalCompletion:^{
             NSLog(@"Update Users");
-            
-           
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;

@@ -6,6 +6,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProText-Regular.ttf">
+            <string>SFProText-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Contact Table View Controller-->
         <scene sceneID="3Mg-4C-uDO">
@@ -26,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lvz-i0-AtW">
-                                                    <rect key="frame" x="20" y="20" width="374" height="80"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="100"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vtb-Km-S2H">
                                                         <size key="itemSize" width="80" height="80"/>
@@ -36,7 +41,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContactCollectionCell" id="Pm2-SP-da2" customClass="ContactCollectionViewCell">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                            <rect key="frame" x="0.0" y="10" width="80" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="q9y-dp-Jzj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -48,7 +53,7 @@
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Lvz-i0-AtW" firstAttribute="top" secondItem="Gat-Bi-bN5" secondAttribute="top" constant="20" symbolic="YES" id="6Ce-we-Vdl"/>
+                                                <constraint firstItem="Lvz-i0-AtW" firstAttribute="top" secondItem="Gat-Bi-bN5" secondAttribute="top" id="6Ce-we-Vdl"/>
                                                 <constraint firstItem="Lvz-i0-AtW" firstAttribute="leading" secondItem="Gat-Bi-bN5" secondAttribute="leading" constant="20" symbolic="YES" id="Pxf-vD-7ya"/>
                                                 <constraint firstAttribute="bottom" secondItem="Lvz-i0-AtW" secondAttribute="bottom" id="Rd6-eh-9fz"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lvz-i0-AtW" secondAttribute="trailing" constant="20" symbolic="YES" id="tw1-UK-sc5"/>
@@ -57,7 +62,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Section-2" id="fhD-RR-0jG">
+                            <tableViewSection headerTitle="Contacts" id="fhD-RR-0jG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="61" id="dIC-tp-rho">
                                         <rect key="frame" x="0.0" y="184" width="414" height="61"/>
@@ -71,15 +76,15 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TmI-JZ-aHJ">
                                                             <rect key="frame" x="0.0" y="8.5" width="45" height="44"/>
-                                                            <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                            <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Te9-w8-vuq"/>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="nea-0Z-c1Y"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="New Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq5-AU-fcs">
-                                                            <rect key="frame" x="50" y="23.5" width="344" height="14"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                            <rect key="frame" x="50" y="23.5" width="344" height="14.5"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -113,7 +118,7 @@
                                             <constraints>
                                                 <constraint firstItem="bnc-ge-DXZ" firstAttribute="leading" secondItem="AIC-tP-6z1" secondAttribute="leading" id="0on-MD-4hO"/>
                                                 <constraint firstAttribute="trailing" secondItem="bnc-ge-DXZ" secondAttribute="trailing" id="BEn-8i-pA9"/>
-                                                <constraint firstAttribute="bottom" secondItem="bnc-ge-DXZ" secondAttribute="bottom" id="TFU-OW-43s"/>
+                                                <constraint firstAttribute="bottom" secondItem="bnc-ge-DXZ" secondAttribute="bottom" id="rag-BS-h4U"/>
                                                 <constraint firstItem="bnc-ge-DXZ" firstAttribute="top" secondItem="AIC-tP-6z1" secondAttribute="top" id="wuX-Tq-SI3"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -133,7 +138,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCz-Us-nzl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4144.927536231884" y="-240.40178571428569"/>
+            <point key="canvasLocation" x="3966.666666666667" y="-394.41964285714283"/>
         </scene>
     </scenes>
     <resources>

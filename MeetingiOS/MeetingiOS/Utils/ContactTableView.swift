@@ -168,7 +168,8 @@ extension ContactTableView {
             
             self.sortingContacts(allContacts)
             completionHandler()
-        }
+
+        }        
     }
 }
 
