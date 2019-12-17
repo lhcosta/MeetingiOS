@@ -19,6 +19,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XBH-kr-nXa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="S7u-aq-dOU">
                                 <cells>
@@ -67,12 +68,6 @@
                                                         <constraint firstItem="6Yc-wp-oId" firstAttribute="top" secondItem="A9G-Qq-NEf" secondAttribute="top" constant="15" id="bco-MU-T5Z"/>
                                                         <constraint firstAttribute="trailing" secondItem="6Yc-wp-oId" secondAttribute="trailing" constant="15" id="hbx-8b-8S8"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -91,11 +86,11 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="74" id="yXD-U5-21f">
                                         <rect key="frame" x="0.0" y="162" width="414" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXD-U5-21f" id="qso-MI-noV">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXD-U5-21f" id="qso-MI-noV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6y-vn-pty">
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6y-vn-pty">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="74"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2du-zH-e19">
@@ -163,7 +158,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jif-Xl-S2k">
+                                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jif-Xl-S2k">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="74"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tNP-zF-WPC">
@@ -234,18 +229,38 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fD-r5-PHx">
+                                                <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fD-r5-PHx">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="74"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYP-ws-HgV">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sYP-ws-HgV">
                                                             <rect key="frame" x="15" y="0.0" width="344" height="74"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Add participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92R-k6-9If">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="344" height="74"/>
+                                                                    <rect key="frame" x="0.0" y="26.5" width="281.5" height="21.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QTq-0p-Oag">
+                                                                    <rect key="frame" x="281.5" y="26.5" width="62.5" height="21.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-Pq-w4c">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="21.5"/>
+                                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                                                    <color key="value" red="0.69019607843137254" green="0.69019607843137254" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                        </label>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="h8w-ij-dkY">
+                                                                            <rect key="frame" x="50" y="2" width="12.5" height="18"/>
+                                                                            <color key="tintColor" red="0.69019607843137254" green="0.69019607843137254" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                </stackView>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
@@ -256,12 +271,6 @@
                                                         <constraint firstItem="sYP-ws-HgV" firstAttribute="leading" secondItem="8fD-r5-PHx" secondAttribute="leading" constant="15" id="mHu-Ja-gxh"/>
                                                         <constraint firstItem="sYP-ws-HgV" firstAttribute="top" secondItem="8fD-r5-PHx" secondAttribute="top" id="pQS-4C-p0v"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -352,7 +361,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9o-pP-nPt">
+                                                <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9o-pP-nPt">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="74"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="AO1-9x-Ps2">
@@ -380,12 +389,6 @@
                                                         <constraint firstAttribute="bottom" secondItem="AO1-9x-Ps2" secondAttribute="bottom" constant="15" id="Utd-Cp-eg5"/>
                                                         <constraint firstItem="AO1-9x-Ps2" firstAttribute="leading" secondItem="J9o-pP-nPt" secondAttribute="leading" constant="15" id="pHs-ib-630"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -407,6 +410,7 @@
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKw-Zc-InE">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="100"/>
                                                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </pickerView>
                                             </subviews>
                                             <constraints>
@@ -436,6 +440,11 @@
                         <outlet property="pickerView" destination="EKw-Zc-InE" id="ugl-He-xnV"/>
                         <outlet property="startDatePicker" destination="4QV-Rf-8lR" id="v4N-1X-cii"/>
                         <outlet property="startsDateTime" destination="TM2-v8-8Si" id="gHS-im-nUu"/>
+                        <outletCollection property="views" destination="A9G-Qq-NEf" id="fev-fV-Nfi"/>
+                        <outletCollection property="views" destination="C6y-vn-pty" id="o3c-22-nz1"/>
+                        <outletCollection property="views" destination="jif-Xl-S2k" id="uBJ-qC-BLL"/>
+                        <outletCollection property="views" destination="8fD-r5-PHx" id="00w-fh-6f9"/>
+                        <outletCollection property="views" destination="J9o-pP-nPt" id="m6H-wZ-YAU"/>
                         <segue destination="oSk-dV-1av" kind="show" identifier="SelectContacts" id="5Uv-LT-x5v"/>
                         <segue destination="Tam-Xa-hCQ" kind="show" identifier="SelectColor" id="E6j-Xv-szd"/>
                     </connections>
@@ -466,6 +475,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.right" catalog="system" width="48" height="64"/>
         <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>

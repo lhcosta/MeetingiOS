@@ -19,6 +19,7 @@ extension UIViewController {
         search.obscuresBackgroundDuringPresentation = false
         
         search.searchResultsUpdater = self as? UISearchResultsUpdating
+        
         if let titles = segmentedControlTitles, titles.count>0 {
             search.searchBar.scopeButtonTitles = titles
             search.searchBar.showsScopeBar = true
