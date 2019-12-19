@@ -11,5 +11,4 @@
 #import "ContactCollectionView.h"
 #import "NSString+NewFeatures.h"
 #import "ContactManager.h"
-#import "ContactTableViewCell.h"
 #import "MeetingDelegate.h"

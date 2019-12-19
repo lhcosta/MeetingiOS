@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
 @property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
+
 
 ///Selecionando a cor do ícone da reunião.
 - (IBAction) chooseColorMeeting:(id)sender;

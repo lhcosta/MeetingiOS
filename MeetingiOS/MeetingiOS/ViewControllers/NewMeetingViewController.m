@@ -38,7 +38,7 @@
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"MMM, dd yyyy  h:mm a";
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
-
+    
     _contactCollectionView = [[ContactCollectionView alloc] init];
     _collectionView.allowsSelection = NO;
     _collectionView.delegate = _contactCollectionView;
@@ -58,31 +58,34 @@
     _chooseEndTime = NO;
     
     [self setupDatePicker];
-    
+    [self setupViews];
+    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#ECF0F4" alpha:1]];
+        
     [self.navigationItem setTitle:TITLE_NAV];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
     [self.navigationController.navigationBar setPrefersLargeTitles:YES];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     if([_contactCollectionView.contacts count] != 0) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [UIView animateWithDuration:0.5 animations:^{
-                 [self.tableView beginUpdates];
-                 [self.tableView endUpdates];
-                 [self.collectionView reloadData];
-             }];
-         });
-     } else {
-         [UIView animateWithDuration:0.5 animations:^{
-             [self.tableView beginUpdates];
-             [self.tableView endUpdates];
-             [self.view layoutIfNeeded];
-         }];
-     }
-
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.tableView beginUpdates];
+                [self.tableView endUpdates];
+                [self.collectionView reloadData];
+            }];
+        });
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.tableView beginUpdates];
+            [self.tableView endUpdates];
+            [self.view layoutIfNeeded];
+        }];
+    }
+    
 }
 
 - (void)dealloc
@@ -94,10 +97,34 @@
     }
 }
 
+//MARK:- UIViews
+- (void) setupViews {
+    
+    for (UIView* view in self.views) {
+        
+        view.clipsToBounds = true;
+        view.layer.cornerRadius = 10;
+        
+        switch (view.tag) {
+            case 1:
+                view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+                break;
+            case 2:
+                view.layer.maskedCorners = kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner;
+            default:
+                break;
+        }
+    }
+}
 
 //MARK:- TableView
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 25;
+    
+    if (section == 0) {
+        return 15;
+    }
+    
+    return 30;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -105,6 +132,7 @@
     [view setBackgroundColor:UIColor.clearColor];
     return view;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -142,7 +170,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
+    
     switch (indexPath.section) {
         case 1:
             switch (indexPath.row) {
@@ -161,12 +189,18 @@
                 case 3:
                     if(!_chooseEndTime) {
                         
+                        UIView* view = [_views objectAtIndex:2];
+                        [view.layer setCornerRadius:10];
+                        view.layer.maskedCorners = kCALayerMaxXMaxYCorner | kCALayerMinXMaxYCorner;
+                        
                         [UIView animateWithDuration:0.5 animations:^{
                             [self.finishDatePicker setHidden:YES];
                         }];
                         
                         return 0;
-                    } else {
+                    } else {                        
+                        UIView* view = [_views objectAtIndex:2];
+                        [view.layer setCornerRadius:0];
                         [self.finishDatePicker setHidden:NO];
                     }
                 default:
@@ -175,14 +209,33 @@
             break;
         case 2:
             if(indexPath.row == 1 && _contactCollectionView.contacts.count == 0) {
+                UIView* view = [self.views objectAtIndex:3];
+                view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner | kCALayerMinXMaxYCorner;
                 return 0;
+            } else if (_contactCollectionView.contacts.count != 0) {
+                UIView* view = [self.views objectAtIndex:3];
+                view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
             }
             break;
         case 3:
-            if(indexPath.row == 1 && !_chooseNumberOfTopics) {
-                return 0;
+            switch (indexPath.row) {
+                case 0:
+                    if(_chooseNumberOfTopics) {
+                        UIView* view = [self.views objectAtIndex:4];
+                        view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+                    } else {
+                        UIView* view = [self.views objectAtIndex:4];
+                        view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner | kCALayerMinXMaxYCorner;
+                    }
+                    break;
+                case 1:
+                    if(!_chooseNumberOfTopics) {
+                        return 0;
+                    }
+                    break;
+                default:
+                    break;
             }
-            break;
         default:
             break;
     }
@@ -193,10 +246,10 @@
 
 /// Atribuindo o delegate da view controller
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-        
+    
     if ([segue.identifier isEqualToString:@"SelectContacts"]) {
-                
-        ContactViewController* contactViewController = [segue destinationViewController];
+        
+        ContactTableViewController* contactViewController = [segue destinationViewController];
         
         if(contactViewController) {
             [contactViewController setContactDelegate:self];
@@ -220,11 +273,11 @@
     if(theme.length == 0) {
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Meeting" message:@"Choose a name for create a meeting." preferredStyle:UIAlertControllerStyleAlert];
-    
+        
         UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         
         [alert addAction:action];                    
-    
+        
         [self presentViewController:alert animated:YES completion:nil];
         
         return;
@@ -234,7 +287,7 @@
     
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
     CKReference* manager = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
-        
+    
     [_meeting setManager:manager];
     [_meeting setTheme:theme];
     [_meeting setColor: _colorMetting.backgroundColor.toHexString];
@@ -264,7 +317,11 @@
             NSLog(@"Update Users");
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];  
+                NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
+                NSUInteger vcCount = [self.navigationController.viewControllers count];
+                MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
+                previousVC.newMeeting = self->_meeting;
+                [self.navigationController popViewControllerAnimated:YES];
             });
         }];
     }];
@@ -288,11 +345,11 @@
     for (Contact* contact in [_contactCollectionView contacts]) {
         [allEmails addObject:contact.email];
     }
-        
+    
     predicate = [NSPredicate predicateWithFormat:@"email IN %@", allEmails];
-
+    
     [CloudManager.shared readRecordsWithRecorType:@"User" predicate:predicate desiredKeys:@[@"recordName"] perRecordCompletion:^(CKRecord * _Nonnull record) {
-                    
+        
         [participants_aux addObject:record];
         
     } finalCompletion:^{

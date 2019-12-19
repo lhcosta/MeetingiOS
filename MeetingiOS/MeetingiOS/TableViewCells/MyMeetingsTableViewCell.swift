@@ -11,8 +11,7 @@ import UIKit
 class MyMeetingsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var meetingName: UILabel!
-    @IBOutlet weak var managerName: UILabel!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var meetingDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,4 +24,7 @@ class MyMeetingsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func didPressInfo(_ sender: Any) {
+        
+    }
 }

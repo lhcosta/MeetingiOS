@@ -49,10 +49,10 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
+    /// Conexão Multipeer
     var multipeer : MeetingBrowserPeer?
     
     var meetingTeste : Meeting?
-    
     
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
@@ -67,7 +67,6 @@ class UnfinishedMeetingViewController: UIViewController {
                 self.meetingTeste = Meeting(record: record)
             }
         }
-        
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
@@ -89,7 +88,17 @@ class UnfinishedMeetingViewController: UIViewController {
                 return
             }
             for i in records! {
-                self.topics.append(Topic(record: i.value))
+                let topic = Topic(record: i.value)
+                // Quando o usuário não é quem criou a Meeting só pegaremos os Topics cujo ele é o author
+                if !self.usrIsManager {
+                    if topic.author == CKRecord.Reference(recordID: CKRecord.ID(recordName: self.defaults.string(forKey: "recordName")!), action: .none) {
+                        self.topics.append(topic)
+                    }
+                } else {
+                    // Senão pegamos todos os Topics daquela Meeting.
+                    self.topics.append(topic)
+                }
+                
             }
             let newTopic = self.creatingTopicInstance()
             self.topics.insert(newTopic, at: 0)
@@ -317,12 +326,31 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                         for ii in 0...currMeeting.topics.count-1 {
                             if currMeeting.topics[ii].recordID == topics[i].record.recordID {
                                 currMeeting.topics.remove(at: ii)
+                                break
                             }
                         }
                         // Adicionamos o Topic editado.
                         currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[i].record.recordID, action: .deleteSelf))
                         // Damos Update da Meeting e do Topic no Cloud
                         CloudManager.shared.updateRecords(records: [topics[i].record, currMeeting.record], perRecordCompletion: { (_, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }) { }
+                    } else {
+                        // Quando a edição é uma exclusão, excluímos o Topic da Meeting e do Cloud.
+                        for ii in 0...currMeeting.topics.count-1 {
+                            if currMeeting.topics[ii].recordID == topics[i].record.recordID {
+                                currMeeting.topics.remove(at: ii)
+                                break
+                            }
+                        }
+                        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }) { }
+                        CloudManager.shared.deleteRecords(recordIDs: [topics[i].record.recordID], perRecordCompletion: { (_, error) in
                             if let error = error {
                                 print(error.localizedDescription)
                             }
@@ -361,6 +389,24 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                 currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath!.section].record.recordID, action: .deleteSelf))
                 // Damos update na Meeting e no Topic criado.
                 CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }) { }
+            } else if indexPath?.section != 0 {
+                // Quando a edição é uma exclusão, excluímos o Topic da Meeting e do Cloud.
+                for ii in 0...currMeeting.topics.count-1 {
+                    if currMeeting.topics[ii].recordID == topics[indexPath!.section].record.recordID {
+                        currMeeting.topics.remove(at: ii)
+                        break
+                    }
+                }
+                CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }) { }
+                CloudManager.shared.deleteRecords(recordIDs: [topics[indexPath!.section].record.recordID], perRecordCompletion: { (_, error) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
