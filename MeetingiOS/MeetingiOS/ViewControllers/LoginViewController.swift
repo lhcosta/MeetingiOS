@@ -126,8 +126,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
         }
         
-
-        
         self.performSegue(withIdentifier: "nextScreen", sender: nil)
     }
     

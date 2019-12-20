@@ -39,12 +39,12 @@ import CloudKit
         meetingsToShow = meetings[0]
         
         self.tableView.addSubview(refreshControl)
+        self.tableView.keyboardDismissMode = .onDrag
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = "My Meetings"
         self.navigationItem.hidesBackButton = true
-        let profileImg = UIImage(systemName: "person.cirlce")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: profileImg, style: .plain, target: self, action: #selector(goToProfile))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "perfil", style: .plain, target: self, action: #selector(goToProfile))
         self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
         
         // MARK: Query no CK
@@ -93,7 +93,7 @@ import CloudKit
     /// Método para fazer append a array correto de reuniao valindando se essa reuniao ja esta no array
     /// - Parameter meeting: reuniao a ser adicionado
     private func appendMeeting(meeting: Meeting){
-        if let finalDate = meeting.finalDate, finalDate > Date(timeIntervalSinceNow: 0) {
+        if let finalDate = meeting.finalDate, finalDate > Date(timeIntervalSinceNow: 0), !meeting.finished {
             self.validateMeeting(arrayIndex: 0, meeting: meeting)
         } else {
             self.validateMeeting(arrayIndex: 1, meeting: meeting)
@@ -137,7 +137,7 @@ import CloudKit
     }
     
     @objc func goToProfile() {
-      
+        self.performSegue(withIdentifier: "goToProfile", sender: nil)
     }
 }
 

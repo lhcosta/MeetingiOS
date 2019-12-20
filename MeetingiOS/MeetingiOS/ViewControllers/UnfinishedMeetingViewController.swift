@@ -13,11 +13,11 @@ import CloudKit
 /// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
 class UnfinishedMeetingViewController: UIViewController {
 
-    //MARK: - Properties
+    //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
-    
     @IBOutlet var mirrorButton: UIButton!
     
+     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
     
@@ -201,7 +201,6 @@ class UnfinishedMeetingViewController: UIViewController {
         }
     }
 }
-
 
 //MARK: - Table View Delegate/DataSource
 extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
