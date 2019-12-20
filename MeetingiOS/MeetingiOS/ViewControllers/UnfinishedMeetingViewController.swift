@@ -49,10 +49,10 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
+    /// Conexão Multipeer
     var multipeer : MeetingBrowserPeer?
     
     var meetingTeste : Meeting?
-    
     
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {

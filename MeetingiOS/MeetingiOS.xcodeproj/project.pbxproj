@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		231AE13C2397E8A80051051C /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */; };
 		231AE14A239828170051051C /* MyMeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231AE149239828170051051C /* MyMeetingsViewController.swift */; };
 		235E7B83238D9CA900B59855 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B82238D9CA900B59855 /* Topic.swift */; };
 		235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */; };
@@ -40,28 +39,47 @@
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
+		A49229EA23A316ED00FD95B9 /* ContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A49229E823A316ED00FD95B9 /* ContactCollectionViewCell.xib */; };
+		A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49229ED23A3323500FD95B9 /* ContactTableView.swift */; };
+		A4922A1F23A728FB00FD95B9 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */; };
+		A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */; };
+		A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1223A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf */; };
+		A4922A2223A728FB00FD95B9 /* SFProText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1323A728FB00FD95B9 /* SFProText-Semibold.ttf */; };
+		A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1423A728FB00FD95B9 /* SFProText-Regular.ttf */; };
+		A4922A2423A728FB00FD95B9 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1523A728FB00FD95B9 /* SFProDisplay-Medium.ttf */; };
+		A4922A2523A728FB00FD95B9 /* SFProDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1623A728FB00FD95B9 /* SFProDisplay-Black.ttf */; };
+		A4922A2623A728FB00FD95B9 /* SFProText-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1723A728FB00FD95B9 /* SFProText-Light.ttf */; };
+		A4922A2723A728FB00FD95B9 /* SFProDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1823A728FB00FD95B9 /* SFProDisplay-Light.ttf */; };
+		A4922A2823A728FB00FD95B9 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1923A728FB00FD95B9 /* SFProDisplay-Regular.ttf */; };
+		A4922A2923A728FB00FD95B9 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1A23A728FB00FD95B9 /* SFProDisplay-Bold.ttf */; };
+		A4922A2A23A728FB00FD95B9 /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1B23A728FB00FD95B9 /* SFProText-Bold.ttf */; };
+		A4922A2B23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */; };
+		A4922A2C23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */; };
+		A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */; };
 		A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */; };
-		A4BAEB2E239F124100800277 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BF22397400A0097857F /* ContactViewController.swift */; };
+		A4BAEB2E239F124100800277 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BF22397400A0097857F /* ContactTableViewController.swift */; };
+		A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */; };
+		A4C5BE8E23A2C105002BE4B9 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */; };
+		A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */; };
+		A4C5BE9623A30025002BE4B9 /* ContactCollectionViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */; };
 		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
 		A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */; };
 		A4EB3BFD239747640097857F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFC239747640097857F /* Contact.m */; };
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
-		A4EB3C1923975F800097857F /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1823975F800097857F /* ContactTableViewCell.m */; };
 		A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */; };
 		A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1E2397EAF60097857F /* ContactManager.m */; };
 		A4EB3C202397F0990097857F /* Contact.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFB239747640097857F /* Contact.h */; };
-		A4EB3C212398542C0097857F /* ContactTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1723975F800097857F /* ContactTableViewCell.h */; };
 		A4EB3C22239854A00097857F /* MeetingiOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */; };
 		A4EB3C232398555D0097857F /* ContactCollectionView.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C11239754D40097857F /* ContactCollectionView.h */; };
 		A4EB3C24239855640097857F /* ContactManager.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1D2397EAF60097857F /* ContactManager.h */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
+		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
+		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */; };
 		E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
-		231AE13B2397E8A80051051C /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
 		231AE149239828170051051C /* MyMeetingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsViewController.swift; sourceTree = "<group>"; };
 		235E7B82238D9CA900B59855 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
@@ -133,25 +151,46 @@
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		A49229E823A316ED00FD95B9 /* ContactCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCollectionViewCell.xib; sourceTree = "<group>"; };
+		A49229ED23A3323500FD95B9 /* ContactTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableView.swift; sourceTree = "<group>"; };
+		A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
+		A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Heavy.ttf"; sourceTree = "<group>"; };
+		A4922A1223A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Ultralight.ttf"; sourceTree = "<group>"; };
+		A4922A1323A728FB00FD95B9 /* SFProText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Semibold.ttf"; sourceTree = "<group>"; };
+		A4922A1423A728FB00FD95B9 /* SFProText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Regular.ttf"; sourceTree = "<group>"; };
+		A4922A1523A728FB00FD95B9 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		A4922A1623A728FB00FD95B9 /* SFProDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Black.ttf"; sourceTree = "<group>"; };
+		A4922A1723A728FB00FD95B9 /* SFProText-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Light.ttf"; sourceTree = "<group>"; };
+		A4922A1823A728FB00FD95B9 /* SFProDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Light.ttf"; sourceTree = "<group>"; };
+		A4922A1923A728FB00FD95B9 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		A4922A1A23A728FB00FD95B9 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		A4922A1B23A728FB00FD95B9 /* SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.ttf"; sourceTree = "<group>"; };
+		A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
+		A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Heavy.ttf"; sourceTree = "<group>"; };
+		A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		A4BAEB2B239DD16300800277 /* NewMeetingViewController+SettingPickers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+SettingPickers.h"; sourceTree = "<group>"; };
 		A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+SettingPickers.m"; sourceTree = "<group>"; };
+		A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
+		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
+		A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
 		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = NewMeetingViewController.h; sourceTree = "<group>"; };
 		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
 		A4EB3BE82396011F0097857F /* UIView+SetupBounds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SetupBounds.h"; sourceTree = "<group>"; };
 		A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetupBounds.m"; sourceTree = "<group>"; };
-		A4EB3BF22397400A0097857F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		A4EB3BF22397400A0097857F /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		A4EB3BFB239747640097857F /* Contact.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = Contact.h; sourceTree = "<group>"; };
 		A4EB3BFC239747640097857F /* Contact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		A4EB3C11239754D40097857F /* ContactCollectionView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionView.h; sourceTree = "<group>"; };
 		A4EB3C12239754D40097857F /* ContactCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionView.m; sourceTree = "<group>"; };
-		A4EB3C1723975F800097857F /* ContactTableViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactTableViewCell.h; sourceTree = "<group>"; };
-		A4EB3C1823975F800097857F /* ContactTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		A4EB3C1A2397DF9A0097857F /* NSString+NewFeatures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+NewFeatures.h"; sourceTree = "<group>"; };
 		A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NewFeatures.m"; sourceTree = "<group>"; };
 		A4EB3C1D2397EAF60097857F /* ContactManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactManager.h; sourceTree = "<group>"; };
 		A4EB3C1E2397EAF60097857F /* ContactManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
 		E219ACC42397DED5002CF585 /* SelectColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
+		E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionInfoTableViewCell.swift; sourceTree = "<group>"; };
 		E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConclusionTableViewCell.h; sourceTree = "<group>"; };
 		E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConclusionTableViewCell.m; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -173,18 +212,18 @@
 		235E7B84238DA93500B59855 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A4EB3BF22397400A0097857F /* ContactViewController.swift */,
+				A4EB3BF22397400A0097857F /* ContactTableViewController.swift */,
 				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
 				49EB44E523871126002F434D /* LoginViewController.swift */,
 				235E7B85238DA95300B59855 /* UnfinishedMeetingViewController.swift */,
 				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
-				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 				231AE149239828170051051C /* MyMeetingsViewController.swift */,
 				A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */,
 				E219ACC42397DED5002CF585 /* SelectColorViewController.swift */,
 				492C050323A1818500442814 /* ProfileViewController.swift */,
 				492C051923A2907A00442814 /* OnBoardingViewController.swift */,
+				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -192,15 +231,17 @@
 		2391532523918E2400479BB6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */,
+				A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */,
 				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
 				23E7E12C2397D46900B99A09 /* UnfinishedTopicsTableViewCell.h */,
 				23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */,
 				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
 				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
-				A4EB3C1723975F800097857F /* ContactTableViewCell.h */,
-				A4EB3C1823975F800097857F /* ContactTableViewCell.m */,
 				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
 				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
+				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */,
+				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -225,6 +266,7 @@
 		49EB44E023871126002F434D /* MeetingiOS */ = {
 			isa = PBXGroup;
 			children = (
+				A4922A0F23A728FB00FD95B9 /* San Francisco Font */,
 				A4533FF4238C58020089257A /* MeetingiOS.entitlements */,
 				49EB44F223871128002F434D /* Info.plist */,
 				49EB44E123871126002F434D /* AppDelegate.swift */,
@@ -238,8 +280,8 @@
 				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
 				A4EB3BE12395E1700097857F /* Storyboards */,
 				2391532523918E2400479BB6 /* TableViewCells */,
-				A4EB3BFA239747000097857F /* Utils */,
 				235E7B84238DA93500B59855 /* ViewControllers */,
+				A4EB3BFA239747000097857F /* Utils */,
 			);
 			path = MeetingiOS;
 			sourceTree = "<group>";
@@ -269,6 +311,28 @@
 				E26A2BCC238D5BD700A956DE /* User.swift */,
 			);
 			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		A4922A0F23A728FB00FD95B9 /* San Francisco Font */ = {
+			isa = PBXGroup;
+			children = (
+				A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */,
+				A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */,
+				A4922A1223A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf */,
+				A4922A1323A728FB00FD95B9 /* SFProText-Semibold.ttf */,
+				A4922A1423A728FB00FD95B9 /* SFProText-Regular.ttf */,
+				A4922A1523A728FB00FD95B9 /* SFProDisplay-Medium.ttf */,
+				A4922A1623A728FB00FD95B9 /* SFProDisplay-Black.ttf */,
+				A4922A1723A728FB00FD95B9 /* SFProText-Light.ttf */,
+				A4922A1823A728FB00FD95B9 /* SFProDisplay-Light.ttf */,
+				A4922A1923A728FB00FD95B9 /* SFProDisplay-Regular.ttf */,
+				A4922A1A23A728FB00FD95B9 /* SFProDisplay-Bold.ttf */,
+				A4922A1B23A728FB00FD95B9 /* SFProText-Bold.ttf */,
+				A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */,
+				A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */,
+				A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */,
+			);
+			path = "San Francisco Font";
 			sourceTree = "<group>";
 		};
 		A4EB3BE12395E1700097857F /* Storyboards */ = {
@@ -305,6 +369,7 @@
 		A4EB3BFA239747000097857F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A49229ED23A3323500FD95B9 /* ContactTableView.swift */,
 				496C515A239893F2000EF74F /* EventManager.h */,
 				496C515B239893F2000EF74F /* EventManager.m */,
 				A4EB3C1D2397EAF60097857F /* ContactManager.h */,
@@ -322,8 +387,9 @@
 		A4EB3C0F2397522A0097857F /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				231AE13B2397E8A80051051C /* ContactCollectionViewCell.h */,
-				231AE13A2397E8A80051051C /* ContactCollectionViewCell.m */,
+				A49229E823A316ED00FD95B9 /* ContactCollectionViewCell.xib */,
+				A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */,
+				A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -389,15 +455,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C5BE8E23A2C105002BE4B9 /* ContactTableViewCell.xib in Resources */,
+				A4922A2723A728FB00FD95B9 /* SFProDisplay-Light.ttf in Resources */,
+				A4922A2A23A728FB00FD95B9 /* SFProText-Bold.ttf in Resources */,
+				A4922A2B23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf in Resources */,
+				A4922A1F23A728FB00FD95B9 /* SFProText-Medium.ttf in Resources */,
 				492C051023A2904800442814 /* OnBoarding.storyboard in Resources */,
+				A4922A2423A728FB00FD95B9 /* SFProDisplay-Medium.ttf in Resources */,
+				A4922A2523A728FB00FD95B9 /* SFProDisplay-Black.ttf in Resources */,
 				49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */,
+				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
+				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
+				A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */,
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
+				A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */,
 				492C050523A1819F00442814 /* Profile.storyboard in Resources */,
 				49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */,
+				A4922A2223A728FB00FD95B9 /* SFProText-Semibold.ttf in Resources */,
+				A4922A2C23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf in Resources */,
+				A49229EA23A316ED00FD95B9 /* ContactCollectionViewCell.xib in Resources */,
+				A4922A2923A728FB00FD95B9 /* SFProDisplay-Bold.ttf in Resources */,
 				49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */,
 				49F09ACB2399A1BA00B7DFD3 /* MyMeetings.storyboard in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
 				49F09ACC2399A1BE00B7DFD3 /* FinishedMeeting.storyboard in Resources */,
+				A4922A2823A728FB00FD95B9 /* SFProDisplay-Regular.ttf in Resources */,
+				A4922A2623A728FB00FD95B9 /* SFProText-Light.ttf in Resources */,
 				49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */,
 				49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */,
 			);
@@ -410,29 +493,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				231AE13C2397E8A80051051C /* ContactCollectionViewCell.m in Sources */,
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */,
 				A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */,
+				A4BAEB2E239F124100800277 /* ContactTableViewController.swift in Sources */,
 				A4BAEB2E239F124100800277 /* ContactViewController.swift in Sources */,
+				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
-				A4EB3C1923975F800097857F /* ContactTableViewCell.m in Sources */,
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,
 				A4EB3C232398555D0097857F /* ContactCollectionView.h in Sources */,
+				A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				A4EB3C24239855640097857F /* ContactManager.h in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
+				A4C5BE9623A30025002BE4B9 /* ContactCollectionViewCell.h in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
-				A4EB3C212398542C0097857F /* ContactTableViewCell.h in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */,
 				A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */,
+				A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */,
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
+				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
 				49EB44E623871126002F434D /* LoginViewController.swift in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				A4EB3C22239854A00097857F /* MeetingiOS-Bridging-Header.h in Sources */,
@@ -446,6 +532,7 @@
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
 				231AE14A239828170051051C /* MyMeetingsViewController.swift in Sources */,
 				A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */,
+				A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				492C050423A1818500442814 /* ProfileViewController.swift in Sources */,
 				A4EB3BFD239747640097857F /* Contact.m in Sources */,

@@ -11,7 +11,7 @@
 @implementation ContactCollectionViewCell
 
 - (void)setContact:(Contact *)contact {
-    [_email setText:contact.email];
+    [_name setText:contact.name];
 }
 
 @end
