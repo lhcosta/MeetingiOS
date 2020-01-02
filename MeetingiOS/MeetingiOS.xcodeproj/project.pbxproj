@@ -499,7 +499,7 @@
 				492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */,
 				A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */,
 				A4BAEB2E239F124100800277 /* ContactTableViewController.swift in Sources */,
-				A4BAEB2E239F124100800277 /* ContactViewController.swift in Sources */,
+				A4BAEB2E239F124100800277 /* ContactTableViewController.swift in Sources */,
 				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
 				235E7B86238DA95300B59855 /* UnfinishedMeetingViewController.swift in Sources */,

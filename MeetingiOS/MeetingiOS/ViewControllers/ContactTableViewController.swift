@@ -170,14 +170,19 @@ extension ContactTableViewController {
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 1 && indexPath.row == 0 {
             
+            let contactViewController = CNContactViewController(forNewContact: nil)
+            let navigation = UINavigationController(rootViewController: contactViewController)
             
+            contactViewController.delegate = self
+            navigation.view.layoutIfNeeded()
+            
+            self.navigationController?.present(navigation, animated: true, completion: nil)
         }
-        
     }
     
 }
@@ -223,8 +228,13 @@ extension ContactTableViewController : ContactTableViewDelegate {
 extension ContactTableViewController : CNContactViewControllerDelegate {
     
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        
+        if let contact = contact {
+            let newContact = Contact(contact: contact)
+            self.addContact(contact: newContact)
+        }
+        
         viewController.dismiss(animated: true, completion: nil)
     }
 }
-
 
