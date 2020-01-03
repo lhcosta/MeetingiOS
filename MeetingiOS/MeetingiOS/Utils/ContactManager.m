@@ -14,6 +14,7 @@
 @property (nonatomic) CNContactFetchRequest* fetchRequest;
 @property (nonatomic) NSMutableDictionary<NSString*, NSArray<Contact*>*>* contacts;
 @property (nonatomic) NSPredicate* predicate;
+
 @end
 
 @implementation ContactManager
@@ -43,7 +44,6 @@
         
         [_fetchRequest setUnifyResults:YES];
         [_fetchRequest setSortOrder:CNContactSortOrderGivenName];
-        
     }
     
     return self;
@@ -64,8 +64,8 @@
                 return;
             }
             
-            if([contact.emailAddresses.firstObject.value length] != 0){
-                
+            if([contact.emailAddresses.firstObject.value length] != 0 && ![contact.emailAddresses.firstObject.value isEqualToString:[NSUserDefaults.standardUserDefaults valueForKey:@"email"]]){
+                    
                 NSMutableArray<Contact*> *contact_aux;
                 Contact* newContact = [[Contact alloc] initWithContact:contact];
                 NSString* key = [contact.givenName substringToIndex:1];
