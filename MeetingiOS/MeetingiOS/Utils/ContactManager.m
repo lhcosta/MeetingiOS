@@ -65,7 +65,7 @@
             }
             
             if([contact.emailAddresses.firstObject.value length] != 0 && ![contact.emailAddresses.firstObject.value isEqualToString:[NSUserDefaults.standardUserDefaults valueForKey:@"email"]]){
-                    
+                        
                 NSMutableArray<Contact*> *contact_aux;
                 Contact* newContact = [[Contact alloc] initWithContact:contact];
                 NSString* key = [contact.givenName substringToIndex:1];

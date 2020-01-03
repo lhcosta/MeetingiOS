@@ -22,9 +22,9 @@ import ContactsUI
     
     @objc var contactCollectionView : ContactCollectionView?
     
-   //MARK:- Delegates
+    //MARK:- Delegates
     @objc weak var contactDelegate : MeetingDelegate?
-        
+    
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
         self.navigationItem.searchController?.searchBar.text?.isEmpty ?? true
@@ -33,8 +33,8 @@ import ContactsUI
     var isFiltering : Bool {
         return !isSearchNameEmpty
     }
-        
-        
+    
+    
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +50,40 @@ import ContactsUI
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
-        self.contactTableViewManager.fetchingContacts { 
-            DispatchQueue.main.async {
-                self.contactTableView.reloadData()
+        
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+            
+            case .authorized, .notDetermined:
+                
+                self.contactTableViewManager.fetchingContacts { (acess) in
+                    if acess {
+                        DispatchQueue.main.async {
+                            self.contactTableView.reloadData()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
             }
+            
+            
+            case .restricted, .denied:
+                
+                let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                })
+                
+                present(alert, animated: true)
+            
+            default:
+                break
         }
+        
+        
+        
     }
     
     deinit {
@@ -83,6 +112,8 @@ extension ContactTableViewController {
     
     /// Configurando navigation controller
     func setupNavigationController() {
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Add participants"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
         
@@ -92,7 +123,6 @@ extension ContactTableViewController {
         searchController.searchBar.placeholder = "Search Contacts"
         
         self.navigationItem.searchController = searchController
-        self.navigationItem.hidesSearchBarWhenScrolling = true
         self.navigationItem.hidesBackButton = true
         
         definesPresentationContext = true
@@ -126,7 +156,7 @@ extension ContactTableViewController : UISearchResultsUpdating {
         
         guard let text = self.navigationItem.searchController?.searchBar.text?.lowercased() else {return}
         var filteringContacts : [Contact] = []
-
+        
         self.contactTableViewManager.sortedContacts.forEach {
             $1.forEach { (contact) in
                 if contact.name?.lowercased().contains(text) ?? false || contact.email?.lowercased().contains(text) ?? false {
@@ -134,11 +164,11 @@ extension ContactTableViewController : UISearchResultsUpdating {
                 }
             }
         }
-                
+        
         self.contactTableViewManager.filteredContacts = filteringContacts
         self.contactTableView.reloadData()  
     }
-
+    
 }
 
 //MARK:- UITableViewDelegate
@@ -155,7 +185,7 @@ extension ContactTableViewController {
             case 2:
                 return 0
             default:
-            break
+                break
         }
         
         return super.tableView(tableView, heightForHeaderInSection: section)
@@ -191,7 +221,7 @@ extension ContactTableViewController {
 extension ContactTableViewController : ContactTableViewDelegate {
     
     func addContact(contact: Contact) {
-                
+        
         self.contactCollectionView?.addContact(contact)
         
         if contactCollectionView?.contacts.count == 1 {
@@ -216,7 +246,7 @@ extension ContactTableViewController : ContactTableViewDelegate {
         self.collectionView.deleteItems(at: [indexPath])  
         self.collectionView.layoutIfNeeded()
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
-
+        
         if contactCollectionView?.contacts.count == 0 {
             self.animateCollection()
         }

@@ -142,13 +142,14 @@ extension ContactTableView : UITableViewDataSource {
 //MARK:- Fetching Contacts and Sending Contacts
 extension ContactTableView {
     
-     func fetchingContacts(completionHandler : @escaping () -> Void) {
+     func fetchingContacts(completionHandler : @escaping (Bool) -> Void) {
         
         var allContacts : [String : [Contact]] = [:]
 
         CNContactStore().requestAccess(for: .contacts) { (acess, error) in
             if let error = error {
                 NSLog("%@", "\(error)")
+                completionHandler(false)
                 return
             }
             
@@ -164,11 +165,11 @@ extension ContactTableView {
                         allContacts = newContacts
                     }
                 })
+                
+                self.sortingContacts(allContacts)                
             }
             
-            self.sortingContacts(allContacts)
-            completionHandler()
-
+            completionHandler(acess)
         }        
     }
 }
