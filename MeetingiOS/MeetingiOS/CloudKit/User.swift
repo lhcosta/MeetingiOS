@@ -128,7 +128,7 @@ import CloudKit
     
     static private func performUpdate(record: CKRecord) {
         cloud.updateRecords(records: [record], perRecordCompletion: { (_, error) in
-            print(error)
+            print(error ?? "Sem erro")
         }){
             print("Update complete")
         }
