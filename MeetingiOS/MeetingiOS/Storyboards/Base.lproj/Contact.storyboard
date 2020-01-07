@@ -12,11 +12,11 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Contact Table View Controller-->
+        <!--Contact View Controller-->
         <scene sceneID="3Mg-4C-uDO">
             <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="Rba-Rt-xy8" customClass="ContactTableViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Rw0-4B-ZL3">
+                <tableViewController modalPresentationStyle="fullScreen" id="Rba-Rt-xy8" customClass="ContactViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Rw0-4B-ZL3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,25 +103,51 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Section-3" id="g7d-UL-Vm3">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="572" id="Iyc-zz-JYk">
-                                        <rect key="frame" x="0.0" y="301" width="414" height="572"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="429" id="Iyc-zz-JYk">
+                                        <rect key="frame" x="0.0" y="301" width="414" height="429"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iyc-zz-JYk" id="AIC-tP-6z1">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="572"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="429"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-ge-DXZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="572"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="429"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </tableView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="bnc-ge-DXZ" firstAttribute="leading" secondItem="AIC-tP-6z1" secondAttribute="leading" id="0on-MD-4hO"/>
                                                 <constraint firstAttribute="trailing" secondItem="bnc-ge-DXZ" secondAttribute="trailing" id="BEn-8i-pA9"/>
-                                                <constraint firstAttribute="bottom" secondItem="bnc-ge-DXZ" secondAttribute="bottom" id="rag-BS-h4U"/>
+                                                <constraint firstAttribute="bottom" secondItem="bnc-ge-DXZ" secondAttribute="bottom" id="HQD-SC-5s4"/>
                                                 <constraint firstItem="bnc-ge-DXZ" firstAttribute="top" secondItem="AIC-tP-6z1" secondAttribute="top" id="wuX-Tq-SI3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Section-4" id="907-5d-RLo">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="297" id="8ac-u3-byI">
+                                        <rect key="frame" x="0.0" y="786" width="414" height="297"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8ac-u3-byI" id="t42-IE-oWP">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hqu-a7-dXc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </tableView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Hqu-a7-dXc" firstAttribute="top" secondItem="t42-IE-oWP" secondAttribute="top" id="UvP-F5-PV8"/>
+                                                <constraint firstAttribute="bottom" secondItem="Hqu-a7-dXc" secondAttribute="bottom" id="Whm-Qc-dHA"/>
+                                                <constraint firstItem="Hqu-a7-dXc" firstAttribute="leading" secondItem="t42-IE-oWP" secondAttribute="leading" id="hax-mc-aSZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hqu-a7-dXc" secondAttribute="trailing" id="qKp-kw-tqO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

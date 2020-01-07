@@ -11,7 +11,7 @@ import Contacts
 import ContactsUI
 
 /// View Controller para selecionar os contatos para reunião
-@objc class ContactTableViewController: UITableViewController {
+@objc class ContactViewController: UITableViewController {
     
     //MARK:- IBOutlets
     @IBOutlet weak var collectionView : UICollectionView!
@@ -108,12 +108,11 @@ import ContactsUI
 }
 
 //MARK:- UINavigationController
-extension ContactTableViewController {
+extension ContactViewController {
     
     /// Configurando navigation controller
     func setupNavigationController() {
         
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Add participants"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
         
@@ -122,6 +121,7 @@ extension ContactTableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Contacts"
         
+        self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesBackButton = true
         
@@ -131,7 +131,7 @@ extension ContactTableViewController {
 }
 
 //MARK:- UICollectionView
-extension ContactTableViewController {
+extension ContactViewController {
     
     /// Animando a collection view. 
     func animateCollection() {
@@ -150,7 +150,7 @@ extension ContactTableViewController {
 }
 
 //MARK:- UISearchResultsUpdating
-extension ContactTableViewController : UISearchResultsUpdating {
+extension ContactViewController : UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -172,7 +172,7 @@ extension ContactTableViewController : UISearchResultsUpdating {
 }
 
 //MARK:- UITableViewDelegate
-extension ContactTableViewController {
+extension ContactViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
@@ -197,6 +197,10 @@ extension ContactTableViewController {
             return 0
         }
         
+//        if indexPath.section == 2 {
+//            return tableView.frame.height
+//        }
+
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -218,7 +222,7 @@ extension ContactTableViewController {
 }
 
 //MARK:- ContactTableViewDelegate 
-extension ContactTableViewController : ContactTableViewDelegate {
+extension ContactViewController : ContactTableViewDelegate {
     
     func addContact(contact: Contact) {
         
@@ -255,7 +259,7 @@ extension ContactTableViewController : ContactTableViewDelegate {
 }
 
 //MARK:- CNContactViewControllerDelegate
-extension ContactTableViewController : CNContactViewControllerDelegate {
+extension ContactViewController : CNContactViewControllerDelegate {
     
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
         

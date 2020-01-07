@@ -249,8 +249,8 @@
     
     if ([segue.identifier isEqualToString:@"SelectContacts"]) {
         
-        ContactTableViewController* contactViewController = [segue destinationViewController];
-        
+        ContactViewController* contactViewController = [segue destinationViewController];
+         
         if(contactViewController) {
             [contactViewController setContactDelegate:self];
             [contactViewController setContactCollectionView:_contactCollectionView];

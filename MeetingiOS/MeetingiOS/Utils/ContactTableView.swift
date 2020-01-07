@@ -17,7 +17,7 @@ protocol ContactTableViewDelegate : AnyObject {
 class ContactTableView : NSObject {
     
     //MARK:- UITableViewController
-    private var contactViewController : ContactTableViewController!
+    private var contactViewController : ContactViewController!
     
     //MARK:- Properties
     var sortedContacts : [(key : String, value : [Contact])] = []
@@ -28,7 +28,7 @@ class ContactTableView : NSObject {
     //MARK:- Delegates 
     private weak var delegate : ContactTableViewDelegate?
     
-    init(_ viewController : ContactTableViewController) {
+    init(_ viewController : ContactViewController) {
         self.contactViewController = viewController
         self.delegate = viewController
     }
