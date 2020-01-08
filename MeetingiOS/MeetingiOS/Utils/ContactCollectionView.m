@@ -71,8 +71,8 @@
     _contacts = [mutableContacts copy];
     
     [collectionView deleteItemsAtIndexPaths:@[indexPath]];
-    
-    [NSNotificationCenter.defaultCenter postNotificationName:@"RemoveContact" object:nil];
+        
+    [NSNotificationCenter.defaultCenter postNotificationName:@"RemoveContact" object: contact];
     
 }
 

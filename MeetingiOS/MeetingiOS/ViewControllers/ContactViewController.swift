@@ -78,12 +78,18 @@ import Contacts
             default:
                 break
         }
+        
+        self.markAllSelectedContacts()
     }
-    
+  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.contactCollectionView?.contacts.count == 0 ? self.animateCollection(.hide) : self.animateCollection(.show)
+    
+        if self.contactCollectionView?.contacts.count ?? 0 > 0 {
+            self.animateCollection(.show)
+        }
     }
+    
    
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -105,6 +111,23 @@ import Contacts
     @objc func sendingContactsToMeeting() {
         self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    /// Marcando todos os contatos que foram selecionados anteriormente.
+    func markAllSelectedContacts() {
+        
+        if let contacts = contactCollectionView?.contacts {
+            for contact in contacts {
+                
+                if let key = contact.name?.first?.uppercased() {
+                    let selectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
+                        return $0.email == contact.email
+                    })
+                        
+                    selectedContact?.isSelected = true
+                }
+            }
+        }
     }
     
 }
@@ -156,14 +179,29 @@ extension ContactViewController {
         }
     }
     
-    /// Deselecionar um contanto que foi removido.
-    @objc func deselectContactInRow() {
+    /// Deselecionar um contanto que foi removido pela collection view.
+    @objc func deselectContactInRow(_ notification : NSNotification) {
+                        
+        guard let contact = notification.object as? Contact,  let key = contact.name?.first?.uppercased() else {return}
         
-        self.contactTableView.reloadData()
+        let deselectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
+            return $0.email == contact.email
+        })
+        
+        deselectedContact?.isSelected = false
+        
+        for indexPath in contactTableView.indexPathsForSelectedRows ?? [] {
+            if let cell = contactTableView.cellForRow(at: indexPath) as? ContactTableViewCell {
+                if cell.contact == deselectedContact {
+                    self.contactTableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
         
         if contactCollectionView?.contacts.count == 0 {
             self.animateCollection(.hide)
         }
+        
     }
 }
 
@@ -206,9 +244,7 @@ extension ContactViewController : ContactTableViewDelegate {
         
         self.collectionView.insertItems(at: [indexPath])
         self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
-        
-        self.collectionView.layoutIfNeeded()
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
+    
     }
     
     /// Removendo contatos da collection view que foram deselecionados.
@@ -224,9 +260,6 @@ extension ContactViewController : ContactTableViewDelegate {
           self.collectionView.scrollToItem(at: IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0), at: .left, animated: true)
         self.contactCollectionView?.removeContactIndex(indexPath.item)
         self.collectionView.deleteItems(at: [indexPath])  
-
-        self.collectionView.layoutIfNeeded()
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
         
         if contactCollectionView?.contacts.count == 0 {
             self.animateCollection(.hide)

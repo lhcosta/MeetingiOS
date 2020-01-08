@@ -25,10 +25,10 @@ class ContactTableView : NSObject {
     private var contactViewController : ContactViewController!
     
     //MARK:- Properties
+    var contacts : [String : [Contact]] = [:]
     var sortedContacts : [(key : String, value : [Contact])] = []
     var filteredContacts : [Contact] = []
     var contactManager = ContactManager.shared()
-    var selectedContacts : [Contact] = []
     
     //MARK:- Delegates 
     private weak var delegate : ContactTableViewDelegate?
@@ -49,6 +49,8 @@ extension ContactTableView : UITableViewDelegate {
         
         if indexPath.section == 0 && !contactViewController.isFiltering {
             
+            tableView.cellForRow(at: indexPath)?.isSelected = false
+            
             let contact = CNContact()
             let newContactViewController = CNContactViewController(forNewContact: contact)
             newContactViewController.contactStore = CNContactStore()
@@ -60,7 +62,7 @@ extension ContactTableView : UITableViewDelegate {
             newContactViewController.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
             
             self.contactViewController.present(navigationController, animated: true, completion: nil)
-            
+                        
             return
         }
         
@@ -216,6 +218,9 @@ private extension ContactTableView {
     /// Ordenação dos contatos.
     /// - Parameter contacts: todos os contatos do usuário que possuem email separados por chaves.
     func sortingContacts(_ contacts : [String : [Contact]]) {
+        
+        self.contacts = contacts
+        
         self.sortedContacts = contacts.sorted(by: { (lhs, rhs) -> Bool in
             return lhs.key < rhs.key
         })
