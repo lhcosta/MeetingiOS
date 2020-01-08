@@ -20,6 +20,7 @@
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
 @property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
+@property (nonatomic, nonnull) UIAlertController* alertLoading;
 @property (nonatomic) BOOL chooseNumberOfTopics;
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
@@ -270,6 +271,8 @@
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     
+    [self showLoadingIndicator];
+    
     if(theme.length == 0) {
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Meeting" message:@"Choose a name for create a meeting." preferredStyle:UIAlertControllerStyleAlert];
@@ -321,7 +324,10 @@
                 NSUInteger vcCount = [self.navigationController.viewControllers count];
                 MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
                 previousVC.newMeeting = self->_meeting;
-                [self.navigationController popViewControllerAnimated:YES];
+                
+                [self.alertLoading dismissViewControllerAnimated:YES completion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
             });
         }];
     }];
@@ -357,5 +363,25 @@
     }];
 }
 
-@end
 
+/// Criando uma view que indica um loading quando criada uma reunião.
+- (void) showLoadingIndicator {
+
+    _alertLoading = [UIAlertController alertControllerWithTitle:Nil message:@"Creating Meeting..." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIActivityIndicatorView* loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
+    
+    [loadingIndicator setHidesWhenStopped:YES];
+    [loadingIndicator startAnimating];
+    
+    [_alertLoading.view addSubview:loadingIndicator];
+    
+    [[loadingIndicator.centerYAnchor constraintEqualToAnchor:_alertLoading.view.centerYAnchor constant:0] setActive:YES];
+    [[loadingIndicator.leftAnchor constraintEqualToAnchor:_alertLoading.view.leftAnchor constant:10] setActive:YES];
+    [loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self presentViewController:_alertLoading animated:YES completion:Nil];
+}
+
+
+@end
