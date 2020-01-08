@@ -12,7 +12,6 @@
 
 @property (nonatomic) CNContactStore* contactsStore;
 @property (nonatomic) CNContactFetchRequest* fetchRequest;
-@property (nonatomic) NSMutableDictionary<NSString*, NSArray<Contact*>*>* contacts;
 @property (nonatomic) NSPredicate* predicate;
 
 @end
@@ -36,8 +35,6 @@
     self = [super init];
     if (self) {
         
-        _contacts = [[NSMutableDictionary alloc] init];
-        
         NSArray<id<CNKeyDescriptor>> *keysToFetch = @[CNContactGivenNameKey, CNContactEmailAddressesKey];
         _contactsStore = [[CNContactStore alloc] init];
         _fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keysToFetch];
@@ -52,37 +49,38 @@
 - (void)fetchContactsWithEmail:(void (^)(NSDictionary<NSString *,NSArray<Contact *> *> * _Nullable, NSError * _Nullable))allContacts {
     
     NSError *error = [[NSError alloc] initWithDomain:@"Problem when fetching contacts" code:201 userInfo:nil];
+    NSMutableDictionary<NSString*, NSArray<Contact*>*>* contacts = [[NSMutableDictionary alloc] init];
     
     if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) {
         
-        if(_contacts.count) {
-            allContacts(_contacts, Nil);
-        
-        } else if([_contactsStore enumerateContactsWithFetchRequest:_fetchRequest error:&error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+        if([_contactsStore enumerateContactsWithFetchRequest:_fetchRequest error:&error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
             
             if(!stop) {
                 return;
             }
             
             if([contact.emailAddresses.firstObject.value length] != 0 && ![contact.emailAddresses.firstObject.value isEqualToString:[NSUserDefaults.standardUserDefaults valueForKey:@"email"]]){
-                        
+                
                 NSMutableArray<Contact*> *contact_aux;
                 Contact* newContact = [[Contact alloc] initWithContact:contact];
-                NSString* key = [contact.givenName substringToIndex:1];
+                NSString* key = [contact.givenName substringToIndex:1].uppercaseString;
                 
-                if([self.contacts objectForKey:key]) {
-                    contact_aux = [[self.contacts valueForKey:key] mutableCopy];
+                if ([key integerValue])
+                    key = @"#";
+                
+                if([contacts objectForKey:key]) {
+                    contact_aux = [[contacts valueForKey:key] mutableCopy];
                 } else {
                     contact_aux = [[NSMutableArray alloc] init];
                 }
                 
                 [contact_aux addObject:newContact];
                 
-                [self.contacts setValue:[contact_aux copy] forKey:key];                
+                [contacts setValue:[contact_aux copy] forKey:key];                
             }            
             
         }]) {
-            allContacts(_contacts, Nil);            
+            allContacts(contacts, Nil);            
         } else {
             allContacts(Nil, error);
         }

@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param allContacts enviando todos os contatos por meio de um bloco
 -(void) fetchContactsWithEmail:(void (^)( NSDictionary<NSString*,NSArray<Contact*>*>* _Nullable contacts, NSError* _Nullable error))allContacts;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

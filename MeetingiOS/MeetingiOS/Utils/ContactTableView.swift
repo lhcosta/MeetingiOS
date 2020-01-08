@@ -8,11 +8,16 @@
 
 import Foundation
 import Contacts
+import ContactsUI
 
+/// Delegate quando selecionados ou removidos contatos da table view.
 protocol ContactTableViewDelegate : AnyObject {
     func addContact(contact : Contact)
     func removeContact(contact : Contact)
 }
+
+/// Classe model para a table view de contatos do usuário.
+/// - Author: Lucas Costa
 
 class ContactTableView : NSObject {
     
@@ -28,6 +33,8 @@ class ContactTableView : NSObject {
     //MARK:- Delegates 
     private weak var delegate : ContactTableViewDelegate?
     
+    /// Inicializando com uma view controller que possue a table view.
+    /// - Parameter viewController: view controller responsável pela table view.
     init(_ viewController : ContactViewController) {
         self.contactViewController = viewController
         self.delegate = viewController
@@ -40,13 +47,30 @@ extension ContactTableView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if indexPath.section == 0 && !contactViewController.isFiltering {
+            
+            let contact = CNContact()
+            let newContactViewController = CNContactViewController(forNewContact: contact)
+            newContactViewController.contactStore = CNContactStore()
+            newContactViewController.delegate = self
+            newContactViewController.view.layoutIfNeeded()
+            
+            let navigationController = UINavigationController(rootViewController: newContactViewController)
+            
+            newContactViewController.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
+            
+            self.contactViewController.present(navigationController, animated: true, completion: nil)
+            
+            return
+        }
+        
         let cell = tableView.cellForRow(at: indexPath) as! ContactTableViewCell
         var selectedContact : Contact
         
         if contactViewController.isFiltering {
             selectedContact = self.filteredContacts[indexPath.row]
         } else {
-            selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
+            selectedContact = self.sortedContacts[indexPath.section-1].value[indexPath.row]
         }
         
         cell.imageSelect.tintColor = UIColor(hexString: "#507EFE", alpha: 1)
@@ -69,7 +93,7 @@ extension ContactTableView : UITableViewDelegate {
         if contactViewController.isFiltering {
             selectedContact = self.filteredContacts[indexPath.row]
         } else {
-            selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
+            selectedContact = self.sortedContacts[indexPath.section-1].value[indexPath.row]
         }  
             
         cell.imageSelect.tintColor = UIColor(hexString: "#E3E3E3", alpha: 1)
@@ -94,7 +118,7 @@ extension ContactTableView : UITableViewDelegate {
 extension ContactTableView : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {        
-        return contactViewController.isFiltering == true ? 1 : self.sortedContacts.count
+        return contactViewController.isFiltering == true ? 1 : (self.sortedContacts.count + 1)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -103,7 +127,11 @@ extension ContactTableView : UITableViewDataSource {
             return "Search Results"
         }
         
-        return String(self.sortedContacts[section].key)
+        if section == 0 {
+            return "Contacts"
+        }
+        
+        return String(self.sortedContacts[section-1].key)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,19 +140,25 @@ extension ContactTableView : UITableViewDataSource {
             return self.filteredContacts.count
         }
         
-        let elements = self.sortedContacts[section].value
-        
-        return elements.count
+        if section == 0 {
+            return 1
+        }
+                
+        return self.sortedContacts[section-1].value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 && !contactViewController.isFiltering {
+            return tableView.dequeueReusableCell(withIdentifier: "NewContactCell", for: indexPath) as! NewContactTableViewCell
+        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell 
         
         if contactViewController.isFiltering {
             cell.contact = self.filteredContacts[indexPath.row]
         } else {
-            cell.contact = self.sortedContacts[indexPath.section].value[indexPath.row]
+            cell.contact = self.sortedContacts[indexPath.section-1].value[indexPath.row]
         }
         
         if cell.contact?.isSelected ?? false {
@@ -142,6 +176,8 @@ extension ContactTableView : UITableViewDataSource {
 //MARK:- Fetching Contacts and Sending Contacts
 extension ContactTableView {
     
+    /// Realizando a busca de todos os contatos que possuem email.
+    /// - Parameter completionHandler: closure com paramêtro para acesso ou não aos contatos.
      func fetchingContacts(completionHandler : @escaping (Bool) -> Void) {
         
         var allContacts : [String : [Contact]] = [:]
@@ -177,10 +213,26 @@ extension ContactTableView {
 //MARK:- Sorting Contacts
 private extension ContactTableView {
     
-    /// Ordenar os contatos.
+    /// Ordenação dos contatos.
+    /// - Parameter contacts: todos os contatos do usuário que possuem email separados por chaves.
     func sortingContacts(_ contacts : [String : [Contact]]) {
         self.sortedContacts = contacts.sorted(by: { (lhs, rhs) -> Bool in
             return lhs.key < rhs.key
         })
     }
+}
+
+//MARK:- CNContactViewController
+extension ContactTableView : CNContactViewControllerDelegate {
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        
+        if let email = contact?.emailAddresses.first?.value as String?, !email.isEmpty {
+            let contact = Contact(contact: contact!)
+            self.contactViewController.addContact(contact: contact)
+        }
+        
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
 }

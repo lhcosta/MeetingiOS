@@ -59,7 +59,6 @@
     
     [self setupDatePicker];
     [self setupViews];
-    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#ECF0F4" alpha:1]];
         
     [self.navigationItem setTitle:TITLE_NAV];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
@@ -212,6 +211,7 @@
                 UIView* view = [self.views objectAtIndex:3];
                 view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner | kCALayerMinXMaxYCorner;
                 return 0;
+                
             } else if (_contactCollectionView.contacts.count != 0) {
                 UIView* view = [self.views objectAtIndex:3];
                 view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;

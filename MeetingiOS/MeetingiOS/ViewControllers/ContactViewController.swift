@@ -8,18 +8,17 @@
 
 import UIKit
 import Contacts
-import ContactsUI
 
 /// View Controller para selecionar os contatos para reunião
-@objc class ContactViewController: UITableViewController {
+@objc class ContactViewController: UIViewController {
     
     //MARK:- IBOutlets
-    @IBOutlet weak var collectionView : UICollectionView!
     @IBOutlet private weak var contactTableView : UITableView!
+    @IBOutlet weak var selectedContactsConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK:- Properties
     private var contactTableViewManager : ContactTableView!
-    
     @objc var contactCollectionView : ContactCollectionView?
     
     //MARK:- Delegates
@@ -39,17 +38,15 @@ import ContactsUI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView.register(UINib(nibName: "ContactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContactCollectionCell")
-        
         self.contactTableViewManager = ContactTableView(self)
         self.setupTableViewContacts()
         self.setupNavigationController()
-        
-        self.collectionView.delegate = contactCollectionView
-        self.collectionView.dataSource = contactCollectionView
-        
+ 
+        collectionView.delegate = contactCollectionView
+        collectionView.dataSource = contactCollectionView
+        self.collectionView.register(UINib(nibName: "ContactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContactCollectionCell")
+    
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
-        
         
         switch CNContactStore.authorizationStatus(for: .contacts) {
             
@@ -81,14 +78,17 @@ import ContactsUI
             default:
                 break
         }
-        
-        
-        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.contactCollectionView?.contacts.count == 0 ? self.animateCollection(.hide) : self.animateCollection(.show)
+    }
+   
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+
     
     /// Setup inicial da table view dos contatos.
     func setupTableViewContacts() {        
@@ -98,8 +98,10 @@ import ContactsUI
         self.contactTableView.allowsMultipleSelection = true
         self.contactTableView.allowsMultipleSelectionDuringEditing = true
         self.contactTableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
+        self.contactTableView.register(UINib(nibName: "NewContactTableViewCell", bundle: nil), forCellReuseIdentifier: "NewContactCell")
     }
     
+    /// Confirmando contatos selecionados para a reunião.
     @objc func sendingContactsToMeeting() {
         self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
@@ -133,19 +135,35 @@ extension ContactViewController {
 //MARK:- UICollectionView
 extension ContactViewController {
     
+    enum Animation {
+        case show
+        case hide
+    }
+    
     /// Animando a collection view. 
-    func animateCollection() {
+    /// - Parameter animation: mostrar ou esconder a collection view.
+    func animateCollection(_ animation : Animation) {
+        
         UIView.animate(withDuration: 0.5) { 
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
+            switch animation {
+                case .hide:
+                    self.selectedContactsConstraint.constant = 0
+                case .show:
+                    self.selectedContactsConstraint.constant = self.view.frame.height * 0.15
+            }
+            
+            self.view.layoutIfNeeded()
         }
     }
     
-    
     /// Deselecionar um contanto que foi removido.
     @objc func deselectContactInRow() {
+        
         self.contactTableView.reloadData()
-        self.animateCollection()
+        
+        if contactCollectionView?.contacts.count == 0 {
+            self.animateCollection(.hide)
+        }
     }
 }
 
@@ -171,73 +189,30 @@ extension ContactViewController : UISearchResultsUpdating {
     
 }
 
-//MARK:- UITableViewDelegate
-extension ContactViewController {
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        switch section {
-            case 0:
-                if contactCollectionView?.contacts.count == 0 {
-                    return 0
-                }
-                return 44
-            case 2:
-                return 0
-            default:
-                break
-        }
-        
-        return super.tableView(tableView, heightForHeaderInSection: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if contactCollectionView?.contacts.count == 0 && indexPath.section == 0 {
-            return 0
-        }
-        
-//        if indexPath.section == 2 {
-//            return tableView.frame.height
-//        }
-
-        return super.tableView(tableView, heightForRowAt: indexPath)
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 1 && indexPath.row == 0 {
-            
-            let contactViewController = CNContactViewController(forNewContact: nil)
-            let navigation = UINavigationController(rootViewController: contactViewController)
-            
-            contactViewController.delegate = self
-            navigation.view.layoutIfNeeded()
-            
-            self.navigationController?.present(navigation, animated: true, completion: nil)
-        }
-    }
-    
-}
-
 //MARK:- ContactTableViewDelegate 
 extension ContactViewController : ContactTableViewDelegate {
     
+    /// Adicionando contatos a collection view que foram selecionados.
+    /// - Parameter contact: contato selecionado.
     func addContact(contact: Contact) {
         
+        if contactCollectionView?.contacts.count == 0 {
+            self.animateCollection(.show)
+        }        
+        
         self.contactCollectionView?.addContact(contact)
-        
-        if contactCollectionView?.contacts.count == 1 {
-            self.animateCollection()
-        }
-        
+            
         let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
+        
         self.collectionView.insertItems(at: [indexPath])
-        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)  
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        
+        self.collectionView.layoutIfNeeded()
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
     }
     
+    /// Removendo contatos da collection view que foram deselecionados.
+    /// - Parameter contact: contato deselecionado.
     func removeContact(contact: Contact) {
         
         let index = self.contactCollectionView?.contacts.firstIndex(where: {
@@ -246,29 +221,20 @@ extension ContactViewController : ContactTableViewDelegate {
         
         let indexPath = IndexPath(item: index!, section: 0)
         
+          self.collectionView.scrollToItem(at: IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0), at: .left, animated: true)
         self.contactCollectionView?.removeContactIndex(indexPath.item)
         self.collectionView.deleteItems(at: [indexPath])  
+
         self.collectionView.layoutIfNeeded()
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false    
         
         if contactCollectionView?.contacts.count == 0 {
-            self.animateCollection()
+            self.animateCollection(.hide)
         }
-        
     }
 }
 
-//MARK:- CNContactViewControllerDelegate
-extension ContactViewController : CNContactViewControllerDelegate {
-    
-    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        
-        if let contact = contact {
-            let newContact = Contact(contact: contact)
-            self.addContact(contact: newContact)
-        }
-        
-        viewController.dismiss(animated: true, completion: nil)
-    }
-}
+
+
+
 
