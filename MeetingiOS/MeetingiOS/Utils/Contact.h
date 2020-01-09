@@ -27,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Inicializar com o CNContact
 -(instancetype) initWithContact:(CNContact*)contact;
 
-/// Inicializar apenas com o email
--(instancetype) initWithEmail:(NSString*)email;
-
 @end
 
 NS_ASSUME_NONNULL_END

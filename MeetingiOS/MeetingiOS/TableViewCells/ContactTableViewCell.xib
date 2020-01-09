@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProText-Regular.ttf">
+            <string>SFProText-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContactTableViewCell" id="KGk-i7-Jjw" customClass="ContactTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="328" height="72"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fdR-vE-Ls9">
+                        <rect key="frame" x="10" y="10" width="298" height="52"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DXj-hy-DpY">
+                                <rect key="frame" x="0.0" y="6" width="268" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-pq-fHR">
+                                        <rect key="frame" x="0.0" y="-2" width="40" height="44"/>
+                                        <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="2O9-n7-lkC"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="34b-2B-Uwy"/>
+                                        </constraints>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="6ll-M7-i6d">
+                                        <rect key="frame" x="45" y="4" width="223" height="32"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1k-WW-Wmq">
+                                                <rect key="frame" x="0.0" y="0.0" width="223" height="14.5"/>
+                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySp-Ie-dfC">
+                                                <rect key="frame" x="0.0" y="17.5" width="223" height="14.5"/>
+                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XXE-zj-n5Y">
+                                <rect key="frame" x="278" y="16.5" width="20" height="19"/>
+                                <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="eHP-es-56d"/>
+                                    <constraint firstAttribute="width" constant="20" id="o8v-Kd-TIO"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fdR-vE-Ls9" secondAttribute="trailing" constant="20" id="FRD-nM-Sqs"/>
+                    <constraint firstItem="fdR-vE-Ls9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="KSG-IR-pab"/>
+                    <constraint firstItem="fdR-vE-Ls9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="akL-OL-Ocf"/>
+                    <constraint firstAttribute="bottom" secondItem="fdR-vE-Ls9" secondAttribute="bottom" constant="10" id="dIR-a9-FSW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="email" destination="ySp-Ie-dfC" id="irU-9E-kNP"/>
+                <outlet property="imageSelect" destination="XXE-zj-n5Y" id="KgV-9I-qEy"/>
+                <outlet property="name" destination="P1k-WW-Wmq" id="4qN-Vr-CY0"/>
+            </connections>
+            <point key="canvasLocation" x="51" y="30"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="circle.fill" catalog="system" width="64" height="60"/>
+        <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
+    </resources>
+</document>

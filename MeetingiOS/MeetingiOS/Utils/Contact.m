@@ -22,15 +22,4 @@
     return self;
 }
 
-- (instancetype)initWithEmail:(NSString *)email {
-    self = [super init];
-    
-    if(self) {
-        _email = email;
-    }
-    
-    return self;
-}
-
-
 @end

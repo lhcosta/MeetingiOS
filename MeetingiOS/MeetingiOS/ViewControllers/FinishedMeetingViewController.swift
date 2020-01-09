@@ -75,7 +75,8 @@ class FinishedMeetingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "conclusions" {
             let vc = segue.destination as! ConclusionsViewController
-            vc.topicToPresentConclusions = sender as? Topic
+            let temp = sender as? Topic
+            vc.topicToPresentConclusions = temp
         }
     }
 }

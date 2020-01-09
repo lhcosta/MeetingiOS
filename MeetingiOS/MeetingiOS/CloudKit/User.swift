@@ -14,6 +14,9 @@ import CloudKit
     //MARK: - Properties
     private(set) var record: CKRecord
     
+    private static let defaults = UserDefaults.standard
+    private static let cloud = CloudManager.shared
+    
     var appleCredential: String? {
         get {
             return self.record.value(forKey: "appCredential") as? String
@@ -86,6 +89,48 @@ import CloudKit
             print("\(String(describing: rec.value(forKey: "email") as? String))")
             
             compleetion(true)
+        }
+    }
+    
+    static func updateUser(name: String?, email: String?, completion: @escaping (() -> Void)) {
+        guard let recordName = defaults.string(forKey: "recordName") else { return }
+        let recordID = CKRecord.ID(recordName: recordName)
+        let userCK = CKRecord(recordType: "User", recordID: recordID)
+        var emailExists = false
+
+        if let name = name {
+            userCK.setValue(name, forKey: "name")
+        }
+        
+        if let email = email {
+            let predicate = NSPredicate(format: "email = %@", email)
+            cloud.readRecords(recorType: "User", predicate: predicate, desiredKeys: ["recordName"], perRecordCompletion: { _ in
+                emailExists = true
+            }) {
+                if emailExists {
+                    print("email ja existente")
+                } else {
+                    userCK.setValue(email, forKey: "email")
+                    if let name = name {
+                        self.defaults.set(name, forKey: "givenName")
+                    }
+                    self.defaults.set(email, forKey: "email")
+                    performUpdate(record: userCK)
+                    completion()
+                }
+            }
+        } else {
+            self.defaults.set(name, forKey: "givenName")
+            performUpdate(record: userCK)
+            completion()
+        }
+    }
+    
+    static private func performUpdate(record: CKRecord) {
+        cloud.updateRecords(records: [record], perRecordCompletion: { (_, error) in
+            print(error ?? "Sem erro")
+        }){
+            print("Update complete")
         }
     }
     

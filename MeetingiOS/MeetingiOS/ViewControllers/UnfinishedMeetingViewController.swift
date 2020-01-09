@@ -13,11 +13,11 @@ import CloudKit
 /// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
 class UnfinishedMeetingViewController: UIViewController {
 
-    //MARK: - Properties
+    //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
-    
     @IBOutlet var mirrorButton: UIButton!
     
+     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
     
@@ -46,10 +46,10 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
+    /// Conexão Multipeer
     var multipeer : MeetingBrowserPeer?
     
     var meetingTeste : Meeting?
-    
     
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
@@ -202,7 +202,6 @@ class UnfinishedMeetingViewController: UIViewController {
         }
     }
 }
-
 
 //MARK: - Table View Delegate/DataSource
 extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {

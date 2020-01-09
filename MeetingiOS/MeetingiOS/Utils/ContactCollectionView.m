@@ -47,7 +47,7 @@
 
 //MARK:- UICollectionViewDataSource
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath { 
-    
+
     ContactCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ContactCollectionCell" forIndexPath:indexPath];
     
     [cell setContact:_contacts[indexPath.item]];
@@ -71,14 +71,18 @@
     _contacts = [mutableContacts copy];
     
     [collectionView deleteItemsAtIndexPaths:@[indexPath]];
-    
-    [NSNotificationCenter.defaultCenter postNotificationName:@"RemoveContact" object:nil];
+        
+    [NSNotificationCenter.defaultCenter postNotificationName:@"RemoveContact" object: contact];
     
 }
 
 //MARK:- UICollectionViewDelegateFlowLayout
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 10, 10, 30);
+    return UIEdgeInsetsMake(0, 20, 0, 20);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(60, collectionView.frame.size.height);    
 }
 
 @end

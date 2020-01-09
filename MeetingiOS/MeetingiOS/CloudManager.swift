@@ -88,7 +88,7 @@ import CloudKit
         }
         
         queryOp.queryCompletionBlock = { (_, error) in
-            print(error)
+            print(error ?? "Sem erro")
         }
         
         queryOp.recordFetchedBlock = { (record) in

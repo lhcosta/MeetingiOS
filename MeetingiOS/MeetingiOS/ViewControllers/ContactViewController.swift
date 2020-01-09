@@ -13,18 +13,12 @@ import Contacts
 @objc class ContactViewController: UIViewController {
     
     //MARK:- IBOutlets
-    @IBOutlet private weak var tableView : UITableView!
-    @IBOutlet private weak var collectionView : UICollectionView!
-    @IBOutlet private weak var searchName : UISearchBar!
-    @IBOutlet private weak var titleParticipants : UIView!
-    @IBOutlet private weak var addNewContact : UIButton!
+    @IBOutlet private weak var contactTableView : UITableView!
+    @IBOutlet weak var selectedContactsConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK:- Properties
-    private var contacts : [String : [Contact]] = [:]
-    private var sortedContacts : [(key : String, value : [Contact])] = []
-    private var filteringContacts : [Contact] = []
-    private var contactManager = ContactManager.shared()
-    private var selectedContacts : [Contact] = []
+    private var contactTableViewManager : ContactTableView!
     @objc var contactCollectionView : ContactCollectionView?
     
     //MARK:- Delegates
@@ -32,16 +26,10 @@ import Contacts
     
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
-        let notHaveName = searchName.text?.isEmpty ?? true 
-        
-        if notHaveName {
-            self.searchName.resignFirstResponder()
-        }
-        
-        return notHaveName
+        self.navigationItem.searchController?.searchBar.text?.isEmpty ?? true
     }
     
-    private var isFiltering : Bool {
+    var isFiltering : Bool {
         return !isSearchNameEmpty
     }
     
@@ -49,241 +37,122 @@ import Contacts
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        self.setupTableView()
-        self.setupSearchBar()        
         
-        //MARK:- Navigation
-        self.navigationItem.title = "Contacts"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
-        
+        self.contactTableViewManager = ContactTableView(self)
+        self.setupTableViewContacts()
+        self.setupNavigationController()
+ 
+        collectionView.delegate = contactCollectionView
+        collectionView.dataSource = contactCollectionView
+        self.collectionView.register(UINib(nibName: "ContactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContactCollectionCell")
+    
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
         
-        self.fetchingContacts {
-            self.sortingContacts()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+            
+            case .authorized, .notDetermined:
+                
+                self.contactTableViewManager.fetchingContacts { (acess) in
+                    if acess {
+                        DispatchQueue.main.async {
+                            self.contactTableView.reloadData()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
             }
+            
+            
+            case .restricted, .denied:
+                
+                let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                })
+                
+                present(alert, animated: true)
+            
+            default:
+                break
         }
+        
+        self.markAllSelectedContacts()
     }
- 
-    
+  
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated) 
-        
-        self.collectionView.delegate = contactCollectionView
-        self.collectionView.dataSource = contactCollectionView
-        
-        if(contactCollectionView?.contacts.count != 0) {
-            animateCollection(.show)
+        super.viewDidAppear(animated)
+    
+        if self.contactCollectionView?.contacts.count ?? 0 > 0 {
+            self.animateCollection(.show)
         }
-        
     }
     
+   
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-}
 
-//MARK:- Fetching Contacts and Sending Contacts
-extension ContactViewController {
     
-    private func fetchingContacts(completionHandler : @escaping () -> Void) {
-        
-        CNContactStore().requestAccess(for: .contacts) { (acess, error) in
-            if let error = error {
-                NSLog("%@", "\(error)")
-                return
-            }
-            
-            if acess {
-                
-                self.contactManager.fetchContacts(email: { (contacts, error) in
-                    if let error = error {
-                        NSLog("%@", "\(error)")
-                        return
-                    }
-                    
-                    if let newContacts = contacts {
-                        self.contacts = newContacts
-                    }
-                })
-            }
-            
-            completionHandler()
-        }
+    /// Setup inicial da table view dos contatos.
+    func setupTableViewContacts() {        
+        self.contactTableView.delegate = contactTableViewManager
+        self.contactTableView.dataSource = contactTableViewManager
+        self.contactTableView.allowsSelectionDuringEditing = true
+        self.contactTableView.allowsMultipleSelection = true
+        self.contactTableView.allowsMultipleSelectionDuringEditing = true
+        self.contactTableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
+        self.contactTableView.register(UINib(nibName: "NewContactTableViewCell", bundle: nil), forCellReuseIdentifier: "NewContactCell")
     }
     
-}
-
-
-//MARK:- UITableViewDataSource
-extension ContactViewController : UITableViewDataSource {
-    
-    /// Setup table view contatos.
-    func setupTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.allowsSelectionDuringEditing = true
-        self.tableView.allowsMultipleSelection = true
-        self.tableView.allowsMultipleSelectionDuringEditing = true
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return isFiltering == true ? 1 : self.sortedContacts.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if isFiltering {
-            return "Search Results"
-        }
-        
-        return String(self.sortedContacts[section].key)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if isFiltering {
-            return self.filteringContacts.count
-        }
-        
-        let elements = self.sortedContacts[section].value
-        
-        return elements.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableCell", for: indexPath) as! ContactTableViewCell 
-        
-        if isFiltering {
-            cell.contact = self.filteringContacts[indexPath.row]
-        } else {
-            cell.contact = self.sortedContacts[indexPath.section].value[indexPath.row]
-        }
-        
-        if cell.contact?.isSelected ?? false {
-            cell.accessoryType = .checkmark
-            self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-        } else {
-            cell.accessoryType = .none
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        }
-        
-        return cell
-    }
-}
-
-//MARK:- UITableViewDelegate
-extension ContactViewController : UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath)
-        var selectedContact : Contact
-        
-        if isFiltering {
-            selectedContact = self.filteringContacts[indexPath.row]
-        } else {
-            selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
-        }
-        
-        cell?.accessoryType = .checkmark
-        selectedContact.isSelected = true
-        
-        if self.collectionView.isHidden {
-            self.animateCollection(.show)
-        }
-        
-        self.contactCollectionView?.addContact(selectedContact)
-        
-        let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
-        
-        self.collectionView.insertItems(at: [indexPath])
-        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)  
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        if isFiltering {
-            UIView.animate(withDuration: 1, delay: 0.5, options: .curveEaseIn, animations: { 
-                self.searchName.resignFirstResponder()
-                self.searchName.text = nil
-                self.tableView.reloadData()
-            }, completion: nil)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath)
-        var selectedContact : Contact
-        
-        if isFiltering {
-            selectedContact = self.filteringContacts[indexPath.row]
-        } else {
-            selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
-        }  
-        
-        let index = self.contactCollectionView?.contacts.firstIndex(where: { (contact) -> Bool in
-            return contact.email == selectedContact.email
-        })
-        
-        cell?.accessoryType = .none
-        selectedContact.isSelected = false
-        
-        let indexPath = IndexPath(item: index!, section: 0)
-        
-        self.contactCollectionView?.removeContactIndex(indexPath.item)
-        self.collectionView.deleteItems(at: [indexPath])  
-        
-        if self.contactCollectionView?.contacts.count == 0 {
-            self.animateCollection(.notShow)
-        }
-    }
-}
-
-
-
-//MARK:- Sorting Contacts and Sending Contacts
-private extension ContactViewController {
-    
-    /// Ordenar os contatos.
-    func sortingContacts() {
-        self.sortedContacts = self.contacts.sorted(by: { (lhs, rhs) -> Bool in
-            return lhs.key < rhs.key
-        })
-    }
-    
-    ///Enviando Contatos
+    /// Confirmando contatos selecionados para a reunião.
     @objc func sendingContactsToMeeting() {
         self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
     }
     
+    /// Marcando todos os contatos que foram selecionados anteriormente.
+    func markAllSelectedContacts() {
+        
+        if let contacts = contactCollectionView?.contacts {
+            for contact in contacts {
+                
+                if let key = contact.name?.first?.uppercased() {
+                    let selectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
+                        return $0.email == contact.email
+                    })
+                        
+                    selectedContact?.isSelected = true
+                }
+            }
+        }
+    }
+    
 }
 
-//MARK:- Insert New Contact
-private extension ContactViewController {
+//MARK:- UINavigationController
+extension ContactViewController {
     
-    @IBAction func addingNewContact(_ button : UIButton) {
+    /// Configurando navigation controller
+    func setupNavigationController() {
         
-        let contact = Contact(email: self.searchName.text!)
-        contact.isSelected = true
+        self.navigationItem.title = "Add participants"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
         
-        self.contactCollectionView?.addContact(contact)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Contacts"
         
-        self.collectionView.insertItems(at: [IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)])
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesBackButton = true
         
-        if self.collectionView.isHidden {
-            self.animateCollection(.show)
-        }
-        
-        self.searchName.resignFirstResponder()
-        self.searchName.text = nil
-        self.tableView.reloadData()
-        
+        definesPresentationContext = true
     }
+    
 }
 
 //MARK:- UICollectionView
@@ -291,69 +160,114 @@ extension ContactViewController {
     
     enum Animation {
         case show
-        case notShow
+        case hide
     }
     
     /// Animando a collection view. 
-    /// - Parameter direction: mostrar ou esconder.
-    func animateCollection(_ type : Animation) {
+    /// - Parameter animation: mostrar ou esconder a collection view.
+    func animateCollection(_ animation : Animation) {
+        
         UIView.animate(withDuration: 0.5) { 
-            self.collectionView.isHidden = type == .show ? false : true 
-            self.titleParticipants.isHidden = type == .show ? false : true 
+            switch animation {
+                case .hide:
+                    self.selectedContactsConstraint.constant = 0
+                case .show:
+                    self.selectedContactsConstraint.constant = self.view.frame.height * 0.15
+            }
+            
             self.view.layoutIfNeeded()
         }
     }
     
-    
-    /// Deselecionar um contanto que foi removido.
-    @objc func deselectContactInRow() {
+    /// Deselecionar um contanto que foi removido pela collection view.
+    @objc func deselectContactInRow(_ notification : NSNotification) {
+                        
+        guard let contact = notification.object as? Contact,  let key = contact.name?.first?.uppercased() else {return}
         
-        self.tableView.reloadData()
+        let deselectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
+            return $0.email == contact.email
+        })
         
-        if self.contactCollectionView?.contacts.count == 0 {
-            self.animateCollection(.notShow)
-        }
+        deselectedContact?.isSelected = false
         
-    }
-    
-}
-
-//MARK:- UISearchDelegate
-extension ContactViewController : UISearchBarDelegate {
-    
-    /// Setup search bar 
-    func setupSearchBar() {
-        self.searchName.delegate = self
-        self.searchName.autocapitalizationType = .none
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        var filterContacts : [Contact] = []
-        
-        if(isSearchNameEmpty) {
-            self.tableView.reloadData()
-            return
-        }
-        
-        self.contacts.forEach {
-            $1.forEach { (contact) in
-                if contact.email?.lowercased().contains(searchText.lowercased()) ?? false || contact.name?.lowercased().contains(searchText.lowercased()) ?? false {
-                    filterContacts.append(contact)
+        for indexPath in contactTableView.indexPathsForSelectedRows ?? [] {
+            if let cell = contactTableView.cellForRow(at: indexPath) as? ContactTableViewCell {
+                if cell.contact == deselectedContact {
+                    self.contactTableView.reloadRows(at: [indexPath], with: .automatic)
                 }
             }
         }
         
-        if filterContacts.count == 0 && searchText.validateEmail() {
-            self.addNewContact.isEnabled = true
-        } else {
-            self.addNewContact.isEnabled = false
+        if contactCollectionView?.contacts.count == 0 {
+            self.animateCollection(.hide)
         }
         
-        self.filteringContacts = filterContacts
-        tableView.reloadData()       
+    }
+}
+
+//MARK:- UISearchResultsUpdating
+extension ContactViewController : UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
         
+        guard let text = self.navigationItem.searchController?.searchBar.text?.lowercased() else {return}
+        var filteringContacts : [Contact] = []
+        
+        self.contactTableViewManager.sortedContacts.forEach {
+            $1.forEach { (contact) in
+                if contact.name?.lowercased().contains(text) ?? false || contact.email?.lowercased().contains(text) ?? false {
+                    filteringContacts.append(contact)
+                }
+            }
+        }
+        
+        self.contactTableViewManager.filteredContacts = filteringContacts
+        self.contactTableView.reloadData()  
     }
     
-    
 }
+
+//MARK:- ContactTableViewDelegate 
+extension ContactViewController : ContactTableViewDelegate {
+    
+    /// Adicionando contatos a collection view que foram selecionados.
+    /// - Parameter contact: contato selecionado.
+    func addContact(contact: Contact) {
+        
+        if contactCollectionView?.contacts.count == 0 {
+            self.animateCollection(.show)
+        }        
+        
+        self.contactCollectionView?.addContact(contact)
+            
+        let indexPath = IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0)
+        
+        self.collectionView.insertItems(at: [indexPath])
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+    
+    }
+    
+    /// Removendo contatos da collection view que foram deselecionados.
+    /// - Parameter contact: contato deselecionado.
+    func removeContact(contact: Contact) {
+        
+        let index = self.contactCollectionView?.contacts.firstIndex(where: {
+            return $0.email == contact.email
+        })
+        
+        let indexPath = IndexPath(item: index!, section: 0)
+        
+          self.collectionView.scrollToItem(at: IndexPath(item: (self.contactCollectionView?.contacts.count ?? 1) - 1, section: 0), at: .left, animated: true)
+        self.contactCollectionView?.removeContactIndex(indexPath.item)
+        self.collectionView.deleteItems(at: [indexPath])  
+        
+        if contactCollectionView?.contacts.count == 0 {
+            self.animateCollection(.hide)
+        }
+    }
+}
+
+
+
+
+
