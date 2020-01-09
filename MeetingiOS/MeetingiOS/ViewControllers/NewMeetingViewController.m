@@ -29,12 +29,18 @@
 ///Criando a reunião no Cloud Kit.
 - (void) createMeetingInCloud;
 
+/// Adicionando sombra e arredondando bordas da view.
+/// @param view view para modificação.
+-(void) setupCornerRadiusShadow:(UIView*)view;
+
 @end
 
 @implementation NewMeetingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
     
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = @"MMM, dd yyyy  hh:mm a";
@@ -44,6 +50,8 @@
     _collectionView.allowsSelection = NO;
     _collectionView.delegate = _contactCollectionView;
     _collectionView.dataSource = _contactCollectionView;
+    [self setupCornerRadiusShadow:_collectionView];
+    [_collectionView.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
     
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
     _meeting = [[Meeting alloc] initWithRecord:record];
@@ -93,8 +101,8 @@
     
     for (UIView* view in self.views) {
         
-        view.clipsToBounds = true;
-        view.layer.cornerRadius = 10;
+        [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
+        [self setupCornerRadiusShadow:view];
         
         switch (view.tag) {
             case 1:
@@ -106,6 +114,15 @@
                 break;
         }
     }
+}
+
+-(void) setupCornerRadiusShadow:(UIView*)view {
+    view.layer.shadowColor = [[UIColor alloc] initWithHexString:@"#00000029" alpha:1].CGColor;
+    view.layer.shadowOpacity = 0.1;
+    view.layer.shadowRadius = 7;
+    view.layer.masksToBounds = NO;
+    view.layer.shadowOffset = CGSizeMake(0, 0);
+    view.layer.cornerRadius = 7;
 }
 
 //MARK:- TableView
@@ -181,7 +198,7 @@
                     if(!_chooseEndTime) {
                         
                         UIView* view = [_views objectAtIndex:2];
-                        [view.layer setCornerRadius:10];
+                        [view.layer setCornerRadius:5];
                         view.layer.maskedCorners = kCALayerMaxXMaxYCorner | kCALayerMinXMaxYCorner;
                         
                         [UIView animateWithDuration:0.5 animations:^{
@@ -261,9 +278,7 @@
 -(void) createMeetingInCloud {
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    
-    [self showLoadingIndicator];
-    
+        
     if(theme.length == 0) {
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Meeting" message:@"Choose a name for create a meeting." preferredStyle:UIAlertControllerStyleAlert];
@@ -278,7 +293,8 @@
     }
     
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    
+    [self showLoadingIndicator];
+
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
     CKReference* manager = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
     

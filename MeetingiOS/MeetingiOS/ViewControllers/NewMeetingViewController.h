@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIView+SetupBounds.h"
 #import "ContactCollectionView.h"
 #import <CloudKit/CloudKit.h>
 #import "MeetingDelegate.h"

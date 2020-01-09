@@ -65,7 +65,6 @@
 		A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */; };
 		A4C5BE9623A30025002BE4B9 /* ContactCollectionViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */; };
 		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
-		A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */; };
 		A4EB3BFD239747640097857F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFC239747640097857F /* Contact.m */; };
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
 		A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */; };
@@ -183,8 +182,6 @@
 		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = NewMeetingViewController.h; sourceTree = "<group>"; };
 		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
-		A4EB3BE82396011F0097857F /* UIView+SetupBounds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SetupBounds.h"; sourceTree = "<group>"; };
-		A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetupBounds.m"; sourceTree = "<group>"; };
 		A4EB3BFB239747640097857F /* Contact.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = Contact.h; sourceTree = "<group>"; };
 		A4EB3BFC239747640097857F /* Contact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		A4EB3C11239754D40097857F /* ContactCollectionView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionView.h; sourceTree = "<group>"; };
@@ -368,8 +365,6 @@
 				A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */,
 				A4EB3C1A2397DF9A0097857F /* NSString+NewFeatures.h */,
 				A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */,
-				A4EB3BE82396011F0097857F /* UIView+SetupBounds.h */,
-				A4EB3BE92396011F0097857F /* UIView+SetupBounds.m */,
 			);
 			path = "Categories - ObjC";
 			sourceTree = "<group>";
@@ -543,7 +538,6 @@
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				492C050423A1818500442814 /* ProfileViewController.swift in Sources */,
 				A4EB3BFD239747640097857F /* Contact.m in Sources */,
-				A4EB3BEA2396011F0097857F /* UIView+SetupBounds.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
