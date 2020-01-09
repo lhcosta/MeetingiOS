@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     _formatter = [[NSDateFormatter alloc] init];
-    _formatter.dateFormat = @"MMM, dd yyyy  h:mm a";
+    _formatter.dateFormat = @"MMM, dd yyyy  hh:mm a";
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
     
     _contactCollectionView = [[ContactCollectionView alloc] init];
@@ -84,16 +84,6 @@
             [self.tableView endUpdates];
             [self.view layoutIfNeeded];
         }];
-    }
-    
-}
-
-- (void)dealloc
-{
-    //Deselecionando todos os contatos que foram selecionados, pois está sendo usado
-    //uma classe singleton para realizar o fetch dos contatos. 
-    for (Contact* contact in _contactCollectionView.contacts) {
-        contact.isSelected = false;
     }
 }
 
@@ -377,7 +367,7 @@
     [_alertLoading.view addSubview:loadingIndicator];
     
     [[loadingIndicator.centerYAnchor constraintEqualToAnchor:_alertLoading.view.centerYAnchor constant:0] setActive:YES];
-    [[loadingIndicator.leftAnchor constraintEqualToAnchor:_alertLoading.view.leftAnchor constant:10] setActive:YES];
+    [[loadingIndicator.leftAnchor constraintEqualToAnchor:_alertLoading.view.leftAnchor constant:20] setActive:YES];
     [loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self presentViewController:_alertLoading animated:YES completion:Nil];
