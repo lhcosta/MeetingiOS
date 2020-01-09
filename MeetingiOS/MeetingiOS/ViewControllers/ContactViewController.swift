@@ -138,9 +138,9 @@ extension ContactViewController {
     /// Configurando navigation controller
     func setupNavigationController() {
                 
-        self.navigationItem.title = "Add participants"        
+        self.navigationItem.title = "Add participants"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
-        
+                
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false

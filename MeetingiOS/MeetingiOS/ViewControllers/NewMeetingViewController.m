@@ -62,6 +62,7 @@
     [self setupViews];
         
     [self.navigationItem setTitle:TITLE_NAV];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
     [self.navigationController.navigationBar setPrefersLargeTitles:YES];
     
