@@ -55,7 +55,9 @@ class UnfinishedMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // SearchBar
+        self.navigationController?.navigationBar.backgroundColor = .white
+        
+        // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
         self.navigationItem.searchController?.searchBar.delegate = self
         self.navigationItem.searchController?.searchBar.showsCancelButton = true
