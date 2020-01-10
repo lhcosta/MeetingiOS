@@ -60,7 +60,7 @@ class UnfinishedMeetingViewController: UIViewController {
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
         self.navigationItem.searchController?.searchBar.delegate = self
-        self.navigationItem.searchController?.searchBar.showsCancelButton = true
+//        self.navigationItem.searchController?.searchBar.showsCancelButton = true
         self.navigationItem.searchController?.searchBar.returnKeyType = .done
         
         //SO TESTE 
@@ -72,11 +72,12 @@ class UnfinishedMeetingViewController: UIViewController {
             }
         }
         
+//        tableViewTopics.clipsToBounds = false
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
         
-        self.navigationItem.title = "Meeting"
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: nil, action: nil), animated: true)
+        self.navigationItem.title = currMeeting.theme
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
         
         // Pegar Topics do Cloud.
         var tempIDs: [CKRecord.ID] = []
@@ -148,9 +149,7 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
-    /// Botão que cria um novo Topic (__Deprecated__)
-    /// - Parameter sender: UIButton
-    @IBAction func createNewTopic(_ sender: Any) {
+    @objc func createNewTopic() {
         
         self.indexPath = IndexPath(row: 0, section: 0)
         tableViewTopics.scrollToRow(at: self.indexPath, at: .none, animated: true)
@@ -250,6 +249,11 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         headerView.backgroundColor = .clear
         
         return headerView
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true;
     }
 
     
