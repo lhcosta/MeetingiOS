@@ -260,11 +260,22 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UnfinishedTopicsTableViewCell
+        let font = UIFont(name: "SF Pro Text Regular", size: (tableView.frame.size.height * 0.2) * 0.2)
+        
         cell.topicTextField.delegate = self
+        cell.buttonHeight.constant = (tableView.frame.size.height * 0.2) * 0.4
+        cell.buttonWidth.constant = (tableView.frame.size.height * 0.2) * 0.4
+        cell.buttonLeftSpace.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textFieldLeft.constant = (tableView.frame.size.height * 0.2) * 0.12
+        cell.textFieldRight.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textFieldHeight.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textLabel?.font = font
         
         // Se não for gerente, não faz sentido termos o botão de check.
         if !usrIsManager {
             cell.checkButton.isHidden = true
+            cell.textFieldSecondLeft.constant = (tableView.frame.size.height * 0.2) * 0.2
+            cell.textFieldLeft.priority = UILayoutPriority(998)
         }
         
         // Verificamos se o usuário está em modo de pesquisa.
