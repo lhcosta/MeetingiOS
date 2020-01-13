@@ -50,8 +50,8 @@
     _collectionView.allowsSelection = NO;
     _collectionView.delegate = _contactCollectionView;
     _collectionView.dataSource = _contactCollectionView;
-    [self setupCornerRadiusShadow:_collectionView];
     [_collectionView.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_collectionView.layer setCornerRadius:7];
     
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
     _meeting = [[Meeting alloc] initWithRecord:record];
