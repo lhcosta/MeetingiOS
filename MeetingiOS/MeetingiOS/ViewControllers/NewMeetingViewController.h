@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UITextField* nameMetting;
 @property (nonatomic, weak) IBOutlet UIButton* colorMetting;
 @property (nonatomic, weak) IBOutlet UILabel* numbersOfTopics;
+@property (nonatomic, weak) IBOutlet UILabel* numbersOfPeople;
 @property (nonatomic, weak) IBOutlet UIPickerView* pickerView;
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
 @property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;

@@ -40,6 +40,7 @@
 		A4382CA223C51BDD0021C814 /* ContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4382CA123C51BDC0021C814 /* ContactCollectionViewCell.xib */; };
 		A4382CA723C5400D0021C814 /* NewContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382CA523C5400D0021C814 /* NewContactTableViewCell.swift */; };
 		A4382CA823C5400D0021C814 /* NewContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4382CA623C5400D0021C814 /* NewContactTableViewCell.xib */; };
+		A4382CAE23CCEAF40021C814 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A592399819500B7DFD3 /* Localizable.strings */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
@@ -132,14 +133,11 @@
 		49F09A852399830400B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Contact.strings"; sourceTree = "<group>"; };
 		49F09A872399830500B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contact.strings; sourceTree = "<group>"; };
 		49F09A8B2399831D00B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewMeeting.storyboard; sourceTree = "<group>"; };
-		49F09A8D2399832300B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/NewMeeting.strings"; sourceTree = "<group>"; };
-		49F09A8F2399832500B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NewMeeting.strings; sourceTree = "<group>"; };
 		49F09AB72399A14300B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		49F09AB92399A14A00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyMeetings.strings; sourceTree = "<group>"; };
 		49F09ABB2399A16900B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FinishedMeeting.strings; sourceTree = "<group>"; };
 		49F09ABD2399A16E00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UnfinishedMeeting.strings; sourceTree = "<group>"; };
 		49F09ABF2399A17100B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
-		49F09AC12399A17400B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewMeeting.strings; sourceTree = "<group>"; };
 		49F09AC42399A18500B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SelectAColor.storyboard; sourceTree = "<group>"; };
 		49F09AC62399A18700B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SelectAColor.strings"; sourceTree = "<group>"; };
 		49F09AC82399A18800B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SelectAColor.strings; sourceTree = "<group>"; };
@@ -153,6 +151,9 @@
 		A4382CA123C51BDC0021C814 /* ContactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewCell.xib; sourceTree = "<group>"; };
 		A4382CA523C5400D0021C814 /* NewContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContactTableViewCell.swift; sourceTree = "<group>"; };
 		A4382CA623C5400D0021C814 /* NewContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewContactTableViewCell.xib; sourceTree = "<group>"; };
+		A4382CB023CCEE4F0021C814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewMeeting.strings; sourceTree = "<group>"; };
+		A4382CB223CCEE6C0021C814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/NewMeeting.strings"; sourceTree = "<group>"; };
+		A4382CB423CCEE720021C814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NewMeeting.strings; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -483,6 +484,7 @@
 				A4382CA223C51BDD0021C814 /* ContactCollectionViewCell.xib in Resources */,
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
 				49F09ACC2399A1BE00B7DFD3 /* FinishedMeeting.storyboard in Resources */,
+				A4382CAE23CCEAF40021C814 /* Localizable.strings in Resources */,
 				A4922A2823A728FB00FD95B9 /* SFProDisplay-Regular.ttf in Resources */,
 				A4922A2623A728FB00FD95B9 /* SFProText-Light.ttf in Resources */,
 				49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */,
@@ -646,9 +648,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				49F09A8B2399831D00B7DFD3 /* Base */,
-				49F09A8D2399832300B7DFD3 /* pt-BR */,
-				49F09A8F2399832500B7DFD3 /* es */,
-				49F09AC12399A17400B7DFD3 /* en */,
+				A4382CB023CCEE4F0021C814 /* en */,
+				A4382CB223CCEE6C0021C814 /* pt-BR */,
+				A4382CB423CCEE720021C814 /* es */,
 			);
 			name = NewMeeting.storyboard;
 			sourceTree = "<group>";

@@ -10,4 +10,16 @@
 "New meeting" = "New meeting";
 "Meeting" = "Meeting";
 "Choose a name for create a meeting." = "Choose a name for create a meeting.";
-"Creating Meeting..." = "Creating Meeting...";
+"Creating Meeting..." = "Creating meeting...";
+"None" = "None";
+"dateFormat" = "MMM, dd yyyy  hh:mm a";
+
+/*Contacts Storyboard --- EN*/
+"Add participants" = "Participants";
+"Search Contacts" = "Search contacts";
+"Open Settings" = "Open Settings";
+"This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?" = "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?";
+
+/*Contact Table View --- EN*/
+"Search Results" = "Search Results";
+"Contacts" = "Contacts";

@@ -1,18 +1,15 @@
 
-/* Class = "UILabel"; text = "Topic per person"; ObjectID = "1Ln-US-Ppa"; */
-"1Ln-US-Ppa.text" = "Topic per person";
+/* Class = "UILabel"; text = "Add participants"; ObjectID = "92R-k6-9If"; */
+"92R-k6-9If.text" = "Participantes";
 
-/* Class = "UITextField"; placeholder = "Meeting's name"; ObjectID = "9m1-i5-8bZ"; */
-"9m1-i5-8bZ.placeholder" = "Meeting's name";
+/* Class = "UITextField"; placeholder = "Meeting's name"; ObjectID = "BAH-Or-YoA"; */
+"BAH-Or-YoA.placeholder" = "Nome da reunião";
 
-/* Class = "UINavigationItem"; title = "New meeting"; ObjectID = "TbK-hl-0ZI"; */
-"TbK-hl-0ZI.title" = "New meeting";
+/* Class = "UILabel"; text = "Starts"; ObjectID = "fcm-2P-Agy"; */
+"fcm-2P-Agy.text" = "Início";
 
-/* Class = "UILabel"; text = "Starts"; ObjectID = "cbL-ux-UR6"; */
-"cbL-ux-UR6.text" = "Starts";
+/* Class = "UILabel"; text = "Endes"; ObjectID = "qRR-VP-hh1"; */
+"qRR-VP-hh1.text" = "Fim";
 
-/* Class = "UILabel"; text = "Add participants"; ObjectID = "t9c-Q0-B1j"; */
-"t9c-Q0-B1j.text" = "Add participants";
-
-/* Class = "UILabel"; text = "Nov, 28 2019  3:00 PM"; ObjectID = "yRB-lI-7pP"; */
-"yRB-lI-7pP.text" = "Nov, 28 2019  3:00 PM";
+/* Class = "UILabel"; text = "Topic per person"; ObjectID = "zaR-8W-bS1"; */
+"zaR-8W-bS1.text" = "Tópicos por pessoa";
