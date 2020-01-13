@@ -119,7 +119,6 @@ import Contacts
         if let contacts = contactCollectionView?.contacts {
             for contact in contacts {
                 
-                
                 if let firstChar = contact.name?.first {
                     
                     let key = firstChar.isNumber ? "#" : firstChar.uppercased()
@@ -186,8 +185,10 @@ extension ContactViewController {
     /// Deselecionar um contanto que foi removido pela collection view.
     @objc func deselectContactInRow(_ notification : NSNotification) {
                         
-        guard let contact = notification.object as? Contact,  let key = contact.name?.first?.uppercased() else {return}
+        guard let contact = notification.object as? Contact,  let firstChar = contact.name?.first else {return}
         
+        let key = firstChar.isNumber ? "#" : firstChar.uppercased()
+
         let deselectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
             return $0.email == contact.email
         })
