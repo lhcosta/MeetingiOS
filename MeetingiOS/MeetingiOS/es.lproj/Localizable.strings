@@ -6,4 +6,8 @@
   Copyright © 2019 Bernardo Nunes. All rights reserved.
 */
 
-"teste" = "teste 1";
+/*New Meeting Storyboard --- ES*/
+"New meeting" = "Nueva reunión";
+"Meeting" = "Reunión";
+"Choose a name for create a meeting." = "Elija un nombre para crear una reunión.";
+"Creating Meeting..." = "Creando reunión...";

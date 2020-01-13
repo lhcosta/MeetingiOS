@@ -12,8 +12,6 @@
 #import "Contact.h"
 #import "NewMeetingViewController+SettingPickers.h"
 
-#define TITLE_NAV @"New meeting"
-
 @interface NewMeetingViewController ()
 
 //MARK:- Properties
@@ -69,7 +67,7 @@
     [self setupDatePicker];
     [self setupViews];
         
-    [self.navigationItem setTitle:TITLE_NAV];
+    [self.navigationItem setTitle:NSLocalizedString(@"New meeting", "")];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
     [self.navigationController.navigationBar setPrefersLargeTitles:YES];
@@ -282,7 +280,7 @@
         
     if(theme.length == 0) {
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Meeting" message:@"Choose a name for create a meeting." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Meeting", "") message:NSLocalizedString(@"Choose a name for create a meeting.", "") preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         
@@ -375,7 +373,7 @@
 /// Criando uma view que indica um loading quando criada uma reunião.
 - (void) showLoadingIndicator {
 
-    _alertLoading = [UIAlertController alertControllerWithTitle:Nil message:@"Creating Meeting..." preferredStyle:UIAlertControllerStyleAlert];
+    _alertLoading = [UIAlertController alertControllerWithTitle:Nil message:NSLocalizedString(@"Creating Meeting...","") preferredStyle:UIAlertControllerStyleAlert];
     
     UIActivityIndicatorView* loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     
