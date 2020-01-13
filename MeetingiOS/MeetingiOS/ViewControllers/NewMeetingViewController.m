@@ -41,8 +41,10 @@
     [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
     
     _formatter = [[NSDateFormatter alloc] init];
-    _formatter.dateFormat = @"MMM, dd yyyy  hh:mm a";
+    _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
+    
+    self.numbersOfPeople.text = NSLocalizedString(@"None", "");
     
     _contactCollectionView = [[ContactCollectionView alloc] init];
     _collectionView.allowsSelection = NO;
@@ -55,7 +57,7 @@
     _meeting = [[Meeting alloc] initWithRecord:record];
     
     _participants = [[NSMutableArray alloc] init];
-    
+        
     _nameMetting.delegate = self;
     _pickerView.delegate = self;
     
@@ -82,6 +84,7 @@
             [UIView animateWithDuration:0.5 animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
+                self.numbersOfPeople.text = [NSString stringWithFormat:@"%ld", self.contactCollectionView.contacts.count];                   
                 [self.collectionView reloadData];
             }];
         });
@@ -89,6 +92,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             [self.tableView beginUpdates];
             [self.tableView endUpdates];
+            self.numbersOfPeople.text = NSLocalizedString(@"None", "");
             [self.view layoutIfNeeded];
         }];
     }

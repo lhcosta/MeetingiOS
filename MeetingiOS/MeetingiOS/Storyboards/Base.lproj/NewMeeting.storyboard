@@ -236,7 +236,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sYP-ws-HgV">
                                                             <rect key="frame" x="20" y="0.0" width="295" height="68"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Add participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="92R-k6-9If">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="92R-k6-9If">
                                                                     <rect key="frame" x="0.0" y="23.333333333333329" width="232.66666666666666" height="21.666666666666671"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <nil key="textColor"/>
@@ -368,14 +368,14 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="AO1-9x-Ps2">
                                                             <rect key="frame" x="20" y="15" width="295" height="43"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Topic per person" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaR-8W-bS1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="43"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Topics per person" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaR-8W-bS1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="152" height="43"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="248" verticalHuggingPriority="251" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cbh-jh-lSR">
-                                                                    <rect key="frame" x="172.66666666666666" y="0.0" width="122.33333333333334" height="43"/>
+                                                                    <rect key="frame" x="182" y="0.0" width="113" height="43"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -438,6 +438,7 @@
                         <outlet property="endesDateTime" destination="8hN-vE-MHz" id="TOf-LD-M5R"/>
                         <outlet property="finishDatePicker" destination="MPK-YE-0a8" id="LPC-ab-htV"/>
                         <outlet property="nameMetting" destination="BAH-Or-YoA" id="jWg-yp-2o4"/>
+                        <outlet property="numbersOfPeople" destination="Ar9-Pq-w4c" id="VRC-Rj-mqs"/>
                         <outlet property="numbersOfTopics" destination="Cbh-jh-lSR" id="MSB-KH-NlW"/>
                         <outlet property="pickerView" destination="EKw-Zc-InE" id="ugl-He-xnV"/>
                         <outlet property="startDatePicker" destination="4QV-Rf-8lR" id="v4N-1X-cii"/>

@@ -126,11 +126,11 @@ extension ContactTableView : UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if contactViewController.isFiltering {
-            return "Search Results"
+            return NSLocalizedString("Search Results", comment: "")
         }
         
         if section == 0 {
-            return "Contacts"
+            return NSLocalizedString("Contacts", comment: "")
         }
         
         return String(self.sortedContacts[section-1].key)
