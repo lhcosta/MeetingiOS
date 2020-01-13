@@ -19,7 +19,7 @@ import CloudKit
     var meetingRecord = CKRecord(recordType: "Meeting")
     
     // O numero da cor selecionada
-    var selectedColor = String()
+    @objc var selectedColor = String()
     
     //Array do hex das cores a serem selecionadas
     var arrayColors: [String] = [ "#88A896",
@@ -39,7 +39,7 @@ import CloudKit
         
         // Arredonda a view e seta como cor inicial a primeira cor do array
         self.viewColorSelected.layer.cornerRadius = 20
-        self.viewColorSelected.backgroundColor = UIColor(hexString: self.arrayColors[0])
+        self.viewColorSelected.backgroundColor = UIColor(hexString: selectedColor)
         
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendSelectedColor))
         self.navigationItem.rightBarButtonItem = done
