@@ -97,9 +97,6 @@
 		492C050B23A181A700442814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Profile.strings"; sourceTree = "<group>"; };
 		492C050D23A181A700442814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Profile.strings; sourceTree = "<group>"; };
 		492C051123A2904800442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OnBoarding.storyboard; sourceTree = "<group>"; };
-		492C051423A2904900442814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
-		492C051623A2904A00442814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
-		492C051823A2904B00442814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
@@ -191,6 +188,9 @@
 		A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NewFeatures.m"; sourceTree = "<group>"; };
 		A4EB3C1D2397EAF60097857F /* ContactManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactManager.h; sourceTree = "<group>"; };
 		A4EB3C1E2397EAF60097857F /* ContactManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
+		A4F8226E23CD0B59006AE7C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
+		A4F8227023CD0B5C006AE7C8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
+		A4F8227223CD0B5E006AE7C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		E219ACC42397DED5002CF585 /* SelectColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
 		E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -561,9 +561,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				492C051123A2904800442814 /* Base */,
-				492C051423A2904900442814 /* en */,
-				492C051623A2904A00442814 /* pt-BR */,
-				492C051823A2904B00442814 /* es */,
+				A4F8226E23CD0B59006AE7C8 /* en */,
+				A4F8227023CD0B5C006AE7C8 /* pt-BR */,
+				A4F8227223CD0B5E006AE7C8 /* es */,
 			);
 			name = OnBoarding.storyboard;
 			sourceTree = "<group>";

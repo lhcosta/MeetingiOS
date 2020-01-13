@@ -1,1 +1,15 @@
 
+/* Class = "UILabel"; text = "Increase the productivity of your work meetings"; ObjectID = "08d-NW-V3h"; */
+"08d-NW-V3h.text" = "Aumente a produtividade de suas reuniões de trabalho";
+
+/* Class = "UILabel"; text = "Be aware of what your coworkers want to talk about"; ObjectID = "RZg-zc-EeH"; */
+"RZg-zc-EeH.text" = "Esteja ciente do que seus colegas de trabalho querem falar";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "Zci-x5-1pV"; */
+"Zci-x5-1pV.normalTitle" = "Continuar";
+
+/* Class = "UILabel"; text = "Meetings"; ObjectID = "moC-GF-GTP"; */
+"moC-GF-GTP.text" = "Meetings";
+
+/* Class = "UILabel"; text = "Create meetings and share with your coworkers"; ObjectID = "yre-ap-VU1"; */
+"yre-ap-VU1.text" = "Crie reuniões e compartilhe com seus colegas de trabalho";
