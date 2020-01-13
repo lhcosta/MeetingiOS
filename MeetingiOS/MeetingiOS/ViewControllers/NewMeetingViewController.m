@@ -271,6 +271,7 @@
         
         if(nextViewController) {
             [nextViewController setDelegate:self];
+            [nextViewController setSelectedColor: self.colorMetting.backgroundColor.toHexString];
         }
     }
 }
