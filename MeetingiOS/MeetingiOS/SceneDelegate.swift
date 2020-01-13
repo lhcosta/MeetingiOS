@@ -24,8 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let rootVC = storyboard.instantiateInitialViewController() as! MyMeetingsViewController
             setRootVC(rootVC: rootVC)
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let rootVC = storyboard.instantiateInitialViewController() as! LoginViewController
+            let storyboard = UIStoryboard(name: "OnBoarding", bundle: nil)
+            let rootVC = storyboard.instantiateInitialViewController() as! OnBoardingViewController
             setRootVC(rootVC: rootVC)
         }
     }
