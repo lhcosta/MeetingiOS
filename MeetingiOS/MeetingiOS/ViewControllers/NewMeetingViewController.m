@@ -61,7 +61,7 @@
     _nameMetting.delegate = self;
     _pickerView.delegate = self;
     
-    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#88A896" alpha:1];
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     _chooseNumberOfTopics = NO;
     _chooseStartTime = NO;
     _chooseEndTime = NO;
