@@ -22,4 +22,16 @@
     return self;
 }
 
+- (instancetype)initWithUser:(User *)user {
+
+    self = [super init];
+    
+    if(self) {
+        _name = user.name;
+        _email = user.email;
+    }
+    
+    return self;
+}
+
 @end

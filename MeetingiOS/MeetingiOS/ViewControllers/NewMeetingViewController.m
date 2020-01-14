@@ -10,6 +10,7 @@
 #import <MeetingiOS-Swift.h>
 #import "NewMeetingViewController+NameMeetingValidation.h"
 #import "Contact.h"
+#import "ContactCollectionView.h"
 #import "NewMeetingViewController+SettingPickers.h"
 
 @interface NewMeetingViewController ()
@@ -122,7 +123,7 @@
     view.layer.shadowOpacity = 0.1;
     view.layer.shadowRadius = 7;
     view.layer.masksToBounds = NO;
-    view.layer.shadowOffset = CGSizeMake(0, 0);
+    view.layer.shadowOffset = CGSizeMake(0, 2);
     view.layer.cornerRadius = 7;
 }
 

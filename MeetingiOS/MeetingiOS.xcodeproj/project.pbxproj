@@ -59,6 +59,9 @@
 		A4922A2B23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */; };
 		A4922A2C23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */; };
 		A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */; };
+		A4BA9B1623CE23B300CCC2AF /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */; };
+		A4BA9B1723CE256B00CCC2AF /* DetailsTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1423CE23B300CCC2AF /* DetailsTableViewController.h */; };
+		A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */; };
 		A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */; };
 		A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */; };
 		A4C5BE8E23A2C105002BE4B9 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */; };
@@ -170,6 +173,12 @@
 		A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Heavy.ttf"; sourceTree = "<group>"; };
 		A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Thin.ttf"; sourceTree = "<group>"; };
+		A4BA9B1423CE23B300CCC2AF /* DetailsTableViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; name = DetailsTableViewController.h; path = MeetingiOS/Storyboards/DetailsTableViewController.h; sourceTree = SOURCE_ROOT; };
+		A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailsTableViewController.m; path = MeetingiOS/Storyboards/DetailsTableViewController.m; sourceTree = SOURCE_ROOT; };
+		A4BA9B1923CE276E00CCC2AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Details.storyboard; sourceTree = "<group>"; };
+		A4BA9B1C23CE277000CCC2AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Details.strings; sourceTree = "<group>"; };
+		A4BA9B1E23CE277400CCC2AF /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Details.strings"; sourceTree = "<group>"; };
+		A4BA9B2023CE277900CCC2AF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Details.strings; sourceTree = "<group>"; };
 		A4BAEB2B239DD16300800277 /* NewMeetingViewController+SettingPickers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+SettingPickers.h"; sourceTree = "<group>"; };
 		A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+SettingPickers.m"; sourceTree = "<group>"; };
 		A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -218,6 +227,8 @@
 		235E7B84238DA93500B59855 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A4BA9B1423CE23B300CCC2AF /* DetailsTableViewController.h */,
+				A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */,
 				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
 				A4382C7923C2BDA40021C814 /* UnfinishedMeetingViewController.swift */,
@@ -353,6 +364,7 @@
 				49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */,
 				49F09A82239982FA00B7DFD3 /* Contact.storyboard */,
 				49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */,
+				A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */,
 				49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */,
 				492C050723A1819F00442814 /* Profile.storyboard */,
 				492C051223A2904800442814 /* OnBoarding.storyboard */,
@@ -470,6 +482,7 @@
 				492C051023A2904800442814 /* OnBoarding.storyboard in Resources */,
 				A4922A2423A728FB00FD95B9 /* SFProDisplay-Medium.ttf in Resources */,
 				A4922A2523A728FB00FD95B9 /* SFProDisplay-Black.ttf in Resources */,
+				A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */,
 				49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */,
 				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
 				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
@@ -512,6 +525,7 @@
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				A4EB3C24239855640097857F /* ContactManager.h in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
+				A4BA9B1623CE23B300CCC2AF /* DetailsTableViewController.m in Sources */,
 				A4C5BE9623A30025002BE4B9 /* ContactCollectionViewCell.h in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
@@ -542,6 +556,7 @@
 				A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				492C050423A1818500442814 /* ProfileViewController.swift in Sources */,
+				A4BA9B1723CE256B00CCC2AF /* DetailsTableViewController.h in Sources */,
 				A4EB3BFD239747640097857F /* Contact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -667,6 +682,17 @@
 				49F09ACA2399A1B100B7DFD3 /* en */,
 			);
 			name = SelectAColor.storyboard;
+			sourceTree = "<group>";
+		};
+		A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4BA9B1923CE276E00CCC2AF /* Base */,
+				A4BA9B1C23CE277000CCC2AF /* en */,
+				A4BA9B1E23CE277400CCC2AF /* pt-BR */,
+				A4BA9B2023CE277900CCC2AF /* es */,
+			);
+			name = Details.storyboard;
 			sourceTree = "<group>";
 		};
 		A4F8227523CD3F6B006AE7C8 /* NewContactTableViewCell.xib */ = {

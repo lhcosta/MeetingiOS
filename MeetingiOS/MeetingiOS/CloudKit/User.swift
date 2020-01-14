@@ -27,7 +27,7 @@ import CloudKit
         }
     }
     
-    var email: String? {
+    @objc var email: String? {
         
         get {
             return self.record.value(forKey: "email") as? String
@@ -38,7 +38,7 @@ import CloudKit
         }
     }
     
-    var name: String? {
+    @objc var name: String? {
         
         get {
             return self.record.value(forKey: "name") as? String
