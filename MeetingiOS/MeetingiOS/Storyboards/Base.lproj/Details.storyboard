@@ -474,6 +474,7 @@
                         <outlet property="finishDatePicker" destination="QDD-hT-8NX" id="pjs-bw-kbw"/>
                         <outlet property="meetingAdmin" destination="1TA-Oz-Ec9" id="Cdx-f9-Nf6"/>
                         <outlet property="meetingName" destination="v1Y-eC-n0e" id="Yl0-6D-Lkf"/>
+                        <outlet property="modifyName" destination="JGt-kq-1BV" id="lew-b0-WXW"/>
                         <outlet property="numbersOfPeople" destination="Lor-v4-acB" id="vvj-Oz-sny"/>
                         <outlet property="numbersOfTopics" destination="6hU-uh-UlW" id="pZb-jj-luw"/>
                         <outlet property="pickerView" destination="Mk6-Xq-hKm" id="OVI-HK-HTd"/>
@@ -486,11 +487,23 @@
                         <outletCollection property="views" destination="V7N-jt-evr" id="ewK-51-1vg"/>
                         <outletCollection property="views" destination="Exb-We-oR4" id="ht0-O5-L1Q"/>
                         <outletCollection property="views" destination="QLU-fE-lvi" id="hha-j2-eVc"/>
+                        <outletCollection property="views" destination="C77-ZC-c21" id="qqt-C8-JH0"/>
+                        <segue destination="gfU-XF-MaK" kind="show" identifier="SelectContacts" id="HJJ-75-SfE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yr-T7-GIh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171" y="-68"/>
+            <point key="canvasLocation" x="394" y="-68"/>
+        </scene>
+        <!--Contact-->
+        <scene sceneID="zMM-h0-i3y">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Contact" id="gfU-XF-MaK" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="tx4-gt-fq1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7mo-4o-DHx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053" y="-68"/>
         </scene>
     </scenes>
     <resources>

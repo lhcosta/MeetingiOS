@@ -10,6 +10,7 @@
 #import <CloudKit/CloudKit.h>
 #import <MeetingiOS-Swift.h>
 #import "Contact.h"
+#import "MeetingDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numbersOfPeople;
 @property (weak, nonatomic) IBOutlet UILabel *topicsPerPerson;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionParticipants;
+@property (weak, nonatomic) IBOutlet UIButton *modifyName;
+@property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
+@property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
 
 /// Reunião
 @property (nonatomic) Meeting* meeting;
