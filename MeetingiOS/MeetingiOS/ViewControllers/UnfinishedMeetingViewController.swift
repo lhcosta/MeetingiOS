@@ -16,8 +16,9 @@ class UnfinishedMeetingViewController: UIViewController {
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
     @IBOutlet var mirrorButton: UIButton!
+    @IBOutlet var bottomUIView: UIView!
     
-     //MARK: - Properties
+    //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
     
@@ -127,8 +128,20 @@ class UnfinishedMeetingViewController: UIViewController {
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
+        
+        bottomViewShadow()
     }
     
+    
+    func bottomViewShadow() {
+        bottomUIView.backgroundColor = .clear
+        bottomUIView.layer.masksToBounds = true
+        bottomUIView.layer.shadowOpacity = 0.2
+        bottomUIView.layer.shadowRadius = 0.1
+        bottomUIView.layer.shadowOffset = CGSize(width: 0, height: -1)
+        bottomUIView.clipsToBounds = false
+        bottomUIView.backgroundColor = .white
+    }
     
     /// Criamos um Topic com os dados do Usuário.
     func creatingTopicInstance() -> Topic {

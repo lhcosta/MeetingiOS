@@ -126,6 +126,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
+                        <outlet property="bottomUIView" destination="BAI-HC-ilp" id="CT8-OJ-aXe"/>
                         <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                     </connections>

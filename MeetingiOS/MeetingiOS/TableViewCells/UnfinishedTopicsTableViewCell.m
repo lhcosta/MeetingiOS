@@ -18,7 +18,7 @@
     self.layer.masksToBounds = YES;
     self.layer.shadowOpacity = 0.2;
     self.layer.shadowRadius = 1;
-    self.layer.shadowOffset = CGSizeMake(0, 2);
+    self.layer.shadowOffset = CGSizeMake(0, 1);
     self.clipsToBounds = false;
     
     self.contentView.backgroundColor = UIColor.whiteColor;
