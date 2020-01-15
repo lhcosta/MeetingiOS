@@ -12,6 +12,7 @@
 #import "Contact.h"
 #import "ContactCollectionView.h"
 #import "NewMeetingViewController+SettingPickers.h"
+#import "UIView+CornerShadows.h"
 
 @interface NewMeetingViewController ()
 
@@ -27,10 +28,6 @@
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
 - (void) createMeetingInCloud;
-
-/// Adicionando sombra e arredondando bordas da view.
-/// @param view view para modificação.
--(void) setupCornerRadiusShadow:(UIView*)view;
 
 @end
 
@@ -104,27 +101,18 @@
     for (UIView* view in self.views) {
         
         [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
-        [self setupCornerRadiusShadow:view];
-        
+    
         switch (view.tag) {
             case 1:
-                view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+                [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner]; 
                 break;
             case 2:
-                view.layer.maskedCorners = kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner;
+                [view setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
             default:
+                [view setupCornerRadiusShadow];
                 break;
         }
     }
-}
-
--(void) setupCornerRadiusShadow:(UIView*)view {
-    view.layer.shadowColor = [[UIColor alloc] initWithHexString:@"#00000029" alpha:1].CGColor;
-    view.layer.shadowOpacity = 0.1;
-    view.layer.shadowRadius = 7;
-    view.layer.masksToBounds = NO;
-    view.layer.shadowOffset = CGSizeMake(0, 2);
-    view.layer.cornerRadius = 7;
 }
 
 //MARK:- TableView
