@@ -76,7 +76,7 @@
             for(CKRecord* record in records.allValues) {
                 
                 User* user = [[User alloc] initWithRecord:record];
-                Contact* contact = [[Contact alloc]initWithUser:user];
+                Contact* contact = [[Contact alloc]initWithName:user.name andEmail:user.email];
                 
                 [self.employees_user addObject:user];
                 [self.employees_contact addObject:contact];

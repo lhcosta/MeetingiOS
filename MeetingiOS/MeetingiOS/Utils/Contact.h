@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <Contacts/Contacts.h>
 #import "Contact.h"
-#import <MeetingiOS-Swift.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,9 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// Inicializar com o CNContact
 -(instancetype) initWithContact:(CNContact*)contact;
 
-/// Inicializar com um usuário.
-/// @param user usuário.
--(instancetype) initWithUser:(User*)user;
+/// Criando contato com nome e email.
+/// @param name nome do contato.
+/// @param email email do contato.
+- (instancetype)initWithName:(NSString*)name andEmail:(NSString*)email;
 
 @end
 

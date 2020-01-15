@@ -22,13 +22,13 @@
     return self;
 }
 
-- (instancetype)initWithUser:(User *)user {
+- (instancetype)initWithName:(NSString*)name andEmail:(NSString*)email {
 
     self = [super init];
     
     if(self) {
-        _name = user.name;
-        _email = user.email;
+        _name = name;
+        _email = email;
     }
     
     return self;

@@ -32,6 +32,7 @@
 		49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
 		49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
 		49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */; };
+		A40E5AD923CF50D20009C25C /* MeetingiOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */; };
 		A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE32395E3820097857F /* NewMeetingViewController.h */; };
 		A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */; };
 		A4382C7523C2BD330021C814 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7423C2BD330021C814 /* LoginViewController.swift */; };
@@ -184,7 +185,7 @@
 		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
 		A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
-		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = NewMeetingViewController.h; sourceTree = "<group>"; };
 		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
 		A4EB3BFB239747640097857F /* Contact.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = Contact.h; sourceTree = "<group>"; };
@@ -536,6 +537,7 @@
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
 				A4382CA723C5400D0021C814 /* NewContactTableViewCell.swift in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
+				A40E5AD923CF50D20009C25C /* MeetingiOS-Bridging-Header.h in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */,
@@ -762,6 +764,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-enable-bridging-pch";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -816,6 +819,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-enable-bridging-pch";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
