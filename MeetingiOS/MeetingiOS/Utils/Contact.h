@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Contacts/Contacts.h>
-#import <MeetingiOS-Swift.h>
 #import "Contact.h"
+#import <MeetingiOS-Swift.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
