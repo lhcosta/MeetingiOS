@@ -25,7 +25,6 @@
 		49EB44E423871126002F434D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E323871126002F434D /* SceneDelegate.swift */; };
 		49EB44EE23871128002F434D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44ED23871128002F434D /* Assets.xcassets */; };
 		49EB44F123871128002F434D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EB44EF23871128002F434D /* LaunchScreen.storyboard */; };
-		49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A602399824500B7DFD3 /* Main.storyboard */; };
 		49F09ACB2399A1BA00B7DFD3 /* MyMeetings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */; };
 		49F09ACC2399A1BE00B7DFD3 /* FinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A72239982A600B7DFD3 /* FinishedMeeting.storyboard */; };
 		49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */; };
@@ -118,9 +117,6 @@
 		49F09A5C2399822600B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		49F09A5D2399822600B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		49F09A622399825600B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		49F09A642399825900B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
-		49F09A662399825A00B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
-		49F09A672399826800B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49F09A6C2399827600B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MyMeetings.strings"; sourceTree = "<group>"; };
 		49F09A6E2399827700B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MyMeetings.strings; sourceTree = "<group>"; };
 		49F09A6F2399827800B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MyMeetings.storyboard; sourceTree = "<group>"; };
@@ -134,7 +130,6 @@
 		49F09A852399830400B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Contact.strings"; sourceTree = "<group>"; };
 		49F09A872399830500B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contact.strings; sourceTree = "<group>"; };
 		49F09A8B2399831D00B7DFD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NewMeeting.storyboard; sourceTree = "<group>"; };
-		49F09AB72399A14300B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		49F09AB92399A14A00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyMeetings.strings; sourceTree = "<group>"; };
 		49F09ABB2399A16900B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FinishedMeeting.strings; sourceTree = "<group>"; };
 		49F09ABD2399A16E00B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UnfinishedMeeting.strings; sourceTree = "<group>"; };
@@ -361,7 +356,6 @@
 		A4EB3BE12395E1700097857F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				49F09A602399824500B7DFD3 /* Main.storyboard */,
 				49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */,
 				49F09A72239982A600B7DFD3 /* FinishedMeeting.storyboard */,
 				49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */,
@@ -488,7 +482,6 @@
 				A4922A2423A728FB00FD95B9 /* SFProDisplay-Medium.ttf in Resources */,
 				A4922A2523A728FB00FD95B9 /* SFProDisplay-Black.ttf in Resources */,
 				A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */,
-				49F09AB52399A0BA00B7DFD3 /* Main.storyboard in Resources */,
 				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
 				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
 				A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */,
@@ -611,17 +604,6 @@
 				49F09A5D2399822600B7DFD3 /* es */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		49F09A602399824500B7DFD3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49F09A642399825900B7DFD3 /* pt-BR */,
-				49F09A662399825A00B7DFD3 /* es */,
-				49F09A672399826800B7DFD3 /* Base */,
-				49F09AB72399A14300B7DFD3 /* en */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */ = {

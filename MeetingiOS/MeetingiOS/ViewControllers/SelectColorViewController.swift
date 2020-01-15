@@ -22,7 +22,7 @@ import CloudKit
     @objc var selectedColor = String()
     
     //Array do hex das cores a serem selecionadas
-    var arrayColors: [String] = [ "#93CCB2",
+    var arrayColors: [String] = [  "#93CCB2",
                                    "#F2AEAE",
                                    "#8AB3D1",
                                    "#DCB4E8",
