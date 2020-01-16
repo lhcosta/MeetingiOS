@@ -19,6 +19,7 @@
 		492C051023A2904800442814 /* OnBoarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492C051223A2904800442814 /* OnBoarding.storyboard */; };
 		492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C051923A2907A00442814 /* OnBoardingViewController.swift */; };
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
+		49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4652923D09FF6006D67D8 /* Login.storyboard */; };
 		49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */; };
 		49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */; };
 		49EB44E223871126002F434D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E123871126002F434D /* AppDelegate.swift */; };
@@ -103,6 +104,10 @@
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
+		49A4652823D09FF6006D67D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		49A4652B23D09FF8006D67D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
+		49A4652D23D09FF9006D67D8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
+		49A4652F23D09FFA006D67D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
 		49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudManager.swift; path = MeetingiOS/CloudManager.swift; sourceTree = SOURCE_ROOT; };
 		49EB44DE23871126002F434D /* MeetingiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,6 +370,7 @@
 				49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */,
 				492C050723A1819F00442814 /* Profile.storyboard */,
 				492C051223A2904800442814 /* OnBoarding.storyboard */,
+				49A4652923D09FF6006D67D8 /* Login.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -487,6 +493,7 @@
 				A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */,
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
 				A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */,
+				49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */,
 				492C050523A1819F00442814 /* Profile.storyboard in Resources */,
 				49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */,
 				A4922A2223A728FB00FD95B9 /* SFProText-Semibold.ttf in Resources */,
@@ -583,6 +590,17 @@
 				A4F8227223CD0B5E006AE7C8 /* es */,
 			);
 			name = OnBoarding.storyboard;
+			sourceTree = "<group>";
+		};
+		49A4652923D09FF6006D67D8 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49A4652823D09FF6006D67D8 /* Base */,
+				49A4652B23D09FF8006D67D8 /* en */,
+				49A4652D23D09FF9006D67D8 /* pt-BR */,
+				49A4652F23D09FFA006D67D8 /* es */,
+			);
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 		49EB44EF23871128002F434D /* LaunchScreen.storyboard */ = {

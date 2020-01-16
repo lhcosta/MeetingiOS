@@ -69,6 +69,12 @@ import CloudKit
         self.showNewMeeting()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        
+    }
+    
     //MARK:- Methods
     /// Método para mostrar adicionar reunião que acabou de ser criada localmente
     private func showNewMeeting(){
@@ -137,7 +143,16 @@ import CloudKit
     }
     
     @objc func goToProfile() {
-        self.performSegue(withIdentifier: "goToProfile", sender: nil)
+        if let _ = defaults.value(forKey: "recordName") as? String {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
+            self.present(nextVC, animated: true, completion: nil)
+        } else {
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let nextVC = storyboard.instantiateInitialViewController() as! LoginViewController
+            nextVC.vcToShowID = "Profile"
+            self.present(nextVC, animated: true, completion: nil)
+        }
     }
 }
 
