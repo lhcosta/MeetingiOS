@@ -103,7 +103,7 @@
     for (UIView* view in self.views) {
         
         [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
-    
+        
         switch (view.tag) {
             case 1:
                 [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner]; 
@@ -112,7 +112,6 @@
                 [view setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
             default:
                 [view setupCornerRadiusShadow];
-                break;
         }
     }
 }

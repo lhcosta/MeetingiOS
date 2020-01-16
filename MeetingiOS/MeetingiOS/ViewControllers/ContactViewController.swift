@@ -19,7 +19,7 @@ import Contacts
     
     //MARK:- Properties
     private var contactTableViewManager : ContactTableView!
-    @objc var contactCollectionView : ContactCollectionView?
+    @objc weak var contactCollectionView : ContactCollectionView?
     
     //MARK:- Delegates
     @objc weak var contactDelegate : MeetingDelegate?

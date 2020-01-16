@@ -23,3 +23,5 @@
 /*Contact Table View --- EN*/
 "Search Results" = "Search Results";
 "Contacts" = "Contacts";
+"Error to add contact" = "Error to add contact";
+"Name or email empty" = "Name or email empty";

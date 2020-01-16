@@ -16,3 +16,4 @@
 #import "ContactManager.h"
 #import "MeetingDelegate.h"
 #import "ContactCollectionView.h"
+#import "DetailsTableViewController.h"

@@ -8,6 +8,10 @@
 
 #import "DetailsTableViewController.h"
 #import "ContactCollectionView.h"
+#import "UIView+CornerShadows.h"
+#import <MeetingiOS-Swift.h>
+
+@class User;
 
 @interface DetailsTableViewController ()
 
@@ -53,7 +57,7 @@
         _isManager = false;
     }
     
-    if(!_isManager) {
+    if(_isManager) {
         [self.modifyName setHidden:YES];
         [self.tableView setAllowsSelection:NO];
     }
@@ -69,27 +73,47 @@
         [employeesID addObject:employee.recordID];
     }
     
-    [CloudManager.shared fetchRecordsWithRecordIDs:@[[employeesID copy]] desiredKeys:Nil finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
-       
-        if (error == Nil) {
+    if (employeesID.count > 0) {
+        [CloudManager.shared fetchRecordsWithRecordIDs:@[[employeesID copy]] desiredKeys:Nil finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
             
-            for(CKRecord* record in records.allValues) {
+            if (error == Nil) {
                 
-                User* user = [[User alloc] initWithRecord:record];
-                Contact* contact = [[Contact alloc]initWithName:user.name andEmail:user.email];
+                for(CKRecord* record in records.allValues) {
+                    
+                    User* user = [[User alloc] initWithRecord:record];
+                    Contact* contact = [[Contact alloc]initWithUser:user];
+                    
+                    [self.employees_user addObject:user];
+                    [self.employees_contact addObject:contact];
+                }
                 
-                [self.employees_user addObject:user];
-                [self.employees_contact addObject:contact];
+            } else {
+                NSLog(@"%@", error.userInfo);
+                return;
             }
-            
-        } else {
-            NSLog(@"%@", error.userInfo);
-            return;
-        }
-    }];
+        }];
+    }
 }
 
-/// Buscando o criador do reunião
+/// Adicionando características as views.
+- (void) setupViews {
+    
+    for(UIView* view in _views) {
+        
+        switch (view.tag) {
+            case 2:
+                [self.view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
+                break;
+            case 3:
+                [self.view setupCornerRadiusShadow: kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+                break;
+            default:
+                [self.view setupCornerRadiusShadow];
+        }
+    }
+}
+
+/// Buscando o criador da reunião.
 - (void) fetchManager {
     
     [CloudManager.shared fetchRecordsWithRecordIDs:@[_meeting.manager.recordID] desiredKeys:Nil finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {

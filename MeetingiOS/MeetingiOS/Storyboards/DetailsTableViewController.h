@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <CloudKit/CloudKit.h>
-#import <MeetingiOS-Swift.h>
 #import "Contact.h"
 #import "MeetingDelegate.h"
+
+@class Meeting;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Reunião
 @property (nonatomic) Meeting* meeting;
+
 
 @end
 

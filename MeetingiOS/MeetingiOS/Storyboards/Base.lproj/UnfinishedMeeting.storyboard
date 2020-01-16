@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProText-Regular.ttf">
+            <string>SFProText-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Unfinished Meeting View Controller-->
         <scene sceneID="N7c-RC-Ypd">
@@ -16,9 +21,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
-                                <rect key="frame" x="20" y="241" width="374" height="532"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="44" width="374" height="744"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="77" id="0Vh-IY-nnt" customClass="UnfinishedTopicsTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="374" height="77"/>
@@ -27,76 +32,106 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWC-TR-COq">
-                                                    <rect key="frame" x="64" y="21" width="290" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWC-TR-COq">
+                                                    <rect key="frame" x="64" y="30" width="290" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="57K-oc-w59"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="105-1b-AMg">
-                                                    <rect key="frame" x="10" y="18" width="46" height="41"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="checkmark.square.fill" catalog="system"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="105-1b-AMg">
+                                                    <rect key="frame" x="10" y="29.5" width="46" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="46" id="5T5-X8-B7j"/>
+                                                        <constraint firstAttribute="height" constant="20.5" id="L7B-FR-RJ5"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="checkmark.square.fill" catalog="system">
+                                                        <color key="titleColor" red="0.32497316599999998" green="0.47915506359999999" blue="0.99612778430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="selectTopicButton:" destination="ID9-zH-FfA" eventType="touchUpInside" id="LuW-Ve-tQZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="105-1b-AMg" firstAttribute="leading" secondItem="JLj-gr-1tY" secondAttribute="leading" constant="10" id="6yg-gm-xF2"/>
+                                                <constraint firstItem="105-1b-AMg" firstAttribute="centerY" secondItem="JLj-gr-1tY" secondAttribute="centerY" id="SzM-Zn-DyJ"/>
+                                                <constraint firstItem="qWC-TR-COq" firstAttribute="leading" secondItem="105-1b-AMg" secondAttribute="trailing" constant="8" id="a9C-ek-6aB"/>
+                                                <constraint firstItem="qWC-TR-COq" firstAttribute="centerY" secondItem="JLj-gr-1tY" secondAttribute="centerY" id="etw-2Z-KBx"/>
+                                                <constraint firstItem="qWC-TR-COq" firstAttribute="leading" secondItem="JLj-gr-1tY" secondAttribute="leading" priority="999" constant="10" id="nHO-OD-hZB"/>
+                                                <constraint firstAttribute="trailing" secondItem="qWC-TR-COq" secondAttribute="trailing" constant="20" id="sCB-XF-9Hf"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonHeight" destination="L7B-FR-RJ5" id="vI6-5d-MHh"/>
+                                            <outlet property="buttonLeftSpace" destination="6yg-gm-xF2" id="uoQ-D8-wJp"/>
+                                            <outlet property="buttonWidth" destination="5T5-X8-B7j" id="5gf-Ac-tz6"/>
                                             <outlet property="checkButton" destination="105-1b-AMg" id="xo4-cd-CWs"/>
+                                            <outlet property="textFieldHeight" destination="nHO-OD-hZB" id="UJq-OB-mSb"/>
+                                            <outlet property="textFieldLeft" destination="a9C-ek-6aB" id="QNO-JQ-zQe"/>
+                                            <outlet property="textFieldRight" destination="sCB-XF-9Hf" id="ff9-3T-oeP"/>
+                                            <outlet property="textFieldSecondLeft" destination="nHO-OD-hZB" id="O5y-ch-tca"/>
                                             <outlet property="topicTextField" destination="qWC-TR-COq" id="MSM-2X-Ovh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C85-hx-fw3">
-                                <rect key="frame" x="20" y="812" width="56" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <state key="normal" backgroundImage="plus.circle.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="createNewTopic:" destination="ID9-zH-FfA" eventType="touchUpInside" id="gjK-0G-S4b"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVt-DO-0Fx">
-                                <rect key="frame" x="270" y="804" width="124" height="67"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XL-bb-37o">
+                                <rect key="frame" x="0.0" y="788" width="414" height="108"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAI-HC-ilp">
+                                <rect key="frame" x="0.0" y="788" width="414" height="74"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVt-DO-0Fx">
+                                        <rect key="frame" x="304" y="21.5" width="90" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="Ft4-VN-ETO"/>
+                                            <constraint firstAttribute="width" constant="90" id="RBC-et-B7y"/>
+                                        </constraints>
+                                        <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <state key="normal" title="Mirror" image="mirror">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" eventType="touchUpInside" id="b6N-2b-fX4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="124" id="J9P-iH-2Sc"/>
-                                    <constraint firstAttribute="height" constant="69.5" id="pNy-Ed-eMF"/>
+                                    <constraint firstAttribute="trailing" secondItem="PVt-DO-0Fx" secondAttribute="trailing" constant="20" id="3xX-Fn-hyC"/>
+                                    <constraint firstAttribute="height" constant="74" id="Mwy-HV-Ig9"/>
+                                    <constraint firstItem="PVt-DO-0Fx" firstAttribute="centerY" secondItem="BAI-HC-ilp" secondAttribute="centerY" id="Sic-Ya-9Q3"/>
                                 </constraints>
-                                <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <state key="normal" title="Mirror" backgroundImage="rectangle.fill" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="espelharMeeting:" destination="ID9-zH-FfA" eventType="touchUpInside" id="b6N-2b-fX4"/>
-                                </connections>
-                            </button>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="94Y-2H-YKX">
-                                <rect key="frame" x="0.0" y="150" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.98040527109999998" green="0.98036855460000005" blue="0.98039346930000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="PVt-DO-0Fx" secondAttribute="trailing" constant="20" id="BNs-6A-qT9"/>
-                            <constraint firstItem="94Y-2H-YKX" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="IOx-rp-jhX"/>
-                            <constraint firstAttribute="bottom" secondItem="PVt-DO-0Fx" secondAttribute="bottom" constant="23.5" id="Lav-nS-UaC"/>
-                            <constraint firstItem="94Y-2H-YKX" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" constant="106" id="MTA-59-KUM"/>
-                            <constraint firstItem="94Y-2H-YKX" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="NQN-Oi-CZK"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="94Y-2H-YKX" secondAttribute="bottom" constant="35" id="URE-Tx-HMs"/>
-                            <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="die-tg-Jft"/>
-                            <constraint firstItem="PVt-DO-0Fx" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" constant="30" id="i6w-p1-kOQ"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="lFv-I9-rAE"/>
+                            <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" id="2WT-QC-CZx"/>
+                            <constraint firstItem="BAI-HC-ilp" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="999" id="9oW-Ki-mbs"/>
+                            <constraint firstItem="BAI-HC-ilp" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="DzY-aU-fQa"/>
+                            <constraint firstItem="BAI-HC-ilp" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="HM6-6F-Y8i"/>
+                            <constraint firstItem="8XL-bb-37o" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="Lgz-bO-jW7"/>
+                            <constraint firstItem="8XL-bb-37o" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="MPa-Sg-d8K"/>
+                            <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="OTe-fo-ZvA"/>
+                            <constraint firstAttribute="bottom" secondItem="8XL-bb-37o" secondAttribute="bottom" id="RRk-6P-YAd"/>
+                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="BAI-HC-ilp" secondAttribute="bottom" id="V09-pV-z9U"/>
+                            <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="Vvj-D4-nEK"/>
+                            <constraint firstItem="8XL-bb-37o" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="999" id="cgC-fA-w2Y"/>
+                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="998" id="l5Z-A1-bgg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
+                        <outlet property="bottomToSafeArea" destination="l5Z-A1-bgg" id="hLM-Lr-Lwd"/>
+                        <outlet property="bottomUIView" destination="BAI-HC-ilp" id="CT8-OJ-aXe"/>
+                        <outlet property="bottomView" destination="BAI-HC-ilp" id="9iX-3l-4zt"/>
+                        <outlet property="bottomViewMaior" destination="8XL-bb-37o" id="bRE-cJ-IPp"/>
                         <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
-                        <outlet property="searchBar" destination="94Y-2H-YKX" id="dcr-zB-d17"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                     </connections>
                 </viewController>
@@ -107,7 +142,6 @@
     </scenes>
     <resources>
         <image name="checkmark.square.fill" catalog="system" width="64" height="56"/>
-        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="rectangle.fill" catalog="system" width="64" height="46"/>
+        <image name="mirror" width="89" height="31"/>
     </resources>
 </document>

@@ -23,3 +23,5 @@
 /*Contact Table View --- ES*/
 "Search Results" = "Resultados de búsqueda";
 "Contacts" = "Contactos";
+"Error Create Contact" = "Error al agregar contacto";
+"Name or email empty" = "Nombre o correo electrónico vacío";

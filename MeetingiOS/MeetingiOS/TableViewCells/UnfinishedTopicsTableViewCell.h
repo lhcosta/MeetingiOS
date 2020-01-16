@@ -14,6 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) IBOutlet UITextField *topicTextField;
 @property (strong, nonatomic) IBOutlet UIButton *checkButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonLeftSpace;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldLeft;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldRight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldSecondLeft;
 
 
 @end

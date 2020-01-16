@@ -16,8 +16,13 @@ class UnfinishedMeetingViewController: UIViewController {
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
     @IBOutlet var mirrorButton: UIButton!
+    @IBOutlet var bottomUIView: UIView!
+    @IBOutlet var bottomToSafeArea: NSLayoutConstraint!
+    @IBOutlet var bottomViewMaior: UIView!
+    @IBOutlet var bottomView: UIView!
     
-     //MARK: - Properties
+    
+    //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
     
@@ -29,9 +34,6 @@ class UnfinishedMeetingViewController: UIViewController {
     
     /// Booleano identificando se o usuário foi quem criou a reunião
     var usrIsManager = false
-    
-    /// Barra de pesquisa dos Topics
-    @IBOutlet var searchBar: UISearchBar!
     
     /// Nome da imagem de fundo do botão de check dos Topics ("square" ou "checkmark.square.fill")
     var bgButtonImg: String!
@@ -57,7 +59,14 @@ class UnfinishedMeetingViewController: UIViewController {
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
+        self.navigationController?.navigationBar.backgroundColor = .white
+        
+        // SearchBar na NavigationBar
+        self.setUpSearchBar(segmentedControlTitles: nil)
+        self.navigationItem.searchController?.searchBar.delegate = self
+//        self.navigationItem.searchController?.searchBar.showsCancelButton = true
+        self.navigationItem.searchController?.searchBar.returnKeyType = .done
         
         //SO TESTE 
         self.multipeer = MeetingBrowserPeer()
@@ -68,20 +77,19 @@ class UnfinishedMeetingViewController: UIViewController {
             }
         }
         
+//        tableViewTopics.clipsToBounds = false
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
-        searchBar.delegate = self
-        searchBar.showsCancelButton = true
-        searchBar.returnKeyType = .done
         
-        self.navigationItem.title = "Meeting"
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: nil, action: nil), animated: true)
+        self.navigationItem.title = currMeeting.theme
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
         
         // Pegar Topics do Cloud.
         var tempIDs: [CKRecord.ID] = []
         for i in currMeeting.topics {
             tempIDs.append(i.recordID)
         }
+        
         CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -120,13 +128,28 @@ class UnfinishedMeetingViewController: UIViewController {
             self.bgButtonImg = "checkmark.square.fill"
         } else {
             mirrorButton.isHidden = true
+            self.bottomToSafeArea.priority = UILayoutPriority(rawValue: 1000)
+            self.bottomView.isHidden = true
+            self.bottomViewMaior.isHidden = true
 //            self.bgButtonImg = "square."
         }
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
+        
+        bottomViewShadow()
     }
     
+    
+    func bottomViewShadow() {
+        bottomUIView.backgroundColor = .clear
+        bottomUIView.layer.masksToBounds = true
+        bottomUIView.layer.shadowOpacity = 0.2
+        bottomUIView.layer.shadowRadius = 0.1
+        bottomUIView.layer.shadowOffset = CGSize(width: 0, height: -1)
+        bottomUIView.clipsToBounds = false
+        bottomUIView.backgroundColor = .white
+    }
     
     /// Criamos um Topic com os dados do Usuário.
     func creatingTopicInstance() -> Topic {
@@ -147,9 +170,7 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
-    /// Botão que cria um novo Topic (__Deprecated__)
-    /// - Parameter sender: UIButton
-    @IBAction func createNewTopic(_ sender: Any) {
+    @objc func createNewTopic() {
         
         self.indexPath = IndexPath(row: 0, section: 0)
         tableViewTopics.scrollToRow(at: self.indexPath, at: .none, animated: true)
@@ -176,17 +197,24 @@ class UnfinishedMeetingViewController: UIViewController {
         guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         let indexPath = tableViewTopics.indexPath(for: cell)
         
-        if topics[indexPath!.section].discussed {
+        if topics[indexPath!.section].selectedForMeeting {
             button.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
-            topics[indexPath!.section].discussed = false
+            topics[indexPath!.section].selectedForMeeting = false
         } else {
             button.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-            topics[indexPath!.section].discussed = true
+            topics[indexPath!.section].selectedForMeeting = true
         }
+        // Atualizamos o Cloud da selectedForMeeting.
+        CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record], perRecordCompletion: { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+        }) { }
+        
     }
     
-    
-    // MARK: Multipeer Aqui.
+    // MARK:- Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
@@ -250,16 +278,34 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         
         return headerView
     }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true;
+    }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UnfinishedTopicsTableViewCell
+        let font = UIFont(name: "SF Pro Text Regular", size: (tableView.frame.size.height * 0.2) * 0.2)
+        
         cell.topicTextField.delegate = self
+        cell.buttonHeight.constant = (tableView.frame.size.height * 0.2) * 0.4
+        cell.buttonWidth.constant = (tableView.frame.size.height * 0.2) * 0.4
+        cell.buttonLeftSpace.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textFieldLeft.constant = (tableView.frame.size.height * 0.2) * 0.12
+        cell.textFieldRight.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textFieldHeight.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textLabel?.font = font
         
         // Se não for gerente, não faz sentido termos o botão de check.
         if !usrIsManager {
             cell.checkButton.isHidden = true
+            cell.textFieldSecondLeft.constant = (tableView.frame.size.height * 0.2) * 0.2
+            cell.textFieldLeft.priority = UILayoutPriority(998)
+        } else {
+            
         }
         
         // Verificamos se o usuário está em modo de pesquisa.
@@ -359,7 +405,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             }
             // Quando o usuário aperta Return em modo de pesquisa, saímos desse modo.
             isSearching = false
-            searchBar.text = ""
+            self.navigationItem.searchController?.searchBar.text = ""
             
             // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
@@ -380,22 +426,22 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
-            let indexPath = tableViewTopics.indexPath(for: cell)
-            topics[indexPath!.section].topicDescription = textField.text!
+            let indexPath = tableViewTopics.indexPath(for: cell)!
+            topics[indexPath.section].topicDescription = textField.text!
             // Se a edição não resultou em um Topic vazio, adicionamos ele no Cloud.
-            if topics[indexPath!.section].topicDescription != "" {
+            if topics[indexPath.section].topicDescription != "" {
                 // Adicionamos o Topic na Meeting.
-                currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath!.section].record.recordID, action: .deleteSelf))
+                currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath.section].record.recordID, action: .deleteSelf))
                 // Damos update na Meeting e no Topic criado.
-                CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
+                CloudManager.shared.updateRecords(records: [topics[indexPath.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
                 }) { }
-            } else if indexPath?.section != 0 {
+            } else if indexPath.section != 0 {
                 // Quando a edição é uma exclusão, excluímos o Topic da Meeting e do Cloud.
                 for ii in 0...currMeeting.topics.count-1 {
-                    if currMeeting.topics[ii].recordID == topics[indexPath!.section].record.recordID {
+                    if currMeeting.topics[ii].recordID == topics[indexPath.section].record.recordID {
                         currMeeting.topics.remove(at: ii)
                         break
                     }
@@ -405,7 +451,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                         print(error.localizedDescription)
                     }
                 }) { }
-                CloudManager.shared.deleteRecords(recordIDs: [topics[indexPath!.section].record.recordID], perRecordCompletion: { (_, error) in
+                CloudManager.shared.deleteRecords(recordIDs: [topics[indexPath.section].record.recordID], perRecordCompletion: { (_, error) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -415,7 +461,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
             for i in 0...topics.count-1 {
-                if topics[i].topicDescription.isEmpty && i != 0 {
+                if topics[i].topicDescription.isEmpty {
                     temp.append(i)
                 }
             }
@@ -424,17 +470,17 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             }
             tableViewTopics.reloadData()
             
-            // Verificamos se o novo Topic não foi vazio e criamos um novo espaço na tbleView para a criação
+            // Verificamos se o novo Topic não foi vazio e criamos um novo espaço na tableView para a criação
             // de outro Topic.
             if !textField.text!.isEmpty {
                 // Apenas inserimos um espaço para o novo Topic se ele já não existir.
                 // (se a edição foi feita em outra Cell)
-                if indexPath!.section == 0 {
+                if indexPath.section == 0 {
                     topics.insert(self.creatingTopicInstance(), at: 0)
+                    tableViewTopics.reloadData()
+                    let cell = tableViewTopics.cellForRow(at: IndexPath(row: 0, section: 0)) as! UnfinishedTopicsTableViewCell
+                    cell.topicTextField.becomeFirstResponder()
                 }
-                tableViewTopics.reloadData()
-                let cell = tableViewTopics.cellForRow(at: IndexPath(row: 0, section: 0)) as! UnfinishedTopicsTableViewCell
-                cell.topicTextField.becomeFirstResponder()
             }
             return true
         }
