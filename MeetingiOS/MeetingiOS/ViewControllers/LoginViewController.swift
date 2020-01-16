@@ -13,6 +13,8 @@ import CloudKit
 class LoginViewController: UIViewController {
     
     let defaults = UserDefaults.standard
+    var vcToShowID: String! = nil
+    var didShow = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +128,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
         }
         
-        self.performSegue(withIdentifier: "nextScreen", sender: nil)
+        let storyboard = UIStoryboard(name: vcToShowID, bundle: nil)
+        let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
+        self.present(nextVC, animated: true, completion: nil)
     }
     
     private func saveDefaults(user: User) {

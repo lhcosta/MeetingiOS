@@ -60,7 +60,12 @@ class ProfileViewController: UITableViewController {
         
         User.updateUser(name: nameToUpdate, email: emailToUpdate) {
             DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    if let vc = self.presentingViewController {
+                        vc.dismiss(animated: false, completion: nil)
+                    }
+                })
             }
         }
     }

@@ -107,7 +107,7 @@ import CloudKit
     ///   - recordIDs: array de record ids para serem buscadas
     ///   - finalCompletion: completion para tratar os resultados da busca
     ///   - desiredKeys: Array de strings contendo o nome das chaves desejadas na pesquisa (caso queira todas as chaves passe o array como nil
-    func fetchRecords(recordIDs: [CKRecord.ID], desiredKeys: [String]?, finalCompletion: @escaping (([CKRecord.ID : CKRecord]?, Error?) -> Void)){
+    @objc func fetchRecords(recordIDs: [CKRecord.ID], desiredKeys: [String]?, finalCompletion: @escaping (([CKRecord.ID : CKRecord]?, Error?) -> Void)){
         
         let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
         

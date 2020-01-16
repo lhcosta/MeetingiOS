@@ -10,9 +10,9 @@
 #import <MeetingiOS-Swift.h>
 #import "NewMeetingViewController+NameMeetingValidation.h"
 #import "Contact.h"
+#import "ContactCollectionView.h"
 #import "NewMeetingViewController+SettingPickers.h"
-
-#define TITLE_NAV @"New meeting"
+#import "UIView+CornerShadows.h"
 
 @interface NewMeetingViewController ()
 
@@ -36,35 +36,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
+    
     _formatter = [[NSDateFormatter alloc] init];
-    _formatter.dateFormat = @"MMM, dd yyyy  h:mm a";
+    _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
+    
+    self.numbersOfPeople.text = NSLocalizedString(@"None", "");
     
     _contactCollectionView = [[ContactCollectionView alloc] init];
     _collectionView.allowsSelection = NO;
     _collectionView.delegate = _contactCollectionView;
     _collectionView.dataSource = _contactCollectionView;
+    [_collectionView.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_collectionView.layer setCornerRadius:7];
     
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
     _meeting = [[Meeting alloc] initWithRecord:record];
     
     _participants = [[NSMutableArray alloc] init];
-    
+        
     _nameMetting.delegate = self;
     _pickerView.delegate = self;
     
-    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#88A896" alpha:1];
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     _chooseNumberOfTopics = NO;
     _chooseStartTime = NO;
     _chooseEndTime = NO;
     
     [self setupDatePicker];
     [self setupViews];
-        
-    [self.navigationItem setTitle:TITLE_NAV];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
-    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
+
+    NSString* title = NSLocalizedString(@"New meeting", "");
     
+    [self.navigationItem setTitle:title];
+    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -75,6 +83,7 @@
             [UIView animateWithDuration:0.5 animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
+                self.numbersOfPeople.text = [NSString stringWithFormat:@"%ld", self.contactCollectionView.contacts.count];                   
                 [self.collectionView reloadData];
             }];
         });
@@ -82,18 +91,9 @@
         [UIView animateWithDuration:0.5 animations:^{
             [self.tableView beginUpdates];
             [self.tableView endUpdates];
+            self.numbersOfPeople.text = NSLocalizedString(@"None", "");
             [self.view layoutIfNeeded];
         }];
-    }
-    
-}
-
-- (void)dealloc
-{
-    //Deselecionando todos os contatos que foram selecionados, pois está sendo usado
-    //uma classe singleton para realizar o fetch dos contatos. 
-    for (Contact* contact in _contactCollectionView.contacts) {
-        contact.isSelected = false;
     }
 }
 
@@ -102,16 +102,16 @@
     
     for (UIView* view in self.views) {
         
-        view.clipsToBounds = true;
-        view.layer.cornerRadius = 10;
-        
+        [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
+    
         switch (view.tag) {
             case 1:
-                view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+                [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner]; 
                 break;
             case 2:
-                view.layer.maskedCorners = kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner;
+                [view setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
             default:
+                [view setupCornerRadiusShadow];
                 break;
         }
     }
@@ -190,7 +190,7 @@
                     if(!_chooseEndTime) {
                         
                         UIView* view = [_views objectAtIndex:2];
-                        [view.layer setCornerRadius:10];
+                        [view.layer setCornerRadius:5];
                         view.layer.maskedCorners = kCALayerMaxXMaxYCorner | kCALayerMinXMaxYCorner;
                         
                         [UIView animateWithDuration:0.5 animations:^{
@@ -263,6 +263,7 @@
         
         if(nextViewController) {
             [nextViewController setDelegate:self];
+            [nextViewController setSelectedColor: self.colorMetting.backgroundColor.toHexString];
         }
     }
 }
@@ -270,12 +271,10 @@
 -(void) createMeetingInCloud {
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    
-    [self showLoadingIndicator];
-    
+        
     if(theme.length == 0) {
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Meeting" message:@"Choose a name for create a meeting." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Meeting", "") message:NSLocalizedString(@"Choose a name for create a meeting.", "") preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         
@@ -287,7 +286,8 @@
     }
     
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    
+    [self showLoadingIndicator];
+
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
     CKReference* manager = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
     
@@ -367,7 +367,7 @@
 /// Criando uma view que indica um loading quando criada uma reunião.
 - (void) showLoadingIndicator {
 
-    _alertLoading = [UIAlertController alertControllerWithTitle:Nil message:@"Creating Meeting..." preferredStyle:UIAlertControllerStyleAlert];
+    _alertLoading = [UIAlertController alertControllerWithTitle:Nil message:NSLocalizedString(@"Creating Meeting...","") preferredStyle:UIAlertControllerStyleAlert];
     
     UIActivityIndicatorView* loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     
@@ -377,7 +377,7 @@
     [_alertLoading.view addSubview:loadingIndicator];
     
     [[loadingIndicator.centerYAnchor constraintEqualToAnchor:_alertLoading.view.centerYAnchor constant:0] setActive:YES];
-    [[loadingIndicator.leftAnchor constraintEqualToAnchor:_alertLoading.view.leftAnchor constant:10] setActive:YES];
+    [[loadingIndicator.leftAnchor constraintEqualToAnchor:_alertLoading.view.leftAnchor constant:20] setActive:YES];
     [loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self presentViewController:_alertLoading animated:YES completion:Nil];

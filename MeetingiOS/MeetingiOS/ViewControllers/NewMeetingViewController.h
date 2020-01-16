@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIView+SetupBounds.h"
-#import "ContactCollectionView.h"
 #import <CloudKit/CloudKit.h>
 #import "MeetingDelegate.h"
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,11 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UITextField* nameMetting;
 @property (nonatomic, weak) IBOutlet UIButton* colorMetting;
 @property (nonatomic, weak) IBOutlet UILabel* numbersOfTopics;
+@property (nonatomic, weak) IBOutlet UILabel* numbersOfPeople;
 @property (nonatomic, weak) IBOutlet UIPickerView* pickerView;
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
 @property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
-@property (nonatomic, nonnull) NSDateFormatter* formatter;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
+@property (nonatomic, nonnull) NSDateFormatter* formatter;
 
 
 ///Selecionando a cor do ícone da reunião.

@@ -67,9 +67,9 @@ import Contacts
             
             case .restricted, .denied:
                 
-                let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
+                let alert = UIAlertController(title: nil, message: NSLocalizedString("This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", comment: ""), preferredStyle: .alert)
                 
-                alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Open Settings", comment: ""), style: .default) { action in
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                 })
                 
@@ -119,11 +119,14 @@ import Contacts
         if let contacts = contactCollectionView?.contacts {
             for contact in contacts {
                 
-                if let key = contact.name?.first?.uppercased() {
+                if let firstChar = contact.name?.first {
+                    
+                    let key = firstChar.isNumber ? "#" : firstChar.uppercased()
+                    
                     let selectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
                         return $0.email == contact.email
                     })
-                        
+                    
                     selectedContact?.isSelected = true
                 }
             }
@@ -137,14 +140,14 @@ extension ContactViewController {
     
     /// Configurando navigation controller
     func setupNavigationController() {
-        
-        self.navigationItem.title = "Add participants"
+                
+        self.navigationItem.title = NSLocalizedString("Add participants", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendingContactsToMeeting))
-        
+                
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Contacts"
+        searchController.searchBar.placeholder = NSLocalizedString("Search Contacts", comment: "")
         
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.searchController = searchController
@@ -182,8 +185,10 @@ extension ContactViewController {
     /// Deselecionar um contanto que foi removido pela collection view.
     @objc func deselectContactInRow(_ notification : NSNotification) {
                         
-        guard let contact = notification.object as? Contact,  let key = contact.name?.first?.uppercased() else {return}
+        guard let contact = notification.object as? Contact,  let firstChar = contact.name?.first else {return}
         
+        let key = firstChar.isNumber ? "#" : firstChar.uppercased()
+
         let deselectedContact = self.contactTableViewManager.contacts[key]?.first(where: { 
             return $0.email == contact.email
         })

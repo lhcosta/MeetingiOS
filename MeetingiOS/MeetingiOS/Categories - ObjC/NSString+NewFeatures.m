@@ -19,4 +19,5 @@
     return [emailPredicate evaluateWithObject:self];
 }
 
+
 @end

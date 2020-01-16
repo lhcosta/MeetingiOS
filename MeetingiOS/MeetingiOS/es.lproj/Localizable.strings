@@ -6,4 +6,20 @@
   Copyright © 2019 Bernardo Nunes. All rights reserved.
 */
 
-"teste" = "teste 1";
+/*New Meeting Storyboard --- ES*/
+"New meeting" = "Nueva reunión";
+"Meeting" = "Reunión";
+"Choose a name for create a meeting." = "Elija un nombre para crear una reunión.";
+"Creating Meeting..." = "Creando reunión...";
+"None" = "Ninguno";
+"dateFormat" = "dd MMM yyyy  HH:mm";
+
+/*Contacts Storyboard --- ES*/
+"Add participants" = "Participantes";
+"Search Contacts" = "Buscar contactos";
+"Open Settings" = "Configuración abierta";
+"This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?" = "Esta aplicación requiere acceso a Contactos para continuar. ¿Desea abrir la configuración y otorgar permiso a los contactos?";
+
+/*Contact Table View --- ES*/
+"Search Results" = "Resultados de búsqueda";
+"Contacts" = "Contactos";

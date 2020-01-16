@@ -19,17 +19,17 @@ import CloudKit
     var meetingRecord = CKRecord(recordType: "Meeting")
     
     // O numero da cor selecionada
-    var selectedColor = String()
+    @objc var selectedColor = String()
     
     //Array do hex das cores a serem selecionadas
-    var arrayColors: [String] = [ "#88A896",
-                                   "#C68C8D",
-                                   "#92B3CE",
-                                   "#C68ECB",
-                                   "#BE9553",
-                                   "#CBB791",
-                                   "#C4D094",
-                                   "#9BCEB6"]
+    var arrayColors: [String] = [  "#93CCB2",
+                                   "#F2AEAE",
+                                   "#8AB3D1",
+                                   "#DCB4E8",
+                                   "#F5B895",
+                                   "#F2D6AE",
+                                   "#E2F2AE",
+                                   "#A5A2E0"]
     
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ import CloudKit
         
         // Arredonda a view e seta como cor inicial a primeira cor do array
         self.viewColorSelected.layer.cornerRadius = 20
-        self.viewColorSelected.backgroundColor = UIColor(hexString: self.arrayColors[0])
+        self.viewColorSelected.backgroundColor = UIColor(hexString: selectedColor)
         
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendSelectedColor))
         self.navigationItem.rightBarButtonItem = done
@@ -100,11 +100,14 @@ extension SelectColorViewController: UICollectionViewDelegateFlowLayout {
     @objc convenience init(hexString: String, alpha: CGFloat = 1.0) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
+        
         if (hexString.hasPrefix("#")) {
             scanner.scanLocation = 1
         }
+        
         var color: UInt32 = 0
         scanner.scanHexInt32(&color)
+        
         let mask = 0x000000FF
         let r = Int(color >> 16) & mask
         let g = Int(color >> 8) & mask
