@@ -107,6 +107,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             user.email = String(describing: email)
             
             user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
+            self.saveDefaults(user: user)
             
             // Cria o record no Cloud
             CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
@@ -114,7 +115,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print("Error: \(error)")
                 } else {
                     print("Successfully created user: ", record["name"]!)
-                    self.saveDefaults(user: user)
+//                    self.saveDefaults(user: user)
                     print(record.recordID.recordName)
                 }
             }) {
@@ -124,7 +125,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         } else {
             user.searchCredentials(record: userRecord){ _ in
                 print("User Email: \(String(describing: user.email))")
-                self.saveDefaults(user: user)
+//                self.saveDefaults(user: user)
             }
         }
         
