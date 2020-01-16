@@ -214,17 +214,6 @@ class UnfinishedMeetingViewController: UIViewController {
         
     }
     
-    //MARK:- Show meeting's details
-    /// Apresentar os detalhes da reunião, caso seja o perfil do gerente é possível editar
-    @objc func showDetailsMeeting() {
-        self.performSegue(withIdentifier: "MeetingDetails", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let details = segue.destination as? DetailsTableViewController else {return}
-        details.meeting = currMeeting
-    }
-    
     // MARK:- Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
