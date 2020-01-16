@@ -7,6 +7,7 @@
 //
 
 #import "Contact.h"
+#import <MeetingiOS-Swift.h>
 
 @implementation Contact
 
@@ -22,13 +23,13 @@
     return self;
 }
 
-- (instancetype)initWithName:(NSString*)name andEmail:(NSString*)email {
-
+- (instancetype)initWithUser:(User *)user {
+    
     self = [super init];
     
     if(self) {
-        _name = name;
-        _email = email;
+        _name = [user name];
+        _email = [user email];
     }
     
     return self;

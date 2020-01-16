@@ -32,16 +32,16 @@
 		49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
 		49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
 		49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */; };
-		A40E5AD923CF50D20009C25C /* MeetingiOS-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */; };
 		A40E5ADF23CF56160009C25C /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */; };
-		A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE32395E3820097857F /* NewMeetingViewController.h */; };
 		A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */; };
 		A4382C7523C2BD330021C814 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7423C2BD330021C814 /* LoginViewController.swift */; };
 		A4382C7723C2BD7E0021C814 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7623C2BD7E0021C814 /* ContactViewController.swift */; };
-		A4382C7A23C2BDA40021C814 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7923C2BDA40021C814 /* UnfinishedMeetingViewController.swift */; };
 		A4382CA223C51BDD0021C814 /* ContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4382CA123C51BDC0021C814 /* ContactCollectionViewCell.xib */; };
 		A4382CA723C5400D0021C814 /* NewContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382CA523C5400D0021C814 /* NewContactTableViewCell.swift */; };
 		A4382CAE23CCEAF40021C814 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A592399819500B7DFD3 /* Localizable.strings */; };
+		A447CC8523D0EFC800A06D01 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */; };
+		A447CC8923D0F23C00A06D01 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */; };
+		A447CC8B23D0F3DB00A06D01 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
@@ -61,22 +61,15 @@
 		A4922A2B23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */; };
 		A4922A2C23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */; };
 		A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */; };
-		A4BA9B1623CE23B300CCC2AF /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */; };
-		A4BA9B1723CE256B00CCC2AF /* DetailsTableViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1423CE23B300CCC2AF /* DetailsTableViewController.h */; };
 		A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */; };
 		A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAEB2C239DD16300800277 /* NewMeetingViewController+SettingPickers.m */; };
 		A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */; };
-		A4C5BE8E23A2C105002BE4B9 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */; };
 		A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */; };
-		A4C5BE9623A30025002BE4B9 /* ContactCollectionViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */; };
 		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
 		A4EB3BFD239747640097857F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFC239747640097857F /* Contact.m */; };
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
 		A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */; };
 		A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1E2397EAF60097857F /* ContactManager.m */; };
-		A4EB3C202397F0990097857F /* Contact.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFB239747640097857F /* Contact.h */; };
-		A4EB3C232398555D0097857F /* ContactCollectionView.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C11239754D40097857F /* ContactCollectionView.h */; };
-		A4EB3C24239855640097857F /* ContactManager.h in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1D2397EAF60097857F /* ContactManager.h */; };
 		A4F8227323CD3F6B006AE7C8 /* NewContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4F8227523CD3F6B006AE7C8 /* NewContactTableViewCell.xib */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
@@ -149,13 +142,12 @@
 		A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+NameMeetingValidation.m"; sourceTree = "<group>"; };
 		A4382C7423C2BD330021C814 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A4382C7623C2BD7E0021C814 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
-		A4382C7823C2BD890021C814 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UnfinishedMeetingViewController.swift; path = MeetingiOS/ViewControllers/UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
-		A4382C7923C2BDA40021C814 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
 		A4382CA123C51BDC0021C814 /* ContactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewCell.xib; sourceTree = "<group>"; };
 		A4382CA523C5400D0021C814 /* NewContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContactTableViewCell.swift; sourceTree = "<group>"; };
 		A4382CB023CCEE4F0021C814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewMeeting.strings; sourceTree = "<group>"; };
 		A4382CB223CCEE6C0021C814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/NewMeeting.strings"; sourceTree = "<group>"; };
 		A4382CB423CCEE720021C814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NewMeeting.strings; sourceTree = "<group>"; };
+		A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -188,7 +180,7 @@
 		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
 		A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
-		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = NewMeetingViewController.h; sourceTree = "<group>"; };
 		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
 		A4EB3BFB239747640097857F /* Contact.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = Contact.h; sourceTree = "<group>"; };
@@ -234,7 +226,6 @@
 				A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */,
 				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
-				A4382C7923C2BDA40021C814 /* UnfinishedMeetingViewController.swift */,
 				A4382C7623C2BD7E0021C814 /* ContactViewController.swift */,
 				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
 				231AE149239828170051051C /* MyMeetingsViewController.swift */,
@@ -243,6 +234,7 @@
 				A4382C7423C2BD330021C814 /* LoginViewController.swift */,
 				492C050323A1818500442814 /* ProfileViewController.swift */,
 				492C051923A2907A00442814 /* OnBoardingViewController.swift */,
+				A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */,
 				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 			);
 			path = ViewControllers;
@@ -271,7 +263,6 @@
 		49EB44D523871126002F434D = {
 			isa = PBXGroup;
 			children = (
-				A4382C7823C2BD890021C814 /* UnfinishedMeetingViewController.swift */,
 				49EB44E023871126002F434D /* MeetingiOS */,
 				49EB44DF23871126002F434D /* Products */,
 				A4533FF5238C58060089257A /* Frameworks */,
@@ -479,7 +470,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4C5BE8E23A2C105002BE4B9 /* ContactTableViewCell.xib in Resources */,
 				A4922A2723A728FB00FD95B9 /* SFProDisplay-Light.ttf in Resources */,
 				A4922A2A23A728FB00FD95B9 /* SFProText-Bold.ttf in Resources */,
 				A4922A2B23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf in Resources */,
@@ -506,6 +496,7 @@
 				49EB44EE23871128002F434D /* Assets.xcassets in Resources */,
 				49F09ACC2399A1BE00B7DFD3 /* FinishedMeeting.storyboard in Resources */,
 				A4382CAE23CCEAF40021C814 /* Localizable.strings in Resources */,
+				A447CC8923D0F23C00A06D01 /* ContactTableViewCell.xib in Resources */,
 				A4922A2823A728FB00FD95B9 /* SFProDisplay-Regular.ttf in Resources */,
 				A4922A2623A728FB00FD95B9 /* SFProText-Light.ttf in Resources */,
 				49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */,
@@ -520,19 +511,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A447CC8B23D0F3DB00A06D01 /* DetailsTableViewController.m in Sources */,
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */,
-				A4284634239976C60044C33E /* NewMeetingViewController.h in Sources */,
 				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
-				A4EB3C232398555D0097857F /* ContactCollectionView.h in Sources */,
 				A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */,
 				A40E5ADF23CF56160009C25C /* UIView+CornerShadows.m in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
-				A4EB3C24239855640097857F /* ContactManager.h in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
-				A4BA9B1623CE23B300CCC2AF /* DetailsTableViewController.m in Sources */,
-				A4C5BE9623A30025002BE4B9 /* ContactCollectionViewCell.h in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
@@ -543,26 +530,23 @@
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
 				A4382CA723C5400D0021C814 /* NewContactTableViewCell.swift in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
-				A40E5AD923CF50D20009C25C /* MeetingiOS-Bridging-Header.h in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */,
 				49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */,
 				A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */,
-				A4EB3C202397F0990097857F /* Contact.h in Sources */,
 				23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
 				A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */,
 				A4382C7723C2BD7E0021C814 /* ContactViewController.swift in Sources */,
+				A447CC8523D0EFC800A06D01 /* UnfinishedMeetingViewController.swift in Sources */,
 				A4382C7523C2BD330021C814 /* LoginViewController.swift in Sources */,
-				A4382C7A23C2BDA40021C814 /* UnfinishedMeetingViewController.swift in Sources */,
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
 				231AE14A239828170051051C /* MyMeetingsViewController.swift in Sources */,
 				A4BAEB2D239DD16300800277 /* NewMeetingViewController+SettingPickers.m in Sources */,
 				A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				492C050423A1818500442814 /* ProfileViewController.swift in Sources */,
-				A4BA9B1723CE256B00CCC2AF /* DetailsTableViewController.h in Sources */,
 				A4EB3BFD239747640097857F /* Contact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

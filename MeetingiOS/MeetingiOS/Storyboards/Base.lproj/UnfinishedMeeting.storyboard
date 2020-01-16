@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -98,11 +98,22 @@
                         <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
                         <outlet property="searchBar" destination="94Y-2H-YKX" id="dcr-zB-d17"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
+                        <segue destination="jnE-Rg-gXa" kind="show" identifier="MeetingDetails" id="RC7-RE-hP6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8U-Za-ztu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="-338.16964285714283"/>
+        </scene>
+        <!--Details-->
+        <scene sceneID="rWB-LY-RId">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Details" id="jnE-Rg-gXa" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Y6s-tC-Uo9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLb-iu-jpe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="670" y="-338"/>
         </scene>
     </scenes>
     <resources>

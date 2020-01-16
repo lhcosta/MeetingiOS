@@ -10,6 +10,8 @@
 #import <Contacts/Contacts.h>
 #import "Contact.h"
 
+@class User;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// Contato para serem escolhidos para reunião
@@ -29,9 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype) initWithContact:(CNContact*)contact;
 
 /// Criando contato com nome e email.
-/// @param name nome do contato.
-/// @param email email do contato.
-- (instancetype)initWithName:(NSString*)name andEmail:(NSString*)email;
+/// @param user usuário.
+- (instancetype)initWithUser:(User*)user;
 
 @end
 

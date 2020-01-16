@@ -93,6 +93,7 @@ import CloudKit
     }
     
     static func updateUser(name: String?, email: String?, completion: @escaping (() -> Void)) {
+        
         guard let recordName = defaults.string(forKey: "recordName") else { return }
         let recordID = CKRecord.ID(recordName: recordName)
         let userCK = CKRecord(recordType: "User", recordID: recordID)

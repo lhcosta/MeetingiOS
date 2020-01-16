@@ -22,13 +22,13 @@ protocol ContactTableViewDelegate : AnyObject {
 class ContactTableView : NSObject {
     
     //MARK:- UITableViewController
-    private var contactViewController : ContactViewController!
+    private weak var contactViewController : ContactViewController!
     
     //MARK:- Properties
     var contacts : [String : [Contact]] = [:]
     var sortedContacts : [(key : String, value : [Contact])] = []
     var filteredContacts : [Contact] = []
-    var contactManager = ContactManager.shared()
+    var contactManager = ContactManager()
     
     //MARK:- Delegates 
     private weak var delegate : ContactTableViewDelegate?
@@ -61,12 +61,12 @@ extension ContactTableView : UITableViewDelegate {
             
             newContactViewController.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
             
-            self.contactViewController.present(navigationController, animated: true, completion: nil)
+            self.contactViewController.navigationController?.present(navigationController, animated: true, completion: nil)
                         
             return
         }
         
-        let cell = tableView.cellForRow(at: indexPath) as! ContactTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ContactTableViewCell else {return}
         var selectedContact : Contact
         
         if contactViewController.isFiltering {
@@ -89,7 +89,7 @@ extension ContactTableView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath) as! ContactTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ContactTableViewCell else {return}
         var selectedContact : Contact
         
         if contactViewController.isFiltering {
@@ -231,13 +231,28 @@ private extension ContactTableView {
 extension ContactTableView : CNContactViewControllerDelegate {
     
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        
-        if let email = contact?.emailAddresses.first?.value as String?, !email.isEmpty {
-            let contact = Contact(contact: contact!)
-            self.contactViewController.addContact(contact: contact)
+                        
+        if contact == nil  {
+            viewController.dismiss(animated: true, completion: nil)
+        } else {
+            
+            if let email = contact?.emailAddresses.first?.value as String?, !email.isEmpty, contact?.givenName.count ?? 0 > 0 {
+                
+                let contact = Contact(contact: contact!)
+                self.contactViewController.addContact(contact: contact)
+                
+                viewController.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                let alert = UIAlertController(title: NSLocalizedString("Error to add contact", comment: ""), message: NSLocalizedString("Name or email empty", comment: ""), preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                    viewController.dismiss(animated: true, completion: nil)
+                }))
+                
+                viewController.present(alert, animated: true, completion: nil)            
+            }
         }
-        
-        viewController.dismiss(animated: true, completion: nil)
     }
-    
 }

@@ -81,7 +81,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C77-ZC-c21">
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C77-ZC-c21">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="73"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="x2L-Ta-tLm">
@@ -125,7 +125,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txr-Ib-l90">
+                                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txr-Ib-l90">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="73"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mZD-mx-I77">
@@ -193,7 +193,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7N-jt-evr">
+                                                <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7N-jt-evr">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="73"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="bn9-Ui-xvl">
@@ -264,7 +264,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exb-We-oR4">
+                                                <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exb-We-oR4">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="73"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-br-bPP">
@@ -396,7 +396,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLU-fE-lvi">
+                                                <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLU-fE-lvi">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="73"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ZOC-o9-tKE">
@@ -468,19 +468,14 @@
                     </tableView>
                     <connections>
                         <outlet property="collectionParticipants" destination="j4h-OL-Pna" id="ACm-XQ-2Ql"/>
-                        <outlet property="collectionView" destination="j4h-OL-Pna" id="9FE-XD-igd"/>
                         <outlet property="endesDate" destination="akg-em-m2H" id="ibZ-bg-Cz7"/>
-                        <outlet property="endesDateTime" destination="akg-em-m2H" id="Zi5-B4-BUZ"/>
                         <outlet property="finishDatePicker" destination="QDD-hT-8NX" id="pjs-bw-kbw"/>
                         <outlet property="meetingAdmin" destination="1TA-Oz-Ec9" id="Cdx-f9-Nf6"/>
                         <outlet property="meetingName" destination="v1Y-eC-n0e" id="Yl0-6D-Lkf"/>
                         <outlet property="modifyName" destination="JGt-kq-1BV" id="lew-b0-WXW"/>
                         <outlet property="numbersOfPeople" destination="Lor-v4-acB" id="vvj-Oz-sny"/>
-                        <outlet property="numbersOfTopics" destination="6hU-uh-UlW" id="pZb-jj-luw"/>
-                        <outlet property="pickerView" destination="Mk6-Xq-hKm" id="OVI-HK-HTd"/>
                         <outlet property="startDatePicker" destination="AfJ-bi-Sy7" id="RVk-Lv-eof"/>
                         <outlet property="startsDate" destination="FxW-dZ-QGI" id="HUm-Wv-KZr"/>
-                        <outlet property="startsDateTime" destination="FxW-dZ-QGI" id="O9r-Ot-OcT"/>
                         <outlet property="topicsPerPerson" destination="6hU-uh-UlW" id="wd8-G2-d3i"/>
                         <outletCollection property="views" destination="FaJ-dD-vlX" id="KVJ-aU-a4G"/>
                         <outletCollection property="views" destination="txr-Ib-l90" id="CMs-G6-b5T"/>

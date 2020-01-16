@@ -59,7 +59,7 @@ class UnfinishedMeetingViewController: UIViewController {
         super.viewDidLoad()
             
         
-        //SO TESTE 
+        //MARK:- SO TESTE 
         self.multipeer = MeetingBrowserPeer()
         
         CloudManager.shared.fetchRecords(recordIDs: [CKRecord.ID(recordName: "431476BA-2555-4205-A500-282A7C9CC3A1")], desiredKeys: nil) { (record, error) in
@@ -75,13 +75,14 @@ class UnfinishedMeetingViewController: UIViewController {
         searchBar.returnKeyType = .done
         
         self.navigationItem.title = "Meeting"
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: nil, action: nil), animated: true)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(showDetailsMeeting)), animated: true)
         
         // Pegar Topics do Cloud.
         var tempIDs: [CKRecord.ID] = []
         for i in currMeeting.topics {
             tempIDs.append(i.recordID)
         }
+        
         CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -185,8 +186,18 @@ class UnfinishedMeetingViewController: UIViewController {
         }
     }
     
+    //MARK:- Show meeting's details
+    /// Apresentar os detalhes da reunião, caso seja o perfil do gerente é possível editar
+    @objc func showDetailsMeeting() {
+        self.performSegue(withIdentifier: "MeetingDetails", sender: nil)
+    }
     
-    // MARK: Multipeer Aqui.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let details = segue.destination as? DetailsTableViewController else {return}
+        details.meeting = currMeeting
+    }
+    
+    // MARK:- Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
