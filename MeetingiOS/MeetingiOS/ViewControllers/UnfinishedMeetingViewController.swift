@@ -17,6 +17,10 @@ class UnfinishedMeetingViewController: UIViewController {
     @IBOutlet var tableViewTopics: UITableView!
     @IBOutlet var mirrorButton: UIButton!
     @IBOutlet var bottomUIView: UIView!
+    @IBOutlet var bottomToSafeArea: NSLayoutConstraint!
+    @IBOutlet var bottomViewMaior: UIView!
+    @IBOutlet var bottomView: UIView!
+    
     
     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
@@ -123,6 +127,9 @@ class UnfinishedMeetingViewController: UIViewController {
             self.bgButtonImg = "checkmark.square.fill"
         } else {
             mirrorButton.isHidden = true
+            self.bottomToSafeArea.priority = UILayoutPriority(rawValue: 1000)
+            self.bottomView.isHidden = true
+            self.bottomViewMaior.isHidden = true
 //            self.bgButtonImg = "square."
         }
         
@@ -189,13 +196,21 @@ class UnfinishedMeetingViewController: UIViewController {
         guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         let indexPath = tableViewTopics.indexPath(for: cell)
         
-        if topics[indexPath!.section].discussed {
+        if topics[indexPath!.section].selectedForMeeting {
             button.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
-            topics[indexPath!.section].discussed = false
+            topics[indexPath!.section].selectedForMeeting = false
         } else {
             button.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-            topics[indexPath!.section].discussed = true
+            topics[indexPath!.section].selectedForMeeting = true
         }
+        // Atualizamos o Cloud da selectedForMeeting.
+        CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record], perRecordCompletion: { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+        }) { }
+        
     }
     
     
@@ -289,6 +304,8 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
             cell.checkButton.isHidden = true
             cell.textFieldSecondLeft.constant = (tableView.frame.size.height * 0.2) * 0.2
             cell.textFieldLeft.priority = UILayoutPriority(998)
+        } else {
+            
         }
         
         // Verificamos se o usuário está em modo de pesquisa.
@@ -409,22 +426,22 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
-            let indexPath = tableViewTopics.indexPath(for: cell)
-            topics[indexPath!.section].topicDescription = textField.text!
+            let indexPath = tableViewTopics.indexPath(for: cell)!
+            topics[indexPath.section].topicDescription = textField.text!
             // Se a edição não resultou em um Topic vazio, adicionamos ele no Cloud.
-            if topics[indexPath!.section].topicDescription != "" {
+            if topics[indexPath.section].topicDescription != "" {
                 // Adicionamos o Topic na Meeting.
-                currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath!.section].record.recordID, action: .deleteSelf))
+                currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath.section].record.recordID, action: .deleteSelf))
                 // Damos update na Meeting e no Topic criado.
-                CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
+                CloudManager.shared.updateRecords(records: [topics[indexPath.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
                 }) { }
-            } else if indexPath?.section != 0 {
+            } else if indexPath.section != 0 {
                 // Quando a edição é uma exclusão, excluímos o Topic da Meeting e do Cloud.
                 for ii in 0...currMeeting.topics.count-1 {
-                    if currMeeting.topics[ii].recordID == topics[indexPath!.section].record.recordID {
+                    if currMeeting.topics[ii].recordID == topics[indexPath.section].record.recordID {
                         currMeeting.topics.remove(at: ii)
                         break
                     }
@@ -434,7 +451,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                         print(error.localizedDescription)
                     }
                 }) { }
-                CloudManager.shared.deleteRecords(recordIDs: [topics[indexPath!.section].record.recordID], perRecordCompletion: { (_, error) in
+                CloudManager.shared.deleteRecords(recordIDs: [topics[indexPath.section].record.recordID], perRecordCompletion: { (_, error) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -444,7 +461,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
             for i in 0...topics.count-1 {
-                if topics[i].topicDescription.isEmpty && i != 0 {
+                if topics[i].topicDescription.isEmpty {
                     temp.append(i)
                 }
             }
@@ -453,17 +470,17 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             }
             tableViewTopics.reloadData()
             
-            // Verificamos se o novo Topic não foi vazio e criamos um novo espaço na tbleView para a criação
+            // Verificamos se o novo Topic não foi vazio e criamos um novo espaço na tableView para a criação
             // de outro Topic.
             if !textField.text!.isEmpty {
                 // Apenas inserimos um espaço para o novo Topic se ele já não existir.
                 // (se a edição foi feita em outra Cell)
-                if indexPath!.section == 0 {
+                if indexPath.section == 0 {
                     topics.insert(self.creatingTopicInstance(), at: 0)
+                    tableViewTopics.reloadData()
+                    let cell = tableViewTopics.cellForRow(at: IndexPath(row: 0, section: 0)) as! UnfinishedTopicsTableViewCell
+                    cell.topicTextField.becomeFirstResponder()
                 }
-                tableViewTopics.reloadData()
-                let cell = tableViewTopics.cellForRow(at: IndexPath(row: 0, section: 0)) as! UnfinishedTopicsTableViewCell
-                cell.topicTextField.becomeFirstResponder()
             }
             return true
         }

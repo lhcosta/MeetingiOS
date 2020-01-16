@@ -111,7 +111,7 @@
                         <color key="backgroundColor" red="0.98040527109999998" green="0.98036855460000005" blue="0.98039346930000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" id="2WT-QC-CZx"/>
-                            <constraint firstItem="BAI-HC-ilp" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" id="9oW-Ki-mbs"/>
+                            <constraint firstItem="BAI-HC-ilp" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="999" id="9oW-Ki-mbs"/>
                             <constraint firstItem="BAI-HC-ilp" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="DzY-aU-fQa"/>
                             <constraint firstItem="BAI-HC-ilp" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="HM6-6F-Y8i"/>
                             <constraint firstItem="8XL-bb-37o" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="Lgz-bO-jW7"/>
@@ -120,13 +120,17 @@
                             <constraint firstAttribute="bottom" secondItem="8XL-bb-37o" secondAttribute="bottom" id="RRk-6P-YAd"/>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="BAI-HC-ilp" secondAttribute="bottom" id="V09-pV-z9U"/>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="Vvj-D4-nEK"/>
-                            <constraint firstItem="8XL-bb-37o" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" id="cgC-fA-w2Y"/>
+                            <constraint firstItem="8XL-bb-37o" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="999" id="cgC-fA-w2Y"/>
+                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="998" id="l5Z-A1-bgg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
+                        <outlet property="bottomToSafeArea" destination="l5Z-A1-bgg" id="hLM-Lr-Lwd"/>
                         <outlet property="bottomUIView" destination="BAI-HC-ilp" id="CT8-OJ-aXe"/>
+                        <outlet property="bottomView" destination="BAI-HC-ilp" id="9iX-3l-4zt"/>
+                        <outlet property="bottomViewMaior" destination="8XL-bb-37o" id="bRE-cJ-IPp"/>
                         <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                     </connections>
