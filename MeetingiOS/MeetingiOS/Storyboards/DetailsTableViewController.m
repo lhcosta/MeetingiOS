@@ -24,81 +24,109 @@
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
 
+//MARK:- Loading View
+@property (nonatomic) UIVisualEffectView *blurEffectView;
+@property (nonatomic) UIActivityIndicatorView* loadingIndicator;
+
 @end
 
 @implementation DetailsTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     
-    [self loadingMeetingsParticipants];
-    [self fetchManager];
+    self.meetingName.text = self.meeting.theme;
+    self.numbersOfPeople.text = self.meeting.employees.count > 0 ? [NSString stringWithFormat:@"%ld", self.meeting.employees.count] : NSLocalizedString(@"None", "") ;
+    self.topicsPerPerson.text = [NSString stringWithFormat:@"%lli", self.meeting.limitTopic];
+    self.startsDate.text = [formatter stringFromDate:self.meeting.initialDate]; 
+    self.endesDate.text = [formatter stringFromDate:self.meeting.finalDate];
+  
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
-    self.meetingName.text = _meeting.theme;
-    self.meetingAdmin.text = _manager.name;
-    self.numbersOfPeople.text = [NSString stringWithFormat:@"%ld", _meeting.employees.count];
-    self.topicsPerPerson.text = [NSString stringWithFormat:@"%lli", _meeting.limitTopic];
-    self.startsDate.text = [formatter stringFromDate:_meeting.initialDate]; 
-    self.endesDate.text = [formatter stringFromDate:_meeting.finalDate];
-    
-    _contactCollectionView = [[ContactCollectionView alloc] init];
-    [_contactCollectionView addContacts:[_employees_contact copy]];
-    
-    [self setupNavigationController];
-    
-    NSString* owner_email = [NSUserDefaults.standardUserDefaults valueForKey:@"email"];
+   // [self setupNavigationController];
+    [self setupViews];
+    [self showLoadingView];
+    self.employees_user = [[NSMutableArray alloc] init];
+    self.employees_contact = [[NSMutableArray alloc] init];
+
+    [self loadingMeetingsParticipants:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             
-    if(owner_email) {
-        _isManager = [_manager.email isEqualToString:owner_email];
-    } else {
-        _isManager = false;
-    }
-    
-    if(_isManager) {
-        [self.modifyName setHidden:YES];
-        [self.tableView setAllowsSelection:NO];
-    }
+            self.meetingAdmin.text = self.manager.name;
+            
+            self.contactCollectionView = [[ContactCollectionView alloc] init];
+            [self.contactCollectionView addContacts:[self.employees_contact copy]];
+            
+            NSString* owner_email = [NSUserDefaults.standardUserDefaults valueForKey:@"email"];
+                    
+            if(owner_email) {
+                self.isManager = [self.manager.email isEqualToString:owner_email];
+            } else {
+                self.isManager = false;
+            }
+            
+            if(!self.isManager) {
+                [self.modifyName setHidden:YES];
+                [self.tableView setAllowsSelection:NO];
+            }
+            
+            [self removeLoadingView];
+        });
+    }];
     
 }
 
 /// Carregando os contatos da reunião.
-- (void) loadingMeetingsParticipants {
+- (void) loadingMeetingsParticipants: (void (^) (void)) completionHandler {
     
-    NSMutableArray<CKRecordID*>* employeesID = [[NSMutableArray alloc]init];
+    NSMutableArray<CKRecordID*>* participants = [[NSMutableArray alloc]init];
     
     for (CKReference* employee in self.meeting.employees) {
-        [employeesID addObject:employee.recordID];
+        [participants addObject:employee.recordID];
     }
+        
+    [participants addObject:_meeting.manager.recordID];
     
-    if (employeesID.count > 0) {
-        [CloudManager.shared fetchRecordsWithRecordIDs:@[[employeesID copy]] desiredKeys:Nil finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
+    [CloudManager.shared fetchRecordsWithRecordIDs:[participants copy] desiredKeys:Nil finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
+        
+        if (error == Nil) {
             
-            if (error == Nil) {
+            for(CKRecord* record in records.allValues) {
                 
-                for(CKRecord* record in records.allValues) {
-                    
+                if ([record.recordID isEqual:self.meeting.manager.recordID]) {
+                    self.manager = [[User alloc] initWithRecord:record];
+                } else {
                     User* user = [[User alloc] initWithRecord:record];
                     Contact* contact = [[Contact alloc]initWithUser:user];
-                    
                     [self.employees_user addObject:user];
                     [self.employees_contact addObject:contact];
                 }
-                
-            } else {
-                NSLog(@"%@", error.userInfo);
-                return;
             }
-        }];
-    }
+            
+        } else {
+            NSLog(@"%@", error.userInfo);
+            return;
+        }
+        
+        completionHandler();
+    }];
+    
 }
 
 /// Adicionando características as views.
 - (void) setupViews {
     
     for(UIView* view in _views) {
+        
+        [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
         
         switch (view.tag) {
             case 2:
@@ -113,18 +141,40 @@
     }
 }
 
-/// Buscando o criador da reunião.
-- (void) fetchManager {
+/// Apresentar view de loading.
+- (void) showLoadingView {
     
-    [CloudManager.shared fetchRecordsWithRecordIDs:@[_meeting.manager.recordID] desiredKeys:Nil finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
-        
-        if (error == Nil) {
-            self.manager = [[User alloc] initWithRecord:records.allValues.firstObject];
-        } else {
-            NSLog(@"%@", error.userInfo);
-            return;
-        }
+     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial]; 
+    _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
+    
+    [_loadingIndicator setHidesWhenStopped:YES];
+    [_loadingIndicator startAnimating];
+    
+    [_blurEffectView setFrame:self.view.bounds];
+    [_blurEffectView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];  
+    [_blurEffectView.contentView addSubview:_loadingIndicator];
+    
+    [[_loadingIndicator.centerXAnchor constraintEqualToAnchor:_blurEffectView.centerXAnchor] setActive:YES];
+    [[_loadingIndicator.centerYAnchor constraintEqualToAnchor:_blurEffectView.centerYAnchor] setActive:YES];
+    [_loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addSubview:_blurEffectView];
+    
+}
+
+
+/// Remover view de loading.
+- (void) removeLoadingView {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.loadingIndicator setAlpha:0];
+        [self.blurEffectView setAlpha:0];
+    } completion:^(BOOL finished) {
+        [self.blurEffectView removeFromSuperview];
     }];
+    
+    
 }
 
 /// Adicionando as configurações da navigation controller.
@@ -258,6 +308,16 @@
     [tableView beginUpdates];
     [tableView endUpdates];
     
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    
+    if (section == 1) {
+        return @"Created By";
+    }
+    
+    return Nil;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

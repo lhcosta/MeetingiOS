@@ -152,6 +152,8 @@ extension ContactViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         
         definesPresentationContext = true
     }

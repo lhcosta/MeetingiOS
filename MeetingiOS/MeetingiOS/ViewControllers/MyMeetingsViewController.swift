@@ -154,6 +154,13 @@ import CloudKit
             self.present(nextVC, animated: true, completion: nil)
         }
     }
+    
+    
+    /// Detalhes da reunião.
+    @IBAction func detailsOfMeeting(_ sender : UIButton) {
+        self.performSegue(withIdentifier: "MeetingDetails", sender: sender)        
+    }
+
 }
 
 //MARK: - Table View Delegate/DataSource
@@ -183,6 +190,7 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
         
         cell.meetingName.text = meetingsArray[indexPath.section].theme
+        cell.detailsButton.tag = indexPath.section
         
         if let date = meetingsArray[indexPath.section].initialDate{
             let dateFormatter = DateFormatter()
@@ -217,12 +225,26 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "finishedMeeting" {
+            
             let viewDestination = segue.destination as! FinishedMeetingViewController
             viewDestination.currMeeting = sender as? Meeting
-        } else if segue.identifier == "unfinishedMeeting"{
+            
+        } else if segue.identifier == "unfinishedMeeting" {
+            
             let viewDestination = segue.destination as! UnfinishedMeetingViewController
             viewDestination.currMeeting = sender as? Meeting
+            
+        } else if segue.identifier == "MeetingDetails" {
+            
+            var meeting : Meeting!
+            guard let button = sender as? UIButton, let viewController = segue.destination as? DetailsTableViewController else {return}
+            
+            //Reuniao identifica de acordo com a tag do botão.
+            meeting = filterring ? self.filtered[button.tag] : self.meetingsToShow[button.tag]
+                
+            viewController.meeting = meeting
         }
     }
 }

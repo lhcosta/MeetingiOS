@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dcg-jt-bSn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dcg-jt-bSn">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,6 +72,7 @@
                                                             </constraints>
                                                             <state key="normal" image="info.circle" catalog="system"/>
                                                             <connections>
+                                                                <action selector="detailsOfMeeting:" destination="dcg-jt-bSn" eventType="touchUpInside" id="DxB-8y-apa"/>
                                                                 <action selector="didPressInfo:" destination="7fe-wl-nNI" eventType="touchUpInside" id="bQB-Ga-vaY"/>
                                                             </connections>
                                                         </button>
@@ -85,6 +86,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="detailsButton" destination="T1G-vB-Lds" id="EWb-Bg-eQV"/>
                                             <outlet property="meetingDate" destination="xCi-Lc-uLc" id="3ro-VF-6vD"/>
                                             <outlet property="meetingName" destination="nks-1Y-QJY" id="Jaj-1M-pad"/>
                                         </connections>
@@ -126,6 +128,7 @@
                         <segue destination="p8j-8A-NPN" kind="show" identifier="finishedMeeting" id="Q88-9u-Gbe"/>
                         <segue destination="S76-Th-kPX" kind="show" identifier="unfinishedMeeting" id="0R0-Nv-dzE"/>
                         <segue destination="uQZ-zh-Ghq" kind="presentation" identifier="goToProfile" modalTransitionStyle="coverVertical" id="8hE-O8-eEQ"/>
+                        <segue destination="NGr-rW-Se3" kind="show" identifier="MeetingDetails" id="ayp-bw-Ejw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu9-4R-dug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -140,7 +143,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvu-sm-1sY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469" y="119"/>
+            <point key="canvasLocation" x="453" y="149"/>
+        </scene>
+        <!--Details-->
+        <scene sceneID="cQH-kP-bLe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Details" id="NGr-rW-Se3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="vPl-7r-zyJ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IFT-TG-7Th" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="329" y="-185"/>
         </scene>
         <!--finishedMeeting-->
         <scene sceneID="sEJ-0r-DEg">
@@ -150,7 +163,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwy-Qa-D3o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="376" y="-124"/>
+            <point key="canvasLocation" x="442" y="-71"/>
         </scene>
         <!--NewMeeting-->
         <scene sceneID="SUH-nP-vTt">
@@ -160,7 +173,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xk1-LS-NDS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="500" y="153"/>
+            <point key="canvasLocation" x="425" y="216"/>
         </scene>
         <!--Profile-->
         <scene sceneID="ILI-WA-h5c">
@@ -170,7 +183,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aey-n2-70B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="232" y="243"/>
+            <point key="canvasLocation" x="400" y="58"/>
         </scene>
     </scenes>
     <resources>
