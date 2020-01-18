@@ -41,9 +41,11 @@ import Contacts
         self.contactTableViewManager = ContactTableView(self)
         self.setupTableViewContacts()
         self.setupNavigationController()
- 
+        
+        contactCollectionView?.isRemoveContact = true
         collectionView.delegate = contactCollectionView
         collectionView.dataSource = contactCollectionView
+    
         self.collectionView.register(UINib(nibName: "ContactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContactCollectionCell")
     
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
@@ -153,7 +155,6 @@ extension ContactViewController {
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        
         
         definesPresentationContext = true
     }

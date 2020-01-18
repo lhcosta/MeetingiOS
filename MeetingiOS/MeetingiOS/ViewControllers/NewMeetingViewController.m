@@ -33,6 +33,14 @@
 
 @implementation NewMeetingViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if(_contactCollectionView)
+        _contactCollectionView.isRemoveContact = NO;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,12 +52,7 @@
     
     self.numbersOfPeople.text = NSLocalizedString(@"None", "");
     
-    _contactCollectionView = [[ContactCollectionView alloc] init];
-    _collectionView.allowsSelection = NO;
-    _collectionView.delegate = _contactCollectionView;
-    _collectionView.dataSource = _contactCollectionView;
-    [_collectionView.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-    [_collectionView.layer setCornerRadius:7];
+    [self setupCollectionViewContacts];
     
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
     _meeting = [[Meeting alloc] initWithRecord:record];
@@ -380,6 +383,19 @@
     [loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self presentViewController:_alertLoading animated:YES completion:Nil];
+}
+
+//MARK:- CollectionViewContacts
+/// Inicializando a collection view de contatos.
+- (void) setupCollectionViewContacts {
+    
+    _contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
+    _collectionView.allowsSelection = NO;
+    _collectionView.delegate = _contactCollectionView;
+    _collectionView.dataSource = _contactCollectionView;
+    [_collectionView registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
+    [_collectionView.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_collectionView.layer setCornerRadius:7];
 }
 
 

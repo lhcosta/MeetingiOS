@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Email do contato
 @property (nonatomic, weak) IBOutlet UILabel* name;
 
+//Imagem de remoção ou não de contato.
+@property (nonatomic, weak) IBOutlet UIImageView* contactImage;
+
 /// Contato
 @property (nonatomic) Contact* contact;
 

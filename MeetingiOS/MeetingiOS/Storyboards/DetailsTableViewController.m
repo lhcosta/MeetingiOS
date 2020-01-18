@@ -45,13 +45,22 @@
     self.topicsPerPerson.text = [NSString stringWithFormat:@"%lli", self.meeting.limitTopic];
     self.startsDate.text = [formatter stringFromDate:self.meeting.initialDate]; 
     self.endesDate.text = [formatter stringFromDate:self.meeting.finalDate];
-  
+    
+    if(_contactCollectionView) {
+        _contactCollectionView.isRemoveContact = NO;
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
    // [self setupNavigationController];
+    self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
+    [self.collectionParticipants setDelegate:_contactCollectionView];
+    [self.collectionParticipants setDataSource:_contactCollectionView];
+    [self.collectionParticipants setAllowsSelection:NO];
+    [_collectionParticipants registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
+    
     [self setupViews];
     [self showLoadingView];
     self.employees_user = [[NSMutableArray alloc] init];
@@ -62,8 +71,8 @@
             
             self.meetingAdmin.text = self.manager.name;
             
-            self.contactCollectionView = [[ContactCollectionView alloc] init];
             [self.contactCollectionView addContacts:[self.employees_contact copy]];
+            [self showCollectionViewContacts];
             
             NSString* owner_email = [NSUserDefaults.standardUserDefaults valueForKey:@"email"];
                     
@@ -81,7 +90,11 @@
             [self removeLoadingView];
         });
     }];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self showCollectionViewContacts];
 }
 
 /// Carregando os contatos da reunião.
@@ -310,16 +323,6 @@
     
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    
-    if (section == 1) {
-        return @"Created By";
-    }
-    
-    return Nil;
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"SelectContacts"]) {
@@ -332,6 +335,27 @@
     }
 }
 
+/// Animação para apresentar a collection view de contatos.
+- (void) showCollectionViewContacts {
+    
+    if([_contactCollectionView.contacts count] != 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.tableView beginUpdates];
+                [self.tableView endUpdates];
+                self.numbersOfPeople.text = [NSString stringWithFormat:@"%ld", self.contactCollectionView.contacts.count];                   
+                [self.collectionParticipants reloadData];
+            }];
+        });
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.tableView beginUpdates];
+            [self.tableView endUpdates];
+            self.numbersOfPeople.text = NSLocalizedString(@"None", "");
+            [self.view layoutIfNeeded];
+        }];
+    }
+}
 
 @end
 
