@@ -25,3 +25,6 @@
 "Contacts" = "Contatos";
 "Error to add contact" = "Erro ao adicionar contato";
 "Name or email empty" = "Nome ou email vazio";
+
+/*Select Color View --- BR*/
+"Pick a color" = "Escolha uma cor";

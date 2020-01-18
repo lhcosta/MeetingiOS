@@ -54,12 +54,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   // [self setupNavigationController];
+    [self setupNavigationController];
     self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
     [self.collectionParticipants setDelegate:_contactCollectionView];
     [self.collectionParticipants setDataSource:_contactCollectionView];
     [self.collectionParticipants setAllowsSelection:NO];
     [_collectionParticipants registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
+    [_collectionParticipants.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_collectionParticipants.layer setCornerRadius:7];
     
     [self setupViews];
     [self showLoadingView];
@@ -143,13 +145,13 @@
         
         switch (view.tag) {
             case 2:
-                [self.view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
+                [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
                 break;
             case 3:
-                [self.view setupCornerRadiusShadow: kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+                [view setupCornerRadiusShadow: kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
                 break;
             default:
-                [self.view setupCornerRadiusShadow];
+                [view setupCornerRadiusShadow];
         }
     }
 }
@@ -192,10 +194,14 @@
 
 /// Adicionando as configurações da navigation controller.
 - (void) setupNavigationController {
-    [self.navigationController setTitle:@"Details"];
+    [self.navigationItem setTitle:@"Details"];
     [self.navigationController.navigationBar setPrefersLargeTitles:NO];
-    [self.navigationController.navigationItem setHidesBackButton:YES];
-    self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action: @selector(popViewControllerAnimated:)];
+    [self.navigationItem setHidesBackButton:YES];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action: @selector(popViewController)];
+}
+
+- (void) popViewController {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //MARK:- TableView

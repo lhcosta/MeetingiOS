@@ -43,7 +43,8 @@ import CloudKit
         
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendSelectedColor))
         self.navigationItem.rightBarButtonItem = done
-        
+        self.navigationItem.title = NSLocalizedString("Pick a color", comment: "")
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
  

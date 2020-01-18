@@ -39,6 +39,7 @@
     if(_contactCollectionView)
         _contactCollectionView.isRemoveContact = NO;
     
+    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
 }
 
 - (void)viewDidLoad {
@@ -73,8 +74,6 @@
     NSString* title = NSLocalizedString(@"New meeting", "");
     
     [self.navigationItem setTitle:title];
-    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
-
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
 }
 
@@ -113,6 +112,7 @@
                 break;
             case 2:
                 [view setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+                break;
             default:
                 [view setupCornerRadiusShadow];
         }

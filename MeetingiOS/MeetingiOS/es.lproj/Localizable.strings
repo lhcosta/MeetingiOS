@@ -25,3 +25,6 @@
 "Contacts" = "Contactos";
 "Error Create Contact" = "Error al agregar contacto";
 "Name or email empty" = "Nombre o correo electrónico vacío";
+
+/*Select Color View --- ES*/
+"Pick a color" = "Elige un color";
