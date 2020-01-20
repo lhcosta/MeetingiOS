@@ -427,7 +427,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="never" id="F31-ow-ouU">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hyn-yI-5os"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hyn-yI-5os">
+                            <connections>
+                                <action selector="dismissView:" destination="IG8-XC-YQX" id="tTd-RM-o6d"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionParticipants" destination="j4h-OL-Pna" id="ACm-XQ-2Ql"/>
@@ -437,6 +441,7 @@
                         <outlet property="meetingName" destination="v1Y-eC-n0e" id="Yl0-6D-Lkf"/>
                         <outlet property="modifyName" destination="JGt-kq-1BV" id="lew-b0-WXW"/>
                         <outlet property="numbersOfPeople" destination="Lor-v4-acB" id="vvj-Oz-sny"/>
+                        <outlet property="pickerView" destination="Mk6-Xq-hKm" id="eSf-g8-3az"/>
                         <outlet property="startDatePicker" destination="AfJ-bi-Sy7" id="RVk-Lv-eof"/>
                         <outlet property="startsDate" destination="FxW-dZ-QGI" id="HUm-Wv-KZr"/>
                         <outlet property="topicsPerPerson" destination="6hU-uh-UlW" id="wd8-G2-d3i"/>

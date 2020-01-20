@@ -36,7 +36,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if(_contactCollectionView) {
         _contactCollectionView.isRemoveContact = NO;
     }
@@ -45,8 +44,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
+    //Nao realizar o dismiss com swipe
+    [self setModalInPresentation:YES];
 
+    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     
@@ -110,6 +111,12 @@
     [super viewDidAppear:animated];
     [self showCollectionViewContacts];
 }
+
+-(IBAction)dismissView:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:Nil];
+}
+
+
 
 /// Carregando os contatos da reunião.
 - (void) loadingMeetingsParticipants: (void (^) (void)) completionHandler {
