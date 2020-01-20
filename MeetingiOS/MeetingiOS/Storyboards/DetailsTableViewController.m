@@ -10,10 +10,11 @@
 #import "ContactCollectionView.h"
 #import "UIView+CornerShadows.h"
 #import <MeetingiOS-Swift.h>
+#import "TopicsPerPersonPickerView.h"
 
 @class User;
 
-@interface DetailsTableViewController ()
+@interface DetailsTableViewController () <TopicsPerPersonPickerViewDelegate>
 
 @property (nonatomic) NSMutableArray<User*> *employees_user;
 @property (nonatomic) NSMutableArray<Contact*> *employees_contact;
@@ -23,6 +24,7 @@
 @property (nonatomic) BOOL chooseNumberOfTopics;
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
+@property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
 
 //MARK:- Loading View
 @property (nonatomic) UIVisualEffectView *blurEffectView;
@@ -35,8 +37,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
+    if(_contactCollectionView) {
+        _contactCollectionView.isRemoveContact = NO;
+    }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
+    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
+
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     
@@ -46,15 +56,6 @@
     self.startsDate.text = [formatter stringFromDate:self.meeting.initialDate]; 
     self.endesDate.text = [formatter stringFromDate:self.meeting.finalDate];
     
-    if(_contactCollectionView) {
-        _contactCollectionView.isRemoveContact = NO;
-    }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setupNavigationController];
     self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
     [self.collectionParticipants setDelegate:_contactCollectionView];
     [self.collectionParticipants setDataSource:_contactCollectionView];
@@ -67,6 +68,10 @@
     [self showLoadingView];
     self.employees_user = [[NSMutableArray alloc] init];
     self.employees_contact = [[NSMutableArray alloc] init];
+    
+    self.topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
+    [self.topicsPickerView setDelegate:self];
+    _pickerView.delegate = self.topicsPickerView;
 
     [self loadingMeetingsParticipants:^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -86,7 +91,14 @@
             
             if(!self.isManager) {
                 [self.modifyName setHidden:YES];
-                [self.tableView setAllowsSelection:NO];
+                
+                for (NSIndexPath* indexPath in self.tableView.indexPathsForVisibleRows) {
+                    if(indexPath.section == 3 && indexPath.row == 1) {
+                        [[self.tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled:YES];
+                    } else {
+                        [[self.tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled: NO];
+                    }
+                }
             }
             
             [self removeLoadingView];
@@ -159,14 +171,14 @@
 /// Apresentar view de loading.
 - (void) showLoadingView {
     
-     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemMaterial]; 
+     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent]; 
     _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
     
     [_loadingIndicator setHidesWhenStopped:YES];
     [_loadingIndicator startAnimating];
     
-    [_blurEffectView setFrame:self.view.bounds];
+    [_blurEffectView setFrame: self.tableView.bounds];
     [_blurEffectView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];  
     [_blurEffectView.contentView addSubview:_loadingIndicator];
     
@@ -174,8 +186,7 @@
     [[_loadingIndicator.centerYAnchor constraintEqualToAnchor:_blurEffectView.centerYAnchor] setActive:YES];
     [_loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    [self.view addSubview:_blurEffectView];
-    
+    [self.tableView addSubview:_blurEffectView];
 }
 
 
@@ -192,34 +203,7 @@
     
 }
 
-/// Adicionando as configurações da navigation controller.
-- (void) setupNavigationController {
-    [self.navigationItem setTitle:@"Details"];
-    [self.navigationController.navigationBar setPrefersLargeTitles:NO];
-    [self.navigationItem setHidesBackButton:YES];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action: @selector(popViewController)];
-}
-
-- (void) popViewController {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 //MARK:- TableView
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return 15;
-    }
-    
-    return 30;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* view = [[UIView alloc] init];
-    [view setBackgroundColor:UIColor.clearColor];
-    return view;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
       
     switch (indexPath.section) {
@@ -296,7 +280,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+        
     switch (indexPath.section) {
         case 2:
             switch (indexPath.row) {
@@ -343,24 +327,28 @@
 
 /// Animação para apresentar a collection view de contatos.
 - (void) showCollectionViewContacts {
-    
+        
     if([_contactCollectionView.contacts count] != 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:0.5 animations:^{
-                [self.tableView beginUpdates];
-                [self.tableView endUpdates];
                 self.numbersOfPeople.text = [NSString stringWithFormat:@"%ld", self.contactCollectionView.contacts.count];                   
                 [self.collectionParticipants reloadData];
             }];
         });
     } else {
         [UIView animateWithDuration:0.5 animations:^{
-            [self.tableView beginUpdates];
-            [self.tableView endUpdates];
             self.numbersOfPeople.text = NSLocalizedString(@"None", "");
             [self.view layoutIfNeeded];
         }];
     }
+    
+    [self.tableView beginUpdates];    
+    [self.tableView endUpdates];
+}
+
+//MARK:- TopicsPerPersonPickerViewDelegate 
+- (void)changedNumberOfTopics:(NSInteger)amount {
+    [self.topicsPerPerson setText:[NSString stringWithFormat:@"%ld", amount]];
 }
 
 @end

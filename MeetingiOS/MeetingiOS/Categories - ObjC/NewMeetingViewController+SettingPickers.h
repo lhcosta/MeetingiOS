@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NewMeetingViewController (SettingPickers)<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface NewMeetingViewController (SettingPickers)
 
 /// Criar date picker para selecionar datas da reunião.
 - (void)setupDatePicker;

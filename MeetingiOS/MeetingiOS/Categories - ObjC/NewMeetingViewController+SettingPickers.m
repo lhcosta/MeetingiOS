@@ -26,22 +26,6 @@
 
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 5;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [NSString stringWithFormat:@"%ld", row + 1];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [self.numbersOfTopics setText:[NSString stringWithFormat:@"%ld", row + 1]];
-}
-
 - (void) modifieDateTimeLabel:(UIDatePicker*)datePicker {
     self.startsDateTime.text = self.endesDateTime.text = [self.formatter stringFromDate:datePicker.date];
     self.finishDatePicker.minimumDate = [self.formatter dateFromString:self.startsDateTime.text];

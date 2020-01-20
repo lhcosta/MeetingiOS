@@ -239,8 +239,10 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         } else if segue.identifier == "MeetingDetails" {
             
             var meeting : Meeting!
-            guard let button = sender as? UIButton, let viewController = segue.destination as? DetailsTableViewController else {return}
+            guard let button = sender as? UIButton, let navigationController = segue.destination as? UINavigationController else {return}
             
+            guard let viewController = navigationController.viewControllers.first as? DetailsTableViewController else {return}
+                        
             //Reuniao identifica de acordo com a tag do botão.
             meeting = filterring ? self.filtered[button.tag] : self.meetingsToShow[button.tag]
                 

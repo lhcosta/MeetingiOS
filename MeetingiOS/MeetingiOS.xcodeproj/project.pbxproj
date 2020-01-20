@@ -42,6 +42,7 @@
 		A447CC8523D0EFC800A06D01 /* UnfinishedMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */; };
 		A447CC8923D0F23C00A06D01 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */; };
 		A447CC8B23D0F3DB00A06D01 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */; };
+		A44CC2FA23D615B1005ECFF6 /* TopicsPerPersonPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CC2F923D615B1005ECFF6 /* TopicsPerPersonPickerView.m */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
@@ -148,6 +149,8 @@
 		A4382CB223CCEE6C0021C814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/NewMeeting.strings"; sourceTree = "<group>"; };
 		A4382CB423CCEE720021C814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/NewMeeting.strings; sourceTree = "<group>"; };
 		A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfinishedMeetingViewController.swift; sourceTree = "<group>"; };
+		A44CC2F823D615B1005ECFF6 /* TopicsPerPersonPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopicsPerPersonPickerView.h; sourceTree = "<group>"; };
+		A44CC2F923D615B1005ECFF6 /* TopicsPerPersonPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopicsPerPersonPickerView.m; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -384,6 +387,8 @@
 		A4EB3BFA239747000097857F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A44CC2F823D615B1005ECFF6 /* TopicsPerPersonPickerView.h */,
+				A44CC2F923D615B1005ECFF6 /* TopicsPerPersonPickerView.m */,
 				A49229ED23A3323500FD95B9 /* ContactTableView.swift */,
 				496C515A239893F2000EF74F /* EventManager.h */,
 				496C515B239893F2000EF74F /* EventManager.m */,
@@ -536,6 +541,7 @@
 				49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */,
 				A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */,
 				23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */,
+				A44CC2FA23D615B1005ECFF6 /* TopicsPerPersonPickerView.m in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
 				A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */,
 				A4382C7723C2BD7E0021C814 /* ContactViewController.swift in Sources */,

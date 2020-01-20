@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
 @property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
 /// Reunião
 @property (nonatomic) Meeting* meeting;

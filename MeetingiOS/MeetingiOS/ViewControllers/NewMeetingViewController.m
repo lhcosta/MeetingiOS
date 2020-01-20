@@ -13,8 +13,9 @@
 #import "ContactCollectionView.h"
 #import "NewMeetingViewController+SettingPickers.h"
 #import "UIView+CornerShadows.h"
+#import "TopicsPerPersonPickerView.h"
 
-@interface NewMeetingViewController ()
+@interface NewMeetingViewController () <TopicsPerPersonPickerViewDelegate>
 
 //MARK:- Properties
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
@@ -24,6 +25,7 @@
 @property (nonatomic) BOOL chooseNumberOfTopics;
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
+@property (nonatomic) TopicsPerPersonPickerView* topicsPickerView; 
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -47,6 +49,9 @@
     
     [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
     
+    _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
+    [_topicsPickerView setDelegate:self];
+    
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
@@ -61,7 +66,7 @@
     _participants = [[NSMutableArray alloc] init];
         
     _nameMetting.delegate = self;
-    _pickerView.delegate = self;
+    _pickerView.delegate = _topicsPickerView;
     
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     _chooseNumberOfTopics = NO;
@@ -398,5 +403,9 @@
     [_collectionView.layer setCornerRadius:7];
 }
 
+//MARK:- TopicsPerPersonPickerViewDelegate 
+- (void)changedNumberOfTopics:(NSInteger)amount {
+    [self.numbersOfTopics setText:[NSString stringWithFormat:@"%ld", amount]];
+}
 
 @end
