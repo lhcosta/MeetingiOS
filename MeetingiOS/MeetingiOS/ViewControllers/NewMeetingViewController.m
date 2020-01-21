@@ -11,11 +11,10 @@
 #import "NewMeetingViewController+NameMeetingValidation.h"
 #import "Contact.h"
 #import "ContactCollectionView.h"
-#import "NewMeetingViewController+SettingPickers.h"
 #import "UIView+CornerShadows.h"
 #import "TopicsPerPersonPickerView.h"
 
-@interface NewMeetingViewController () <TopicsPerPersonPickerViewDelegate>
+@interface NewMeetingViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
 //MARK:- Properties
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
@@ -26,6 +25,8 @@
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView; 
+@property (nonatomic, nonnull) NSDateFormatter* formatter;
+
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -47,35 +48,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Construtores
+    //Cor do Background
     [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
     
-    _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
-    [_topicsPickerView setDelegate:self];
+    //Iniciando nova reunião.
+    CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
     
     _formatter = [[NSDateFormatter alloc] init];
-    _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
+    [_formatter setDateFormat:NSLocalizedString(@"dateFormat", "")];
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
+    [self setupPickersWithStartDatePicker:_startDatePicker finishDatePicker:_finishDatePicker];
+            
+     _meeting = [[Meeting alloc] initWithRecord:record];
+     _participants = [[NSMutableArray alloc] init];
+    _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
+    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     
     self.numbersOfPeople.text = NSLocalizedString(@"None", "");
     
-    [self setupCollectionViewContacts];
-    
-    CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
-    _meeting = [[Meeting alloc] initWithRecord:record];
-    
-    _participants = [[NSMutableArray alloc] init];
-        
     _nameMetting.delegate = self;
     _pickerView.delegate = _topicsPickerView;
+    [_topicsPickerView setDelegate:self];
     
-    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     _chooseNumberOfTopics = NO;
     _chooseStartTime = NO;
     _chooseEndTime = NO;
     
-    [self setupDatePicker];
+    [self setupCollectionViewContacts];
     [self setupViews];
-
+    
     NSString* title = NSLocalizedString(@"New meeting", "");
     
     [self.navigationItem setTitle:title];
@@ -406,6 +408,27 @@
 //MARK:- TopicsPerPersonPickerViewDelegate 
 - (void)changedNumberOfTopics:(NSInteger)amount {
     [self.numbersOfTopics setText:[NSString stringWithFormat:@"%ld", amount]];
+}
+
+//MARK:- DatePickersSetup
+- (void)modifieStartDateTimeWithDatePicker:(UIDatePicker *)datePicker {
+    _startsDateTime.text = _endesDateTime.text = [self.formatter stringFromDate:datePicker.date];
+    _finishDatePicker.minimumDate = _finishDatePicker.date = datePicker.date;
+}
+
+- (void)modifieEndTimeWithDatePicker:(UIDatePicker *)datePicker {
+    _endesDateTime.text = [self.formatter stringFromDate:datePicker.date];
+}
+
+- (void)setupPickersWithStartDatePicker:(UIDatePicker *)startDatePicker finishDatePicker:(UIDatePicker *)finishDatePicker {
+    
+    startDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    finishDatePicker.datePickerMode = UIDatePickerModeTime;
+    startDatePicker.minimumDate = finishDatePicker.minimumDate = NSDate.now;
+
+    [startDatePicker addTarget:self action:@selector(modifieStartDateTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
+    
+    [finishDatePicker addTarget:self action:@selector(modifieEndTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
 }
 
 @end

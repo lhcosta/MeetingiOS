@@ -14,7 +14,7 @@
 
 @class User;
 
-@interface DetailsTableViewController () <TopicsPerPersonPickerViewDelegate>
+@interface DetailsTableViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
 @property (nonatomic) NSMutableArray<User*> *employees_user;
 @property (nonatomic) NSMutableArray<Contact*> *employees_contact;
@@ -25,6 +25,8 @@
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
+@property (nonatomic, nonnull) NSDateFormatter* formatter;
+
 
 //MARK:- Loading View
 @property (nonatomic) UIVisualEffectView *blurEffectView;
@@ -48,14 +50,17 @@
     [self setModalInPresentation:YES];
 
     [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
+    
+    _formatter = [[NSDateFormatter alloc] init];
+    _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     
     self.meetingName.text = self.meeting.theme;
     self.numbersOfPeople.text = self.meeting.employees.count > 0 ? [NSString stringWithFormat:@"%ld", self.meeting.employees.count] : NSLocalizedString(@"None", "") ;
     self.topicsPerPerson.text = [NSString stringWithFormat:@"%lli", self.meeting.limitTopic];
-    self.startsDate.text = [formatter stringFromDate:self.meeting.initialDate]; 
-    self.endesDate.text = [formatter stringFromDate:self.meeting.finalDate];
+    self.startsDate.text = [_formatter stringFromDate:self.meeting.initialDate]; 
+    self.endesDate.text = [_formatter stringFromDate:self.meeting.finalDate];
+    
+    [self setupPickersWithStartDatePicker:_startDatePicker finishDatePicker:_finishDatePicker];
     
     self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
     [self.collectionParticipants setDelegate:_contactCollectionView];
@@ -115,7 +120,6 @@
 -(IBAction)dismissView:(id)sender {
     [self dismissViewControllerAnimated:YES completion:Nil];
 }
-
 
 
 /// Carregando os contatos da reunião.
@@ -178,14 +182,14 @@
 /// Apresentar view de loading.
 - (void) showLoadingView {
     
-     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent]; 
+     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular]; 
     _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
     
     [_loadingIndicator setHidesWhenStopped:YES];
     [_loadingIndicator startAnimating];
     
-    [_blurEffectView setFrame: self.tableView.bounds];
+    [_blurEffectView setFrame: self.view.bounds];
     [_blurEffectView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];  
     [_blurEffectView.contentView addSubview:_loadingIndicator];
     
@@ -193,7 +197,7 @@
     [[_loadingIndicator.centerYAnchor constraintEqualToAnchor:_blurEffectView.centerYAnchor] setActive:YES];
     [_loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    [self.tableView addSubview:_blurEffectView];
+    [self.view addSubview:_blurEffectView];
 }
 
 
@@ -320,6 +324,15 @@
     
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if (section == 1) {
+        return @"Created by";
+    }
+    
+    return Nil;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"SelectContacts"]) {
@@ -357,6 +370,31 @@
 - (void)changedNumberOfTopics:(NSInteger)amount {
     [self.topicsPerPerson setText:[NSString stringWithFormat:@"%ld", amount]];
 }
+
+//MARK:- DatePickersSetup
+- (void)modifieStartDateTimeWithDatePicker:(UIDatePicker *)datePicker {
+    _startsDate.text = _endesDate.text = [self.formatter stringFromDate:datePicker.date];
+    _finishDatePicker.date = _finishDatePicker.minimumDate = datePicker.date;
+}
+
+- (void)modifieEndTimeWithDatePicker:(UIDatePicker *)datePicker {
+    _endesDate.text = [self.formatter stringFromDate:datePicker.date];
+}
+
+- (void)setupPickersWithStartDatePicker:(UIDatePicker *)startDatePicker finishDatePicker:(UIDatePicker *)finishDatePicker {
+    
+    startDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    finishDatePicker.datePickerMode = UIDatePickerModeTime;
+    startDatePicker.minimumDate = NSDate.now;
+    finishDatePicker.minimumDate = startDatePicker.date;
+
+    startDatePicker.date = [self.formatter dateFromString:self.startsDate.text];
+    finishDatePicker.date = [self.formatter dateFromString:self.endesDate.text];
+    
+    [startDatePicker addTarget:self action:@selector(modifieStartDateTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
+    [finishDatePicker addTarget:self action:@selector(modifieEndTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
+}
+
 
 @end
 
