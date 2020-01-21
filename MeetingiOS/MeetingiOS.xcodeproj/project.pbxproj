@@ -152,6 +152,9 @@
 		A44CC2F823D615B1005ECFF6 /* TopicsPerPersonPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopicsPerPersonPickerView.h; sourceTree = "<group>"; };
 		A44CC2F923D615B1005ECFF6 /* TopicsPerPersonPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopicsPerPersonPickerView.m; sourceTree = "<group>"; };
 		A44CC2FE23D77555005ECFF6 /* DatePickersSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickersSetup.swift; sourceTree = "<group>"; };
+		A44CC30423D79C04005ECFF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Details.strings; sourceTree = "<group>"; };
+		A44CC30623D79C08005ECFF6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Details.strings"; sourceTree = "<group>"; };
+		A44CC30823D79C0A005ECFF6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Details.strings; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -175,9 +178,6 @@
 		A4BA9B1423CE23B300CCC2AF /* DetailsTableViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; name = DetailsTableViewController.h; path = MeetingiOS/Storyboards/DetailsTableViewController.h; sourceTree = SOURCE_ROOT; };
 		A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailsTableViewController.m; path = MeetingiOS/Storyboards/DetailsTableViewController.m; sourceTree = SOURCE_ROOT; };
 		A4BA9B1923CE276E00CCC2AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Details.storyboard; sourceTree = "<group>"; };
-		A4BA9B1C23CE277000CCC2AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Details.strings; sourceTree = "<group>"; };
-		A4BA9B1E23CE277400CCC2AF /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Details.strings"; sourceTree = "<group>"; };
-		A4BA9B2023CE277900CCC2AF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Details.strings; sourceTree = "<group>"; };
 		A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
@@ -682,9 +682,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				A4BA9B1923CE276E00CCC2AF /* Base */,
-				A4BA9B1C23CE277000CCC2AF /* en */,
-				A4BA9B1E23CE277400CCC2AF /* pt-BR */,
-				A4BA9B2023CE277900CCC2AF /* es */,
+				A44CC30423D79C04005ECFF6 /* en */,
+				A44CC30623D79C08005ECFF6 /* pt-BR */,
+				A44CC30823D79C0A005ECFF6 /* es */,
 			);
 			name = Details.storyboard;
 			sourceTree = "<group>";

@@ -59,19 +59,11 @@
     self.topicsPerPerson.text = [NSString stringWithFormat:@"%lli", self.meeting.limitTopic];
     self.startsDate.text = [_formatter stringFromDate:self.meeting.initialDate]; 
     self.endesDate.text = [_formatter stringFromDate:self.meeting.finalDate];
-    
-    [self setupPickersWithStartDatePicker:_startDatePicker finishDatePicker:_finishDatePicker];
-    
-    self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
-    [self.collectionParticipants setDelegate:_contactCollectionView];
-    [self.collectionParticipants setDataSource:_contactCollectionView];
-    [self.collectionParticipants setAllowsSelection:NO];
-    [_collectionParticipants registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
-    [_collectionParticipants.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-    [_collectionParticipants.layer setCornerRadius:7];
-    
+        
+    [self setupCollectionView];
     [self setupViews];
     [self showLoadingView];
+    
     self.employees_user = [[NSMutableArray alloc] init];
     self.employees_contact = [[NSMutableArray alloc] init];
     
@@ -105,6 +97,9 @@
                         [[self.tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled: NO];
                     }
                 }
+                                
+            } else {
+                [self setupPickersWithStartDatePicker:self.startDatePicker finishDatePicker:self.finishDatePicker];
             }
             
             [self removeLoadingView];
@@ -184,6 +179,7 @@
     
      UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular]; 
     _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
     _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
     
     [_loadingIndicator setHidesWhenStopped:YES];
@@ -327,7 +323,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
     if (section == 1) {
-        return @"Created by";
+        return NSLocalizedString(@"Created by", "");
     }
     
     return Nil;
@@ -343,6 +339,18 @@
             [contactViewController setContactCollectionView:_contactCollectionView];
         }
     }
+}
+
+//MARK:- CollectionView
+- (void) setupCollectionView {
+    
+    self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
+    [self.collectionParticipants setDelegate:_contactCollectionView];
+    [self.collectionParticipants setDataSource:_contactCollectionView];
+    [self.collectionParticipants setAllowsSelection:NO];
+    [_collectionParticipants registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
+    [_collectionParticipants.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_collectionParticipants.layer setCornerRadius:7];
 }
 
 /// Animação para apresentar a collection view de contatos.
