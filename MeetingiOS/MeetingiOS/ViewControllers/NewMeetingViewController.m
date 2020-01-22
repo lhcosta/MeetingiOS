@@ -262,7 +262,6 @@
         ContactViewController* contactViewController = [segue destinationViewController];
          
         if(contactViewController) {
-            [contactViewController setContactDelegate:self];
             [contactViewController setContactCollectionView:_contactCollectionView];
         }
         

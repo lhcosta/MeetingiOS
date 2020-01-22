@@ -7,7 +7,6 @@
 //
 
 #import "DetailsTableViewController.h"
-#import "ContactCollectionView.h"
 #import "UIView+CornerShadows.h"
 #import <MeetingiOS-Swift.h>
 #import "TopicsPerPersonPickerView.h"
@@ -17,9 +16,7 @@
 
 @interface DetailsTableViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
-@property (nonatomic) NSMutableArray<User*> *employees_user;
 @property (nonatomic) NSMutableArray<Contact*> *employees_contact;
-@property (nonatomic) ContactCollectionView* contactCollectionView;
 @property (nonatomic) User* manager;
 @property (nonatomic) BOOL isManager;
 @property (nonatomic) BOOL chooseNumberOfTopics;
@@ -116,6 +113,7 @@
 }
 
 -(IBAction)dismissView:(id)sender {
+    [self updateMeeting];
     [self dismissViewControllerAnimated:YES completion:Nil];
 }
 

@@ -10,6 +10,7 @@
 #import <CloudKit/CloudKit.h>
 #import "Contact.h"
 #import "MeetingDelegate.h"
+#import "ContactCollectionView.h"
 
 @class Meeting;
 
@@ -31,8 +32,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
+/// Contatos selecionados.
+@property (nonatomic) ContactCollectionView* contactCollectionView;
+
 /// Reunião
 @property (nonatomic) Meeting* meeting;
+
+/// Usuários da reunião que possuem record.
+@property (nonatomic) NSMutableArray<User*> *employees_user;
+
 
 /// Alterando o nome da reunião.
 /// @param sender botão clicado.

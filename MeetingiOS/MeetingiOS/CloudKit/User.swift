@@ -49,7 +49,6 @@ import CloudKit
         }
     }
     
-    
     // reuniões vindos da entidade Reunião
     var meetings: [CKRecord.Reference]{
         get {
@@ -57,9 +56,13 @@ import CloudKit
         }
         
         set {
-            print(newValue)
             self.record.setValue(newValue, forKey: "meetings")
         }
+    }
+    
+    // Debug
+    override var description: String {
+        return "\(self.name ?? "Empty") -> \(self.email ?? "Empty")"
     }
     
     //MARK: - Initializer
@@ -141,15 +144,10 @@ import CloudKit
     }
     
     /// Busca no vetor e deleta reunião do array de reuniões
-    /// - Parameter
-    /// meetingReference: é o CKRecord.Reference da reunião que deseja deletar do array
-    func removeMeeting(meetingReference: CKRecord.Reference){
-        var  i = 0
-        for met in meetings {
-            if met == meetingReference{
-                meetings.remove(at: i)
-            }
-            i += 0
+    /// - Parameter meetingReference: é o CKRecord.Reference da reunião que deseja deletar do array
+    func removeMeeting(meetingReference: CKRecord.ID){        
+        self.meetings.removeAll { 
+            $0.recordID == meetingReference
         }
     }
 }

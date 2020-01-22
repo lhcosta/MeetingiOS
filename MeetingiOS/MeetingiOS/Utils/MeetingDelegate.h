@@ -15,6 +15,4 @@
 /// Enviando a cor selecionado.
 - (void) selectedColor:(NSString*)hex;
 
-- (void)getRecordForSelectedUsers;
-
 @end
