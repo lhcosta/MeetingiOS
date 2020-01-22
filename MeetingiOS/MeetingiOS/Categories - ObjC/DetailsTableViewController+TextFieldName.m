@@ -7,6 +7,9 @@
 //
 
 #import "DetailsTableViewController+TextFieldName.h"
+#import <MeetingiOS-Swift.h>
+
+@class Meeting;
 
 @implementation DetailsTableViewController (TextFieldName)
 
@@ -15,6 +18,13 @@
     [textField resignFirstResponder];
     [textField setUserInteractionEnabled:NO];
     [self.modifyName setHidden:NO];
+    
+    //Retornando ao ultimo nome caso não seja preenchido
+    if(textField.text.length == 0) {
+        [textField setText:self.meeting.theme];
+    } else {
+        [self.meeting setTheme:textField.text];
+    }
     
     return YES;
 }
