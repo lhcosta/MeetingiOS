@@ -44,6 +44,7 @@
 		A447CC8B23D0F3DB00A06D01 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA9B1523CE23B300CCC2AF /* DetailsTableViewController.m */; };
 		A44CC2FA23D615B1005ECFF6 /* TopicsPerPersonPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CC2F923D615B1005ECFF6 /* TopicsPerPersonPickerView.m */; };
 		A44CC2FF23D77555005ECFF6 /* DatePickersSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44CC2FE23D77555005ECFF6 /* DatePickersSetup.swift */; };
+		A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */; };
 		A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */; };
 		A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4533FF6238C58060089257A /* CloudKit.framework */; };
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
@@ -155,6 +156,8 @@
 		A44CC30423D79C04005ECFF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Details.strings; sourceTree = "<group>"; };
 		A44CC30623D79C08005ECFF6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Details.strings"; sourceTree = "<group>"; };
 		A44CC30823D79C0A005ECFF6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Details.strings; sourceTree = "<group>"; };
+		A44CC30923D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DetailsTableViewController+TextFieldName.h"; sourceTree = "<group>"; };
+		A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DetailsTableViewController+TextFieldName.m"; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -371,6 +374,8 @@
 		A4EB3BEB239607CB0097857F /* Categories - ObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A44CC30923D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.h */,
+				A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */,
 				A40E5ADD23CF56160009C25C /* UIView+CornerShadows.h */,
 				A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */,
 				A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */,
@@ -534,6 +539,7 @@
 				A4382CA723C5400D0021C814 /* NewContactTableViewCell.swift in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
+				A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */,
 				49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */,

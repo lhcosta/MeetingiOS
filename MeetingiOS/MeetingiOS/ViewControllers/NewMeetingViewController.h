@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// View Controllers para criar uma nova reuinao
+/// View Controllers para criar uma nova reuniao
 @interface NewMeetingViewController : UITableViewController<MeetingDelegate>
 
 //MARK:- IBOutlets
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIPickerView* pickerView;
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
 @property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
-@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
+@property (nonatomic) IBOutletCollection(UIView) NSArray *views;
 
 
 ///Selecionando a cor do ícone da reunião.

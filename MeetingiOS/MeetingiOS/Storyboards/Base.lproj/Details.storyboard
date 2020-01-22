@@ -39,15 +39,17 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="MNL-S9-WfU">
                                                             <rect key="frame" x="20" y="15" width="334" height="47"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="v1Y-eC-n0e">
+                                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Work" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NXJ-O4-iXS">
                                                                     <rect key="frame" x="0.0" y="0.0" width="312.5" height="47"/>
-                                                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="22"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="24"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                </textField>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGt-kq-1BV">
                                                                     <rect key="frame" x="313.5" y="0.0" width="20.5" height="47"/>
                                                                     <state key="normal" image="square.and.pencil" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="changeMeetingName:" destination="IG8-XC-YQX" eventType="touchUpInside" id="gGW-xe-Okn"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -438,7 +440,7 @@
                         <outlet property="endesDate" destination="akg-em-m2H" id="ibZ-bg-Cz7"/>
                         <outlet property="finishDatePicker" destination="QDD-hT-8NX" id="pjs-bw-kbw"/>
                         <outlet property="meetingAdmin" destination="1TA-Oz-Ec9" id="Cdx-f9-Nf6"/>
-                        <outlet property="meetingName" destination="v1Y-eC-n0e" id="Yl0-6D-Lkf"/>
+                        <outlet property="meetingName" destination="NXJ-O4-iXS" id="WQG-GR-frN"/>
                         <outlet property="modifyName" destination="JGt-kq-1BV" id="lew-b0-WXW"/>
                         <outlet property="numbersOfPeople" destination="Lor-v4-acB" id="vvj-Oz-sny"/>
                         <outlet property="pickerView" destination="Mk6-Xq-hKm" id="eSf-g8-3az"/>

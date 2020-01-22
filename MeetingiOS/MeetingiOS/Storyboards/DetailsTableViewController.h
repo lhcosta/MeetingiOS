@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DetailsTableViewController : UITableViewController
 
 //MARK:- IBOutlets
-@property (weak, nonatomic) IBOutlet UILabel *meetingName;
+@property (weak, nonatomic) IBOutlet UITextField *meetingName;
 @property (weak, nonatomic) IBOutlet UILabel *meetingAdmin;
 @property (weak, nonatomic) IBOutlet UILabel *startsDate;
 @property (weak, nonatomic) IBOutlet UILabel *endesDate;
@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Reunião
 @property (nonatomic) Meeting* meeting;
 
+/// Alterando o nome da reunião.
+/// @param sender botão clicado.
+-(IBAction)changeMeetingName:(id)sender;
 
 @end
 

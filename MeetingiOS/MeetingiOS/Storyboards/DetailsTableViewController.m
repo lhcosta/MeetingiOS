@@ -11,6 +11,7 @@
 #import "UIView+CornerShadows.h"
 #import <MeetingiOS-Swift.h>
 #import "TopicsPerPersonPickerView.h"
+#import "DetailsTableViewController+TextFieldName.h"
 
 @class User;
 
@@ -55,6 +56,8 @@
     _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
     
     self.meetingName.text = self.meeting.theme;
+    self.meetingName.delegate = self;
+    
     self.numbersOfPeople.text = self.meeting.employees.count > 0 ? [NSString stringWithFormat:@"%ld", self.meeting.employees.count] : NSLocalizedString(@"None", "") ;
     self.topicsPerPerson.text = [NSString stringWithFormat:@"%lli", self.meeting.limitTopic];
     self.startsDate.text = [_formatter stringFromDate:self.meeting.initialDate]; 
@@ -403,6 +406,14 @@
     [finishDatePicker addTarget:self action:@selector(modifieEndTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
 }
 
+//MARK:- UITextField -> Change Name
+- (void)changeMeetingName:(id)sender {
+    [self.meetingName setUserInteractionEnabled:YES];
+    [self.meetingName setText:@""];
+    [self.meetingName setPlaceholder:@"Meeting's name"];
+    [self.meetingName becomeFirstResponder];
+    [self.modifyName setHidden:YES];
+}
 
 @end
 
