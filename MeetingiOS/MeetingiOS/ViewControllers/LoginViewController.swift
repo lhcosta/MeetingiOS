@@ -13,8 +13,7 @@ import CloudKit
 class LoginViewController: UIViewController {
     
     let defaults = UserDefaults.standard
-    var vcToShowID: String! = nil
-    var didShow = false
+    var goingToProfile = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,6 @@ class LoginViewController: UIViewController {
         ])
     }
 
-    
     @objc private func signInButtonTapped() {
         //  Cria o provedor de autorização para obter as informações do Usuário
         let authorizationProvider = ASAuthorizationAppleIDProvider()
@@ -129,9 +127,15 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
         }
         
-        let storyboard = UIStoryboard(name: vcToShowID, bundle: nil)
-        let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
-        self.present(nextVC, animated: true, completion: nil)
+        if goingToProfile {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
+            nextVC.didComeFromLogin = true
+            self.present(nextVC, animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     private func saveDefaults(user: User) {

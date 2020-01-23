@@ -143,24 +143,32 @@ import CloudKit
     }
     
     @objc func goToProfile() {
-        if let _ = defaults.value(forKey: "recordName") as? String {
+        if isLoggedIn(){
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
             let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
             self.present(nextVC, animated: true, completion: nil)
         } else {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let nextVC = storyboard.instantiateInitialViewController() as! LoginViewController
-            nextVC.vcToShowID = "Profile"
+            nextVC.goingToProfile = true
             self.present(nextVC, animated: true, completion: nil)
         }
     }
     
+    private func isLoggedIn() -> Bool{
+        if let _ = defaults.value(forKey: "recordName") as? String {
+            return true
+        } else {
+           return false
+        }
+    }
+    
+    //MARK: - IBActions
     
     /// Detalhes da reunião.
     @IBAction func detailsOfMeeting(_ sender : UIButton) {
         self.performSegue(withIdentifier: "MeetingDetails", sender: sender)        
     }
-
 }
 
 //MARK: - Table View Delegate/DataSource
