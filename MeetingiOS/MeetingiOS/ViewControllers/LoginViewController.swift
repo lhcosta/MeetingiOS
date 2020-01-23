@@ -127,6 +127,18 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
         }
         
+        let application = UIApplication.shared
+        let userNotCenter = UNUserNotificationCenter.current()
+        userNotCenter.delegate = application.delegate as! AppDelegate
+        
+        userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
+            print("===>\(permission)/\(String(describing: error))")
+        })
+        
+        DispatchQueue.main.async {
+            application.registerForRemoteNotifications()
+        }
+        
         if goingToProfile {
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
             let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
