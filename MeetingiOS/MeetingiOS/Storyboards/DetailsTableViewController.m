@@ -24,6 +24,7 @@
 @property (nonatomic) BOOL chooseEndTime;
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
+@property (nonatomic) DetailsNewMeetingManager* detailsManagerController;
 
 
 //MARK:- Loading View
@@ -60,7 +61,9 @@
     self.startsDate.text = [_formatter stringFromDate:self.meeting.initialDate]; 
     self.endesDate.text = [_formatter stringFromDate:self.meeting.finalDate];
         
-    [self setupCollectionView];
+    _detailsManagerController = [[DetailsNewMeetingManager alloc] init];
+    _contactCollectionView = [_detailsManagerController setupCollectionViewContacts:_collectionParticipants];
+    
     [self setupViews];
     [self showLoadingView];
     
@@ -343,17 +346,6 @@
 }
 
 //MARK:- CollectionView
-- (void) setupCollectionView {
-    
-    self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
-    [self.collectionParticipants setDelegate:_contactCollectionView];
-    [self.collectionParticipants setDataSource:_contactCollectionView];
-    [self.collectionParticipants setAllowsSelection:NO];
-    [_collectionParticipants registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
-    [_collectionParticipants.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-    [_collectionParticipants.layer setCornerRadius:7];
-}
-
 /// Animação para apresentar a collection view de contatos.
 - (void) showCollectionViewContacts {
         

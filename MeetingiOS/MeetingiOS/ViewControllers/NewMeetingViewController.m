@@ -19,14 +19,12 @@
 //MARK:- Properties
 @property (nonatomic, nullable) ContactCollectionView* contactCollectionView;
 @property (nonatomic, nonnull) Meeting* meeting;
-@property (nonatomic, nonnull) NSArray<CKRecord*>* participants;
-@property (nonatomic, nonnull) UIAlertController* alertLoading;
 @property (nonatomic) BOOL chooseNumberOfTopics;
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView; 
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
-
+@property (nonatomic) DetailsNewMeetingManager* managerController;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -61,7 +59,6 @@
     [self setupPickersWithStartDatePicker:_startDatePicker finishDatePicker:_finishDatePicker];
             
      _meeting = [[Meeting alloc] initWithRecord:record];
-     _participants = [[NSMutableArray alloc] init];
     _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     
@@ -75,7 +72,9 @@
     _chooseStartTime = NO;
     _chooseEndTime = NO;
     
-    [self setupCollectionViewContacts];
+    _managerController = [[DetailsNewMeetingManager alloc] init];
+    _contactCollectionView = [_managerController setupCollectionViewContacts:_collectionView];
+    
     [self setupViews];
     
     NSString* title = NSLocalizedString(@"New meeting", "");
@@ -279,7 +278,8 @@
 -(void) createMeetingInCloud {
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-        
+    UIAlertController* alertLoading;
+    
     if(theme.length == 0) {
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Meeting", "") message:NSLocalizedString(@"Choose a name for create a meeting.", "") preferredStyle:UIAlertControllerStyleAlert];
@@ -294,7 +294,9 @@
     }
     
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    [self showLoadingIndicator];
+    
+    alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting", "")];
+    [self presentViewController:alertLoading animated:true completion:nil];
 
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
     CKReference* manager = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
@@ -306,12 +308,6 @@
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
     
-    for(CKRecord* record in _participants) {
-        
-        User* user = [[User alloc] initWithRecord:record];
-        [user registerMeetingWithMeeting:[[CKReference alloc] initWithRecord:_meeting.record action:CKReferenceActionNone]];
-        [_meeting addingNewEmployee:[[CKReference alloc]initWithRecord:record action:CKReferenceActionNone]];
-    }
     
     [CloudManager.shared createRecordsWithRecords:@[_meeting.record] perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
         if(error) {
@@ -320,24 +316,16 @@
     } finalCompletion:^{
         NSLog(@"Create Record");
         
-        [CloudManager.shared updateRecordsWithRecords:self.participants perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
-            if(error) {
-                NSLog(@"Update -> %@", [error userInfo]);
-            }
-        } finalCompletion:^{
-            NSLog(@"Update Users");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
+            NSUInteger vcCount = [self.navigationController.viewControllers count];
+            MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
+            previousVC.newMeeting = self->_meeting;
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
-                NSUInteger vcCount = [self.navigationController.viewControllers count];
-                MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
-                previousVC.newMeeting = self->_meeting;
-                
-                [self.alertLoading dismissViewControllerAnimated:YES completion:^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
-            });
-        }];
+            [alertLoading dismissViewControllerAnimated:YES completion:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        });
     }];
 }
 
@@ -348,60 +336,6 @@
 - (void)selectedColor:(NSString *)hex {
     //Pegar cor de acordo com o hex    
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
-}
-
-- (void)getRecordForSelectedUsers {
-    
-    NSMutableArray<NSString*>* allEmails = [[NSMutableArray alloc] init];
-    NSMutableArray<CKRecord*>* participants_aux = [[NSMutableArray alloc] init];
-    NSPredicate* predicate;
-    
-    for (Contact* contact in [_contactCollectionView contacts]) {
-        [allEmails addObject:contact.email];
-    }
-    
-    predicate = [NSPredicate predicateWithFormat:@"email IN %@", allEmails];
-    
-    [CloudManager.shared readRecordsWithRecorType:@"User" predicate:predicate desiredKeys:@[@"recordName"] perRecordCompletion:^(CKRecord * _Nonnull record) {
-        
-        [participants_aux addObject:record];
-        
-    } finalCompletion:^{
-        self.participants = [participants_aux copy];
-    }];
-}
-
-
-/// Criando uma view que indica um loading quando criada uma reunião.
-- (void) showLoadingIndicator {
-
-    _alertLoading = [UIAlertController alertControllerWithTitle:Nil message:NSLocalizedString(@"Creating Meeting...","") preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIActivityIndicatorView* loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
-    
-    [loadingIndicator setHidesWhenStopped:YES];
-    [loadingIndicator startAnimating];
-    
-    [_alertLoading.view addSubview:loadingIndicator];
-    
-    [[loadingIndicator.centerYAnchor constraintEqualToAnchor:_alertLoading.view.centerYAnchor constant:0] setActive:YES];
-    [[loadingIndicator.leftAnchor constraintEqualToAnchor:_alertLoading.view.leftAnchor constant:20] setActive:YES];
-    [loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    [self presentViewController:_alertLoading animated:YES completion:Nil];
-}
-
-//MARK:- CollectionViewContacts
-/// Inicializando a collection view de contatos.
-- (void) setupCollectionViewContacts {
-    
-    _contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
-    _collectionView.allowsSelection = NO;
-    _collectionView.delegate = _contactCollectionView;
-    _collectionView.dataSource = _contactCollectionView;
-    [_collectionView registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
-    [_collectionView.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-    [_collectionView.layer setCornerRadius:7];
 }
 
 //MARK:- TopicsPerPersonPickerViewDelegate 
