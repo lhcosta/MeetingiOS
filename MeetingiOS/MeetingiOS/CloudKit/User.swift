@@ -12,7 +12,7 @@ import CloudKit
 @objc class User : NSObject {
     
     //MARK: - Properties
-    private(set) var record: CKRecord
+    @objc private(set) var record: CKRecord
     
     private static let defaults = UserDefaults.standard
     private static let cloud = CloudManager.shared

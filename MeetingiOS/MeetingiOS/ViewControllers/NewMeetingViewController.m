@@ -57,8 +57,8 @@
     [_formatter setDateFormat:NSLocalizedString(@"dateFormat", "")];
     _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
     [self setupPickersWithStartDatePicker:_startDatePicker finishDatePicker:_finishDatePicker];
-            
-     _meeting = [[Meeting alloc] initWithRecord:record];
+    
+    _meeting = [[Meeting alloc] initWithRecord:record];
     _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     
@@ -259,7 +259,7 @@
     if ([segue.identifier isEqualToString:@"SelectContacts"]) {
         
         ContactViewController* contactViewController = [segue destinationViewController];
-         
+        
         if(contactViewController) {
             [contactViewController setContactCollectionView:_contactCollectionView];
         }
@@ -278,7 +278,7 @@
 -(void) createMeetingInCloud {
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    UIAlertController* alertLoading;
+    UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting", "")];
     
     if(theme.length == 0) {
         
@@ -293,11 +293,9 @@
         return;
     }
     
-    [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    
-    alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting", "")];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];    
     [self presentViewController:alertLoading animated:true completion:nil];
-
+    
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
     CKReference* manager = [[CKReference alloc] initWithRecordID:recordID action:CKReferenceActionNone];
     
@@ -308,24 +306,38 @@
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
     
-    
-    [CloudManager.shared createRecordsWithRecords:@[_meeting.record] perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
-        if(error) {
-            NSLog(@"Create -> %@", [error userInfo]);
-        }
-    } finalCompletion:^{
-        NSLog(@"Create Record");
+    [self.managerController getUsersFromSelectedContactWithContacts:self.contactCollectionView.contacts completionHandler:^(NSArray<User *> * _Nonnull users) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
-            NSUInteger vcCount = [self.navigationController.viewControllers count];
-            MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
-            previousVC.newMeeting = self->_meeting;
+        NSMutableArray<CKReference*>* references_users = [[NSMutableArray alloc] init];
+        
+        for(User* user in users) {
+            [user registerMeetingWithMeeting:[[CKReference alloc] initWithRecord:self.meeting.record action:CKReferenceActionNone]];
+            [references_users addObject: [[CKReference alloc] initWithRecord:user.record action:CKReferenceActionNone]];
+        }
+        
+        [self.meeting setEmployees:references_users.copy];
+        
+        [CloudManager.shared createRecordsWithRecords:@[self.meeting.record] perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
             
-            [alertLoading dismissViewControllerAnimated:YES completion:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
-        });
+            if(error) {
+                NSLog(@"Create -> %@", [error userInfo]);
+            }
+            
+        } finalCompletion:^{
+            
+            NSLog(@"Create Record");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
+                NSUInteger vcCount = [self.navigationController.viewControllers count];
+                MyMeetingsViewController* previousVC = (MyMeetingsViewController *)[viewControllers objectAtIndex:vcCount -2];
+                previousVC.newMeeting = self->_meeting;
+                
+                [alertLoading dismissViewControllerAnimated:YES completion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            });
+        }];
     }];
 }
 
@@ -358,7 +370,7 @@
     startDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
     finishDatePicker.datePickerMode = UIDatePickerModeTime;
     startDatePicker.minimumDate = finishDatePicker.minimumDate = NSDate.now;
-
+    
     [startDatePicker addTarget:self action:@selector(modifieStartDateTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
     
     [finishDatePicker addTarget:self action:@selector(modifieEndTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
