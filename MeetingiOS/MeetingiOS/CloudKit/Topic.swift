@@ -75,7 +75,6 @@ import CloudKit
     /// Adicionar/editar a pauta do Topic
     /// - Parameter description: Pauta em si.
     func editDescription(_ description: String) {
-        
         self.topicDescription = description
         self.record["description"] = self.topicDescription
     }

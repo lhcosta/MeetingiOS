@@ -25,7 +25,7 @@
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
 
 //MARK:- Loading View
-@property (nonatomic) UIVisualEffectView *blurEffectView;
+@property (nonatomic) UIView *loadingView;
 @property (nonatomic) UIActivityIndicatorView* loadingIndicator;
 
 @end
@@ -182,23 +182,21 @@
 /// Apresentar view de loading.
 - (void) showLoadingView {
     
-     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular]; 
-    _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    _loadingView = [[UIView alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height)]; 
+    [_loadingView setBackgroundColor: self.view.backgroundColor];
     
     _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
     
     [_loadingIndicator setHidesWhenStopped:YES];
     [_loadingIndicator startAnimating];
     
-    [_blurEffectView setFrame: self.view.bounds];
-    [_blurEffectView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];  
-    [_blurEffectView.contentView addSubview:_loadingIndicator];
+    [_loadingView addSubview:_loadingIndicator];
     
-    [[_loadingIndicator.centerXAnchor constraintEqualToAnchor:_blurEffectView.centerXAnchor] setActive:YES];
-    [[_loadingIndicator.centerYAnchor constraintEqualToAnchor:_blurEffectView.centerYAnchor] setActive:YES];
+    [[_loadingIndicator.centerXAnchor constraintEqualToAnchor:_loadingView.centerXAnchor] setActive:YES];
+    [[_loadingIndicator.centerYAnchor constraintEqualToAnchor:_loadingView.centerYAnchor] setActive:YES];
     [_loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    [self.view addSubview:_blurEffectView];
+    [self.navigationController.view addSubview:_loadingView];
 }
 
 
@@ -207,9 +205,9 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         [self.loadingIndicator setAlpha:0];
-        [self.blurEffectView setAlpha:0];
+        [self.loadingView setAlpha:0];
     } completion:^(BOOL finished) {
-        [self.blurEffectView removeFromSuperview];
+        [self.loadingView removeFromSuperview];
     }];
     
     
