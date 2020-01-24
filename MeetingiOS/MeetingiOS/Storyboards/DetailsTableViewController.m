@@ -371,6 +371,7 @@
 //MARK:- TopicsPerPersonPickerViewDelegate 
 - (void)changedNumberOfTopics:(NSInteger)amount {
     [self.topicsPerPerson setText:[NSString stringWithFormat:@"%ld", amount]];
+    _isMeetingModified = true;
 }
 
 //MARK:- DatePickersSetup

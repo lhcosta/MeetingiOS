@@ -53,9 +53,7 @@ class UnfinishedMeetingViewController: UIViewController {
     
     /// Conexão Multipeer
     var multipeer : MeetingBrowserPeer?
-    
-    var meetingTeste : Meeting?
-    
+        
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,16 +65,7 @@ class UnfinishedMeetingViewController: UIViewController {
         self.navigationItem.searchController?.searchBar.delegate = self
 //        self.navigationItem.searchController?.searchBar.showsCancelButton = true
         self.navigationItem.searchController?.searchBar.returnKeyType = .done
-        
-        //SO TESTE 
-        self.multipeer = MeetingBrowserPeer()
-        
-        CloudManager.shared.fetchRecords(recordIDs: [CKRecord.ID(recordName: "431476BA-2555-4205-A500-282A7C9CC3A1")], desiredKeys: nil) { (record, error) in
-            if let record = record?.values.first {
-                self.meetingTeste = Meeting(record: record)
-            }
-        }
-        
+         
 //        tableViewTopics.clipsToBounds = false
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
@@ -214,19 +203,21 @@ class UnfinishedMeetingViewController: UIViewController {
         
     }
     
+    // FIXME:- Do
     // MARK:- Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
-        let encoder = JSONEncoder()
-        
-        do {
-            let data = try encoder.encode(self.meetingTeste)
-            self.multipeer?.sendingDataFromPeer(data: data)
-        } catch {
-            print(error)
-        }
+//        let meeting : Meeting?
+//        let encoder = JSONEncoder()
+//        
+//        do {
+//            let data = try encoder.encode(meeting)
+//            self.multipeer?.sendingDataFromPeer(data: data)
+//        } catch {
+//            print(error)
+//        }
     }
 }
 
