@@ -42,7 +42,7 @@ import CloudKit
         self.tableView.keyboardDismissMode = .onDrag
         
         // MARK: Nav Controller Settings
-        self.navigationItem.title = "My Meetings"
+        self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "perfil", style: .plain, target: self, action: #selector(goToProfile))
         self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])

@@ -115,7 +115,6 @@
 }
 
 -(IBAction)confirmUpdateMeeting:(id)sender {
-    
     if(_isMeetingModified || [self hasMoficationInParticipants]) 
         [self updateMeeting];
     

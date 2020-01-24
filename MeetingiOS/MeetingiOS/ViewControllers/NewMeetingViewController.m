@@ -39,9 +39,7 @@
     [super viewWillAppear:animated];
     
     if(_contactCollectionView)
-        _contactCollectionView.isRemoveContact = NO;
-    
-    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
+        _contactCollectionView.isRemoveContact = NO;    
 }
 
 - (void)viewDidLoad {
@@ -77,10 +75,9 @@
     _contactCollectionView = [_managerController setupCollectionViewContacts:_collectionView];
     
     [self setupViews];
-    
-    NSString* title = NSLocalizedString(@"New meeting", "");
-    
-    [self.navigationItem setTitle:title];
+        
+    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
+    [self.navigationItem setTitle:NSLocalizedString(@"New meeting", "")];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
 }
 
