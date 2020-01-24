@@ -21,9 +21,6 @@ import Contacts
     private var contactTableViewManager : ContactTableView!
     @objc weak var contactCollectionView : ContactCollectionView?
     
-    //MARK:- Delegates
-    @objc weak var contactDelegate : MeetingDelegate?
-    
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
         self.navigationItem.searchController?.searchBar.text?.isEmpty ?? true
@@ -111,7 +108,6 @@ import Contacts
     
     /// Confirmando contatos selecionados para a reunião.
     @objc func sendingContactsToMeeting() {
-        self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
     }
     

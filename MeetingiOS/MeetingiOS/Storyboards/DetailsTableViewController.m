@@ -7,27 +7,22 @@
 //
 
 #import "DetailsTableViewController.h"
-#import "ContactCollectionView.h"
 #import "UIView+CornerShadows.h"
-#import <MeetingiOS-Swift.h>
 #import "TopicsPerPersonPickerView.h"
 #import "DetailsTableViewController+TextFieldName.h"
+#import <MeetingiOS-Swift.h>
 
 @class User;
 
 @interface DetailsTableViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
-@property (nonatomic) NSMutableArray<User*> *employees_user;
 @property (nonatomic) NSMutableArray<Contact*> *employees_contact;
-@property (nonatomic) ContactCollectionView* contactCollectionView;
 @property (nonatomic) User* manager;
 @property (nonatomic) BOOL isManager;
 @property (nonatomic) BOOL chooseNumberOfTopics;
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
-@property (nonatomic, nonnull) NSDateFormatter* formatter;
-
 
 //MARK:- Loading View
 @property (nonatomic) UIVisualEffectView *blurEffectView;
@@ -63,7 +58,9 @@
     self.startsDate.text = [_formatter stringFromDate:self.meeting.initialDate]; 
     self.endesDate.text = [_formatter stringFromDate:self.meeting.finalDate];
         
-    [self setupCollectionView];
+    _detailsManagerController = [[DetailsNewMeetingManager alloc] init];
+    _contactCollectionView = [_detailsManagerController setupCollectionViewContacts:_collectionParticipants];
+    
     [self setupViews];
     [self showLoadingView];
     
@@ -115,10 +112,9 @@
     [self showCollectionViewContacts];
 }
 
--(IBAction)dismissView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:Nil];
+-(IBAction)confirmUpdateMeeting:(id)sender {
+    [self updateMeeting];
 }
-
 
 /// Carregando os contatos da reunião.
 - (void) loadingMeetingsParticipants: (void (^) (void)) completionHandler {
@@ -345,17 +341,6 @@
 }
 
 //MARK:- CollectionView
-- (void) setupCollectionView {
-    
-    self.contactCollectionView = [[ContactCollectionView alloc] initWithRemoveContact:NO];
-    [self.collectionParticipants setDelegate:_contactCollectionView];
-    [self.collectionParticipants setDataSource:_contactCollectionView];
-    [self.collectionParticipants setAllowsSelection:NO];
-    [_collectionParticipants registerNib:[UINib nibWithNibName:@"ContactCollectionViewCell" bundle:Nil] forCellWithReuseIdentifier:@"ContactCollectionCell"];
-    [_collectionParticipants.layer setMaskedCorners:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
-    [_collectionParticipants.layer setCornerRadius:7];
-}
-
 /// Animação para apresentar a collection view de contatos.
 - (void) showCollectionViewContacts {
         

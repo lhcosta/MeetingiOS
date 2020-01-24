@@ -35,4 +35,10 @@
     return self;
 }
 
+//Debug
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ -> %@", self.name, self.email];
+}
+
 @end
