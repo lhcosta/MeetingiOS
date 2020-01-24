@@ -106,7 +106,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
             self.saveDefaults(user: user)
-            
+            self.notificationPermission()
+            self.goToNextVC()
             // Cria o record no Cloud
             CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
                 if let error = error {
@@ -121,13 +122,30 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
             
         } else {
-            self.saveDefaults(user: user)
-            user.searchCredentials(record: userRecord){ _ in
-                print("User Email: \(String(describing: user.email))")
-                self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: -10, y: 5, width: 50, height: 50))
+            activityIndicator.style = .medium
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.startAnimating()
+            
+            let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
+            loadingAlert.view.addSubview(activityIndicator)
+            
+            self.present(loadingAlert, animated: true){
+                user.searchCredentials(record: userRecord){ _ in
+                    print("User Email: \(String(describing: user.email))")
+                    self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
+                    self.saveDefaults(user: user)
+                    DispatchQueue.main.async {
+                        loadingAlert.dismiss(animated: true, completion: nil)
+                        self.notificationPermission()
+                        self.goToNextVC()
+                    }
+                }
             }
         }
-        
+    }
+    
+    private func notificationPermission(){
         let application = UIApplication.shared
         let userNotCenter = UNUserNotificationCenter.current()
         userNotCenter.delegate = application.delegate as! AppDelegate
@@ -139,7 +157,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         DispatchQueue.main.async {
             application.registerForRemoteNotifications()
         }
-        
+    }
+    
+    private func goToNextVC(){
         if goingToProfile {
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
             let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
@@ -148,7 +168,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         } else {
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
     
     private func saveDefaults(user: User) {
