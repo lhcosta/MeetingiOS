@@ -113,17 +113,18 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print("Error: \(error)")
                 } else {
                     print("Successfully created user: ", record["name"]!)
-//                    self.saveDefaults(user: user)
                     print(record.recordID.recordName)
+                    self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
                 }
             }) {
                 print("Done")
             }
             
         } else {
+            self.saveDefaults(user: user)
             user.searchCredentials(record: userRecord){ _ in
                 print("User Email: \(String(describing: user.email))")
-//                self.saveDefaults(user: user)
+                self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
             }
         }
         
@@ -151,7 +152,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
     
     private func saveDefaults(user: User) {
-        self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
         self.defaults.set(user.name, forKey: "givenName")
         self.defaults.set(user.email, forKey: "email")
     }
