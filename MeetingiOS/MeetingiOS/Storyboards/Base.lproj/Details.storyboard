@@ -431,7 +431,7 @@
                     <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="never" id="F31-ow-ouU">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hyn-yI-5os">
                             <connections>
-                                <action selector="dismissView:" destination="IG8-XC-YQX" id="tTd-RM-o6d"/>
+                                <action selector="confirmUpdateMeeting:" destination="IG8-XC-YQX" id="UcZ-Fz-ZTg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

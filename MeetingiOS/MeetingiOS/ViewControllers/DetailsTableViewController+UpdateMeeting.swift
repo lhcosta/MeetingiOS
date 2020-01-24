@@ -10,93 +10,83 @@ import Foundation
 
 extension DetailsTableViewController {
     
+    /// Atualização da reunião.
     @objc func updateMeeting() {
         
-        separateUsersAndContacts()
+        let loadingAlertIndicator = self.detailsManagerController.createAlertLoadingIndicator(message: NSLocalizedString("Meeting update...", comment: ""))
+        
+        self.present(loadingAlertIndicator, animated: true, completion: nil)
+        
+        updateMeetingUsers { (users) in
+            
+            DispatchQueue.main.async {
+                
+                guard let name = self.meetingName?.text else {return}
+                guard let numberOfTopics = Int(self.topicsPerPerson?.text ?? "1") else {return}
+                guard let initialDate = self.startsDate?.text, let finalDate = self.endesDate?.text else {return}
+                
+                self.meeting.theme = name
+                self.meeting.limitTopic = Int64(numberOfTopics)
+                self.meeting.initialDate = self.formatter.date(from: initialDate)
+                self.meeting.finalDate = self.formatter.date(from: finalDate)
+                self.meeting.addingNewEmployees(users)
+                
+                CloudManager.shared.updateRecords(records: [self.meeting.record], perRecordCompletion: { (_, error) in
+                    
+                    if let error = error as NSError? {
+                        NSLog("%@", error.userInfo)
+                        return
+                    }
+                    
+                }) { 
+                    DispatchQueue.main.async {
+                        loadingAlertIndicator.dismiss(animated: true) { 
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                }
+            } 
+            
+            self.detailsManagerController.updateUsers(users: users, meeting: self.meeting, typeUpdate: .insertUser)
+        }
     }
     
-    private func separateUsersAndContacts() {
+    /// Buscando novos usuários que foram selecionados e removendo os deselecionados
+    /// - Parameter completionHandler: todos os contatos que foram selecionados e possuem cadastro.
+    private func updateMeetingUsers(completionHandler : @escaping ([User]) -> Void) {
         
         //Novos usuários
         var newUsers = [User]()
         
         // Novos contatos
-        let newContacts = self.contactCollectionView.contacts
+        let selectedContacts = self.contactCollectionView.contacts
         
         /// Usuários antigos
         guard let oldUsers = self.employees_user.copy() as? [User] else {return}
         
-        //Usuários que não foram removidos da reunião
-        let continueUsers = oldUsers.filter { (user) -> Bool in
-            return newContacts.contains(where: {
-                return $0.email == user.email
-            })            
-        }
-        
-        newUsers.append(contentsOf: continueUsers)
-        
         //Apenas os contatos que não são usuários ainda.
-        let onlyContacts = newContacts.filter { (contact) -> Bool in
+        let onlyContacts = selectedContacts.filter { (contact) -> Bool in
             return !oldUsers.contains(where: { 
                 return $0.email == contact.email
             })
         }
         
-        newUsers.append(contentsOf: fetchNewUsers(contacts: onlyContacts))
+        self.detailsManagerController.getUsersFromSelectedContact(contacts: onlyContacts) { (users) in
+            if let new_users = users {
+                newUsers = new_users
+            }
+            
+            completionHandler(newUsers)
+        }
         
-        //Usuários removido da reunião
+        //Usuários removidos da reunião
         let removeUsers = oldUsers.filter { (user) -> Bool in
-            !newContacts.contains(where: {
+            !selectedContacts.contains(where: {
                 return $0.email == user.email
             })
         }
         
-        updateRemovedUsers(removeUsers: removeUsers)
-        
-    }
-    
-    /// Buscando a existência do contato no cloud e o transformando em record.
-    /// - Parameter contacts: contatos a serem buscados.
-    private func fetchNewUsers(contacts : [Contact]) -> [User] {
-        
-        var newUsers = [User]()
-        
-        let allEmails = contacts.compactMap { (contact) -> String? in
-            return contact.email
-        }
-        
-        let predicate = NSPredicate(format: "email IN %@", allEmails)
-        
-        CloudManager.shared.readRecords(recorType: "User", predicate: predicate, desiredKeys: ["recordName"], perRecordCompletion: { (record) in
-            
-            let user = User(record: record)
-            user.meetings.append(CKRecord.Reference(record: self.meeting.record, action: .none))
-            newUsers.append(user)
-            
-        }) { 
-            print("Fetched new users")
-        }
-        
-        return newUsers
-    }
-    
-    /// Atualizando usuários removidos da reunião.
-    private func updateRemovedUsers(removeUsers : [User]) {
-        
-        removeUsers.forEach {
-            $0.removeMeeting(meetingReference: self.meeting.record.recordID)
-        }
-        
-        let records = removeUsers.map { (user) -> CKRecord in
-            return user.record
-        }
-        
-        CloudManager.shared.updateRecords(records: records, perRecordCompletion: { (record, error) in
-            if let error = error as NSError? {
-                print("Error - Update user -> \(error.userInfo)")
-            }
-        }) { 
-            print("Update all users")
-        }
+        self.meeting.removingEmployees(removeUsers)
+        self.detailsManagerController.updateUsers(users: removeUsers, meeting: meeting, typeUpdate: .deleteUser)
     }
 }

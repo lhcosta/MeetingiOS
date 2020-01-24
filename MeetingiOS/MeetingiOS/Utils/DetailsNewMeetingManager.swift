@@ -50,7 +50,12 @@ import UIKit
     /// - Parameters:
     ///   - contacts: contatos selecionados.
     ///   - completionHandler: usuários que já possuem cadastro.
-    @objc func getUsersFromSelectedContact(contacts : [Contact], completionHandler : @escaping ([User]) -> Void) {
+    @objc func getUsersFromSelectedContact(contacts : [Contact], completionHandler : @escaping ([User]?) -> Void) {
+        
+        if contacts.count == 0 {
+            completionHandler(nil)
+            return
+        }
         
         var users : [User] = []
         
@@ -61,10 +66,38 @@ import UIKit
         let predicate = NSPredicate(format: "email IN %@", emails)
         
         CloudManager.shared.readRecords(recorType: "User", predicate: predicate, desiredKeys: ["recordName"], perRecordCompletion: { (record) in
+    
             users.append(User(record: record))
+            
         }) { 
             completionHandler(users)
         }
     }
     
+    /// Atualização dos usuários.
+    /// - Parameters:
+    ///   - users: usuários escolhidos.
+    ///   - meeting: reunião atual.
+    ///   - typeUpdate: insercao ou delecao de reunioes.
+    @objc func updateUsers(users : [User], meeting : Meeting, typeUpdate : TypeUpdateUser) {
+    
+        if typeUpdate == .insertUser {
+            users.forEach {
+                $0.registerMeeting(meeting: CKRecord.Reference(record: meeting.record, action: .none))
+            }
+        } else {
+            users.forEach {
+                $0.removeMeeting(meetingReference: meeting.record.recordID)
+            }
+        }
+        
+        CloudManager.shared.updateRecords(records: users.map({ return $0.record }), perRecordCompletion: { (record, error) in
+            if let error = error as NSError? {
+                NSLog("Update User -> %@", error.userInfo)
+            }
+    
+        }) { 
+            print("Updated Users")
+        }
+    }
 }

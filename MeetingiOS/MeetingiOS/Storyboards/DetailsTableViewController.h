@@ -13,6 +13,7 @@
 #import "ContactCollectionView.h"
 
 @class Meeting;
+@class DetailsNewMeetingManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,6 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Usuários da reunião que possuem record.
 @property (nonatomic) NSMutableArray<User*> *employees_user;
 
+@property (nonatomic, nonnull) NSDateFormatter* formatter;
+
+@property (nonatomic) DetailsNewMeetingManager* detailsManagerController;
 
 /// Alterando o nome da reunião.
 /// @param sender botão clicado.

@@ -163,6 +163,7 @@
 		A44CC30C23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailsTableViewController+UpdateMeeting.swift"; sourceTree = "<group>"; };
 		A44CC30E23D8D4F7005ECFF6 /* MeetingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeetingDelegate.h; sourceTree = "<group>"; };
 		A44CC31623D8FD67005ECFF6 /* DetailsNewMeetingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsNewMeetingManager.swift; sourceTree = "<group>"; };
+		A44CC31823DA913D005ECFF6 /* TypeUpdateUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeUpdateUser.h; sourceTree = "<group>"; };
 		A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingBrowserPeer.swift; sourceTree = "<group>"; };
 		A4533FF4238C58020089257A /* MeetingiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeetingiOS.entitlements; sourceTree = "<group>"; };
 		A4533FF6238C58060089257A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -439,6 +440,7 @@
 		A4EB3BFA239747000097857F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A44CC31823DA913D005ECFF6 /* TypeUpdateUser.h */,
 				A44CC30E23D8D4F7005ECFF6 /* MeetingDelegate.h */,
 				A49229ED23A3323500FD95B9 /* ContactTableView.swift */,
 				A44CC31623D8FD67005ECFF6 /* DetailsNewMeetingManager.swift */,

@@ -8,9 +8,9 @@
 
 #import "DetailsTableViewController.h"
 #import "UIView+CornerShadows.h"
-#import <MeetingiOS-Swift.h>
 #import "TopicsPerPersonPickerView.h"
 #import "DetailsTableViewController+TextFieldName.h"
+#import <MeetingiOS-Swift.h>
 
 @class User;
 
@@ -23,9 +23,6 @@
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
-@property (nonatomic, nonnull) NSDateFormatter* formatter;
-@property (nonatomic) DetailsNewMeetingManager* detailsManagerController;
-
 
 //MARK:- Loading View
 @property (nonatomic) UIVisualEffectView *blurEffectView;
@@ -115,11 +112,9 @@
     [self showCollectionViewContacts];
 }
 
--(IBAction)dismissView:(id)sender {
+-(IBAction)confirmUpdateMeeting:(id)sender {
     [self updateMeeting];
-    [self dismissViewControllerAnimated:YES completion:Nil];
 }
-
 
 /// Carregando os contatos da reunião.
 - (void) loadingMeetingsParticipants: (void (^) (void)) completionHandler {

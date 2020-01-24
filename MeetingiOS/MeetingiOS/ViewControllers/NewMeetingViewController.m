@@ -13,6 +13,7 @@
 #import "ContactCollectionView.h"
 #import "UIView+CornerShadows.h"
 #import "TopicsPerPersonPickerView.h"
+#import "TypeUpdateUser.h"
 
 @interface NewMeetingViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
@@ -124,23 +125,6 @@
         }
     }
 }
-
-//MARK:- TableView
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return 15;
-    }
-    
-    return 30;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* view = [[UIView alloc] init];
-    [view setBackgroundColor:UIColor.clearColor];
-    return view;
-}
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -305,7 +289,7 @@
     }
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting", "")];
+    UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting...", "")];
     
     if(theme.length == 0) {
         
@@ -333,12 +317,11 @@
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
     
-    [self.managerController getUsersFromSelectedContactWithContacts:self.contactCollectionView.contacts completionHandler:^(NSArray<User *> * _Nonnull users) {
+    [self.managerController getUsersFromSelectedContactWithContacts:_contactCollectionView.contacts completionHandler:^(NSArray<User *> * _Nonnull users) {
         
         NSMutableArray<CKReference*>* references_users = [[NSMutableArray alloc] init];
         
         for(User* user in users) {
-            [user registerMeetingWithMeeting:[[CKReference alloc] initWithRecord:self.meeting.record action:CKReferenceActionNone]];
             [references_users addObject: [[CKReference alloc] initWithRecord:user.record action:CKReferenceActionNone]];
         }
         
@@ -347,12 +330,13 @@
         [CloudManager.shared createRecordsWithRecords:@[self.meeting.record] perRecordCompletion:^(CKRecord * _Nonnull record, NSError * _Nullable error) {
             
             if(error) {
-                NSLog(@"Create -> %@", [error userInfo]);
+                NSLog(@"Create Record -> %@", [error userInfo]);
             }
             
         } finalCompletion:^{
             
             NSLog(@"Create Record");
+            [self.managerController updateUsersWithUsers:users meeting:self.meeting typeUpdate:(TypeUpdateUser)insertUser];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
@@ -372,7 +356,7 @@
     [self performSegueWithIdentifier:@"SelectColor" sender:Nil];
 }
 
-- (void)selectedColor:(NSString *)hex {
+- (void)selectedColor:(NSString *)hex {;
     //Pegar cor de acordo com o hex    
     _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
 }
