@@ -24,6 +24,7 @@
         [textField setText:self.meeting.theme];
     } else {
         [self.meeting setTheme:textField.text];
+        self.isMeetingModified = true;
     }
     
     return YES;

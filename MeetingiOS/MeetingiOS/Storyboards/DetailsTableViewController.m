@@ -42,6 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _isMeetingModified = false;
+    
     //Nao realizar o dismiss com swipe
     [self setModalInPresentation:YES];
 
@@ -113,7 +115,11 @@
 }
 
 -(IBAction)confirmUpdateMeeting:(id)sender {
-    [self updateMeeting];
+    
+    if(_isMeetingModified || [self hasMoficationInParticipants]) 
+        [self updateMeeting];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /// Carregando os contatos da reunião.
@@ -371,10 +377,14 @@
 - (void)modifieStartDateTimeWithDatePicker:(UIDatePicker *)datePicker {
     _startsDate.text = _endesDate.text = [self.formatter stringFromDate:datePicker.date];
     _finishDatePicker.date = _finishDatePicker.minimumDate = datePicker.date;
+    
+    _isMeetingModified = true;
 }
 
 - (void)modifieEndTimeWithDatePicker:(UIDatePicker *)datePicker {
     _endesDate.text = [self.formatter stringFromDate:datePicker.date];
+    
+    _isMeetingModified = true;
 }
 
 - (void)setupPickersWithStartDatePicker:(UIDatePicker *)startDatePicker finishDatePicker:(UIDatePicker *)finishDatePicker {

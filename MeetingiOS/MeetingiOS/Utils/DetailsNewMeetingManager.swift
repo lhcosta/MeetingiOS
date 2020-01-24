@@ -80,24 +80,27 @@ import UIKit
     ///   - meeting: reunião atual.
     ///   - typeUpdate: insercao ou delecao de reunioes.
     @objc func updateUsers(users : [User], meeting : Meeting, typeUpdate : TypeUpdateUser) {
-    
-        if typeUpdate == .insertUser {
-            users.forEach {
-                $0.registerMeeting(meeting: CKRecord.Reference(record: meeting.record, action: .none))
-            }
-        } else {
-            users.forEach {
-                $0.removeMeeting(meetingReference: meeting.record.recordID)
-            }
-        }
         
-        CloudManager.shared.updateRecords(records: users.map({ return $0.record }), perRecordCompletion: { (record, error) in
-            if let error = error as NSError? {
-                NSLog("Update User -> %@", error.userInfo)
+        if(users.count != 0) {
+            
+            if typeUpdate == .insertUser {
+                users.forEach {
+                    $0.registerMeeting(meeting: CKRecord.Reference(record: meeting.record, action: .none))
+                }
+            } else {
+                users.forEach {
+                    $0.removeMeeting(meetingReference: meeting.record.recordID)
+                }
             }
-    
-        }) { 
-            print("Updated Users")
+            
+            CloudManager.shared.updateRecords(records: users.map({ return $0.record }), perRecordCompletion: { (record, error) in
+                if let error = error as NSError? {
+                    NSLog("Update User -> %@", error.userInfo)
+                }
+                
+            }) { 
+                print("Updated Users")
+            }
         }
     }
 }

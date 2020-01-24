@@ -46,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) DetailsNewMeetingManager* detailsManagerController;
 
+/// Monitorando se a reunião foi modificada.
+@property (nonatomic) BOOL isMeetingModified;
+
+
 /// Alterando o nome da reunião.
 /// @param sender botão clicado.
 -(IBAction)changeMeetingName:(id)sender;
