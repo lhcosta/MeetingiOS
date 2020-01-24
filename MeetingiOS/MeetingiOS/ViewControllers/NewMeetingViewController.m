@@ -275,7 +275,34 @@
     }
 }
 
+//private func isLoggedIn() -> Bool{
+//    if let _ = defaults.value(forKey: "recordName") as? String {
+//        return true
+//    } else {
+//       return false
+//    }
+//}
+
+-(bool) isLoggedIn {
+    NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
+    
+    if (!recordName || [recordName isEqualToString:@""]) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 -(void) createMeetingInCloud {
+    
+    NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
+    
+    if (!recordName || [recordName isEqualToString:@""]) {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        UIViewController* loginVC = [storyboard instantiateInitialViewController];
+        [self presentViewController:loginVC animated:true completion:nil];
+        return;
+    }
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting", "")];

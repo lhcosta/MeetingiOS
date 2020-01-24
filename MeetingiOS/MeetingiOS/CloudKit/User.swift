@@ -124,8 +124,10 @@ import CloudKit
                 }
             }
         } else {
-            self.defaults.set(name, forKey: "givenName")
-            performUpdate(record: userCK)
+            if let name = name {
+                self.defaults.set(name, forKey: "givenName")
+                performUpdate(record: userCK)
+            }
             completion()
         }
     }

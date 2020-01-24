@@ -107,7 +107,7 @@
                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Iqt-xa-Jii" kind="show" id="a5S-fL-LnF"/>
+                                    <segue destination="RZ8-qU-0ri" kind="show" id="8Vf-77-WJt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -145,6 +145,16 @@
             </objects>
             <point key="canvasLocation" x="453" y="149"/>
         </scene>
+        <!--NewMeeting-->
+        <scene sceneID="BMJ-5b-ehS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NewMeeting" id="RZ8-qU-0ri" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="sJA-b5-pGE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uQZ-qp-GqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="291" y="244"/>
+        </scene>
         <!--Details-->
         <scene sceneID="cQH-kP-bLe">
             <objects>
@@ -164,16 +174,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwy-Qa-D3o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="442" y="-71"/>
-        </scene>
-        <!--NewMeeting-->
-        <scene sceneID="SUH-nP-vTt">
-            <objects>
-                <viewControllerPlaceholder storyboardName="NewMeeting" id="Iqt-xa-Jii" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="JM4-6y-0en"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xk1-LS-NDS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="425" y="216"/>
         </scene>
         <!--Profile-->
         <scene sceneID="ILI-WA-h5c">
