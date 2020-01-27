@@ -49,7 +49,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        guard CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) != nil else { return }
+        guard let meeting = CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) else { return }
+        guard let keys = meeting.recordFields else { return }
+        guard let theme = keys["theme"] as? String else { return }
+        guard let begin = keys["initialDate"] as? Date else { return }
+        guard let end = keys["finalDate"] as? Date else { return }
         
+        EventManager.saveMeeting(theme, starting: begin, ending: end)
     }
 }

@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navController = UINavigationController(rootViewController: rootVC)
         navController.navigationBar.prefersLargeTitles = true
         navController.hidesBarsWhenKeyboardAppears = false
+        navController.navigationBar.backgroundColor = .white
         
         navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blue]
         navController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blue]

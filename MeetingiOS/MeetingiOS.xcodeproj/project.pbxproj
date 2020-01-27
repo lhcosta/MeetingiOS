@@ -21,6 +21,7 @@
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
 		49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4652923D09FF6006D67D8 /* Login.storyboard */; };
 		49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */; };
+		49BF5F9423DF652600DD56DC /* TableView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */; };
 		49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */; };
 		49EB44E223871126002F434D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E123871126002F434D /* AppDelegate.swift */; };
 		49EB44E423871126002F434D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB44E323871126002F434D /* SceneDelegate.swift */; };
@@ -106,6 +107,7 @@
 		49A4652D23D09FF9006D67D8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
 		49A4652F23D09FFA006D67D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
+		49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Gradient.swift"; sourceTree = "<group>"; };
 		49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudManager.swift; path = MeetingiOS/CloudManager.swift; sourceTree = SOURCE_ROOT; };
 		49EB44DE23871126002F434D /* MeetingiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EB44E123871126002F434D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 			children = (
 				A44CC31823DA913D005ECFF6 /* TypeUpdateUser.h */,
 				A44CC30E23D8D4F7005ECFF6 /* MeetingDelegate.h */,
+				49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */,
 				A49229ED23A3323500FD95B9 /* ContactTableView.swift */,
 				A44CC31623D8FD67005ECFF6 /* DetailsNewMeetingManager.swift */,
 				A44CC2FE23D77555005ECFF6 /* DatePickersSetup.swift */,
@@ -588,6 +591,7 @@
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
 				A4382CA723C5400D0021C814 /* NewContactTableViewCell.swift in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
+				49BF5F9423DF652600DD56DC /* TableView+Gradient.swift in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
 				A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
