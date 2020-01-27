@@ -128,7 +128,7 @@ import CloudKit
         let subscription = CKQuerySubscription(recordType: "Meeting", predicate: predicate, options: .firesOnRecordCreation)
         
         let notificationInfo = CKSubscription.NotificationInfo()
-        notificationInfo.desiredKeys = ["manager", "date", "theme"]
+        notificationInfo.desiredKeys = ["manager", "initialDate", "theme", "finalDate"]
         notificationInfo.shouldBadge = true
         
         //TODO: Definir conteúdo da notificação localized String para internacionalizacao da notificacao
