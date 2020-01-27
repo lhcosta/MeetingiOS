@@ -89,7 +89,8 @@
                 self.isManager = false;
             }
             
-            if(!self.isManager) {
+            if(!self.isManager || self.meeting.finished) {
+                
                 [self.modifyName setHidden:YES];
                 
                 for (NSIndexPath* indexPath in self.tableView.indexPathsForVisibleRows) {

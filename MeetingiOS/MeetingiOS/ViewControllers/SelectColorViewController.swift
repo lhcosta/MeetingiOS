@@ -44,8 +44,6 @@ import CloudKit
         self.navigationItem.title = NSLocalizedString("Pick a color", comment: "")
     }
     
- 
-    
     /// Enviando a cor selecionado por meio do delegate 
     @IBAction func sendSelectedColor() {
         self.delegate?.selectedColor(selectedColor)

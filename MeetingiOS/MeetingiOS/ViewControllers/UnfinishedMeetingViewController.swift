@@ -209,15 +209,15 @@ class UnfinishedMeetingViewController: UIViewController {
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
-//        let meeting : Meeting?
-//        let encoder = JSONEncoder()
-//        
-//        do {
-//            let data = try encoder.encode(meeting)
-//            self.multipeer?.sendingDataFromPeer(data: data)
-//        } catch {
-//            print(error)
-//        }
+        self.multipeer = MeetingBrowserPeer()
+        let encoder = JSONEncoder()
+        
+        do {
+            let data = try encoder.encode(self.currMeeting)
+            self.multipeer?.sendingDataFromPeer(data: data)
+        } catch {
+            print(error)
+        }
     }
 }
 

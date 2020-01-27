@@ -55,13 +55,10 @@ extension ContactTableView : UITableViewDelegate {
             let newContactViewController = CNContactViewController(forNewContact: contact)
             newContactViewController.contactStore = CNContactStore()
             newContactViewController.delegate = self
-            newContactViewController.view.layoutIfNeeded()
-            
+        
             let navigationController = UINavigationController(rootViewController: newContactViewController)
-            
-            newContactViewController.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-            
-            self.contactViewController.navigationController?.present(navigationController, animated: true, completion: nil)
+        
+            self.contactViewController.present(navigationController, animated: true, completion: nil)
                         
             return
         }
