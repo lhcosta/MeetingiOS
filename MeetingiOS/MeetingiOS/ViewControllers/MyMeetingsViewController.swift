@@ -19,13 +19,14 @@ import CloudKit
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
     @objc var newMeeting: Meeting?
+    
     lazy var refreshControl: UIRefreshControl = {
-          let refreshControl = UIRefreshControl()
-          refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
         refreshControl.tintColor = .gray
-          
-          return refreshControl
-      }()
+        
+        return refreshControl
+    }()
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -40,6 +41,7 @@ import CloudKit
         
         self.tableView.addSubview(refreshControl)
         self.tableView.keyboardDismissMode = .onDrag
+        self.tableView.setTableViewBackgroundGradient()
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
@@ -48,6 +50,8 @@ import CloudKit
         self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
         
         // MARK: Query no CK
+        
+        guard let _ = defaults.string(forKey: "recordName") else { return }
         
         self.refreshMeetings(predicateFormat: "manager = %@"){
             DispatchQueue.main.async {
@@ -67,12 +71,6 @@ import CloudKit
         super.viewWillAppear(animated)
         self.navigationItem.hidesSearchBarWhenScrolling = true
         self.showNewMeeting()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        
     }
     
     //MARK:- Methods

@@ -30,7 +30,7 @@ class ProfileViewController: UITableViewController {
         let topColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
         let bottomColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
         
-        setTableViewBackgroundGradient(sender: self, topColor, bottomColor)
+        self.tableView.setTableViewBackgroundGradient()
         
         fillTF()
     }
@@ -137,20 +137,6 @@ class ProfileViewController: UITableViewController {
         if let email = defaults.string(forKey: "email") {
             emailTF.text = email
         }
-    }
-    
-    func setTableViewBackgroundGradient(sender: UITableViewController, _ topColor:UIColor, _ bottomColor:UIColor) {
-
-        let gradientBackgroundColors = [topColor.cgColor, bottomColor.cgColor]
-
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientBackgroundColors
-        gradientLayer.locations = [0,1]
-
-        gradientLayer.frame = sender.tableView.bounds
-        let backgroundView = UIView(frame: sender.tableView.bounds)
-        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-        sender.tableView.backgroundView = backgroundView
     }
     
     //MARK:- Table View
