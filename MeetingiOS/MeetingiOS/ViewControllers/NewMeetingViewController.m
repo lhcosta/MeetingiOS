@@ -247,11 +247,12 @@
         
     } else if ([segue.identifier isEqualToString:@"SelectColor"]) {
         
-        SelectColorViewController* nextViewController = [segue destinationViewController];
+        UINavigationController* navigationController = [segue destinationViewController];
+        SelectColorViewController* viewController = [navigationController.viewControllers firstObject];
         
-        if(nextViewController) {
-            [nextViewController setDelegate:self];
-            [nextViewController setSelectedColor: self.colorMetting.backgroundColor.toHexString];
+        if(viewController) {
+            [viewController setDelegate:self];
+            [viewController setSelectedColor: self.colorMetting.backgroundColor.toHexString];
         }
     }
 }

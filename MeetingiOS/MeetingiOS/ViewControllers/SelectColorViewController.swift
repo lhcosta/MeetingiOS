@@ -41,20 +41,16 @@ import CloudKit
         self.viewColorSelected.layer.cornerRadius = 20
         self.viewColorSelected.backgroundColor = UIColor(hexString: selectedColor)
         
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(sendSelectedColor))
-        self.navigationItem.rightBarButtonItem = done
         self.navigationItem.title = NSLocalizedString("Pick a color", comment: "")
-        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
  
     
     /// Enviando a cor selecionado por meio do delegate 
-    @objc func sendSelectedColor() {
+    @IBAction func sendSelectedColor() {
         self.delegate?.selectedColor(selectedColor)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewDataSource{
