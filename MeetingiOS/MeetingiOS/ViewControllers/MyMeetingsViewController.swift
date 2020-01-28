@@ -52,19 +52,8 @@ import CloudKit
         // MARK: Query no CK
         
         guard let _ = defaults.string(forKey: "recordName") else { return }
+        self.refreshingMeetings()
         
-        self.refreshMeetings(predicateFormat: "manager = %@"){
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-        }
-        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,13 +120,7 @@ import CloudKit
     /// Método para fazer refresh da table view
     /// - Parameter refreshControl: default
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.refreshMeetings(predicateFormat: "employees CONTAINS %@") {
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-                refreshControl.endRefreshing()
-            }
-        }
+        self.refreshingMeetings()
     }
     
     @objc func goToProfile() {
@@ -158,6 +141,25 @@ import CloudKit
             return true
         } else {
            return false
+        }
+    }
+    
+    private func refreshingMeetings() {
+        
+        self.refreshMeetings(predicateFormat: "manager = %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+        
+        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
     }
     
@@ -200,7 +202,7 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let date = meetingsArray[indexPath.section].initialDate{
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EE MMM dd yyyy"
+            dateFormatter.dateFormat = NSLocalizedString("dateFormat", comment: "")
             let formattedDate = dateFormatter.string(from: date)
             cell.meetingDate.text = formattedDate
         } else {

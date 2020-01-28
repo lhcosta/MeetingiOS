@@ -19,12 +19,12 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Account" id="ym3-gE-Q5T">
-                                    <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="cancel" id="CiR-ZJ-ha0">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CiR-ZJ-ha0">
                                         <connections>
                                             <action selector="didPressCancel:" destination="qoh-0J-yhU" id="1Tk-Nm-JTq"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="TDs-1p-IJo">
+                                    <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="TDs-1p-IJo">
                                         <connections>
                                             <action selector="didPressDone:" destination="qoh-0J-yhU" id="2BP-0Z-iX8"/>
                                         </connections>
