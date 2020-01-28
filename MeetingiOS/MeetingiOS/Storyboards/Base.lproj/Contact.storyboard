@@ -38,22 +38,41 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fZN-Z9-FOa">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNa-uL-Dhv">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem image="plus.circle.fill" catalog="system" id="fYk-od-4N3">
+                                        <connections>
+                                            <action selector="addingNewContact:" destination="uO4-SB-ijz" id="hcD-ct-Jqy"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="New contact" id="BlV-uw-Dme">
+                                        <connections>
+                                            <action selector="addingNewContact:" destination="uO4-SB-ijz" id="SQK-Kf-NTR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Mjj-Jl-2Ui" firstAttribute="bottom" secondItem="fZN-Z9-FOa" secondAttribute="bottom" id="8Ep-YB-GHY"/>
+                            <constraint firstItem="KNa-uL-Dhv" firstAttribute="top" secondItem="fZN-Z9-FOa" secondAttribute="bottom" id="HJ7-8S-eS5"/>
                             <constraint firstItem="Mjj-Jl-2Ui" firstAttribute="trailing" secondItem="e0f-4p-eTr" secondAttribute="trailing" id="J3g-Im-gEf"/>
+                            <constraint firstItem="KNa-uL-Dhv" firstAttribute="trailing" secondItem="Mjj-Jl-2Ui" secondAttribute="trailing" id="NNL-BP-6ww"/>
                             <constraint firstItem="e0f-4p-eTr" firstAttribute="top" secondItem="Mjj-Jl-2Ui" secondAttribute="top" id="UbX-9H-53P"/>
                             <constraint firstItem="Mjj-Jl-2Ui" firstAttribute="trailing" secondItem="fZN-Z9-FOa" secondAttribute="trailing" id="VMI-VO-Sqe"/>
+                            <constraint firstItem="Mjj-Jl-2Ui" firstAttribute="bottom" secondItem="KNa-uL-Dhv" secondAttribute="bottom" id="YKX-ge-kNC"/>
                             <constraint firstItem="e0f-4p-eTr" firstAttribute="leading" secondItem="Mjj-Jl-2Ui" secondAttribute="leading" id="Yhc-ql-66R"/>
+                            <constraint firstItem="KNa-uL-Dhv" firstAttribute="leading" secondItem="Mjj-Jl-2Ui" secondAttribute="leading" id="fKc-Rw-Ino"/>
                             <constraint firstItem="fZN-Z9-FOa" firstAttribute="top" secondItem="e0f-4p-eTr" secondAttribute="bottom" id="k2Q-o9-bdQ"/>
                             <constraint firstItem="fZN-Z9-FOa" firstAttribute="leading" secondItem="Mjj-Jl-2Ui" secondAttribute="leading" id="ydu-RF-gsD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mjj-Jl-2Ui"/>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="e0f-4p-eTr" id="ak9-4I-eGx"/>
                         <outlet property="contactTableView" destination="fZN-Z9-FOa" id="N3m-Vw-Nn3"/>
@@ -62,7 +81,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vWh-P1-3jt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4682.608695652174" y="-394.41964285714283"/>
+            <point key="canvasLocation" x="4631.884057971015" y="-433.25892857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
+    </resources>
 </document>
