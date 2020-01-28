@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81r-5o-ZG0">
-                                <rect key="frame" x="17" y="44" width="380" height="744"/>
+                                <rect key="frame" x="17" y="44" width="380" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="120" id="7fe-wl-nNI" customClass="MyMeetingsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
@@ -97,26 +97,28 @@
                                     <outlet property="delegate" destination="dcg-jt-bSn" id="Iut-r8-qua"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPO-qO-NlB">
-                                <rect key="frame" x="0.0" y="788" width="414" height="74"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="74" id="8hq-kF-t0C"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="    New Meeting" image="plus.circle.fill" catalog="system">
-                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RZ8-qU-0ri" kind="show" id="8Vf-77-WJt"/>
-                                </connections>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem image="plus.circle.fill" catalog="system" id="sqR-4e-h3r">
+                                        <connections>
+                                            <segue destination="RZ8-qU-0ri" kind="show" id="PfM-2M-zLR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="New meeting" id="bQY-k5-1xX">
+                                        <connections>
+                                            <segue destination="RZ8-qU-0ri" kind="show" id="WKF-Nl-1bS"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="yPO-qO-NlB" firstAttribute="trailing" secondItem="GcE-6K-nxn" secondAttribute="trailing" id="FRE-hI-KUm"/>
-                            <constraint firstItem="yPO-qO-NlB" firstAttribute="leading" secondItem="GcE-6K-nxn" secondAttribute="leading" id="Nbw-Ts-X7f"/>
-                            <constraint firstItem="yPO-qO-NlB" firstAttribute="top" secondItem="81r-5o-ZG0" secondAttribute="bottom" id="Spm-Wl-oev"/>
-                            <constraint firstItem="yPO-qO-NlB" firstAttribute="bottom" secondItem="GcE-6K-nxn" secondAttribute="bottom" id="bU7-Xu-a0H"/>
+                            <constraint firstItem="pkH-v3-ztq" firstAttribute="trailing" secondItem="GcE-6K-nxn" secondAttribute="trailing" id="Kke-jB-X23"/>
+                            <constraint firstItem="pkH-v3-ztq" firstAttribute="bottom" secondItem="GcE-6K-nxn" secondAttribute="bottom" id="OHF-Nn-2tO"/>
+                            <constraint firstItem="pkH-v3-ztq" firstAttribute="top" secondItem="81r-5o-ZG0" secondAttribute="bottom" id="STL-nh-vxy"/>
+                            <constraint firstItem="pkH-v3-ztq" firstAttribute="leading" secondItem="GcE-6K-nxn" secondAttribute="leading" id="lGw-iv-F8V"/>
                             <constraint firstItem="81r-5o-ZG0" firstAttribute="trailing" secondItem="GcE-6K-nxn" secondAttribute="trailing" constant="-17" id="w12-na-B2i"/>
                             <constraint firstItem="81r-5o-ZG0" firstAttribute="leading" secondItem="GcE-6K-nxn" secondAttribute="leading" constant="17" id="xqy-UJ-1C2"/>
                             <constraint firstItem="81r-5o-ZG0" firstAttribute="top" secondItem="GcE-6K-nxn" secondAttribute="top" id="zl6-0p-Rh0"/>
@@ -153,7 +155,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQZ-qp-GqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="291" y="244"/>
+            <point key="canvasLocation" x="354" y="325"/>
         </scene>
         <!--Details-->
         <scene sceneID="cQH-kP-bLe">
@@ -163,7 +165,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFT-TG-7Th" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="329" y="-185"/>
+            <point key="canvasLocation" x="354" y="-92"/>
         </scene>
         <!--finishedMeeting-->
         <scene sceneID="sEJ-0r-DEg">
@@ -173,7 +175,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwy-Qa-D3o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="-71"/>
+            <point key="canvasLocation" x="441" y="-5"/>
         </scene>
         <!--Profile-->
         <scene sceneID="ILI-WA-h5c">
@@ -183,7 +185,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aey-n2-70B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="400" y="58"/>
+            <point key="canvasLocation" x="400" y="73"/>
         </scene>
     </scenes>
     <resources>
@@ -191,4 +193,7 @@
         <image name="info.circle" catalog="system" width="64" height="60"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="WKF-Nl-1bS"/>
+    </inferredMetricsTieBreakers>
 </document>

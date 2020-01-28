@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import ContactsUI
 
 /// View Controller para selecionar os contatos para reunião
 @objc class ContactViewController: UIViewController {
@@ -271,7 +272,57 @@ extension ContactViewController : ContactTableViewDelegate {
     }
 }
 
+//MARK:- Add New Contact 
+extension ContactViewController  {
+    
+    /// Adicionando um novo contato por dentro do nosso app.
+    /// - Parameter sender: bar button clicado.
+    @IBAction func addingNewContact(_ sender : Any) {
+        
+        let newContact = CNContactViewController(forNewContact: nil)
+        newContact.contactStore = CNContactStore()
+        newContact.allowsActions = false
+        newContact.delegate = self
+        newContact.view.layoutIfNeeded()
+        
+        let navigationController = UINavigationController(rootViewController: newContact)
+        navigationController.view.layoutIfNeeded()
+        
+        self.present(navigationController, animated: true, completion: nil)
+    }
+}
 
+
+//MARK:- CNContactViewControllerDelegate
+extension ContactViewController : CNContactViewControllerDelegate {
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+                        
+        if contact == nil  {
+            viewController.dismiss(animated: true, completion: nil)
+        } else {
+            
+            if let email = contact?.emailAddresses.first?.value as String?, !email.isEmpty, contact?.givenName.count ?? 0 > 0 {
+                
+                let contact = Contact(contact: contact!)
+                self.addContact(contact: contact)
+                
+                viewController.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                let alert = UIAlertController(title: NSLocalizedString("Error to add contact", comment: ""), message: NSLocalizedString("Name or email empty", comment: ""), preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                    viewController.dismiss(animated: true, completion: nil)
+                }))
+                
+                viewController.present(alert, animated: true, completion: nil)            
+            }
+        }
+    }
+    
+}
 
 
 

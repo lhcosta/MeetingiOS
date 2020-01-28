@@ -1,27 +1,3 @@
 
-/* Class = "UILabel"; text = "To: "; ObjectID = "94S-lU-dV8"; */
-"94S-lU-dV8.text" = "To: ";
-
-/* Class = "UINavigationItem"; title = "Contacts"; ObjectID = "PK8-p5-6WV"; */
-"PK8-p5-6WV.title" = "Contacts";
-
-/* Class = "UISearchBar"; placeholder = "Search contact"; ObjectID = "TpC-dz-LOz"; */
-"TpC-dz-LOz.placeholder" = "Search contact";
-
-/* Class = "UISearchBar"; TpC-dz-LOz.scopeButtonTitles[0] = "Title"; ObjectID = "TpC-dz-LOz"; */
-"TpC-dz-LOz.scopeButtonTitles[0]" = "Title";
-
-/* Class = "UISearchBar"; TpC-dz-LOz.scopeButtonTitles[1] = "Title"; ObjectID = "TpC-dz-LOz"; */
-"TpC-dz-LOz.scopeButtonTitles[1]" = "Title";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "cP1-Jp-aUc"; */
-"cP1-Jp-aUc.text" = "Title";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "fIu-XI-Dgq"; */
-"fIu-XI-Dgq.text" = "Label";
-
-/* Class = "UILabel"; text = "Participants"; ObjectID = "hAA-vg-1B8"; */
-"hAA-vg-1B8.text" = "Participants";
-
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "pjF-xz-D2g"; */
-"pjF-xz-D2g.text" = "Subtitle";
+/* Class = "UIBarButtonItem"; title = "New contact"; ObjectID = "BlV-uw-Dme"; */
+"BlV-uw-Dme.title" = "New contact";

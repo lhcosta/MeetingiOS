@@ -76,7 +76,6 @@
     
     [self setupViews];
         
-    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
     [self.navigationItem setTitle:NSLocalizedString(@"New meeting", "")];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
 }
@@ -159,12 +158,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return 15;
-    }
-    
-    return 30;
+    return 15;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

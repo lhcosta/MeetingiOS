@@ -28,6 +28,7 @@ class ProfileViewController: UITableViewController {
         super.viewDidLoad()
         
         self.tableView.setTableViewBackgroundGradient()
+        self.isModalInPresentation = true
         
         fillTF()
     }

@@ -1,12 +1,12 @@
 
-/* Class = "UILabel"; text = "My Meetings"; ObjectID = "2xu-nZ-hHt"; */
-"2xu-nZ-hHt.text" = "My Meetings";
+/* Class = "UIBarButtonItem"; title = "New meeting"; ObjectID = "bQY-k5-1xX"; */
+"bQY-k5-1xX.title" = "Nueva reunión";
 
-/* Class = "UILabel"; text = "Autor"; ObjectID = "9I2-nb-649"; */
-"9I2-nb-649.text" = "Autor";
+/* Class = "UIViewController"; title = "MyMeetingsViewController"; ObjectID = "dcg-jt-bSn"; */
+"dcg-jt-bSn.title" = "MyMeetingsViewController";
 
-/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "D3M-XL-cz0"; */
-"D3M-XL-cz0.placeholder" = "Search";
+/* Class = "UILabel"; text = "tema"; ObjectID = "nks-1Y-QJY"; */
+"nks-1Y-QJY.text" = "tema";
 
-/* Class = "UILabel"; text = "Título"; ObjectID = "Fu9-1c-Nmb"; */
-"Fu9-1c-Nmb.text" = "Título";
+/* Class = "UILabel"; text = "data"; ObjectID = "xCi-Lc-uLc"; */
+"xCi-Lc-uLc.text" = "data";
