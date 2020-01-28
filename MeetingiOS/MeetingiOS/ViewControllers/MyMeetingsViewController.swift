@@ -50,7 +50,6 @@ import CloudKit
         self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
         
         // MARK: Query no CK
-        
         guard let _ = defaults.string(forKey: "recordName") else { return }
         
         self.refreshMeetings(predicateFormat: "manager = %@"){
@@ -59,6 +58,7 @@ import CloudKit
                 self.tableView.reloadData()
             }
         }
+        
         self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
             DispatchQueue.main.async {
                 self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
@@ -74,6 +74,7 @@ import CloudKit
     }
     
     //MARK:- Methods
+    
     /// Método para mostrar adicionar reunião que acabou de ser criada localmente
     private func showNewMeeting(){
         var allMeetings = [Meeting]()
@@ -104,7 +105,7 @@ import CloudKit
         }
     }
     
-    /// Método utilizado para validar se reuniao esta no array
+    /// Método utilizado para validar se reuniao esta no array e inseri-la na ordem
     /// - Parameters:
     ///   - arrayIndex: 0 ou 1 indicando array de reuniao futura ou passada
     ///   - meeting: reuniao a ser verificada
@@ -112,10 +113,20 @@ import CloudKit
         let recordIDs = meetings[arrayIndex].map({$0.record.recordID.recordName})
         
         if !recordIDs.contains(meeting.record.recordID.recordName) {
-            self.meetings[arrayIndex].append(meeting)
+            if let index = self.meetings[arrayIndex].firstIndex(where: { (oldMeeting) -> Bool in
+                if oldMeeting.initialDate! < meeting.initialDate! {
+                    return true
+                } else {
+                    return false
+                }
+            }) {
+                self.meetings[arrayIndex].insert(meeting, at: index)
+            } else {
+                self.meetings[arrayIndex].append(meeting)
+            }
         }
     }
-    
+ 
     /// Método que faz fetch de todas as reunioes
     /// - Parameters:
     ///   - predicateFormat: formato do predicate a ser realizado

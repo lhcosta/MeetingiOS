@@ -27,9 +27,6 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let topColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
-        let bottomColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
-        
         self.tableView.setTableViewBackgroundGradient()
         
         fillTF()
