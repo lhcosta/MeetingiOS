@@ -47,7 +47,7 @@ import CloudKit
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "perfil", style: .plain, target: self, action: #selector(goToProfile))
-        self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
+        self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
         
         // MARK: Query no CK
         
