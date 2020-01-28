@@ -97,7 +97,7 @@
                                     <outlet property="delegate" destination="dcg-jt-bSn" id="Iut-r8-qua"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem image="plus.circle.fill" catalog="system" id="sqR-4e-h3r">
@@ -165,7 +165,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFT-TG-7Th" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="329" y="-185"/>
+            <point key="canvasLocation" x="354" y="-92"/>
         </scene>
         <!--finishedMeeting-->
         <scene sceneID="sEJ-0r-DEg">
