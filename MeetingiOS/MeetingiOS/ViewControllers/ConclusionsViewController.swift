@@ -201,6 +201,8 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellConclusion", for: indexPath) as! ConclusionInfoTableViewCell
                 
+//                self.topicToPresentConclusions.conclusions.append("Con1")
+                
                 if !self.meetingDidBegin {
                     cell.fromUnfinishedMeeting = true
                     cell.meetingDidBegin = self.meetingDidBegin

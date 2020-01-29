@@ -211,7 +211,6 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
-    // MARK: Multipeer Aqui.
     // FIXME:- Do
     // MARK:- Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV

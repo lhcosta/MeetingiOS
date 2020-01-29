@@ -39,7 +39,13 @@ extension ConclusionInfoTableViewCell: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !fromUnfinishedMeeting || meetingDidBegin {
-            return viewControler.topicToPresentConclusions.conclusions.count
+            
+            if viewControler.topicToPresentConclusions.conclusions.count == 0 {
+                viewControler.topicToPresentConclusions.conclusions.append("")
+                return 1
+            } else {
+                return viewControler.topicToPresentConclusions.conclusions.count
+            }
         } else {
             return 1
         }
