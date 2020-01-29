@@ -12,6 +12,10 @@ class ConclusionInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var conclusionTableView: UITableView!
     
+    /// Quando viemos de uma Meeting não finalizada.
+    var fromUnfinishedMeeting = false
+    var meetingDidBegin = true
+    
     var viewControler: ConclusionsViewController!
     
     override func awakeFromNib() {
@@ -34,14 +38,24 @@ extension ConclusionInfoTableViewCell: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewControler.topicToPresentConclusions.conclusions.count
+        if !fromUnfinishedMeeting || meetingDidBegin {
+            return viewControler.topicToPresentConclusions.conclusions.count
+        } else {
+            return 1
+        }
     }
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conCell", for: indexPath) as! ConclusionTableViewCell
 
-        cell.textConclusion.text = viewControler.topicToPresentConclusions.conclusions[indexPath.row]
+        if !fromUnfinishedMeeting || meetingDidBegin {
+            cell.textConclusion.text = viewControler.topicToPresentConclusions.conclusions[indexPath.row]
+        } else {
+            cell.textConclusionLabel.isHidden = false
+            cell.textConclusion.isHidden = true
+            cell.textConclusionLabel.text = "Disponível depois que a Reunião começar."
+        }
         cell.textConclusion.delegate = self
 
         return cell

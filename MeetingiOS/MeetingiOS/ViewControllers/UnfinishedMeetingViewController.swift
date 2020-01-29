@@ -56,6 +56,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     var meetingTeste : Meeting?
     
+    var selectedTopicForInfo: Topic?
+    
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,27 +70,31 @@ class UnfinishedMeetingViewController: UIViewController {
 //        self.navigationItem.searchController?.searchBar.showsCancelButton = true
         self.navigationItem.searchController?.searchBar.returnKeyType = .done
         
-        //SO TESTE 
-        self.multipeer = MeetingBrowserPeer()
-        
-        CloudManager.shared.fetchRecords(recordIDs: [CKRecord.ID(recordName: "431476BA-2555-4205-A500-282A7C9CC3A1")], desiredKeys: nil) { (record, error) in
-            if let record = record?.values.first {
-                self.meetingTeste = Meeting(record: record)
-            }
-        }
-        
-//        tableViewTopics.clipsToBounds = false
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
         
         self.navigationItem.title = currMeeting.theme
         self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        //SO TESTE
+        self.multipeer = MeetingBrowserPeer()
+        
+        CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
+            if let record = record?.values.first {
+                self.currMeeting = Meeting(record: record)
+            }
+        }
         
         // Pegar Topics do Cloud.
         var tempIDs: [CKRecord.ID] = []
         for i in currMeeting.topics {
             tempIDs.append(i.recordID)
         }
+        self.topics = []
         CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -214,18 +220,48 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
+    @IBAction func topicInfoButton(_ sender: Any) {
+        
+        guard let button = sender as? UIButton else { return }
+        
+        if let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell {
+            let indexPath = tableViewTopics.indexPath(for: cell)
+            self.selectedTopicForInfo = topics[indexPath!.section]
+            
+            performSegue(withIdentifier: "conclusion", sender: self)
+        }
+    }
+    
+    
     // MARK: Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
+        self.currMeeting.started = true
+        CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }) {}
+        
         let encoder = JSONEncoder()
         
         do {
-            let data = try encoder.encode(self.meetingTeste)
+            let data = try encoder.encode(self.currMeeting)
             self.multipeer?.sendingDataFromPeer(data: data)
         } catch {
             print(error)
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let conclusionVC = segue.destination as? ConclusionsViewController {
+            conclusionVC.fromUnfinishedMeeting = true
+            conclusionVC.topicToPresentConclusions = self.selectedTopicForInfo
+            conclusionVC.meetingDidBegin = self.currMeeting.started
+            self.view.setNeedsDisplay()
         }
     }
 }
@@ -294,19 +330,22 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         cell.buttonHeight.constant = (tableView.frame.size.height * 0.2) * 0.4
         cell.buttonWidth.constant = (tableView.frame.size.height * 0.2) * 0.4
         cell.buttonLeftSpace.constant = (tableView.frame.size.height * 0.2) * 0.2
+        cell.textFieldLeft.priority = UILayoutPriority(1000)
+        cell.checkButton.isHidden = false
         cell.textFieldLeft.constant = (tableView.frame.size.height * 0.2) * 0.12
         cell.textFieldRight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textFieldHeight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textLabel?.font = font
+        cell.buttonInfo.isHidden = true
         
         // Se não for gerente, não faz sentido termos o botão de check.
         if !usrIsManager {
             cell.checkButton.isHidden = true
             cell.textFieldSecondLeft.constant = (tableView.frame.size.height * 0.2) * 0.2
             cell.textFieldLeft.priority = UILayoutPriority(998)
-        } else {
+        } /*else {
             
-        }
+        }*/
         
         // Verificamos se o usuário está em modo de pesquisa.
         if isSearching {
@@ -321,6 +360,11 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         } else {
             // Pegamos os dados da Array principal.
             cell.topicTextField.text = topics[indexPath.section].topicDescription
+            if cell.topicTextField.text!.isEmpty {
+                cell.checkButton.isHidden = true
+                cell.textFieldSecondLeft.constant = (tableView.frame.size.height * 0.2) * 0.2
+                cell.textFieldLeft.priority = UILayoutPriority(998)
+            }
             if topics[indexPath.section].selectedForMeeting {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             } else {
@@ -347,6 +391,9 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         if isSearching {
             topicToBeEditedOnSearch = textField.text
         }
+        
+        guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
+        cell.buttonInfo.isHidden = false
     }
     
     
@@ -482,6 +529,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                     cell.topicTextField.becomeFirstResponder()
                 }
             }
+            cell.buttonInfo.isHidden = true
             return true
         }
     }

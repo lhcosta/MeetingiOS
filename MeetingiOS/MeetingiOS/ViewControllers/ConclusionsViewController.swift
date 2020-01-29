@@ -20,20 +20,43 @@ class ConclusionsViewController: UIViewController {
     @IBOutlet weak var labelTopicTitle: UILabel!
     @IBOutlet weak var labelTimeDiscussed: UILabel!
     
+    @IBOutlet var topicTextfield: UITextField!
+    
+    
 ///    @IBOutlet var conclusionsTableView: UITableView!
     
     /// Conclusions vindos do Tópico Seelecionado
     var topicToPresentConclusions: Topic!
     
+    /// Flag para saber se viemos da UnfinishedMeetingViewController
+    var fromUnfinishedMeeting = false
+    
+    var meetingDidBegin = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /// Adiciona os dados do Tópico no local indicado
+        if !fromUnfinishedMeeting {
+            
+            self.labelTopicTitle.text = topicToPresentConclusions.topicDescription
+            self.labelAuthorName.text = topicToPresentConclusions.authorName
+            
+            self.labelTimeDiscussed.text = String(describing: topicToPresentConclusions.duration)
+            
+        } else {
+            labelTopicTitle.isHidden = true
+            topicTextfield.isHidden = false
+            
+            self.topicTextfield.text = topicToPresentConclusions.topicDescription
+            
+        }
         
-        self.labelTopicTitle.text = topicToPresentConclusions.topicDescription
         self.labelAuthorName.text = topicToPresentConclusions.authorName
         
-        self.labelTimeDiscussed.text = String(describing: topicToPresentConclusions.duration)
+        tableViewInfo.delegate = self
+        tableViewInfo.dataSource = self        
+        
         
         /// Configuração da Navigation - Título e ação do botão Done
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAction))
@@ -42,8 +65,7 @@ class ConclusionsViewController: UIViewController {
         
         /// Configruração da TableView
 //        conclusionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableViewInfo.delegate = self
-        tableViewInfo.dataSource = self
+        
         
         // Arredondando bordas da View
         viewTopic.layer.cornerRadius = 3
@@ -77,7 +99,9 @@ class ConclusionsViewController: UIViewController {
     
     /// Ação do botão Done para mandar a conclusiona para o Cloud
     @objc func doneAction() {
-        print("Done")
+        
+        topicToPresentConclusions.topicDescription = self.topicTextfield.text!
+        
         
         CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
             if let error = error {
@@ -131,28 +155,65 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /// Section 0 -> Descrição    |      Section 1 -> Conslusões
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellDescription", for: indexPath) as! DescriptionTableViewCell
-            
-            setShadow(view: cell.descriptionView)
-            
-            cell.descriptionLabel.text = topicToPresentConclusions.description
-            cell.backgroundColor = .groupTableViewBackground
-            
-            return cell
+        
+        /// TableView feita quando viemos de uma Meeting Finalizada
+        if !fromUnfinishedMeeting {
+            /// Section 0 -> Descrição    |      Section 1 -> Conslusões
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellDescription", for: indexPath) as! DescriptionTableViewCell
+                
+                setShadow(view: cell.descriptionView)
+                    
+                cell.descriptionLabel.text = topicToPresentConclusions.topicPorque
+                
+                cell.backgroundColor = .groupTableViewBackground
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellConclusion", for: indexPath) as! ConclusionInfoTableViewCell
+                cell.viewControler = self
+                cell.conclusionTableView.delegate = cell
+                cell.conclusionTableView.dataSource = cell
+                cell.backgroundColor = .groupTableViewBackground
+                
+                return cell
+            }
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellConclusion", for: indexPath) as! ConclusionInfoTableViewCell
-            cell.viewControler = self
-            cell.conclusionTableView.delegate = cell
-            cell.conclusionTableView.dataSource = cell
-            cell.backgroundColor = .groupTableViewBackground
-            
-            return cell
+            /// TableView feita quando viemos de uma Meeting não Finalizada.
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellDescription", for: indexPath) as! DescriptionTableViewCell
+                
+                setShadow(view: cell.descriptionView)
+                cell.viewController = self
+                cell.descriptionTextField.delegate = cell
+                
+                if topicToPresentConclusions.authorName == UserDefaults.standard.string(forKey: "givenName") {
+                    cell.descriptionTextField.isHidden = false
+                    cell.descriptionLabel.isHidden = true
+                    cell.descriptionTextField.text = topicToPresentConclusions.topicPorque
+                } else {
+                    cell.descriptionLabel.text = topicToPresentConclusions.topicPorque
+                }
+                
+                cell.backgroundColor = .groupTableViewBackground
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellConclusion", for: indexPath) as! ConclusionInfoTableViewCell
+                
+                if !self.meetingDidBegin {
+                    cell.fromUnfinishedMeeting = true
+                    cell.meetingDidBegin = self.meetingDidBegin
+                }
+                
+                cell.viewControler = self
+                cell.conclusionTableView.delegate = cell
+                cell.conclusionTableView.dataSource = cell
+                cell.backgroundColor = .groupTableViewBackground
+                
+                return cell
+            }
         }
-        
-        
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
