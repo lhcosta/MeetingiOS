@@ -34,7 +34,7 @@ import CloudKit
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         meetings.append([Meeting]())
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]
@@ -46,7 +46,8 @@ import CloudKit
         // MARK: Nav Controller Settings
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "perfil", style: .plain, target: self, action: #selector(goToProfile))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(goToProfile))
+       
         self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
         
         // MARK: Query no CK

@@ -9,7 +9,7 @@
 /*New Meeting Storyboard --- EN*/
 "New meeting" = "New meeting";
 "Meeting" = "Meeting";
-"Choose a name for create a meeting." = "Choose a name for create a meeting.";
+"Choose a name to create a meeting." = "Choose a name to create a meeting.";
 "Creating Meeting..." = "Creating meeting...";
 "None" = "None";
 "dateFormat" = "MMM, dd yyyy  hh:mm a";
