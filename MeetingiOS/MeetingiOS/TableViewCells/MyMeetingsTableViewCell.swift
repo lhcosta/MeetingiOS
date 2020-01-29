@@ -12,6 +12,7 @@ class MyMeetingsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var meetingName: UILabel!
     @IBOutlet weak var meetingDate: UILabel!
+    @IBOutlet weak var detailsButton : UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -23,3 +23,17 @@
 /*Contact Table View --- ES*/
 "Search Results" = "Resultados de búsqueda";
 "Contacts" = "Contactos";
+"Error Create Contact" = "Error al agregar contacto";
+"Name or email empty" = "Nombre o correo electrónico vacío";
+
+/*Select Color View --- ES*/
+"Pick a color" = "Elige un color";
+
+/*Details View Controller -- ES*/
+"Created by" = "Creado por";
+"Meeting update..." = "Actualización reunión...";
+
+/*MyMeetings View Controller -- ES*/
+"My meetings" = "Mis reuniones";
+"Past meetings" = "Reuniones pasadas";
+"Future meetings" = "Reuniones futuras";

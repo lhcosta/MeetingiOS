@@ -22,13 +22,13 @@ protocol ContactTableViewDelegate : AnyObject {
 class ContactTableView : NSObject {
     
     //MARK:- UITableViewController
-    private var contactViewController : ContactViewController!
+    private weak var contactViewController : ContactViewController!
     
     //MARK:- Properties
     var contacts : [String : [Contact]] = [:]
     var sortedContacts : [(key : String, value : [Contact])] = []
     var filteredContacts : [Contact] = []
-    var contactManager = ContactManager.shared()
+    var contactManager = ContactManager()
     
     //MARK:- Delegates 
     private weak var delegate : ContactTableViewDelegate?
@@ -47,32 +47,13 @@ extension ContactTableView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 && !contactViewController.isFiltering {
-            
-            tableView.cellForRow(at: indexPath)?.isSelected = false
-            
-            let contact = CNContact()
-            let newContactViewController = CNContactViewController(forNewContact: contact)
-            newContactViewController.contactStore = CNContactStore()
-            newContactViewController.delegate = self
-            newContactViewController.view.layoutIfNeeded()
-            
-            let navigationController = UINavigationController(rootViewController: newContactViewController)
-            
-            newContactViewController.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-            
-            self.contactViewController.present(navigationController, animated: true, completion: nil)
-                        
-            return
-        }
-        
-        let cell = tableView.cellForRow(at: indexPath) as! ContactTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ContactTableViewCell else {return}
         var selectedContact : Contact
         
         if contactViewController.isFiltering {
             selectedContact = self.filteredContacts[indexPath.row]
         } else {
-            selectedContact = self.sortedContacts[indexPath.section-1].value[indexPath.row]
+            selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }
         
         cell.imageSelect.tintColor = UIColor(hexString: "#507EFE", alpha: 1)
@@ -89,13 +70,13 @@ extension ContactTableView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath) as! ContactTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ContactTableViewCell else {return}
         var selectedContact : Contact
         
         if contactViewController.isFiltering {
             selectedContact = self.filteredContacts[indexPath.row]
         } else {
-            selectedContact = self.sortedContacts[indexPath.section-1].value[indexPath.row]
+            selectedContact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }  
             
         cell.imageSelect.tintColor = UIColor(hexString: "#E3E3E3", alpha: 1)
@@ -120,7 +101,7 @@ extension ContactTableView : UITableViewDelegate {
 extension ContactTableView : UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {        
-        return contactViewController.isFiltering == true ? 1 : (self.sortedContacts.count + 1)
+        return contactViewController.isFiltering == true ? 1 : self.sortedContacts.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -128,12 +109,8 @@ extension ContactTableView : UITableViewDataSource {
         if contactViewController.isFiltering {
             return NSLocalizedString("Search Results", comment: "")
         }
-        
-        if section == 0 {
-            return NSLocalizedString("Contacts", comment: "")
-        }
-        
-        return String(self.sortedContacts[section-1].key)
+    
+        return String(self.sortedContacts[section].key)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,26 +118,18 @@ extension ContactTableView : UITableViewDataSource {
         if contactViewController.isFiltering {
             return self.filteredContacts.count
         }
-        
-        if section == 0 {
-            return 1
-        }
-                
-        return self.sortedContacts[section-1].value.count
+                    
+        return self.sortedContacts[section].value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 && !contactViewController.isFiltering {
-            return tableView.dequeueReusableCell(withIdentifier: "NewContactCell", for: indexPath) as! NewContactTableViewCell
-        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell 
         
         if contactViewController.isFiltering {
             cell.contact = self.filteredContacts[indexPath.row]
         } else {
-            cell.contact = self.sortedContacts[indexPath.section-1].value[indexPath.row]
+            cell.contact = self.sortedContacts[indexPath.section].value[indexPath.row]
         }
         
         if cell.contact?.isSelected ?? false {
@@ -227,17 +196,3 @@ private extension ContactTableView {
     }
 }
 
-//MARK:- CNContactViewController
-extension ContactTableView : CNContactViewControllerDelegate {
-    
-    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        
-        if let email = contact?.emailAddresses.first?.value as String?, !email.isEmpty {
-            let contact = Contact(contact: contact!)
-            self.contactViewController.addContact(contact: contact)
-        }
-        
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-}

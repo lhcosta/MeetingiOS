@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
-                                <rect key="frame" x="20" y="44" width="374" height="744"/>
+                                <rect key="frame" x="20" y="44" width="374" height="769"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -93,60 +93,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XL-bb-37o">
-                                <rect key="frame" x="0.0" y="788" width="414" height="108"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAI-HC-ilp">
-                                <rect key="frame" x="0.0" y="788" width="414" height="74"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVt-DO-0Fx">
-                                        <rect key="frame" x="304" y="21.5" width="90" height="31"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="31" id="Ft4-VN-ETO"/>
-                                            <constraint firstAttribute="width" constant="90" id="RBC-et-B7y"/>
-                                        </constraints>
-                                        <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <state key="normal" title="Mirror" image="mirror">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X9q-nQ-8LI">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ck1-5D-b4d"/>
+                                    <barButtonItem title="Item" image="mirror" id="6rh-rZ-xC0">
                                         <connections>
-                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" eventType="touchUpInside" id="b6N-2b-fX4"/>
+                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" id="wc3-Ql-dg2"/>
                                         </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="PVt-DO-0Fx" secondAttribute="trailing" constant="20" id="3xX-Fn-hyC"/>
-                                    <constraint firstAttribute="height" constant="74" id="Mwy-HV-Ig9"/>
-                                    <constraint firstItem="PVt-DO-0Fx" firstAttribute="centerY" secondItem="BAI-HC-ilp" secondAttribute="centerY" id="Sic-Ya-9Q3"/>
-                                </constraints>
-                            </view>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.98040527109999998" green="0.98036855460000005" blue="0.98039346930000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" id="2WT-QC-CZx"/>
-                            <constraint firstItem="BAI-HC-ilp" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="999" id="9oW-Ki-mbs"/>
-                            <constraint firstItem="BAI-HC-ilp" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="DzY-aU-fQa"/>
-                            <constraint firstItem="BAI-HC-ilp" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="HM6-6F-Y8i"/>
-                            <constraint firstItem="8XL-bb-37o" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="Lgz-bO-jW7"/>
-                            <constraint firstItem="8XL-bb-37o" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="MPa-Sg-d8K"/>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="OTe-fo-ZvA"/>
-                            <constraint firstAttribute="bottom" secondItem="8XL-bb-37o" secondAttribute="bottom" id="RRk-6P-YAd"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="BAI-HC-ilp" secondAttribute="bottom" id="V09-pV-z9U"/>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="Vvj-D4-nEK"/>
-                            <constraint firstItem="8XL-bb-37o" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="999" id="cgC-fA-w2Y"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="B33-Ov-qw8" secondAttribute="bottom" priority="998" id="l5Z-A1-bgg"/>
+                            <constraint firstItem="X9q-nQ-8LI" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="d7g-Vm-5Ac"/>
+                            <constraint firstItem="X9q-nQ-8LI" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" symbolic="YES" id="dpM-N6-sHM"/>
+                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="X9q-nQ-8LI" secondAttribute="bottom" id="eU0-Fq-y8K"/>
+                            <constraint firstItem="X9q-nQ-8LI" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="r2Z-Xu-JRG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
-                        <outlet property="bottomToSafeArea" destination="l5Z-A1-bgg" id="hLM-Lr-Lwd"/>
-                        <outlet property="bottomUIView" destination="BAI-HC-ilp" id="CT8-OJ-aXe"/>
-                        <outlet property="bottomView" destination="BAI-HC-ilp" id="9iX-3l-4zt"/>
-                        <outlet property="bottomViewMaior" destination="8XL-bb-37o" id="bRE-cJ-IPp"/>
-                        <outlet property="mirrorButton" destination="PVt-DO-0Fx" id="Rdb-PF-Xgo"/>
+                        <outlet property="mirrorButton" destination="X9q-nQ-8LI" id="0ea-HI-d3F"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                         <segue destination="UXK-3M-bfi" kind="show" identifier="conclusion" id="NlO-MH-F1x"/>
                     </connections>

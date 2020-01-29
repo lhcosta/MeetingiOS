@@ -8,16 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <CloudKit/CloudKit.h>
-#import <MeetingiOS-Swift.h>
 #import "Contact.h"
 #import "MeetingDelegate.h"
+#import "ContactCollectionView.h"
+
+@class Meeting;
+@class DetailsNewMeetingManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailsTableViewController : UITableViewController
 
 //MARK:- IBOutlets
-@property (weak, nonatomic) IBOutlet UILabel *meetingName;
+@property (weak, nonatomic) IBOutlet UITextField *meetingName;
 @property (weak, nonatomic) IBOutlet UILabel *meetingAdmin;
 @property (weak, nonatomic) IBOutlet UILabel *startsDate;
 @property (weak, nonatomic) IBOutlet UILabel *endesDate;
@@ -28,9 +31,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIDatePicker* startDatePicker;
 @property (nonatomic, weak) IBOutlet UIDatePicker* finishDatePicker;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+
+/// Contatos selecionados.
+@property (nonatomic) ContactCollectionView* contactCollectionView;
 
 /// Reunião
 @property (nonatomic) Meeting* meeting;
+
+/// Usuários da reunião que possuem record.
+@property (nonatomic) NSMutableArray<User*> *employees_user;
+
+@property (nonatomic, nonnull) NSDateFormatter* formatter;
+
+@property (nonatomic) DetailsNewMeetingManager* detailsManagerController;
+
+/// Monitorando se a reunião foi modificada.
+@property (nonatomic) BOOL isMeetingModified;
+
+
+/// Alterando o nome da reunião.
+/// @param sender botão clicado.
+-(IBAction)changeMeetingName:(id)sender;
 
 @end
 

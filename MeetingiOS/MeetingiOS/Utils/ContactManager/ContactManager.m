@@ -18,18 +18,6 @@
 
 @implementation ContactManager
 
-+ (instancetype)shared {
-    
-    static ContactManager* shared = nil;
-    static dispatch_once_t oncePredicate;
-    
-    dispatch_once(&oncePredicate, ^{
-        shared = [[self alloc] init];
-    });
-    
-    return shared;
-}
-
 - (instancetype)init
 {
     self = [super init];
@@ -54,12 +42,8 @@
     if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) {
         
         if([_contactsStore enumerateContactsWithFetchRequest:_fetchRequest error:&error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-            
-            if(!stop) {
-                return;
-            }
-            
-            if([contact.emailAddresses.firstObject.value length] != 0 && ![contact.emailAddresses.firstObject.value isEqualToString:[NSUserDefaults.standardUserDefaults valueForKey:@"email"]]){
+         
+            if([contact.givenName length] > 0 && [contact.emailAddresses.firstObject.value length] != 0 && ![contact.emailAddresses.firstObject.value isEqualToString:[NSUserDefaults.standardUserDefaults valueForKey:@"email"]]){
                 
                 NSMutableArray<Contact*> *contact_aux;
                 Contact* newContact = [[Contact alloc] initWithContact:contact];

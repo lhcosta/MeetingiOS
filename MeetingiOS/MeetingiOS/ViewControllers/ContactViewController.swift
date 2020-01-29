@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import ContactsUI
 
 /// View Controller para selecionar os contatos para reunião
 @objc class ContactViewController: UIViewController {
@@ -19,10 +20,7 @@ import Contacts
     
     //MARK:- Properties
     private var contactTableViewManager : ContactTableView!
-    @objc var contactCollectionView : ContactCollectionView?
-    
-    //MARK:- Delegates
-    @objc weak var contactDelegate : MeetingDelegate?
+    @objc weak var contactCollectionView : ContactCollectionView?
     
     //MARK:- Computed Properties
     private var isSearchNameEmpty : Bool {
@@ -41,9 +39,11 @@ import Contacts
         self.contactTableViewManager = ContactTableView(self)
         self.setupTableViewContacts()
         self.setupNavigationController()
- 
+        
+        contactCollectionView?.isRemoveContact = true
         collectionView.delegate = contactCollectionView
         collectionView.dataSource = contactCollectionView
+    
         self.collectionView.register(UINib(nibName: "ContactCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ContactCollectionCell")
     
         NotificationCenter.default.addObserver(self, selector: #selector(self.deselectContactInRow), name: NSNotification.Name(rawValue: "RemoveContact"), object: nil)
@@ -109,7 +109,6 @@ import Contacts
     
     /// Confirmando contatos selecionados para a reunião.
     @objc func sendingContactsToMeeting() {
-        self.contactDelegate?.getRecordForSelectedUsers()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -152,6 +151,7 @@ extension ContactViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         definesPresentationContext = true
     }
@@ -272,7 +272,57 @@ extension ContactViewController : ContactTableViewDelegate {
     }
 }
 
+//MARK:- Add New Contact 
+extension ContactViewController  {
+    
+    /// Adicionando um novo contato por dentro do nosso app.
+    /// - Parameter sender: bar button clicado.
+    @IBAction func addingNewContact(_ sender : Any) {
+        
+        let newContact = CNContactViewController(forNewContact: nil)
+        newContact.contactStore = CNContactStore()
+        newContact.allowsActions = false
+        newContact.delegate = self
+        newContact.view.layoutIfNeeded()
+        
+        let navigationController = UINavigationController(rootViewController: newContact)
+        navigationController.view.layoutIfNeeded()
+        
+        self.present(navigationController, animated: true, completion: nil)
+    }
+}
 
+
+//MARK:- CNContactViewControllerDelegate
+extension ContactViewController : CNContactViewControllerDelegate {
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+                        
+        if contact == nil  {
+            viewController.dismiss(animated: true, completion: nil)
+        } else {
+            
+            if let email = contact?.emailAddresses.first?.value as String?, !email.isEmpty, contact?.givenName.count ?? 0 > 0 {
+                
+                let contact = Contact(contact: contact!)
+                self.addContact(contact: contact)
+                
+                viewController.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                let alert = UIAlertController(title: NSLocalizedString("Error to add contact", comment: ""), message: NSLocalizedString("Name or email empty", comment: ""), preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                    viewController.dismiss(animated: true, completion: nil)
+                }))
+                
+                viewController.present(alert, animated: true, completion: nil)            
+            }
+        }
+    }
+    
+}
 
 
 

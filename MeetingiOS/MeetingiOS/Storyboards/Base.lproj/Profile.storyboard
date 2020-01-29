@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qoh-0J-yhU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qoh-0J-yhU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,9 +19,14 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Account" id="ym3-gE-Q5T">
-                                    <barButtonItem key="rightBarButtonItem" systemItem="done" id="Yp3-UA-ug8">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CiR-ZJ-ha0">
                                         <connections>
-                                            <action selector="didPressDone:" destination="qoh-0J-yhU" id="KUb-Oo-aOf"/>
+                                            <action selector="didPressCancel:" destination="qoh-0J-yhU" id="1Tk-Nm-JTq"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="TDs-1p-IJo">
+                                        <connections>
+                                            <action selector="didPressDone:" destination="qoh-0J-yhU" id="2BP-0Z-iX8"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -46,7 +51,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ykz-Ms-fXZ" userLabel="TF Stack View">
                                                                     <rect key="frame" x="0.0" y="18.5" width="313" height="41"/>
                                                                     <subviews>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bernardo" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="67l-RY-yDG">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="67l-RY-yDG">
                                                                             <rect key="frame" x="0.0" y="0.0" width="313" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="tfV-OD-Swk"/>
@@ -57,7 +62,7 @@
                                                                                 <action selector="nameChanged:" destination="qoh-0J-yhU" eventType="editingChanged" id="G0J-LZ-3BW"/>
                                                                             </connections>
                                                                         </textField>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="email" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4GF-bm-ybv">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4GF-bm-ybv">
                                                                             <rect key="frame" x="0.0" y="25" width="313" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="16" id="uCJ-2h-gce"/>
@@ -147,7 +152,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="doneBtn" destination="Yp3-UA-ug8" id="r8z-nb-L0b"/>
+                        <outlet property="cancelBtn" destination="CiR-ZJ-ha0" id="dpv-g9-dwB"/>
+                        <outlet property="doneBtn" destination="TDs-1p-IJo" id="3Pi-rF-xk6"/>
                         <outlet property="emailTF" destination="4GF-bm-ybv" id="8EM-jU-2af"/>
                         <outlet property="infoView" destination="O5s-s2-L6i" id="Arj-uh-ebv"/>
                         <outlet property="nameTF" destination="67l-RY-yDG" id="LaO-0E-iH5"/>

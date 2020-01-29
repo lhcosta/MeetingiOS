@@ -15,13 +15,8 @@ class UnfinishedMeetingViewController: UIViewController {
 
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
-    @IBOutlet var mirrorButton: UIButton!
-    @IBOutlet var bottomUIView: UIView!
-    @IBOutlet var bottomToSafeArea: NSLayoutConstraint!
-    @IBOutlet var bottomViewMaior: UIView!
-    @IBOutlet var bottomView: UIView!
-    
-    
+    @IBOutlet var mirrorButton: UIToolbar!
+
     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
@@ -62,7 +57,7 @@ class UnfinishedMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.backgroundColor = .clear
         
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
@@ -130,30 +125,13 @@ class UnfinishedMeetingViewController: UIViewController {
         // Conforme o usuário foi quem criou ou não a Meeting.
         if usrIsManager {
             mirrorButton.isHidden = false
-            self.bgButtonImg = "checkmark.square.fill"
         } else {
             mirrorButton.isHidden = true
-            self.bottomToSafeArea.priority = UILayoutPriority(rawValue: 1000)
-            self.bottomView.isHidden = true
-            self.bottomViewMaior.isHidden = true
 //            self.bgButtonImg = "square."
         }
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
-        
-        bottomViewShadow()
-    }
-    
-    
-    func bottomViewShadow() {
-        bottomUIView.backgroundColor = .clear
-        bottomUIView.layer.masksToBounds = true
-        bottomUIView.layer.shadowOpacity = 0.2
-        bottomUIView.layer.shadowRadius = 0.1
-        bottomUIView.layer.shadowOffset = CGSize(width: 0, height: -1)
-        bottomUIView.clipsToBounds = false
-        bottomUIView.backgroundColor = .white
     }
     
     /// Criamos um Topic com os dados do Usuário.
@@ -234,6 +212,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     
     // MARK: Multipeer Aqui.
+    // FIXME:- Do
+    // MARK:- Multipeer Aqui.
     /// Botão que o gerente apertará para espelhar a Meeting na TV
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
@@ -245,7 +225,12 @@ class UnfinishedMeetingViewController: UIViewController {
             }
         }) {}
         
+        self.multipeer = MeetingBrowserPeer()
         let encoder = JSONEncoder()
+        
+        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
+            return topic.selectedForMeeting ? topic : nil
+        })
         
         do {
             let data = try encoder.encode(self.currMeeting)

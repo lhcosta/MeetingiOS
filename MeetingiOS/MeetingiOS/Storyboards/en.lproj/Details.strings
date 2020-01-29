@@ -8,6 +8,9 @@
 /* Class = "UILabel"; text = "1"; ObjectID = "6hU-uh-UlW"; */
 "6hU-uh-UlW.text" = "1";
 
+/* Class = "UINavigationItem"; title = "Details"; ObjectID = "F31-ow-ouU"; */
+"F31-ow-ouU.title" = "Details";
+
 /* Class = "UILabel"; text = "Nov, 28 2019  3:00 PM"; ObjectID = "FxW-dZ-QGI"; */
 "FxW-dZ-QGI.text" = "Nov, 28 2019  3:00 PM";
 
@@ -25,9 +28,6 @@
 
 /* Class = "UILabel"; text = "Topics per person"; ObjectID = "eJc-wq-zzy"; */
 "eJc-wq-zzy.text" = "Topics per person";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "mGB-NQ-HKi"; */
-"mGB-NQ-HKi.text" = "Label";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "v1Y-eC-n0e"; */
 "v1Y-eC-n0e.text" = "Name";

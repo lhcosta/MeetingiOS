@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="akh-QK-HWq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HWP-hG-vEw">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Select Color View Controller-->
+        <!--Pick a color-->
         <scene sceneID="Gnh-I9-XR3">
             <objects>
                 <viewController id="akh-QK-HWq" customClass="SelectColorViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -74,13 +74,41 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JS2-ww-nJw"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Pick a color" largeTitleDisplayMode="never" id="5tS-aP-E6d">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="iCL-xg-1JP">
+                            <connections>
+                                <action selector="sendSelectedColor" destination="akh-QK-HWq" id="yRo-fe-yz7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="viewColorSelected" destination="7zg-MI-GCc" id="dTh-ml-f0x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2L-bC-kA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="297" y="76"/>
+            <point key="canvasLocation" x="1205.7971014492755" y="75.669642857142847"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="T7O-wz-riX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HWP-hG-vEw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jSZ-xp-5iD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="akh-QK-HWq" kind="relationship" relationship="rootViewController" id="3ax-ns-yhU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3a-U0-7ye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="295.6521739130435" y="75.669642857142847"/>
         </scene>
     </scenes>
 </document>

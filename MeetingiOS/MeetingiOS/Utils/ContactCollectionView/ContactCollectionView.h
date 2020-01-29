@@ -15,6 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ContactCollectionView : NSObject <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
  
+/// Inicializar com imagens de remoão de contato.
+/// @param isRemoveContact imagem de remover ou não.
+-(instancetype) initWithRemoveContact:(BOOL) isRemoveContact;
+
+/// Imagens de remover contato.
+@property (nonatomic) BOOL isRemoveContact;
+
 /// Todos os contatos selecionados
 @property (nonatomic, readonly) NSArray<Contact*>* contacts;
 
@@ -29,7 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Adicionando um array de contatos.
 /// @param contacts array de contatos
 - (void) addContacts : (NSArray<Contact*>*) contacts;
-
 
 @end
 

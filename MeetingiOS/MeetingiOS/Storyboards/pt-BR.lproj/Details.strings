@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Endes"; ObjectID = "0mY-kv-ebT"; */
-"0mY-kv-ebT.text" = "Endes";
+"0mY-kv-ebT.text" = "Fim";
 
 /* Class = "UILabel"; text = "Admin"; ObjectID = "1TA-Oz-Ec9"; */
 "1TA-Oz-Ec9.text" = "Admin";
@@ -8,26 +8,26 @@
 /* Class = "UILabel"; text = "1"; ObjectID = "6hU-uh-UlW"; */
 "6hU-uh-UlW.text" = "1";
 
+/* Class = "UINavigationItem"; title = "Details"; ObjectID = "F31-ow-ouU"; */
+"F31-ow-ouU.title" = "Detalhes";
+
 /* Class = "UILabel"; text = "Nov, 28 2019  3:00 PM"; ObjectID = "FxW-dZ-QGI"; */
 "FxW-dZ-QGI.text" = "Nov, 28 2019  3:00 PM";
 
 /* Class = "UILabel"; text = "Starts"; ObjectID = "LEQ-UO-C6j"; */
-"LEQ-UO-C6j.text" = "Starts";
+"LEQ-UO-C6j.text" = "Início";
 
 /* Class = "UILabel"; text = "Participants"; ObjectID = "LQO-hS-Cx5"; */
-"LQO-hS-Cx5.text" = "Participants";
+"LQO-hS-Cx5.text" = "Participantes";
 
 /* Class = "UILabel"; text = "None"; ObjectID = "Lor-v4-acB"; */
-"Lor-v4-acB.text" = "None";
+"Lor-v4-acB.text" = "Nenhum";
 
 /* Class = "UILabel"; text = "Nov, 28 2019  3:00 PM"; ObjectID = "akg-em-m2H"; */
 "akg-em-m2H.text" = "Nov, 28 2019  3:00 PM";
 
 /* Class = "UILabel"; text = "Topics per person"; ObjectID = "eJc-wq-zzy"; */
-"eJc-wq-zzy.text" = "Topics per person";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "mGB-NQ-HKi"; */
-"mGB-NQ-HKi.text" = "Label";
+"eJc-wq-zzy.text" = "Tópicos por pessoa";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "v1Y-eC-n0e"; */
 "v1Y-eC-n0e.text" = "Name";

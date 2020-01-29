@@ -177,21 +177,24 @@ utilizar como auxílio de manipulação de CKRecord Meeting
     /**
      Adicionando novos funcionários à reunião
     - parameters: 
-        - employee: Novo funcionário 
+        - employees: Novo funcionário 
     */
-    @objc func addingNewEmployee(_ employee : CKRecord.Reference) {
-        self.employees.append(employee)
-        self.record.setValue(employees, forKey: "employees")
+    @objc func addingNewEmployees(_ employees : [User]) {
+        self.employees.append(contentsOf: employees.map { CKRecord.Reference(recordID: $0.record.recordID, action: .none)})
+        self.record.setValue(self.employees, forKey: "employees")
     }
     
-    /**
-     Remover funcionários da reunião
-    - parameters: 
-        - index : Indice do funcionário
-    */
-    @objc func removingEmployee(index : Int) {
-        self.employees.remove(at: index)
-        self.record.setValue(employees, forKey: "employees")
+    /// Remover funcionários da reunião.
+    /// - Parameter employees: employees
+    @objc func removingEmployees(_ employees : [User]) {
+        
+        employees.forEach { (employee) in
+            self.employees.removeAll {
+                employee.record.recordID == $0.recordID
+            }
+        }
+        
+        self.record.setValue(self.employees, forKey: "employees")
     }
     
     /**

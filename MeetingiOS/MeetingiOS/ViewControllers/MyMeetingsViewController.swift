@@ -19,13 +19,14 @@ import CloudKit
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
     @objc var newMeeting: Meeting?
+    
     lazy var refreshControl: UIRefreshControl = {
-          let refreshControl = UIRefreshControl()
-          refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
         refreshControl.tintColor = .gray
-          
-          return refreshControl
-      }()
+        
+        return refreshControl
+    }()
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -40,27 +41,18 @@ import CloudKit
         
         self.tableView.addSubview(refreshControl)
         self.tableView.keyboardDismissMode = .onDrag
+        self.tableView.setTableViewBackgroundGradient()
         
         // MARK: Nav Controller Settings
-        self.navigationItem.title = "My Meetings"
+        self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "perfil", style: .plain, target: self, action: #selector(goToProfile))
-        self.setUpSearchBar(segmentedControlTitles: ["Future meetings", "Past meetings"])
+        self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
         
         // MARK: Query no CK
+        guard let _ = defaults.string(forKey: "recordName") else { return }
+        self.refreshingMeetings()
         
-        self.refreshMeetings(predicateFormat: "manager = %@"){
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-        }
-        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,13 +61,8 @@ import CloudKit
         self.showNewMeeting()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        
-    }
-    
     //MARK:- Methods
+    
     /// Método para mostrar adicionar reunião que acabou de ser criada localmente
     private func showNewMeeting(){
         var allMeetings = [Meeting]()
@@ -106,7 +93,7 @@ import CloudKit
         }
     }
     
-    /// Método utilizado para validar se reuniao esta no array
+    /// Método utilizado para validar se reuniao esta no array e inseri-la na ordem
     /// - Parameters:
     ///   - arrayIndex: 0 ou 1 indicando array de reuniao futura ou passada
     ///   - meeting: reuniao a ser verificada
@@ -114,10 +101,20 @@ import CloudKit
         let recordIDs = meetings[arrayIndex].map({$0.record.recordID.recordName})
         
         if !recordIDs.contains(meeting.record.recordID.recordName) {
-            self.meetings[arrayIndex].append(meeting)
+            if let index = self.meetings[arrayIndex].firstIndex(where: { (oldMeeting) -> Bool in
+                if oldMeeting.initialDate! < meeting.initialDate! {
+                    return true
+                } else {
+                    return false
+                }
+            }) {
+                self.meetings[arrayIndex].insert(meeting, at: index)
+            } else {
+                self.meetings[arrayIndex].append(meeting)
+            }
         }
     }
-    
+ 
     /// Método que faz fetch de todas as reunioes
     /// - Parameters:
     ///   - predicateFormat: formato do predicate a ser realizado
@@ -133,26 +130,54 @@ import CloudKit
     /// Método para fazer refresh da table view
     /// - Parameter refreshControl: default
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.refreshMeetings(predicateFormat: "employees CONTAINS %@") {
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-                refreshControl.endRefreshing()
-            }
-        }
+        self.refreshingMeetings()
     }
     
     @objc func goToProfile() {
-        if let _ = defaults.value(forKey: "recordName") as? String {
+        if isLoggedIn(){
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
             let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
             self.present(nextVC, animated: true, completion: nil)
         } else {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let nextVC = storyboard.instantiateInitialViewController() as! LoginViewController
-            nextVC.vcToShowID = "Profile"
+            nextVC.goingToProfile = true
             self.present(nextVC, animated: true, completion: nil)
         }
+    }
+    
+    private func isLoggedIn() -> Bool{
+        if let _ = defaults.value(forKey: "recordName") as? String {
+            return true
+        } else {
+           return false
+        }
+    }
+    
+    private func refreshingMeetings() {
+        
+        self.refreshMeetings(predicateFormat: "manager = %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+        
+        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    //MARK: - IBActions
+    
+    /// Detalhes da reunião.
+    @IBAction func detailsOfMeeting(_ sender : UIButton) {
+        self.performSegue(withIdentifier: "MeetingDetails", sender: sender)        
     }
 }
 
@@ -183,10 +208,11 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
         
         cell.meetingName.text = meetingsArray[indexPath.section].theme
+        cell.detailsButton.tag = indexPath.section
         
         if let date = meetingsArray[indexPath.section].initialDate{
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EE MMM dd yyyy"
+            dateFormatter.dateFormat = NSLocalizedString("dateFormat", comment: "")
             let formattedDate = dateFormatter.string(from: date)
             cell.meetingDate.text = formattedDate
         } else {
@@ -217,12 +243,28 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "finishedMeeting" {
+            
             let viewDestination = segue.destination as! FinishedMeetingViewController
             viewDestination.currMeeting = sender as? Meeting
-        } else if segue.identifier == "unfinishedMeeting"{
+            
+        } else if segue.identifier == "unfinishedMeeting" {
+            
             let viewDestination = segue.destination as! UnfinishedMeetingViewController
             viewDestination.currMeeting = sender as? Meeting
+            
+        } else if segue.identifier == "MeetingDetails" {
+            
+            var meeting : Meeting!
+            guard let button = sender as? UIButton, let navigationController = segue.destination as? UINavigationController else {return}
+            
+            guard let viewController = navigationController.viewControllers.first as? DetailsTableViewController else {return}
+                        
+            //Reuniao identifica de acordo com a tag do botão.
+            meeting = filterring ? self.filtered[button.tag] : self.meetingsToShow[button.tag]
+                
+            viewController.meeting = meeting
         }
     }
 }

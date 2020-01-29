@@ -11,11 +11,12 @@
 
 @implementation ContactCollectionView 
 
-- (instancetype)init
-{
+- (instancetype)initWithRemoveContact:(BOOL)isRemoveContact {
+    
     self = [super init];
     if (self) {
         _contacts = [[NSArray alloc] init];
+        _isRemoveContact = isRemoveContact;
     }
     
     return self;
@@ -51,6 +52,7 @@
     ContactCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ContactCollectionCell" forIndexPath:indexPath];
     
     [cell setContact:_contacts[indexPath.item]];
+    cell.contactImage.image = _isRemoveContact ? [UIImage systemImageNamed:@"person.crop.circle.fill.badge.xmark"] :  [UIImage systemImageNamed:@"person.crop.circle.fill"];
     
     return cell;
 }

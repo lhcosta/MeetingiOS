@@ -12,7 +12,7 @@ import CloudKit
 @objc class User : NSObject {
     
     //MARK: - Properties
-    private(set) var record: CKRecord
+    @objc private(set) var record: CKRecord
     
     private static let defaults = UserDefaults.standard
     private static let cloud = CloudManager.shared
@@ -49,7 +49,6 @@ import CloudKit
         }
     }
     
-    
     // reuniões vindos da entidade Reunião
     var meetings: [CKRecord.Reference]{
         get {
@@ -57,9 +56,13 @@ import CloudKit
         }
         
         set {
-            print(newValue)
             self.record.setValue(newValue, forKey: "meetings")
         }
+    }
+    
+    // Debug
+    override var description: String {
+        return "\(self.name ?? "Empty") -> \(self.email ?? "Empty")"
     }
     
     //MARK: - Initializer
@@ -93,6 +96,7 @@ import CloudKit
     }
     
     static func updateUser(name: String?, email: String?, completion: @escaping (() -> Void)) {
+        
         guard let recordName = defaults.string(forKey: "recordName") else { return }
         let recordID = CKRecord.ID(recordName: recordName)
         let userCK = CKRecord(recordType: "User", recordID: recordID)
@@ -120,8 +124,10 @@ import CloudKit
                 }
             }
         } else {
-            self.defaults.set(name, forKey: "givenName")
-            performUpdate(record: userCK)
+            if let name = name {
+                self.defaults.set(name, forKey: "givenName")
+                performUpdate(record: userCK)
+            }
             completion()
         }
     }
@@ -140,15 +146,10 @@ import CloudKit
     }
     
     /// Busca no vetor e deleta reunião do array de reuniões
-    /// - Parameter
-    /// meetingReference: é o CKRecord.Reference da reunião que deseja deletar do array
-    func removeMeeting(meetingReference: CKRecord.Reference){
-        var  i = 0
-        for met in meetings {
-            if met == meetingReference{
-                meetings.remove(at: i)
-            }
-            i += 0
+    /// - Parameter meetingReference: é o CKRecord.Reference da reunião que deseja deletar do array
+    func removeMeeting(meetingReference: CKRecord.ID){        
+        self.meetings.removeAll { 
+            $0.recordID == meetingReference
         }
     }
 }

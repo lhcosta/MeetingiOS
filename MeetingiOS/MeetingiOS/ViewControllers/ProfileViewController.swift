@@ -16,32 +16,31 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var doneBtn: UIBarButtonItem!
+    @IBOutlet weak var cancelBtn: UIBarButtonItem!
     
     //MARK:- Properties
     let defaults = UserDefaults.standard
     let cloud = CloudManager.shared
+    var didComeFromLogin = false
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let topColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
-        let bottomColor = UIColor(red: 253/255, green: 253/255, blue: 253/255, alpha: 1)
+        self.tableView.setTableViewBackgroundGradient()
+        self.isModalInPresentation = true
         
-        setTableViewBackgroundGradient(sender: self, topColor, bottomColor)
-        
-        if let name = defaults.string(forKey: "givenName") {
-            nameTF.text = name
-        }
-        
-        guard let email = defaults.string(forKey: "email") else { return }
-        emailTF.text = email
+        fillTF()
     }
     
     //MARK:- IBActions
     
     @IBAction func didPressPremiumBtn(_ sender: Any) {
         
+    }
+    
+    @IBAction func didPressCancel(_ sender: Any) {
+        fillTF()
     }
     
     @IBAction func didPressDone(_ sender: Any) {
@@ -60,17 +59,18 @@ class ProfileViewController: UITableViewController {
         
         User.updateUser(name: nameToUpdate, email: emailToUpdate) {
             DispatchQueue.main.async {
+                if self.didComeFromLogin {
                 self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                self.dismiss(animated: true, completion: {
-                    if let vc = self.presentingViewController {
-                        vc.dismiss(animated: false, completion: nil)
-                    }
-                })
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }
     
     @IBAction func nameChanged(_ sender: Any) {
+        cancelBtn.isEnabled = true
+        
         if validateTextField(textField: nameTF) {
             doneBtn.isEnabled = true
         } else {
@@ -79,6 +79,8 @@ class ProfileViewController: UITableViewController {
     }
     
     @IBAction func emailChanged(_ sender: Any) {
+        cancelBtn.isEnabled = true
+        
         if validateEmail(email: emailTF) {
             doneBtn.isEnabled = true
         } else {
@@ -124,18 +126,15 @@ class ProfileViewController: UITableViewController {
         return true
     }
     
-    func setTableViewBackgroundGradient(sender: UITableViewController, _ topColor:UIColor, _ bottomColor:UIColor) {
-
-        let gradientBackgroundColors = [topColor.cgColor, bottomColor.cgColor]
-
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientBackgroundColors
-        gradientLayer.locations = [0,1]
-
-        gradientLayer.frame = sender.tableView.bounds
-        let backgroundView = UIView(frame: sender.tableView.bounds)
-        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-        sender.tableView.backgroundView = backgroundView
+    /// Method used to fill name and email textfields with userdefaults
+    private func fillTF() {
+        if let name = defaults.string(forKey: "givenName") {
+            nameTF.text = name
+        }
+        
+        if let email = defaults.string(forKey: "email") {
+            emailTF.text = email
+        }
     }
     
     //MARK:- Table View

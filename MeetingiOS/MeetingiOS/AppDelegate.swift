@@ -16,17 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
-        // Override point for customization after application launch.
-        let userNotCenter = UNUserNotificationCenter.current()
-        userNotCenter.delegate = self
-        
-        userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
-            print("===>\(permission)/\(String(describing: error))")
-        })
-        
-        DispatchQueue.main.async {
-            application.registerForRemoteNotifications()
-        }
+//        // Override point for customization after application launch.
+//        let userNotCenter = UNUserNotificationCenter.current()
+//        userNotCenter.delegate = self
+//        
+//        userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
+//            print("===>\(permission)/\(String(describing: error))")
+//        })
+//        
+//        DispatchQueue.main.async {
+//            application.registerForRemoteNotifications()
+//        }
         return true
     }
 
@@ -49,7 +49,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        guard CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) != nil else { return }
+        guard let meeting = CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) else { return }
+        guard let keys = meeting.recordFields else { return }
+        guard let theme = keys["theme"] as? String else { return }
+        guard let begin = keys["initialDate"] as? Date else { return }
+        guard let end = keys["finalDate"] as? Date else { return }
         
+        EventManager.saveMeeting(theme, starting: begin, ending: end)
     }
 }
