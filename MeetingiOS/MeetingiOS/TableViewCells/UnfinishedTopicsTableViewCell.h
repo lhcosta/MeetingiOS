@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldRight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *textFieldSecondLeft;
+@property (strong, nonatomic) IBOutlet UIButton *buttonInfo;
+
 
 
 @end

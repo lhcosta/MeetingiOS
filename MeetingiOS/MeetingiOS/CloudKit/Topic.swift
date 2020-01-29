@@ -43,8 +43,16 @@ import CloudKit
     /// Será usada para filtrar as pautas não discutidas e discutidas para a visualização do autor delas.
     var discussed: Bool {
         set { self.record["discussed"] = newValue }
-        get { return self.record.value(forKey: "discussed") as? Bool ?? false}
+        get { return self.record.value(forKey: "discussed") as? Bool ?? false }
     }
+    
+    
+    /// O Porquê do Topic ter sido feito pelo author
+    var topicPorque: String! {
+        set { self.record["topicPorque"] = newValue }
+        get { return self.record.value(forKey: "topicPorque") as? String ?? "Não especificado." }
+    }
+    
     
     /// Conclusões enviadas pelos funcionários/gerente durante a reunião (quando já discutida?)
     var conclusions: [String] {

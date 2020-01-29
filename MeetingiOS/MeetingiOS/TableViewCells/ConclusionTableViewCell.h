@@ -11,5 +11,7 @@
 @interface ConclusionTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *textConclusion;
+@property (strong, nonatomic) IBOutlet UILabel *textConclusionLabel;
+
 
 @end
