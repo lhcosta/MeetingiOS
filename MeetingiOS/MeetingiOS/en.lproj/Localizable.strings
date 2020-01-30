@@ -40,3 +40,16 @@
 
 /*Onboarding View Controller -- EN*/
 "Welcome to Meetings" = "Welcome to Meetings";
+"Continue" = "Continue";
+
+//Titles - Onboarding
+"Create meetings" = "Create meetings";
+"Connect with your team" = "Connect with your team";
+"Time your meetings" = "Time your meetings";
+"Increase the dynamics" = "Increase the dynamics";
+
+//Descriptions - Onboarding
+"Create meetings and share with your coworkers" = "Create meetings and share with your coworkers";
+"Be aware of what your coworkers want to talk" = "Be aware of what your coworkers want to talk";
+"Increase the productivity of your meetings" = "Increase the productivity of your meetings";
+"Have easy access to your meeting feedbacks" = "Have easy acess to your meeting feedbacks";

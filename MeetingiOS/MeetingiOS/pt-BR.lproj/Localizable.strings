@@ -40,3 +40,16 @@
 
 /*Onboarding View Controller -- BR*/
 "Welcome to Meetings" = "Bem-vindo ao Meetings";
+"Continue" = "Continuar";
+
+//Titles - Onboarding
+"Create meetings" = "Crie reuniões";
+"Connect with your team" = "Conecte-se com seu time";
+"Time your meetings" = "Cronometre suas reuniões";
+"Increase the dynamics" = "Aumente a dinâmica";
+
+//Descriptions - Onboarding
+"Create meetings and share with your coworkers" = "Crie reuniões e compartilhe com seus colegas de trabalho";
+"Be aware of what your coworkers want to talk" = "Esteja ciente sobre o que seus colegas querem falar";
+"Increase the productivity of your meetings" = "Aumente a produtividade das suas reuniões";
+"Have easy access to your meeting feedbacks" = "Tenha fácil acesso aos feedbacks das reuniões";

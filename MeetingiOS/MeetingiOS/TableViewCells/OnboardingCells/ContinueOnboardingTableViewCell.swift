@@ -16,14 +16,8 @@ class ContinueOnboardingTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.continueButton.clipsToBounds = true
-        self.continueButton.layer.cornerRadius = 5
-    }
-
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.continueButton.layer.cornerRadius = 5  
+        self.continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
     }
 
 }

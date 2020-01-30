@@ -17,8 +17,7 @@ class OnboardingTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.imageDescription.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        //self.imageDescription.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.imageDescription.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

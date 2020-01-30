@@ -17,7 +17,7 @@ class OnBoardingViewController: UIViewController {
                           UIImage(named: "onboarding_2"),
                           UIImage(named: "onboarding_3"),
                           UIImage(named: "onboarding_4")]
-    private let texts = [["Create meetings", "Create meetings and share with your coworkers"],
+    private var texts = [["Create meetings", "Create meetings and share with your coworkers"],
                          ["Connect with your team", "Be aware of what your coworkers want to talk"],
                          ["Time your meetings", "Increase the productivity of your meetings"], 
                          ["Increase the dynamics", "Have easy access to your meeting feedbacks"]]
@@ -28,6 +28,12 @@ class OnBoardingViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "OnboardingTableViewCell", bundle: nil), forCellReuseIdentifier: "OnboardingCell")
+        
+        self.texts = self.texts.map { (texts) -> [String] in
+            texts.map { (text) -> String in
+                NSLocalizedString(text, comment: "")
+            }
+        }
     }
 }
 
