@@ -12,6 +12,10 @@ class ConclusionInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var conclusionTableView: UITableView!
     
+    /// Quando viemos de uma Meeting não finalizada.
+    var fromUnfinishedMeeting = false
+    var meetingDidBegin = true
+    
     var viewControler: ConclusionsViewController!
     
     override func awakeFromNib() {
@@ -34,14 +38,30 @@ extension ConclusionInfoTableViewCell: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewControler.topicToPresentConclusions.conclusions.count
+        if !fromUnfinishedMeeting || meetingDidBegin {
+            
+            if viewControler.topicToPresentConclusions.conclusions.count == 0 {
+                viewControler.topicToPresentConclusions.conclusions.append("")
+                return 1
+            } else {
+                return viewControler.topicToPresentConclusions.conclusions.count
+            }
+        } else {
+            return 1
+        }
     }
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conCell", for: indexPath) as! ConclusionTableViewCell
 
-        cell.textConclusion.text = viewControler.topicToPresentConclusions.conclusions[indexPath.row]
+        if !fromUnfinishedMeeting || meetingDidBegin {
+            cell.textConclusion.text = viewControler.topicToPresentConclusions.conclusions[indexPath.row]
+        } else {
+            cell.textConclusionLabel.isHidden = false
+            cell.textConclusion.isHidden = true
+            cell.textConclusionLabel.text = "Disponível depois que a Reunião começar."
+        }
         cell.textConclusion.delegate = self
 
         return cell
@@ -66,7 +86,8 @@ extension ConclusionInfoTableViewCell: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-extension ConclusionInfoTableViewCell: UITextFieldDelegate{
+extension ConclusionInfoTableViewCell: UITextFieldDelegate {
+    
     public func textFieldDidEndEditing(_ textField: UITextField) {
 
         // Obtem a referência da calular para a obtenção do indexPath referente
@@ -74,7 +95,7 @@ extension ConclusionInfoTableViewCell: UITextFieldDelegate{
         let indexPath = conclusionTableView.indexPath(for: cell)
 
         // Se o tópico estiva em branco então após a edição do mesmo adiciona um topico em branco abaixo para futura edição
-        if self.viewControler.topicToPresentConclusions.conclusions[indexPath!.row] == ""{
+        if self.viewControler.topicToPresentConclusions.conclusions[indexPath!.row] == "" {
             self.viewControler.topicToPresentConclusions.conclusions[indexPath!.row] = textField.text!
             self.viewControler.topicToPresentConclusions.conclusions.append(String())
         } else {
