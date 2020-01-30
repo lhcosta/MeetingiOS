@@ -25,23 +25,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6Ft-F9-M0v">
-                        <rect key="frame" x="45" y="0.0" width="223.5" height="60"/>
+                        <rect key="frame" x="45" y="0.0" width="218.5" height="60"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_4" id="QgB-cy-XZC">
                                 <rect key="frame" x="20" y="20" width="97" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="em3-ib-dMT">
-                                <rect key="frame" x="137" y="20" width="86.5" height="40"/>
+                                <rect key="frame" x="137" y="20" width="81.5" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ksI-hb-VKM">
-                                        <rect key="frame" x="0.0" y="0.0" width="37" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="32" height="21"/>
                                         <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="idR-LU-xFi">
-                                        <rect key="frame" x="0.0" y="20.5" width="86.5" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="21" width="81.5" height="19"/>
                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
