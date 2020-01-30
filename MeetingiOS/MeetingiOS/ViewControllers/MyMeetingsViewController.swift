@@ -22,7 +22,7 @@ import CloudKit
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
         refreshControl.tintColor = .gray
         
         return refreshControl
@@ -30,6 +30,7 @@ import CloudKit
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
+
     
     //MARK:- View life cycle
     override func viewDidLoad() {
@@ -39,16 +40,16 @@ import CloudKit
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]
         
-        self.tableView.addSubview(refreshControl)
+        self.tableView.refreshControl = refreshControl
         self.tableView.keyboardDismissMode = .onDrag
         self.tableView.setTableViewBackgroundGradient()
+        
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "perfil", style: .plain, target: self, action: #selector(goToProfile))
         self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
-        
         // MARK: Query no CK
         guard let _ = defaults.string(forKey: "recordName") else { return }
         self.refreshingMeetings()
@@ -156,10 +157,15 @@ import CloudKit
     
     private func refreshingMeetings() {
         
+        let deadline = DispatchTime.now() + .milliseconds(700)
+        
         self.refreshMeetings(predicateFormat: "manager = %@"){
             DispatchQueue.main.async {
                 self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
                 self.tableView.reloadData()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: deadline) { 
                 self.refreshControl.endRefreshing()
             }
         }
@@ -168,8 +174,12 @@ import CloudKit
             DispatchQueue.main.async {
                 self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
                 self.tableView.reloadData()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: deadline) { 
                 self.refreshControl.endRefreshing()
             }
+
         }
     }
     
@@ -290,3 +300,4 @@ extension MyMeetingsViewController: UISearchResultsUpdating {
         self.tableView.reloadData()
     }
 }
+

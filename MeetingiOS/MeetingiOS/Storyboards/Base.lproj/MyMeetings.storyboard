@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dcg-jt-bSn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vTy-o5-exJ">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81r-5o-ZG0">
-                                <rect key="frame" x="17" y="44" width="380" height="769"/>
+                                <rect key="frame" x="17" y="88" width="380" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="120" id="7fe-wl-nNI" customClass="MyMeetingsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
@@ -125,6 +125,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GcE-6K-nxn"/>
                     </view>
+                    <navigationItem key="navigationItem" id="uPP-p2-nrS"/>
                     <connections>
                         <outlet property="tableView" destination="81r-5o-ZG0" id="cbH-Qx-Vnr"/>
                         <segue destination="p8j-8A-NPN" kind="show" identifier="finishedMeeting" id="Q88-9u-Gbe"/>
@@ -135,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu9-4R-dug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-362.31884057971018" y="137.94642857142856"/>
+            <point key="canvasLocation" x="547.82608695652175" y="137.94642857142856"/>
         </scene>
         <!--unfinishedMeeting-->
         <scene sceneID="ww9-fQ-nOb">
@@ -145,7 +146,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvu-sm-1sY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="453" y="149"/>
+            <point key="canvasLocation" x="1363.0434782608697" y="148.66071428571428"/>
         </scene>
         <!--NewMeeting-->
         <scene sceneID="BMJ-5b-ehS">
@@ -155,7 +156,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQZ-qp-GqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="354" y="325"/>
+            <point key="canvasLocation" x="1263.768115942029" y="324.77678571428572"/>
         </scene>
         <!--Details-->
         <scene sceneID="cQH-kP-bLe">
@@ -165,7 +166,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFT-TG-7Th" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="354" y="-92"/>
+            <point key="canvasLocation" x="1263.768115942029" y="-92.410714285714278"/>
         </scene>
         <!--finishedMeeting-->
         <scene sceneID="sEJ-0r-DEg">
@@ -175,7 +176,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwy-Qa-D3o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441" y="-5"/>
+            <point key="canvasLocation" x="1350.7246376811595" y="-5.3571428571428568"/>
         </scene>
         <!--Profile-->
         <scene sceneID="ILI-WA-h5c">
@@ -185,7 +186,31 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aey-n2-70B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="400" y="73"/>
+            <point key="canvasLocation" x="1310.144927536232" y="72.991071428571431"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wmy-rH-uo1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="vTy-o5-exJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GYS-hu-iJV">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dcg-jt-bSn" kind="relationship" relationship="rootViewController" id="y1Z-mR-wgl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6IY-7N-kn5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-362.31884057971018" y="137.94642857142856"/>
         </scene>
     </scenes>
     <resources>

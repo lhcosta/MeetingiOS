@@ -25,22 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             setRootVC(rootVC: rootVC)
         } else {
             let storyboard = UIStoryboard(name: "MyMeetings", bundle: nil)
-            let rootVC = storyboard.instantiateInitialViewController() as! MyMeetingsViewController
+            let rootVC = storyboard.instantiateInitialViewController() as! UINavigationController
             setRootVC(rootVC: rootVC)
         }
-    }
+    } 
     
-    private func setRootVC(rootVC: UIViewController) {
-        
-        let navController = UINavigationController(rootViewController: rootVC)
-        navController.navigationBar.prefersLargeTitles = true
-        navController.hidesBarsWhenKeyboardAppears = false
-        navController.navigationBar.backgroundColor = .clear
-        
-        navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blue]
-        navController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blue]
-        
-        self.window?.rootViewController = navController
+    private func setRootVC(rootVC: UIViewController) {        
+        self.window?.rootViewController = rootVC
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
