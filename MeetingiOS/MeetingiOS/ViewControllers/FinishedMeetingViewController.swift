@@ -34,8 +34,9 @@ class FinishedMeetingViewController: UIViewController {
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = self.currMeeting.theme
-        self.setUpSearchBar(segmentedControlTitles: ["Discussed Topics", "Not Discussed"])
-
+        self.setUpSearchBar(segmentedControlTitles: ["Discussed", "Not discussed"])
+        
+        self.navigationItem.searchController?.searchBar.delegate = self
         
         // MARK: Fetch dos topicos
         let topicIDs = currMeeting.topics.map({ (topic) -> CKRecord.ID in
@@ -188,3 +189,10 @@ extension FinishedMeetingViewController: UISearchResultsUpdating {
         self.topicsTableView.reloadData()
     }
 }
+
+extension FinishedMeetingViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        print("update")
+    }
+}
+

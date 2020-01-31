@@ -37,3 +37,19 @@
 "My meetings" = "Mis reuniones";
 "Past meetings" = "Reuniones pasadas";
 "Future meetings" = "Reuniones futuras";
+
+/*Onboarding View Controller -- ES*/
+"Welcome to Meetings" = "Bienvenido al Meetings";
+"Continue" = "Seguir";
+
+//Titles - Onboarding
+"Create meetings" = "Cree reuniones";
+"Connect with your team" = "Conecte con su equipo";
+"Time your meetings" = "Cronometre sus reuniones";
+"Increase the dynamics" = "Aumente la dinámica";
+
+//Descriptions - Onboarding
+"Create meetings and share with your coworkers" = "Cree reuniones y compártelas con sus compañeros de trabajo";
+"Be aware of what your coworkers want to talk" = "Sepa lo que sus compañeros de trabajo quieren discutir";
+"Increase the productivity of your meetings" = "Aumente la productividad de sus reuniones";
+"Have easy access to your meeting feedbacks" = "Tenga fácil acceso a los comentarios de su reunión";

@@ -19,7 +19,10 @@
 		492C051023A2904800442814 /* OnBoarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492C051223A2904800442814 /* OnBoarding.storyboard */; };
 		492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C051923A2907A00442814 /* OnBoardingViewController.swift */; };
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
+		497FB2AD23E207EB008059D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497FB2AC23E207EB008059D9 /* StoreKit.framework */; };
 		49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4652923D09FF6006D67D8 /* Login.storyboard */; };
+		49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A59B1323E0B993003F749C /* MeetingsProducts.swift */; };
+		49A59B1623E0BC9A003F749C /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A59B1523E0BC9A003F749C /* StoreManager.swift */; };
 		49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */; };
 		49BF5F9423DF652600DD56DC /* TableView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */; };
 		49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */; };
@@ -69,6 +72,10 @@
 		A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */; };
 		A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */; };
 		A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */; };
+		A4E1EA0823E34CFD00B2B32A /* OnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E1EA0623E34CFD00B2B32A /* OnboardingTableViewCell.swift */; };
+		A4E1EA0923E34CFD00B2B32A /* OnboardingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E1EA0723E34CFD00B2B32A /* OnboardingTableViewCell.xib */; };
+		A4E1EA0B23E34F3E00B2B32A /* WelcomeOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E1EA0A23E34F3E00B2B32A /* WelcomeOnboardingTableViewCell.swift */; };
+		A4E1EA0D23E35D8A00B2B32A /* ContinueOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E1EA0C23E35D8A00B2B32A /* ContinueOnboardingTableViewCell.swift */; };
 		A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BE42395E3820097857F /* NewMeetingViewController.m */; };
 		A4EB3BFD239747640097857F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3BFC239747640097857F /* Contact.m */; };
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
@@ -100,10 +107,13 @@
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
+		497FB2AC23E207EB008059D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		49A4652823D09FF6006D67D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		49A4652B23D09FF8006D67D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
 		49A4652D23D09FF9006D67D8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
 		49A4652F23D09FFA006D67D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
+		49A59B1323E0B993003F749C /* MeetingsProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsProducts.swift; sourceTree = "<group>"; };
+		49A59B1523E0BC9A003F749C /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
 		49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Gradient.swift"; sourceTree = "<group>"; };
 		49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudManager.swift; path = MeetingiOS/CloudManager.swift; sourceTree = SOURCE_ROOT; };
@@ -190,6 +200,10 @@
 		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
 		A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCollectionViewCell.m; sourceTree = "<group>"; };
+		A4E1EA0623E34CFD00B2B32A /* OnboardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTableViewCell.swift; sourceTree = "<group>"; };
+		A4E1EA0723E34CFD00B2B32A /* OnboardingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingTableViewCell.xib; sourceTree = "<group>"; };
+		A4E1EA0A23E34F3E00B2B32A /* WelcomeOnboardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOnboardingTableViewCell.swift; sourceTree = "<group>"; };
+		A4E1EA0C23E35D8A00B2B32A /* ContinueOnboardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueOnboardingTableViewCell.swift; sourceTree = "<group>"; };
 		A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetingiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		A4EB3BE32395E3820097857F /* NewMeetingViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = NewMeetingViewController.h; sourceTree = "<group>"; };
 		A4EB3BE42395E3820097857F /* NewMeetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMeetingViewController.m; sourceTree = "<group>"; };
@@ -218,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4533FF7238C58060089257A /* CloudKit.framework in Frameworks */,
+				497FB2AD23E207EB008059D9 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +264,7 @@
 		2391532523918E2400479BB6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				A4E1EA0E23E35D9500B2B32A /* OnboardingCells */,
 				A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */,
 				A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */,
 				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
@@ -262,6 +278,15 @@
 				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		49A59B1723E1BB83003F749C /* AppStore */ = {
+			isa = PBXGroup;
+			children = (
+				49A59B1523E0BC9A003F749C /* StoreManager.swift */,
+				49A59B1323E0B993003F749C /* MeetingsProducts.swift */,
+			);
+			path = AppStore;
 			sourceTree = "<group>";
 		};
 		49EB44D523871126002F434D = {
@@ -295,6 +320,7 @@
 				A4EB3BEB239607CB0097857F /* Categories - ObjC */,
 				A4533FFA238C67F50089257A /* CloudKit */,
 				A4EB3C0F2397522A0097857F /* CollectionViewCells */,
+				49A59B1723E1BB83003F749C /* AppStore */,
 				A45097B0238D95F9009AB71E /* Multipeer Connectivity */,
 				A4EB3BE12395E1700097857F /* Storyboards */,
 				2391532523918E2400479BB6 /* TableViewCells */,
@@ -360,6 +386,7 @@
 		A4533FF5238C58060089257A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				497FB2AC23E207EB008059D9 /* StoreKit.framework */,
 				A4533FF6238C58060089257A /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -396,6 +423,17 @@
 				A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */,
 			);
 			path = "San Francisco Font";
+			sourceTree = "<group>";
+		};
+		A4E1EA0E23E35D9500B2B32A /* OnboardingCells */ = {
+			isa = PBXGroup;
+			children = (
+				A4E1EA0C23E35D8A00B2B32A /* ContinueOnboardingTableViewCell.swift */,
+				A4E1EA0A23E34F3E00B2B32A /* WelcomeOnboardingTableViewCell.swift */,
+				A4E1EA0623E34CFD00B2B32A /* OnboardingTableViewCell.swift */,
+				A4E1EA0723E34CFD00B2B32A /* OnboardingTableViewCell.xib */,
+			);
+			path = OnboardingCells;
 			sourceTree = "<group>";
 		};
 		A4EB3BE12395E1700097857F /* Storyboards */ = {
@@ -530,6 +568,7 @@
 				A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */,
 				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
 				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
+				A4E1EA0923E34CFD00B2B32A /* OnboardingTableViewCell.xib in Resources */,
 				A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */,
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
 				A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */,
@@ -575,17 +614,21 @@
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				A44CC30D23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift in Sources */,
+				49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */,
 				492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */,
 				A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */,
 				A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */,
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
+				49A59B1623E0BC9A003F749C /* StoreManager.swift in Sources */,
 				49BF5F9423DF652600DD56DC /* TableView+Gradient.swift in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
+				A4E1EA0823E34CFD00B2B32A /* OnboardingTableViewCell.swift in Sources */,
 				A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */,
 				49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */,
+				A4E1EA0D23E35D8A00B2B32A /* ContinueOnboardingTableViewCell.swift in Sources */,
 				A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */,
 				23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */,
 				A44CC2FA23D615B1005ECFF6 /* TopicsPerPersonPickerView.m in Sources */,
@@ -597,6 +640,7 @@
 				A4382C7523C2BD330021C814 /* LoginViewController.swift in Sources */,
 				49EB44E423871126002F434D /* SceneDelegate.swift in Sources */,
 				231AE14A239828170051051C /* MyMeetingsViewController.swift in Sources */,
+				A4E1EA0B23E34F3E00B2B32A /* WelcomeOnboardingTableViewCell.swift in Sources */,
 				A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */,
 				235E7B83238D9CA900B59855 /* Topic.swift in Sources */,
 				492C050423A1818500442814 /* ProfileViewController.swift in Sources */,

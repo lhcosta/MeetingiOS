@@ -14,7 +14,8 @@ class LoginViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     var goingToProfile = false
-
+    @IBOutlet private weak var stackView : UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,17 +30,14 @@ class LoginViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(LoginViewController.signInButtonTapped), for: .touchDown)
         
         // Adiciona o botão na tela
-        self.view.addSubview(signInButton)
-        
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         
         // Auto Layout do botão
         NSLayoutConstraint.activate([
-            signInButton.widthAnchor.constraint(equalToConstant: 200),
-            signInButton.heightAnchor.constraint(equalToConstant: 40),
-            signInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            signInButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            signInButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+        self.stackView.addArrangedSubview(signInButton)
     }
 
     @objc private func signInButtonTapped() {
