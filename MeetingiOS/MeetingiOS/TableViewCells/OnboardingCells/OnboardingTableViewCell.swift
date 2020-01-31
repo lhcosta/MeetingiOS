@@ -18,12 +18,16 @@ class OnboardingTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.imageDescription.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        self.title.textColor = UIColor(named: "TitleColor")!
+        self.descriptionText.textColor = UIColor(named: "DescriptionColor")!
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }
+
+
+

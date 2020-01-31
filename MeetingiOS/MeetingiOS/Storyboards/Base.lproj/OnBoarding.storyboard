@@ -43,6 +43,7 @@
                                         <constraint firstAttribute="bottom" secondItem="dwq-Yx-DdL" secondAttribute="bottom" id="fbm-VH-EzN"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="welcomeLabel" destination="dwq-Yx-DdL" id="DyE-JE-LNv"/>
                                 </connections>
@@ -73,6 +74,7 @@
                                         <constraint firstItem="vpA-DP-MpR" firstAttribute="top" secondItem="Scg-ld-2sv" secondAttribute="top" id="w46-3Y-Ij7"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="continueButton" destination="vpA-DP-MpR" id="ALp-ds-O8V"/>
                                 </connections>

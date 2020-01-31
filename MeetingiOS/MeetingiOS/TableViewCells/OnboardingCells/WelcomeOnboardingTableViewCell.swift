@@ -25,11 +25,13 @@ private extension WelcomeOnboardingTableViewCell  {
     
     func changeColorWelcomeText() {
         
+        guard let meetingColor = UIColor(named: "MeetingColor") else {return}
+        
         let welcomeText = NSLocalizedString("Welcome to Meetings", comment: "") as NSString
         let range = welcomeText.range(of: "Meetings")
         
         let mutableString = NSMutableAttributedString(string: welcomeText as String)
-        mutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.blue, range: range)
+        mutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: meetingColor, range: range)
         
         welcomeLabel.attributedText = mutableString
     }
