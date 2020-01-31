@@ -95,7 +95,7 @@ extension ConclusionInfoTableViewCell: UITextFieldDelegate {
         let indexPath = conclusionTableView.indexPath(for: cell)
 
         // Se o tópico estiva em branco então após a edição do mesmo adiciona um topico em branco abaixo para futura edição
-        if self.viewControler.topicToPresentConclusions.conclusions[indexPath!.row] == "" {
+        if self.viewControler.topicToPresentConclusions.conclusions[indexPath!.row] == ""{
             self.viewControler.topicToPresentConclusions.conclusions[indexPath!.row] = textField.text!
             self.viewControler.topicToPresentConclusions.conclusions.append(String())
         } else {
