@@ -109,9 +109,6 @@
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		497FB2AC23E207EB008059D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		49A4652823D09FF6006D67D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
-		49A4652B23D09FF8006D67D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
-		49A4652D23D09FF9006D67D8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
-		49A4652F23D09FFA006D67D8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		49A59B1323E0B993003F749C /* MeetingsProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsProducts.swift; sourceTree = "<group>"; };
 		49A59B1523E0BC9A003F749C /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -196,6 +193,9 @@
 		A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Heavy.ttf"; sourceTree = "<group>"; };
 		A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		A4BA9B1923CE276E00CCC2AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Details.storyboard; sourceTree = "<group>"; };
+		A4BCAD0E23E4A3B900470E95 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
+		A4BCAD1023E4A3BC00470E95 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
+		A4BCAD1223E4A3BF00470E95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
 		A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
@@ -677,9 +677,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				49A4652823D09FF6006D67D8 /* Base */,
-				49A4652B23D09FF8006D67D8 /* en */,
-				49A4652D23D09FF9006D67D8 /* pt-BR */,
-				49A4652F23D09FFA006D67D8 /* es */,
+				A4BCAD0E23E4A3B900470E95 /* es */,
+				A4BCAD1023E4A3BC00470E95 /* pt-BR */,
+				A4BCAD1223E4A3BF00470E95 /* en */,
 			);
 			name = Login.storyboard;
 			sourceTree = "<group>";
