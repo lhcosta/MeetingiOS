@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DeE-jB-R7u">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DeE-jB-R7u">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,25 +23,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="MgW-aD-6NI">
-                                <rect key="frame" x="132" y="235" width="150" height="125"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="MgW-aD-6NI">
+                                <rect key="frame" x="72.5" y="376" width="269" height="144.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meetings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWd-AH-Ul1">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meetings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWd-AH-Ul1">
+                                        <rect key="frame" x="0.0" y="0.0" width="269" height="45"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="bkG-EC-HcU"/>
                                             <constraint firstAttribute="height" constant="45" id="vcr-4I-sK6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="34"/>
                                         <color key="textColor" red="0.0" green="0.24705882352941178" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to create your meetings!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hiu-Y8-bSj">
-                                        <rect key="frame" x="7.5" y="80" width="135" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="135" id="XZl-qX-lxa"/>
-                                            <constraint firstAttribute="height" constant="45" id="hJE-90-Se7"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hiu-Y8-bSj">
+                                        <rect key="frame" x="0.0" y="80" width="269" height="64.5"/>
+                                        <string key="text">To create a meeting, 
+login and share the email with us</string>
                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                         <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -51,11 +48,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="MgW-aD-6NI" firstAttribute="top" secondItem="T93-Lh-LQ3" secondAttribute="top" constant="191" id="3DM-wl-Ijj"/>
                             <constraint firstItem="MgW-aD-6NI" firstAttribute="centerX" secondItem="0aL-rg-EJq" secondAttribute="centerX" id="KXc-mc-NTb"/>
+                            <constraint firstItem="MgW-aD-6NI" firstAttribute="width" secondItem="0aL-rg-EJq" secondAttribute="width" multiplier="0.65" id="P7j-3Z-pgt"/>
+                            <constraint firstItem="MgW-aD-6NI" firstAttribute="centerY" secondItem="0aL-rg-EJq" secondAttribute="centerY" id="lTz-6o-e3u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="T93-Lh-LQ3"/>
                     </view>
+                    <connections>
+                        <outlet property="stackView" destination="MgW-aD-6NI" id="x6H-Ax-B2y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFu-w2-aT0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
