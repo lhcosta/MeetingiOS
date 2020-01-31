@@ -102,7 +102,7 @@ extension MeetingBrowserPeer : MCSessionDelegate {
                 self.stoppingBrowserPeer()
             case .notConnected:
                 NSLog("%@", "Did not connect")
-                self.serviceBrowser.startBrowsingForPeers()
+                //self.serviceBrowser.startBrowsingForPeers()
                 break
             default:
             break
