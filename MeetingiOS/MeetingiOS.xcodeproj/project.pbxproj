@@ -234,13 +234,13 @@
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
 				A4382C7623C2BD7E0021C814 /* ContactViewController.swift */,
 				239153232391883E00479BB6 /* FinishedMeetingViewController.swift */,
+				A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */,
 				231AE149239828170051051C /* MyMeetingsViewController.swift */,
 				A4EB3BE22395E3820097857F /* MeetingiOS-Bridging-Header.h */,
 				E219ACC42397DED5002CF585 /* SelectColorViewController.swift */,
 				A4382C7423C2BD330021C814 /* LoginViewController.swift */,
 				492C050323A1818500442814 /* ProfileViewController.swift */,
 				492C051923A2907A00442814 /* OnBoardingViewController.swift */,
-				A447CC8423D0EFC800A06D01 /* UnfinishedMeetingViewController.swift */,
 				2391532823919F2E00479BB6 /* ConclusionsViewController.swift */,
 			);
 			path = ViewControllers;

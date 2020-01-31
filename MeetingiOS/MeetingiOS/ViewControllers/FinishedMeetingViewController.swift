@@ -17,24 +17,24 @@ class FinishedMeetingViewController: UIViewController {
     @IBOutlet var topicsTableView: UITableView!
     
     //MARK:- Properties
-    var topics = [[Topic]]()
+    var topics: [[Topic]] = [[],[]]
     var topicsToShow = [Topic]()
     var currMeeting: Meeting!
     
     fileprivate var filtered = [Topic]()
-    fileprivate var filterring = false
+    fileprivate var filtering = false
     
     private let cloud = CloudManager.shared
     
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        topics.append([Topic]())
-        topics.append([Topic]())
+//        topics.append([Topic]())
+//        topics.append([Topic]())
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = self.currMeeting.theme
-        self.setUpSearchBar(segmentedControlTitles: ["Discussed", "Not discussed"])
+        self.setUpSearchBar(segmentedControlTitles: ["Discussed Topics", "Not Discussed"])
 
         
         // MARK: Fetch dos topicos
@@ -67,6 +67,7 @@ class FinishedMeetingViewController: UIViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = true
     }
     
+    
     /// Identificamos a passagem dessa ViewController para a ConclusionViewController e passamos o Topic selecionado na TableView
     ///  para então exibirmos suas Conclusions na ConclusionsViewController.
     /// - Parameters:
@@ -79,36 +80,92 @@ class FinishedMeetingViewController: UIViewController {
             vc.topicToPresentConclusions = temp
         }
     }
+    
+    
+    @objc func segmentChanged() {
+        self.topicsTableView.reloadData()
+    }
 }
 
 //MARK: - Table View Settings
 extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
     
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
+//        return self.filterring ? self.filtered.count : self.topicsToShow.count
+//    }
+//
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FinishedTopicsTableViewCell
+//
+//        let topicsArray = self.filterring ? self.filtered : self.topicsToShow
+//
+//        cell.authorNameLabel.text = topicsArray[indexPath.row].authorName
+//        cell.topicDescriptionLabel.text = topicsArray[indexPath.row].topicDescription
+//
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        let topicsArray = self.filterring ? self.filtered : self.topicsToShow
+//
+//        self.performSegue(withIdentifier: "conclusions", sender: topicsArray[indexPath.row])
+//    }
+    
+    /// Usamos apenas uma Cell em cada Section.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return self.filterring ? self.filtered.count : self.topicsToShow.count
+        return 1
     }
     
+    
+    /// A quantidade de dados será exibida em cada Section e não nas Cells.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.filtering ? self.filtered.count : self.topicsToShow.count
+    }
+    
+    
+    /// Espaçamento de cada section.
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return tableView.frame.height * 0.03
+    }
+    
+    
+    /// Setamos o Header da section para .clear
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        
+        return headerView
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true;
+    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FinishedTopicsTableViewCell
-        
-        let topicsArray = self.filterring ? self.filtered : self.topicsToShow
-        
+
+        let topicsArray = self.filtering ? self.filtered : self.topicsToShow
+
         cell.authorNameLabel.text = topicsArray[indexPath.row].authorName
         cell.topicDescriptionLabel.text = topicsArray[indexPath.row].topicDescription
-        
+
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let topicsArray = self.filterring ? self.filtered : self.topicsToShow
-
-        self.performSegue(withIdentifier: "conclusions", sender: topicsArray[indexPath.row])
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.size.height * 0.2
     }
 }
+
+
 
 //MARK: - Search Settings
 extension FinishedMeetingViewController: UISearchResultsUpdating {
@@ -122,13 +179,12 @@ extension FinishedMeetingViewController: UISearchResultsUpdating {
                 return (topic.topicDescription.lowercased().contains(text.lowercased()) || topic.authorName?.lowercased().contains(text.lowercased()) ?? false)
             })
             
-            self.filterring = true
+            self.filtering = true
         } else {
-            self.filterring = false
+            self.filtering = false
             self.filtered = [Topic]()
         }
         
         self.topicsTableView.reloadData()
     }
 }
-

@@ -59,10 +59,10 @@ utilizar como auxílio de manipulação de CKRecord Meeting
     }
     
     ///Duração da reunião
-    @objc var duration : Int64 {
+    @objc var duration : String? {
         
         get {
-            self.record.value(forKey: "duration") as? Int64 ?? 0
+            self.record.value(forKey: "duration") as? String ?? "00:00:00"
         }
         
         set {
