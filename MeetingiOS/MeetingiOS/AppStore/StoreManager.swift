@@ -14,7 +14,7 @@ class StoreManager: NSObject {
     static let shared = StoreManager()
     private override init() {}
     
-     //MARK:- Properties
+    //MARK:- Properties
     var products = [SKProduct]()
     let paymentQueue = SKPaymentQueue.default()
     
@@ -27,7 +27,7 @@ class StoreManager: NSObject {
         let request = SKProductsRequest(productIdentifiers: products)
         request.delegate = self
         request.start()
-        
+    
         paymentQueue.add(self)
     }
     
@@ -40,9 +40,18 @@ class StoreManager: NSObject {
         paymentQueue.add(payment)
     }
     
-    /// Método para restaurar status de assinatura do usuário 
+    func getReceipts() {
+        let bundle = Bundle.main
+        if let url = bundle.appStoreReceiptURL {
+            if let receiptData = try? Data(contentsOf: url) {
+                
+            }
+        }
+    }
+    
+    /// Método para restaurar status de assinatura do usuário
     func restoreSubscription(){
-       paymentQueue.restoreCompletedTransactions()
+        paymentQueue.restoreCompletedTransactions()
     }
 }
 

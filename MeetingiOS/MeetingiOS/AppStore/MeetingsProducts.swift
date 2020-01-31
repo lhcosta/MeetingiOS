@@ -9,7 +9,7 @@
 import Foundation
 
 struct  MeetingsProducts {
-    let month = "id"
-    let threeMonths = "id2"
-    let year = "id3"
+    let month = "com.QuartetoFantastico.Meeting.iOS.month"
+    let threeMonths = "com.QuartetoFantastico.Meeting.iOS.3month"
+    let year = "com.QuartetoFantastico.Meeting.iOS.year"
 }
