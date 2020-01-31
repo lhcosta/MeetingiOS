@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        if true {
+        if UserDefaults.standard.value(forKey: "newUser") as? Bool ?? true {
             let storyboard = UIStoryboard(name: "OnBoarding", bundle: nil)
             let rootVC = storyboard.instantiateInitialViewController() as! OnBoardingViewController
             UserDefaults.standard.set(false, forKey: "newUser")
