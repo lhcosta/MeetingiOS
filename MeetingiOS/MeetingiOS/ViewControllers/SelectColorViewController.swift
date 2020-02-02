@@ -11,6 +11,8 @@ import CloudKit
 
 @objc class SelectColorViewController: UIViewController {
 
+    @IBOutlet weak var collectionView : UICollectionView!
+    
     @IBOutlet weak var viewColorSelected: UIView!
     
     @objc weak var delegate: MeetingDelegate?
@@ -19,27 +21,27 @@ import CloudKit
     var meetingRecord = CKRecord(recordType: "Meeting")
     
     // O numero da cor selecionada
-    @objc var selectedColor = String()
+    @objc var selectedColor : UIColor!
+    
+    private let itemSize = CGSize(width: 48, height: 48)
     
     //Array do hex das cores a serem selecionadas
-    var arrayColors: [String] = [  "#93CCB2",
-                                   "#F2AEAE",
-                                   "#8AB3D1",
-                                   "#DCB4E8",
-                                   "#F5B895",
-                                   "#F2D6AE",
-                                   "#E2F2AE",
-                                   "#A5A2E0"]
+    var colors: [UIColor] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        for i in 1...8 {
+            colors.append(UIColor(named: "ColorMeeting_\(i)")!)
+        }
         
         // Arredonda a view e seta como cor inicial a primeira cor do array
         self.viewColorSelected.layer.cornerRadius = 20
-        self.viewColorSelected.backgroundColor = UIColor(hexString: selectedColor)
+        self.viewColorSelected.backgroundColor = selectedColor
+        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
         
         self.navigationItem.title = NSLocalizedString("Pick a color", comment: "")
     }
@@ -54,41 +56,40 @@ import CloudKit
 extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.arrayColors.count
+        self.colors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colectionCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath)
         
         // Adiciona a cor a celula da collection de acordo com o array de cores
-        cell.backgroundColor = UIColor(hexString: self.arrayColors[indexPath.row])
+        cell.backgroundColor = self.colors[indexPath.row]
         cell.layer.cornerRadius = cell.frame.size.width/2
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.viewColorSelected.backgroundColor = UIColor(hexString: self.arrayColors[indexPath.row])
-        selectedColor = self.arrayColors[indexPath.row]
+        self.viewColorSelected.backgroundColor = self.colors[indexPath.row]
+        selectedColor = self.colors[indexPath.row]
     }
     
     
 }
 
 extension SelectColorViewController: UICollectionViewDelegateFlowLayout {
-    
+  
     // Seta os espaços entre as celulas
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return collectionView.bounds.width/CGFloat(arrayColors.count)
+        return collectionView.frame.width/CGFloat(colors.count)
     }
     
     // Seta os espaços ente linhas
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        return collectionView.bounds.height/CGFloat(arrayColors.count)
+        return collectionView.bounds.height/CGFloat(colors.count)
     }
-    
 }
 
 @objc extension UIColor {
