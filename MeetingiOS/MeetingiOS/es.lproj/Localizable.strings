@@ -13,6 +13,8 @@
 "Creating Meeting..." = "Creando reunión...";
 "None" = "Ninguno";
 "dateFormat" = "dd MMM yyyy  HH:mm";
+"Meeting's name" = "Nombre de lá reunión";
+
 
 /*Contacts Storyboard --- ES*/
 "Add participants" = "Participantes";

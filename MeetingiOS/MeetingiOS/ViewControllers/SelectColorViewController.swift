@@ -25,9 +25,8 @@ import CloudKit
     
     private let itemSize = CGSize(width: 48, height: 48)
     
-    //Array do hex das cores a serem selecionadas
+    //Array  das cores a serem selecionadas
     var colors: [UIColor] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +70,7 @@ extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.viewColorSelected.backgroundColor = self.colors[indexPath.row]
-        selectedColor = indexPath.row
+        selectedColor = indexPath.row + 1
     }
     
     

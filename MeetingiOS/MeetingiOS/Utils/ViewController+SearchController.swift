@@ -25,7 +25,7 @@ extension UIViewController {
             search.searchBar.showsScopeBar = true
         }
         
-        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.hidesSearchBarWhenScrolling = true
         self.navigationItem.searchController = search
 
         definesPresentationContext = true
