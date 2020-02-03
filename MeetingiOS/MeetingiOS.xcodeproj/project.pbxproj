@@ -70,6 +70,11 @@
 		A4922A2C23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */; };
 		A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */; };
 		A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */; };
+		A4BCAD1623E4F38A00470E95 /* TVsTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BCAD1523E4F38A00470E95 /* TVsTableView.xib */; };
+		A4BCAD1823E4F46B00470E95 /* TvsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCAD1723E4F46B00470E95 /* TvsTableView.swift */; };
+		A4BCAD1B23E5043100470E95 /* TvTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCAD1923E5043100470E95 /* TvTableViewCell.swift */; };
+		A4BCAD1C23E5043100470E95 /* TvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BCAD1A23E5043100470E95 /* TvTableViewCell.xib */; };
+		A4BCAD1E23E5075600470E95 /* TvsTableViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCAD1D23E5075600470E95 /* TvsTableViewData.swift */; };
 		A4C5BE8D23A2C105002BE4B9 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */; };
 		A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4C5BE9223A2E6B5002BE4B9 /* ContactCollectionViewCell.m */; };
 		A4E1EA0823E34CFD00B2B32A /* OnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E1EA0623E34CFD00B2B32A /* OnboardingTableViewCell.swift */; };
@@ -196,6 +201,11 @@
 		A4BCAD0E23E4A3B900470E95 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		A4BCAD1023E4A3BC00470E95 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
 		A4BCAD1223E4A3BF00470E95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
+		A4BCAD1523E4F38A00470E95 /* TVsTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVsTableView.xib; sourceTree = "<group>"; };
+		A4BCAD1723E4F46B00470E95 /* TvsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvsTableView.swift; sourceTree = "<group>"; };
+		A4BCAD1923E5043100470E95 /* TvTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvTableViewCell.swift; sourceTree = "<group>"; };
+		A4BCAD1A23E5043100470E95 /* TvTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvTableViewCell.xib; sourceTree = "<group>"; };
+		A4BCAD1D23E5075600470E95 /* TvsTableViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvsTableViewData.swift; sourceTree = "<group>"; };
 		A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		A4C5BE9123A2E6B5002BE4B9 /* ContactCollectionViewCell.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactCollectionViewCell.h; sourceTree = "<group>"; };
@@ -378,6 +388,11 @@
 		A45097B0238D95F9009AB71E /* Multipeer Connectivity */ = {
 			isa = PBXGroup;
 			children = (
+				A4BCAD1D23E5075600470E95 /* TvsTableViewData.swift */,
+				A4BCAD1523E4F38A00470E95 /* TVsTableView.xib */,
+				A4BCAD1723E4F46B00470E95 /* TvsTableView.swift */,
+				A4BCAD1923E5043100470E95 /* TvTableViewCell.swift */,
+				A4BCAD1A23E5043100470E95 /* TvTableViewCell.xib */,
 				A45097AE238D95F4009AB71E /* MeetingBrowserPeer.swift */,
 			);
 			path = "Multipeer Connectivity";
@@ -559,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4922A2723A728FB00FD95B9 /* SFProDisplay-Light.ttf in Resources */,
+				A4BCAD1623E4F38A00470E95 /* TVsTableView.xib in Resources */,
 				A4922A2A23A728FB00FD95B9 /* SFProText-Bold.ttf in Resources */,
 				A4922A2B23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf in Resources */,
 				A4922A1F23A728FB00FD95B9 /* SFProText-Medium.ttf in Resources */,
@@ -573,6 +589,7 @@
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
 				A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */,
 				49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */,
+				A4BCAD1C23E5043100470E95 /* TvTableViewCell.xib in Resources */,
 				492C050523A1819F00442814 /* Profile.storyboard in Resources */,
 				49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */,
 				A4922A2223A728FB00FD95B9 /* SFProText-Semibold.ttf in Resources */,
@@ -622,11 +639,14 @@
 				49BC44C5239FD913007A85E2 /* MyMeetingsTableViewCell.swift in Sources */,
 				49A59B1623E0BC9A003F749C /* StoreManager.swift in Sources */,
 				49BF5F9423DF652600DD56DC /* TableView+Gradient.swift in Sources */,
+				A4BCAD1823E4F46B00470E95 /* TvsTableView.swift in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
 				A4E1EA0823E34CFD00B2B32A /* OnboardingTableViewCell.swift in Sources */,
 				A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */,
+				A4BCAD1B23E5043100470E95 /* TvTableViewCell.swift in Sources */,
+				A4BCAD1E23E5075600470E95 /* TvsTableViewData.swift in Sources */,
 				49CB4C47238D6C6500DFDAD4 /* CloudManager.swift in Sources */,
 				A4E1EA0D23E35D8A00B2B32A /* ContinueOnboardingTableViewCell.swift in Sources */,
 				A45097AF238D95F4009AB71E /* MeetingBrowserPeer.swift in Sources */,

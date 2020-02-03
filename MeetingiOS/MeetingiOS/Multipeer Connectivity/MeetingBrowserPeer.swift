@@ -9,6 +9,12 @@
 import UIKit
 import MultipeerConnectivity
 
+protocol FindTvsDelegate : AnyObject {
+    /// Nova TV encontrada e enviada.
+    /// - Parameter peerID: identificador da TV.
+    func sendNewTV(peerID : MCPeerID)
+}
+
 /// Conexão Multipeer 
 class MeetingBrowserPeer: NSObject {
     
@@ -29,8 +35,15 @@ class MeetingBrowserPeer: NSObject {
     //Data para ser enviado através dos peers
     private var data : Data!
     
-    //MARK:- Initializer
-    override init() {
+    /// Delegate para enviar as Tvs encontradas.
+    private var delegate : FindTvsDelegate?
+    
+    ///Peer que a sessao está conectada.
+    private var connectedPeer : MCPeerID!
+    
+    /// Inicializando Multipeer
+    /// - Parameter delegate: quem vai receber as Tvs achadas.
+    init<T : FindTvsDelegate>(_ delegate : T) {
         super.init()
         
         self.peer = MCPeerID(displayName: UIDevice.current.name)
@@ -38,8 +51,11 @@ class MeetingBrowserPeer: NSObject {
         self.serviceBrowser.delegate = self
         self.session = MCSession(peer: self.peer, securityIdentity: nil, encryptionPreference: .required)
         self.session.delegate = self
+        self.delegate = delegate
+        self.serviceBrowser.startBrowsingForPeers()
+        
     }
-
+    
     /// Data para ser enviado para o outro peer
     /// - Parameters:
     ///   - data: dados a serem enviados
@@ -52,20 +68,20 @@ class MeetingBrowserPeer: NSObject {
         } catch let error {
             completionHandler(error)
         }        
+        
     }
     
-    
-    /// Dados a serem enviados para o peer
-    /// - Parameter data: data
-    func sendingDataFromPeer(data : Data) {
-        self.data = data
-        self.serviceBrowser.startBrowsingForPeers()        
-    }
-    
+
     /// Parar a busca de peers.
     func stoppingBrowserPeer() {
         self.serviceBrowser.stopBrowsingForPeers()
         NSLog("%@", "Stop Browser peer")
+    }
+    
+    /// Enviando convite para peer selecionado.
+    /// - Parameter peerID: peer selecionado.
+    func sendInviteFromPeer(peerID : MCPeerID) {
+        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
     }
     
 }
@@ -78,8 +94,7 @@ extension MeetingBrowserPeer : MCNearbyServiceBrowserDelegate {
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
-        NSLog("%@", "Connection with - \(peerID)")
+        self.delegate?.sendNewTV(peerID: peerID)            
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -93,16 +108,11 @@ extension MeetingBrowserPeer : MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
             case .connected:
-                self.sendMeetingForPeer(data: data) { (error) in
-                    if let error = error {
-                        print("Error - > \(error)")
-                    }
-            }
-            
-                self.stoppingBrowserPeer()
+                
+               
+            break
             case .notConnected:
-                NSLog("%@", "Did not connect")
-                //self.serviceBrowser.startBrowsingForPeers()
+      
                 break
             default:
             break

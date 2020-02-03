@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mcd-M6-zaN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mcd-M6-zaN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,6 +59,7 @@
                                                 <constraint firstItem="zAs-rc-acw" firstAttribute="leading" secondItem="pej-N8-ug5" secondAttribute="leading" constant="20" id="jKT-yJ-C0A"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="ColorTableViewCell"/>
                                         <connections>
                                             <outlet property="authorNameLabel" destination="6ae-H6-rPi" id="XYi-qZ-xq2"/>
                                             <outlet property="topicDescriptionLabel" destination="bOu-eD-5Yh" id="uM4-gH-7qN"/>
@@ -70,7 +72,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="5xs-u1-q25" firstAttribute="leading" secondItem="Hky-74-jXB" secondAttribute="leading" id="3Fm-rR-bbg"/>
                             <constraint firstItem="Hky-74-jXB" firstAttribute="trailing" secondItem="5xs-u1-q25" secondAttribute="trailing" id="4yJ-Ln-hrG"/>
@@ -116,7 +118,7 @@
                                 <constraints>
                                     <constraint firstItem="x9v-h1-NPe" firstAttribute="leading" secondItem="j2g-Pn-eez" secondAttribute="leading" constant="20" id="1Fb-eA-aWu"/>
                                     <constraint firstItem="Vmr-lL-fhP" firstAttribute="leading" secondItem="j2g-Pn-eez" secondAttribute="leading" constant="15" id="8re-KG-xcs"/>
-                                    <constraint firstAttribute="trailing" secondItem="x9v-h1-NPe" secondAttribute="trailing" constant="20" id="92w-cY-gjB"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="x9v-h1-NPe" secondAttribute="trailing" constant="20" id="92w-cY-gjB"/>
                                     <constraint firstItem="Vmr-lL-fhP" firstAttribute="centerX" secondItem="j2g-Pn-eez" secondAttribute="centerX" id="BqE-Vh-Dax"/>
                                     <constraint firstAttribute="trailing" secondItem="Vmr-lL-fhP" secondAttribute="trailing" constant="15" id="DAh-Dt-UYC"/>
                                     <constraint firstItem="x9v-h1-NPe" firstAttribute="centerY" secondItem="j2g-Pn-eez" secondAttribute="centerY" id="JiH-kZ-1oM"/>
@@ -157,7 +159,6 @@
                                                         </label>
                                                         <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qhX-fV-0wD">
                                                             <rect key="frame" x="33" y="15" width="319" height="143"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
@@ -245,8 +246,8 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXi-w9-4Zn">
-                                <rect key="frame" x="20" y="189" width="84" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Created by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXi-w9-4Zn">
+                                <rect key="frame" x="20" y="189" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -311,6 +312,7 @@
                             <constraint firstItem="SXi-w9-4Zn" firstAttribute="leading" secondItem="dht-L1-VYm" secondAttribute="leading" constant="20" id="eug-pQ-PHo"/>
                             <constraint firstItem="j2g-Pn-eez" firstAttribute="height" secondItem="3rG-q4-thg" secondAttribute="height" multiplier="0.078125" id="f3p-kS-LVt"/>
                             <constraint firstItem="Xsq-wa-eBX" firstAttribute="leading" secondItem="dht-L1-VYm" secondAttribute="leading" constant="20" id="g9K-dQ-6N6"/>
+                            <constraint firstItem="dht-L1-VYm" firstAttribute="trailing" secondItem="SXi-w9-4Zn" secondAttribute="trailing" constant="20" id="ldM-Db-Xsz"/>
                             <constraint firstItem="dht-L1-VYm" firstAttribute="trailing" secondItem="Xsq-wa-eBX" secondAttribute="trailing" constant="20" id="ohB-u5-ifJ"/>
                             <constraint firstItem="YCp-db-hX2" firstAttribute="leading" secondItem="dht-L1-VYm" secondAttribute="leading" id="q4M-X1-eGN"/>
                             <constraint firstItem="Dl9-BS-ziK" firstAttribute="leading" secondItem="dht-L1-VYm" secondAttribute="leading" constant="20" id="tmd-du-XZn"/>
@@ -332,10 +334,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLh-3g-hUD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2573.913043478261" y="582.58928571428567"/>
+            <point key="canvasLocation" x="2254" y="583"/>
         </scene>
     </scenes>
     <resources>
         <image name="circle.fill" catalog="system" width="64" height="60"/>
+        <namedColor name="BackgroundColor">
+            <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ColorTableViewCell">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

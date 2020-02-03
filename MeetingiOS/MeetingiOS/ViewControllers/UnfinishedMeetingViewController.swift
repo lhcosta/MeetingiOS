@@ -8,7 +8,7 @@
 
 import UIKit
 import CloudKit
-
+import MultipeerConnectivity
 
 /// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
 class UnfinishedMeetingViewController: UIViewController {
@@ -53,12 +53,14 @@ class UnfinishedMeetingViewController: UIViewController {
     
     var selectedTopicForInfo: Topic?
     
+    private var tvsTableView : TvsTableView!
+    
+    private var blurEffectView : UIVisualEffectView!
+    
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.backgroundColor = .clear
-        
+                        
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
         self.navigationItem.searchController?.searchBar.delegate = self
@@ -69,15 +71,14 @@ class UnfinishedMeetingViewController: UIViewController {
         tableViewTopics.dataSource = self
         
         self.navigationItem.title = currMeeting.theme
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(selectedTv(notification:)), name: Notification.Name(rawValue:"SelectedTV"), object: nil)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        //SO TESTE
-        self.multipeer = MeetingBrowserPeer()
-        
+                
         CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
             if let record = record?.values.first {
                 self.currMeeting = Meeting(record: record)
@@ -132,6 +133,10 @@ class UnfinishedMeetingViewController: UIViewController {
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     /// Criamos um Topic com os dados do Usuário.
@@ -217,6 +222,10 @@ class UnfinishedMeetingViewController: UIViewController {
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
+        showTvTableView()
+        
+        
+        
         self.currMeeting.started = true
         CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
             if let error = error {
@@ -224,21 +233,56 @@ class UnfinishedMeetingViewController: UIViewController {
             }
         }) {}
         
-        self.multipeer = MeetingBrowserPeer()
-        let encoder = JSONEncoder()
-        
-        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
-            return topic.selectedForMeeting ? topic : nil
-        })
-        
-        do {
-            let data = try encoder.encode(self.currMeeting)
-            self.multipeer?.sendingDataFromPeer(data: data)
-        } catch {
-            print(error)
-        }
+//        let encoder = JSONEncoder()
+//        
+//        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
+//            return topic.selectedForMeeting ? topic : nil
+//        })
+//        
+//        do {
+//            let data = try encoder.encode(self.currMeeting)
+//            self.multipeer?.sendingDataFromPeer(data: data)
+//        } catch {
+//            print(error)
+//        }
     }
     
+    /// Apresentar TVs disponiveis para espelhar.
+    func showTvTableView() {
+        
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.frame = self.navigationController!.view.bounds
+        
+        self.navigationController?.view.addSubview(blurEffectView)
+        
+        tvsTableView = TvsTableView()
+        let tvsTableViewData = TvsTableViewData(tvsTableView)
+        
+        tvsTableView.awakeFromNib()
+        
+        self.multipeer = MeetingBrowserPeer(tvsTableViewData)
+        
+        blurEffectView.contentView.addSubview(tvsTableView)
+        
+        NSLayoutConstraint.activate([
+            tvsTableView.widthAnchor.constraint(equalTo: blurEffectView.widthAnchor, multiplier: 0.8),
+            tvsTableView.heightAnchor.constraint(equalTo: blurEffectView.heightAnchor, multiplier: 0.25),
+            tvsTableView.centerXAnchor.constraint(equalTo: blurEffectView.centerXAnchor),
+            tvsTableView.centerYAnchor.constraint(equalTo: blurEffectView.centerYAnchor)
+        ])
+        
+        tvsTableView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    /// Recebendo o peer selecionado através de uma notificação enviada.
+    /// - Parameter notification: notificacao enviada.
+    @objc private func selectedTv(notification : NSNotification) {
+        guard let peerId = notification.object as? MCPeerID else {return}
+        self.multipeer?.sendInviteFromPeer(peerID: peerId)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let conclusionVC = segue.destination as? ConclusionsViewController {
@@ -581,3 +625,4 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
 }
+

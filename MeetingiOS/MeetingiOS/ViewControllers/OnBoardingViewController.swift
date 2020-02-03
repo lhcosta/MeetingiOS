@@ -35,7 +35,7 @@ class OnBoardingViewController: UIViewController {
             }
         }
         
-        self.view.backgroundColor = UIColor(named: "OnboardingColor")
+        self.view.backgroundColor = UIColor(named: "BackgroundColor")
     }
 }
 

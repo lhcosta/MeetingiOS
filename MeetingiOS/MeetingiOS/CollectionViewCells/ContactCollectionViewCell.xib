@@ -29,7 +29,7 @@
                                 <color key="tintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="KIB-jU-Wgq"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="59" id="sRN-TB-3Oj"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="sRN-TB-3Oj"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJz-jY-5dY">
@@ -56,7 +56,7 @@
                 <outlet property="contactImage" destination="Y8b-iA-ifw" id="XXC-Vo-bR5"/>
                 <outlet property="name" destination="pJz-jY-5dY" id="edW-LI-Ruc"/>
             </connections>
-            <point key="canvasLocation" x="-43.478260869565219" y="35.491071428571423"/>
+            <point key="canvasLocation" x="-43.478260869565219" y="34.821428571428569"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -19,7 +20,7 @@
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="IG8-XC-YQX" customClass="DetailsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="0GN-J4-vzT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -319,30 +320,42 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="C5H-xb-uCC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="g36-HT-Cqa">
                                         <rect key="frame" x="0.0" y="700" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C5H-xb-uCC" id="KWZ-Bx-Rh4">
+                                        <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g36-HT-Cqa" id="FQP-So-IhL">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="j4h-OL-Pna">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="100"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmB-N6-wRZ">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="99"/>
+                                                    <subviews>
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bgq-Uf-LGm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="99"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gcK-Qi-Gqi">
+                                                                <size key="itemSize" width="90" height="70"/>
+                                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            </collectionViewFlowLayout>
+                                                            <cells/>
+                                                        </collectionView>
+                                                    </subviews>
                                                     <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zBM-jF-5kW">
-                                                        <size key="itemSize" width="90" height="81"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    </collectionViewFlowLayout>
-                                                    <cells/>
-                                                </collectionView>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="Bgq-Uf-LGm" secondAttribute="trailing" id="Ihv-ln-4om"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Bgq-Uf-LGm" secondAttribute="bottom" id="VmT-WA-Fim"/>
+                                                        <constraint firstItem="Bgq-Uf-LGm" firstAttribute="leading" secondItem="gmB-N6-wRZ" secondAttribute="leading" id="WeW-1y-nL3"/>
+                                                        <constraint firstItem="Bgq-Uf-LGm" firstAttribute="top" secondItem="gmB-N6-wRZ" secondAttribute="top" id="p3g-ai-Vyg"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="j4h-OL-Pna" secondAttribute="bottom" id="CbW-Py-V61"/>
-                                                <constraint firstItem="j4h-OL-Pna" firstAttribute="leading" secondItem="KWZ-Bx-Rh4" secondAttribute="leading" constant="20" id="Xtc-lC-PgF"/>
-                                                <constraint firstAttribute="trailing" secondItem="j4h-OL-Pna" secondAttribute="trailing" constant="20" id="awP-va-6ec"/>
-                                                <constraint firstItem="j4h-OL-Pna" firstAttribute="top" secondItem="KWZ-Bx-Rh4" secondAttribute="top" id="pG6-e9-UT4"/>
+                                                <constraint firstItem="gmB-N6-wRZ" firstAttribute="top" secondItem="FQP-So-IhL" secondAttribute="top" id="3ht-tx-tGc"/>
+                                                <constraint firstAttribute="bottom" secondItem="gmB-N6-wRZ" secondAttribute="bottom" priority="750" constant="1" id="buC-E3-4Wf"/>
+                                                <constraint firstItem="gmB-N6-wRZ" firstAttribute="leading" secondItem="FQP-So-IhL" secondAttribute="leading" constant="20" id="h3A-fu-VfJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="gmB-N6-wRZ" secondAttribute="trailing" constant="20" id="mZc-2m-cgi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -436,7 +449,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionParticipants" destination="j4h-OL-Pna" id="ACm-XQ-2Ql"/>
+                        <outlet property="collectionParticipants" destination="Bgq-Uf-LGm" id="qzN-0V-UkY"/>
+                        <outlet property="contentViewCollection" destination="gmB-N6-wRZ" id="g0R-32-9TS"/>
                         <outlet property="endesDate" destination="akg-em-m2H" id="ibZ-bg-Cz7"/>
                         <outlet property="finishDatePicker" destination="QDD-hT-8NX" id="pjs-bw-kbw"/>
                         <outlet property="meetingAdmin" destination="1TA-Oz-Ec9" id="Cdx-f9-Nf6"/>
@@ -475,11 +489,12 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jvK-K9-OpN" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BKc-Zo-hM5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="BKc-Zo-hM5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="NavigationBarColor"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" name="MeetingColor"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -495,5 +510,11 @@
     <resources>
         <image name="chevron.right" catalog="system" width="48" height="64"/>
         <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+        <namedColor name="MeetingColor">
+            <color red="0.0" green="0.24705882352941178" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NavigationBarColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        DispatchQueue.main.async {
         //            application.registerForRemoteNotifications()
         //        }
+        
         return true
     }
     
@@ -60,3 +61,4 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         EventManager.saveMeeting(theme, starting: begin, ending: end)
     }
 }
+
