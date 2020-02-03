@@ -21,22 +21,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
-                                <rect key="frame" x="20" y="44" width="374" height="769"/>
+                                <rect key="frame" x="20" y="44" width="374" height="748"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="77" id="0Vh-IY-nnt" customClass="UnfinishedTopicsTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="77" id="0Vh-IY-nnt" customClass="UnfinishedTopicsTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="374" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Vh-IY-nnt" id="JLj-gr-1tY">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWC-TR-COq">
-                                                    <rect key="frame" x="64" y="30" width="248" height="17"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="17" id="57K-oc-w59"/>
-                                                    </constraints>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWC-TR-COq">
+                                                    <rect key="frame" x="64" y="21" width="245" height="35"/>
                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -70,6 +67,8 @@
                                                 <constraint firstItem="fZC-WN-pwk" firstAttribute="top" secondItem="JLj-gr-1tY" secondAttribute="top" constant="25" id="0vJ-iL-qMx"/>
                                                 <constraint firstItem="105-1b-AMg" firstAttribute="leading" secondItem="JLj-gr-1tY" secondAttribute="leading" constant="10" id="6yg-gm-xF2"/>
                                                 <constraint firstAttribute="bottom" secondItem="fZC-WN-pwk" secondAttribute="bottom" constant="25" id="BfI-Y6-SBj"/>
+                                                <constraint firstItem="qWC-TR-COq" firstAttribute="top" secondItem="JLj-gr-1tY" secondAttribute="topMargin" constant="10" id="J0g-i5-Ypf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qWC-TR-COq" secondAttribute="bottom" constant="10" id="Kbd-Ag-M08"/>
                                                 <constraint firstAttribute="trailing" secondItem="fZC-WN-pwk" secondAttribute="trailing" constant="15" id="Q0D-wz-cGP"/>
                                                 <constraint firstItem="105-1b-AMg" firstAttribute="centerY" secondItem="JLj-gr-1tY" secondAttribute="centerY" id="SzM-Zn-DyJ"/>
                                                 <constraint firstItem="qWC-TR-COq" firstAttribute="leading" secondItem="105-1b-AMg" secondAttribute="trailing" constant="8" id="a9C-ek-6aB"/>
@@ -94,7 +93,10 @@
                                 </prototypes>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X9q-nQ-8LI">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="792" width="414" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="3vS-dY-mMU"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ck1-5D-b4d"/>
                                     <barButtonItem title="Item" image="mirror" id="6rh-rZ-xC0">
@@ -142,6 +144,6 @@
     <resources>
         <image name="checkmark.square.fill" catalog="system" width="64" height="56"/>
         <image name="info.circle" catalog="system" width="64" height="60"/>
-        <image name="mirror" width="89" height="31"/>
+        <image name="mirror" width="122" height="38"/>
     </resources>
 </document>

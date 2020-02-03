@@ -68,6 +68,13 @@ class FinishedMeetingViewController: UIViewController {
     }
     
     
+    @IBAction func infoButton(_ sender: Any) {
+        
+        performSegue(withIdentifier: "conclusions", sender: sender)
+    }
+    
+    
+    
     /// Identificamos a passagem dessa ViewController para a ConclusionViewController e passamos o Topic selecionado na TableView
     ///  para então exibirmos suas Conclusions na ConclusionsViewController.
     /// - Parameters:
@@ -76,8 +83,14 @@ class FinishedMeetingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "conclusions" {
             let vc = segue.destination as! ConclusionsViewController
-            let temp = sender as? Topic
-            vc.topicToPresentConclusions = temp
+            if let button = sender as? UIButton {
+                guard let cell = button.superview?.superview as? FinishedTopicsTableViewCell else {
+                    return
+                }
+                let indexPath = topicsTableView.indexPath(for: cell)
+                let topicsArray = self.filtering ? self.filtered : self.topicsToShow
+                vc.topicToPresentConclusions = topicsArray[indexPath!.section]
+            }
         }
     }
     
@@ -153,8 +166,8 @@ extension FinishedMeetingViewController: UITableViewDelegate, UITableViewDataSou
 
         let topicsArray = self.filtering ? self.filtered : self.topicsToShow
 
-        cell.authorNameLabel.text = topicsArray[indexPath.row].authorName
-        cell.topicDescriptionLabel.text = topicsArray[indexPath.row].topicDescription
+        cell.authorNameLabel.text = topicsArray[indexPath.section].authorName
+        cell.topicDescriptionLabel.text = topicsArray[indexPath.section].topicDescription
 
         return cell
     }
