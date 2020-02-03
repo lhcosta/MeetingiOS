@@ -14,6 +14,7 @@
 #import "UIView+CornerShadows.h"
 #import "TopicsPerPersonPickerView.h"
 #import "TypeUpdateUser.h"
+#import "UIViewController+StatusBarBackground.h"
 
 @interface NewMeetingViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
@@ -78,8 +79,9 @@
     
     _managerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_managerController setupCollectionViewContacts:_collectionView];
-    [_collectionView setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]]; 
+    [_collectionView setBackgroundColor:UIColor.clearColor]; 
     [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_contentViewCollection setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]];
     
     [self setupViews];
         
@@ -90,6 +92,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+//    [self addColorToStatusBarBackground:[UIColor colorNamed:@"NavigationBarColor"] inView:self.navigationController.view];
+//        
     if([_contactCollectionView.contacts count] != 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:0.5 animations:^{

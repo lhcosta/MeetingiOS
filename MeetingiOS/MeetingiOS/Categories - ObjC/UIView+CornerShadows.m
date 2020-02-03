@@ -23,7 +23,6 @@
     self.layer.shadowRadius = 1;
     self.layer.shadowOffset = CGSizeMake(0, 1);
     self.clipsToBounds = false;
-    
     self.layer.cornerRadius = 5;
 }
 

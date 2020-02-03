@@ -18,3 +18,4 @@
 #import "ContactCollectionView.h"
 #import "DetailsTableViewController.h"
 #import "TypeUpdateUser.h"
+#import "UIViewController+StatusBarBackground.h"

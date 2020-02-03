@@ -30,12 +30,11 @@ import CloudKit
     
     //MARK:- IBOutlets
     @IBOutlet weak var tableView: UITableView!
-
     
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         meetings.append([Meeting]())
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]
@@ -60,6 +59,11 @@ import CloudKit
         super.viewWillAppear(animated)
         self.navigationItem.hidesSearchBarWhenScrolling = true
         self.showNewMeeting()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)
     }
     
     //MARK:- Methods

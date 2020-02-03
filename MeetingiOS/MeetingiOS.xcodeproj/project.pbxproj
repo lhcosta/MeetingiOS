@@ -86,6 +86,7 @@
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
 		A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */; };
 		A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1E2397EAF60097857F /* ContactManager.m */; };
+		A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
 		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */; };
@@ -225,6 +226,8 @@
 		A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NewFeatures.m"; sourceTree = "<group>"; };
 		A4EB3C1D2397EAF60097857F /* ContactManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactManager.h; sourceTree = "<group>"; };
 		A4EB3C1E2397EAF60097857F /* ContactManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
+		A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBarBackground.h"; sourceTree = "<group>"; };
+		A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBarBackground.m"; sourceTree = "<group>"; };
 		A4F8226E23CD0B59006AE7C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		A4F8227023CD0B5C006AE7C8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
 		A4F8227223CD0B5E006AE7C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
@@ -471,6 +474,8 @@
 		A4EB3BEB239607CB0097857F /* Categories - ObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */,
+				A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */,
 				A44CC30923D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.h */,
 				A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */,
 				A40E5ADD23CF56160009C25C /* UIView+CornerShadows.h */,
@@ -626,6 +631,7 @@
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
+				A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */,
 				A44CC31B23DB841F005ECFF6 /* DetailsTableViewController.m in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
