@@ -16,6 +16,7 @@ class UnfinishedMeetingViewController: UIViewController {
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
     @IBOutlet var mirrorButton: UIToolbar!
+    @IBOutlet weak var buttonItem: UIBarButtonItem!
     
     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
@@ -71,7 +72,7 @@ class UnfinishedMeetingViewController: UIViewController {
         tableViewTopics.dataSource = self
         
         self.navigationItem.title = currMeeting.theme
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
+//        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
         
         NotificationCenter.default.addObserver(self, selector: #selector(selectedTv(notification:)), name: Notification.Name(rawValue:"SelectedTV"), object: nil)
     }
@@ -127,8 +128,8 @@ class UnfinishedMeetingViewController: UIViewController {
         if usrIsManager {
             mirrorButton.isHidden = false
         } else {
-            mirrorButton.isHidden = true
-            //            self.bgButtonImg = "square."
+            buttonItem.image = UIImage(named: "onboarding_3")
+//            self.bgButtonImg = "square."
         }
         
         tableViewTopics.delegate = self
@@ -182,7 +183,9 @@ class UnfinishedMeetingViewController: UIViewController {
     @IBAction func selectTopicButton(_ sender: Any) {
         
         guard let button = sender as? UIButton else { return }
+        
         guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
+        
         let indexPath = tableViewTopics.indexPath(for: cell)
         
         if topics[indexPath!.section].selectedForMeeting {
@@ -192,6 +195,7 @@ class UnfinishedMeetingViewController: UIViewController {
             button.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             topics[indexPath!.section].selectedForMeeting = true
         }
+        
         // Atualizamos o Cloud da selectedForMeeting.
         CloudManager.shared.updateRecords(records: [topics[indexPath!.section].record], perRecordCompletion: { (_, error) in
             if let error = error {
@@ -199,6 +203,7 @@ class UnfinishedMeetingViewController: UIViewController {
                 return
             }
         }) { }
+        
         
     }
     
@@ -222,9 +227,12 @@ class UnfinishedMeetingViewController: UIViewController {
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
-        showTvTableView()
         
-        
+        for idx in 1..<topics.count {
+            if topics[idx].selectedForMeeting {
+                currMeeting.selected_topics.append(topics[idx])
+            }
+        }
         
         self.currMeeting.started = true
         CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
@@ -233,18 +241,9 @@ class UnfinishedMeetingViewController: UIViewController {
             }
         }) {}
         
-        //        let encoder = JSONEncoder()
-        //        
-        //        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
-        //            return topic.selectedForMeeting ? topic : nil
-        //        })
-        //        
-        //        do {
-        //            let data = try encoder.encode(self.currMeeting)
-        //            self.multipeer?.sendingDataFromPeer(data: data)
-        //        } catch {
-        //            print(error)
-        //        }
+        showTvTableView()
+
+   
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
