@@ -26,6 +26,7 @@
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView; 
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
 @property (nonatomic) DetailsNewMeetingManager* managerController;
+@property (nonatomic) NSInteger index_color;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -47,7 +48,10 @@
     
     //Construtores
     //Cor do Background
-    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
+    [self.view setBackgroundColor:UIColor.clearColor];
+    self.tableView.backgroundColor = [UIColor colorNamed:@"BackgroundColor"];
+    
+    _index_color = 1;
     
     //Iniciando nova reunião.
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
@@ -59,7 +63,6 @@
     
     _meeting = [[Meeting alloc] initWithRecord:record];
     _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
-    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     
     self.numbersOfPeople.text = NSLocalizedString(@"None", "");
     
@@ -71,8 +74,12 @@
     _chooseStartTime = NO;
     _chooseEndTime = NO;
     
+    _colorMetting.backgroundColor = [UIColor colorNamed: [NSString stringWithFormat:@"ColorMeeting_%i", 1]];
+    
     _managerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_managerController setupCollectionViewContacts:_collectionView];
+    [_collectionView setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]]; 
+    [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
     
     [self setupViews];
         
@@ -107,7 +114,7 @@
     
     for (UIView* view in self.views) {
         
-        [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
+        [view setBackgroundColor:[UIColor colorNamed:@"ColorTableViewCell"]];
         
         switch (view.tag) {
             case 1:
@@ -158,7 +165,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 15;
+    return 20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -255,7 +262,7 @@
         
         if(viewController) {
             [viewController setDelegate:self];
-            [viewController setSelectedColor: self.colorMetting.backgroundColor.toHexString];
+            [viewController setSelectedColor: _index_color];
         }
     }
 }
@@ -313,7 +320,7 @@
     
     [_meeting setManager:manager];
     [_meeting setTheme:theme];
-    [_meeting setColor: _colorMetting.backgroundColor.toHexString];
+    [_meeting setColor: [NSString stringWithFormat:@"%li", _index_color]];
     [_meeting setInitialDate:[_formatter dateFromString:_startsDateTime.text]];
     [_meeting setFinalDate:[_formatter dateFromString:_endesDateTime.text]];
     [_meeting setLimitTopic:_numbersOfTopics.text.integerValue];
@@ -357,10 +364,13 @@
     [self performSegueWithIdentifier:@"SelectColor" sender:Nil];
 }
 
-- (void)selectedColor:(NSString *)hex {;
-    //Pegar cor de acordo com o hex    
-    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:hex alpha:1];
+//MARK:- Meeting Delegate
+- (void)selectedColor:(NSInteger)index_color {
+    NSString *color = [NSString stringWithFormat:@"ColorMeeting_%li", index_color];
+    _colorMetting.backgroundColor = [UIColor colorNamed: color];
+    _index_color = index_color;
 }
+
 
 //MARK:- TopicsPerPersonPickerViewDelegate 
 - (void)changedNumberOfTopics:(NSInteger)amount {

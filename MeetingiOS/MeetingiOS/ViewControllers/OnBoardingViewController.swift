@@ -34,6 +34,8 @@ class OnBoardingViewController: UIViewController {
                 NSLocalizedString(text, comment: "")
             }
         }
+        
+        self.view.backgroundColor = UIColor(named: "BackgroundColor")
     }
 }
 
@@ -123,8 +125,6 @@ extension OnBoardingViewController : UITableViewDelegate {
         
         return height
     }
-    
-    
 }
 
 

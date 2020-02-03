@@ -7,6 +7,7 @@
 //
 
 #import "UIView+CornerShadows.h"
+#import <MeetingiOS-Swift.h>
 
 @implementation UIView (CornerShadows)
 
@@ -16,12 +17,14 @@
 }
 
 - (void)setupCornerRadiusShadow {
-    self.layer.shadowColor = UIColor.blackColor.CGColor;
-    self.layer.shadowOpacity = 0.1;
-    self.layer.shadowRadius = 7;
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(0, 2);
-    self.layer.cornerRadius = 7;
+    self.layer.shadowColor = [[UIColor alloc] initWithHexString:@"#00000029" alpha:1].CGColor;
+    self.layer.masksToBounds = YES;
+    self.layer.shadowOpacity = 0.2;
+    self.layer.shadowRadius = 1;
+    self.layer.shadowOffset = CGSizeMake(0, 1);
+    self.clipsToBounds = false;
+    
+    self.layer.cornerRadius = 5;
 }
 
 @end

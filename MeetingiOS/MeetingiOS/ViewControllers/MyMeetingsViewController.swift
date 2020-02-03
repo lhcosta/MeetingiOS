@@ -42,9 +42,8 @@ import CloudKit
         
         self.tableView.refreshControl = refreshControl
         self.tableView.keyboardDismissMode = .onDrag
-        self.tableView.setTableViewBackgroundGradient()
-        
-        
+        //self.tableView.setTableViewBackgroundGradient()
+                
         // MARK: Nav Controller Settings
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
@@ -54,7 +53,7 @@ import CloudKit
         // MARK: Query no CK
         guard let _ = defaults.string(forKey: "recordName") else { return }
         self.refreshingMeetings()
-        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -232,11 +231,13 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.contentView.layer.cornerRadius = 5
         var color = UIColor()
-        if let colorHex = meetingsArray[indexPath.section].color {
-            color = UIColor(hexString: colorHex)
+        
+        if let colorIndex = meetingsArray[indexPath.section].color {
+            color = UIColor(named: "ColorMeeting_\(colorIndex)")!
         } else {
-            color = UIColor(hexString: "93CCB2")
+            color = UIColor(named: "ColorMeeting_1")!
         }
+        
         cell.contentView.backgroundColor = color
         
         return cell

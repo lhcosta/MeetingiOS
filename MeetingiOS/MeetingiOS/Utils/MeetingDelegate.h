@@ -13,6 +13,6 @@
 
 @required
 /// Enviando a cor selecionado.
-- (void) selectedColor:(NSString*)hex;
+- (void) selectedColor:(NSInteger)index_color;
 
 @end

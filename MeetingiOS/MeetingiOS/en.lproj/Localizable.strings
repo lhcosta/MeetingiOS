@@ -13,6 +13,7 @@
 "Creating Meeting..." = "Creating meeting...";
 "None" = "None";
 "dateFormat" = "MMM, dd yyyy  hh:mm a";
+"Meeting's name" = "Meeting's name";
 
 /*Contacts Storyboard --- EN*/
 "Add participants" = "Participants";

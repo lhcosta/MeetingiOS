@@ -47,7 +47,7 @@
     //Nao realizar o dismiss com swipe
     [self setModalInPresentation:YES];
 
-    [self.view setBackgroundColor:[[UIColor alloc] initWithHexString:@"#FAFAFA" alpha:1]];
+    [self.view setBackgroundColor:[UIColor colorNamed:@"BackgroundColor"]];
     
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.dateFormat = NSLocalizedString(@"dateFormat", "");
@@ -62,6 +62,7 @@
         
     _detailsManagerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_detailsManagerController setupCollectionViewContacts:_collectionParticipants];
+     [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
     
     [self setupViews];
     [self showLoadingView];
@@ -164,7 +165,7 @@
     
     for(UIView* view in _views) {
         
-        [view setBackgroundColor:[[UIColor alloc]initWithHexString:@"#FEFEFF" alpha:1]];
+        [view setBackgroundColor:[UIColor colorNamed:@"ColorTableViewCell"]];
         
         switch (view.tag) {
             case 2:
@@ -404,7 +405,7 @@
 - (void)changeMeetingName:(id)sender {
     [self.meetingName setUserInteractionEnabled:YES];
     [self.meetingName setText:@""];
-    [self.meetingName setPlaceholder:@"Meeting's name"];
+    [self.meetingName setPlaceholder:NSLocalizedString(@"Meeting's name", "")];
     [self.meetingName becomeFirstResponder];
     [self.modifyName setHidden:YES];
 }
