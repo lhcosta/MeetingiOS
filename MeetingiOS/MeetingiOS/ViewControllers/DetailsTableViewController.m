@@ -62,7 +62,7 @@
         
     _detailsManagerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_detailsManagerController setupCollectionViewContacts:_collectionParticipants];
-    [_collectionParticipants setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]];
+     [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
     
     [self setupViews];
     [self showLoadingView];

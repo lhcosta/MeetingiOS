@@ -63,7 +63,6 @@
     
     _meeting = [[Meeting alloc] initWithRecord:record];
     _topicsPickerView = [[TopicsPerPersonPickerView alloc] init];
-    _colorMetting.backgroundColor = [[UIColor alloc] initWithHexString:@"#93CCB2" alpha:1];
     
     self.numbersOfPeople.text = NSLocalizedString(@"None", "");
     
@@ -75,10 +74,12 @@
     _chooseStartTime = NO;
     _chooseEndTime = NO;
     
+    _colorMetting.backgroundColor = [UIColor colorNamed: [NSString stringWithFormat:@"ColorMeeting_%i", 1]];
+    
     _managerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_managerController setupCollectionViewContacts:_collectionView];
     [_collectionView setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]]; 
-    [_collectionView setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
     
     [self setupViews];
         
