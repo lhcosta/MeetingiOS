@@ -12,11 +12,11 @@ import MultipeerConnectivity
 
 /// ViewController onde adicionamos os Topics em um Meeting (MeetingViewController ficaria melhor :/).
 class UnfinishedMeetingViewController: UIViewController {
-
+    
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
     @IBOutlet var mirrorButton: UIToolbar!
-
+    
     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
     var topics: [Topic] = []
@@ -60,11 +60,11 @@ class UnfinishedMeetingViewController: UIViewController {
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
         self.navigationItem.searchController?.searchBar.delegate = self
-//        self.navigationItem.searchController?.searchBar.showsCancelButton = true
+        //        self.navigationItem.searchController?.searchBar.showsCancelButton = true
         self.navigationItem.searchController?.searchBar.returnKeyType = .done
         
         tableViewTopics.delegate = self
@@ -78,7 +78,7 @@ class UnfinishedMeetingViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-                
+        
         CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
             if let record = record?.values.first {
                 self.currMeeting = Meeting(record: record)
@@ -128,7 +128,7 @@ class UnfinishedMeetingViewController: UIViewController {
             mirrorButton.isHidden = false
         } else {
             mirrorButton.isHidden = true
-//            self.bgButtonImg = "square."
+            //            self.bgButtonImg = "square."
         }
         
         tableViewTopics.delegate = self
@@ -175,12 +175,12 @@ class UnfinishedMeetingViewController: UIViewController {
             newTopicCell.topicTextField.becomeFirstResponder()
         }
     }
-
+    
     
     /// Check mark, só para o gerente, que decide se o Topic atual irá para a Meeting.
     /// - Parameter sender: UIButton
     @IBAction func selectTopicButton(_ sender: Any) {
-       
+        
         guard let button = sender as? UIButton else { return }
         guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         let indexPath = tableViewTopics.indexPath(for: cell)
@@ -233,55 +233,18 @@ class UnfinishedMeetingViewController: UIViewController {
             }
         }) {}
         
-//        let encoder = JSONEncoder()
-//        
-//        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
-//            return topic.selectedForMeeting ? topic : nil
-//        })
-//        
-//        do {
-//            let data = try encoder.encode(self.currMeeting)
-//            self.multipeer?.sendingDataFromPeer(data: data)
-//        } catch {
-//            print(error)
-//        }
-    }
-    
-    /// Apresentar TVs disponiveis para espelhar.
-    func showTvTableView() {
-        
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.frame = self.navigationController!.view.bounds
-        
-        self.navigationController?.view.addSubview(blurEffectView)
-        
-        tvsTableView = TvsTableView()
-        let tvsTableViewData = TvsTableViewData(tvsTableView)
-        
-        tvsTableView.awakeFromNib()
-        
-        self.multipeer = MeetingBrowserPeer(tvsTableViewData)
-        
-        blurEffectView.contentView.addSubview(tvsTableView)
-        
-        NSLayoutConstraint.activate([
-            tvsTableView.widthAnchor.constraint(equalTo: blurEffectView.widthAnchor, multiplier: 0.8),
-            tvsTableView.heightAnchor.constraint(equalTo: blurEffectView.heightAnchor, multiplier: 0.25),
-            tvsTableView.centerXAnchor.constraint(equalTo: blurEffectView.centerXAnchor),
-            tvsTableView.centerYAnchor.constraint(equalTo: blurEffectView.centerYAnchor)
-        ])
-        
-        tvsTableView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    /// Recebendo o peer selecionado através de uma notificação enviada.
-    /// - Parameter notification: notificacao enviada.
-    @objc private func selectedTv(notification : NSNotification) {
-        guard let peerId = notification.object as? MCPeerID else {return}
-        self.multipeer?.sendInviteFromPeer(peerID: peerId)
+        //        let encoder = JSONEncoder()
+        //        
+        //        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
+        //            return topic.selectedForMeeting ? topic : nil
+        //        })
+        //        
+        //        do {
+        //            let data = try encoder.encode(self.currMeeting)
+        //            self.multipeer?.sendingDataFromPeer(data: data)
+        //        } catch {
+        //            print(error)
+        //        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -297,23 +260,23 @@ class UnfinishedMeetingViewController: UIViewController {
 //MARK: - Table View Delegate/DataSource
 extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
     
-//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-//
-//        let newTopic = creatingTopicInstance()
-//        topics.append(newTopic)
-//        tableViewTopics.reloadData()
-//
-//        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            }
-//        }) { }
-//        let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as! UnfinishedTopicsTableViewCell
-//        newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
-//        newTopicCell.topicTextField.becomeFirstResponder()
-//    }
+    //    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    //
+    //        let newTopic = creatingTopicInstance()
+    //        topics.append(newTopic)
+    //        tableViewTopics.reloadData()
+    //
+    //        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+    //            if let error = error {
+    //                print(error.localizedDescription)
+    //            }
+    //        }) { }
+    //        let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as! UnfinishedTopicsTableViewCell
+    //        newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
+    //        newTopicCell.topicTextField.becomeFirstResponder()
+    //    }
     
-
+    
     /// Usamos apenas uma Cell em cada Section.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -347,7 +310,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.layer.masksToBounds = true;
     }
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -372,8 +335,8 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
             cell.textFieldSecondLeft.constant = (tableView.frame.size.height * 0.2) * 0.2
             cell.textFieldLeft.priority = UILayoutPriority(998)
         } /*else {
-            
-        }*/
+         
+         }*/
         
         // Verificamos se o usuário está em modo de pesquisa.
         if isSearching {
@@ -626,3 +589,76 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
     }
 }
 
+//MARK:- Show TVs to Mirror
+extension UnfinishedMeetingViewController : UIGestureRecognizerDelegate {
+    
+    // Apresentar TVs disponiveis para espelhar.
+    func showTvTableView() {
+        
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTVsTableView(_:)))
+        tapGesture.delegate = self
+        
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.frame = self.view.bounds
+        
+        self.blurEffectView.addGestureRecognizer(tapGesture)
+        
+        self.navigationController?.view.addSubview(blurEffectView)
+        
+        tvsTableView = TvsTableView()
+        let tvsTableViewData = TvsTableViewData(tvsTableView)
+        
+        tvsTableView.awakeFromNib()
+        
+        self.multipeer = MeetingBrowserPeer(tvsTableViewData)
+        
+        blurEffectView.contentView.addSubview(tvsTableView)
+        
+        NSLayoutConstraint.activate([
+            tvsTableView.widthAnchor.constraint(equalTo: blurEffectView.widthAnchor, multiplier: 0.8),
+            tvsTableView.heightAnchor.constraint(equalTo: blurEffectView.heightAnchor, multiplier: 0.25),
+            tvsTableView.centerXAnchor.constraint(equalTo: blurEffectView.centerXAnchor),
+            tvsTableView.centerYAnchor.constraint(equalTo: blurEffectView.centerYAnchor)
+        ])
+        
+        tvsTableView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    /// Remover view ao realizar um tap na view.
+    /// - Parameter tapGesture: toque na tela.
+    @objc func dismissTVsTableView(_ tapGesture : UITapGestureRecognizer) {
+        
+        let location = tapGesture.location(in: self.blurEffectView)
+        
+        if self.blurEffectView.frame.contains(location) {            
+            self.blurEffectView.removeFromSuperview()
+        }
+        
+    }
+    
+    /// Recebendo o peer selecionado através de uma notificação enviada.
+    /// - Parameter notification: notificacao enviada.
+    @objc private func selectedTv(notification : NSNotification) {
+        
+        guard let peerId = notification.object as? MCPeerID else {return}
+        
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(self.currMeeting) {
+            
+            self.multipeer?.sendInviteFromPeer(peerID: peerId, dataToSend: data)
+            print("Dados enviados")
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        let point = touch.location(in: self.blurEffectView)
+        
+        let isTouch = self.tvsTableView.frame.contains(point)
+        
+        return !isTouch
+    }
+    
+}

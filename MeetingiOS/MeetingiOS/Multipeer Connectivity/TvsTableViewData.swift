@@ -62,7 +62,6 @@ extension TvsTableViewData : UITableViewDelegate {
         
         view.backgroundColor = .black
         view.alpha = 0.6
-        view.isOpaque = false
         
         title.text = "Apple TVs"
         title.textAlignment = .center
@@ -104,4 +103,14 @@ extension TvsTableViewData : FindTvsDelegate {
         self.tvs.append(peerID)
         self.tableView.insertRows(at: [IndexPath(row: tvs.count - 1, section: 0)], with: .fade)
     }    
+    
+    func removeTV(peerID: MCPeerID) {
+        
+        if let index = self.tvs.firstIndex(where: {
+            $0 == peerID
+        }) {
+            self.tvs.remove(at: index)
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        }
+    }
 }
