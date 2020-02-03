@@ -21,7 +21,7 @@ import CloudKit
     var meetingRecord = CKRecord(recordType: "Meeting")
     
     // O numero da cor selecionada
-    @objc var selectedColor : UIColor!
+    @objc var selectedColor : Int = 1
     
     private let itemSize = CGSize(width: 48, height: 48)
     
@@ -38,7 +38,7 @@ import CloudKit
         
         // Arredonda a view e seta como cor inicial a primeira cor do array
         self.viewColorSelected.layer.cornerRadius = 20
-        self.viewColorSelected.backgroundColor = selectedColor
+        self.viewColorSelected.backgroundColor = UIColor(named: "ColorMeeting_\(selectedColor)")
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -71,7 +71,7 @@ extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.viewColorSelected.backgroundColor = self.colors[indexPath.row]
-        selectedColor = self.colors[indexPath.row]
+        selectedColor = indexPath.row
     }
     
     
