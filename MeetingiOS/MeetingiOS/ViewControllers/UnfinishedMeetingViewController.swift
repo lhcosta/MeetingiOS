@@ -31,7 +31,7 @@ class UnfinishedMeetingViewController: UIViewController {
     var usrIsManager = false
     
     /// Nome da imagem de fundo do botão de check dos Topics ("square" ou "checkmark.square.fill")
-    var bgButtonImg: String!
+//    var bgButtonImg: String!
     
     /// IndexPath utilizado para iniciar uma cell fora do delegate da tableView
     var indexPath: IndexPath!
@@ -127,7 +127,6 @@ class UnfinishedMeetingViewController: UIViewController {
             mirrorButton.isHidden = false
         } else {
             mirrorButton.isHidden = true
-//            self.bgButtonImg = "square."
         }
         
         tableViewTopics.delegate = self
@@ -165,7 +164,7 @@ class UnfinishedMeetingViewController: UIViewController {
                 tableViewTopics.reloadData()
             }
             if usrIsManager {
-                newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: self.bgButtonImg), for: .normal)
+                newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             }
             newTopicCell.topicTextField.becomeFirstResponder()
         }
@@ -228,7 +227,7 @@ class UnfinishedMeetingViewController: UIViewController {
         let encoder = JSONEncoder()
         
         self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
-            return topic.selectedForMeeting ? topic : nil
+            return topic.selectedForMeeting && topic.topicDescription != "" ? topic : nil
         })
         
         do {
@@ -492,7 +491,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             // Excluímos todos os tópicos que ficaram em branco.
             var temp: [Int] = []
             for i in 0...topics.count-1 {
-                if topics[i].topicDescription.isEmpty {
+                if topics[i].topicDescription.isEmpty && i != 0 {
                     temp.append(i)
                 }
             }
