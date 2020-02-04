@@ -21,6 +21,7 @@ class FinishedMeetingViewController: UIViewController {
     var topicsToShow = [Topic]()
     var currMeeting: Meeting!
     var scopeSelected = 0
+    var timerView: UIView?
     
     fileprivate var filtered = [Topic]()
     fileprivate var filtering = false
@@ -30,22 +31,10 @@ class FinishedMeetingViewController: UIViewController {
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        topics.append([Topic]())
-//        topics.append([Topic]())
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = self.currMeeting.theme
         self.setUpSearchBar(segmentedControlTitles: ["Topics Discussed", "Topics sot discussed"])
-//        if self.navigationController?.navigationBar.subviews[0] == nil {
-//            self.navigationController?.navigationBar.addSubview(setTitle(title: currMeeting.theme, subtitle: "00:00"))
-//        }
-        self.navigationController?.navigationBar.subviews[3].addSubview(setTitle(title: currMeeting.theme, subtitle: "00:00"))
-//        self.navigationController?.navigationBar.subviews[0].backgroundColor = .green
-//        self.navigationController?.navigationBar.subviews[1].backgroundColor = .blue
-//        self.navigationController?.navigationBar.subviews[2].backgroundColor = .red
-//        self.navigationController?.navigationBar.subviews[3].backgroundColor = .gray
-//        self.navigationController?.navigationBar.subviews[4].backgroundColor = .orange
-        
         
         // MARK: Fetch dos topicos
         let topicIDs = currMeeting.topics.map({ (topic) -> CKRecord.ID in
@@ -75,6 +64,13 @@ class FinishedMeetingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.hidesSearchBarWhenScrolling = true
+        self.navigationController?.navigationBar.subviews[2].addSubview(topTimer(time: currMeeting.duration ?? "00:00"))
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        guard let _ = self.timerView else { return }
+        self.timerView?.removeFromSuperview()
     }
     
     
@@ -110,7 +106,7 @@ class FinishedMeetingViewController: UIViewController {
     }
     
     
-    func setTitle(title: String, subtitle: String) -> UIView {
+    func topTimer(time: String) -> UIView {
 
         let navigationBarHeight = CGFloat((self.navigationController?.navigationBar.subviews[3].frame.height)!)
         let navigationBarWidth = CGFloat((self.navigationController?.navigationBar.subviews[3].frame.width)!)
@@ -123,17 +119,18 @@ class FinishedMeetingViewController: UIViewController {
         timeLabel.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
         timeLabel.backgroundColor = .clear
         timeLabel.textColor = .black
-        timeLabel.text = "00:00"
+        timeLabel.text = time
         timeLabel.sizeToFit()
         
-        let titleView = UIView(frame: CGRect(x: navigationBarWidth*0.95, y: navigationBarHeight*0.5, width: clock.frame.width*2 + timeLabel.frame.width, height: clock.frame.height))
-        titleView.layer.anchorPoint  = CGPoint(x: 1.5, y: 1)
-        titleView.backgroundColor = .clear
+        let timerView = UIView(frame: CGRect(x: navigationBarWidth*0.95, y: navigationBarHeight*0.5, width: clock.frame.width*2 + timeLabel.frame.width, height: clock.frame.height))
+        timerView.layer.anchorPoint  = CGPoint(x: 1.5, y: 1)
+        timerView.backgroundColor = .clear
 
-        titleView.addSubview(timeLabel)
-        titleView.addSubview(clock)
+        timerView.addSubview(timeLabel)
+        timerView.addSubview(clock)
         
-        return titleView
+        self.timerView = timerView
+        return timerView
     }
 }
 
