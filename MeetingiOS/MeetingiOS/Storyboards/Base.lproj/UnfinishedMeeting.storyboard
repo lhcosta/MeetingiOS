@@ -99,7 +99,7 @@
                                 <color key="backgroundColor" name="NavigationBarColor"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ck1-5D-b4d"/>
-                                    <barButtonItem title="Item" image="mirror" id="6rh-rZ-xC0">
+                                    <barButtonItem title="Item" image="botaoMirror" id="6rh-rZ-xC0">
                                         <connections>
                                             <action selector="espelharMeeting:" destination="ID9-zH-FfA" id="wc3-Ql-dg2"/>
                                         </connections>
@@ -144,9 +144,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="botaoMirror" width="184" height="38"/>
         <image name="checkmark.square.fill" catalog="system" width="64" height="56"/>
         <image name="info.circle" catalog="system" width="64" height="60"/>
-        <image name="mirror" width="122" height="38"/>
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

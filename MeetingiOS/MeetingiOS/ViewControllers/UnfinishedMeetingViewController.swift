@@ -128,7 +128,7 @@ class UnfinishedMeetingViewController: UIViewController {
         if usrIsManager {
             mirrorButton.isHidden = false
         } else {
-            buttonItem.image = UIImage(named: "onboarding_3")
+            buttonItem.image = UIImage(named: "shareButton")
 //            self.bgButtonImg = "square."
         }
         
@@ -227,21 +227,30 @@ class UnfinishedMeetingViewController: UIViewController {
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
-        
-        for idx in 1..<topics.count {
-            if topics[idx].selectedForMeeting {
-                currMeeting.selected_topics.append(topics[idx])
+        if usrIsManager {
+            for idx in 1..<topics.count {
+                if topics[idx].selectedForMeeting {
+                    currMeeting.selected_topics.append(topics[idx])
+                }
             }
+            
+            self.currMeeting.started = true
+            CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }) {}
+            
+            showTvTableView()
+        } else {
+            // Damos Update da Meeting e do Topic no Cloud
+            CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }) { }
         }
         
-        self.currMeeting.started = true
-        CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }) {}
-        
-        showTvTableView()
 
    
     }
@@ -413,12 +422,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                         }
                         // Adicionamos o Topic editado.
                         currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[i].record.recordID, action: .deleteSelf))
-                        // Damos Update da Meeting e do Topic no Cloud
-                        CloudManager.shared.updateRecords(records: [topics[i].record, currMeeting.record], perRecordCompletion: { (_, error) in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }
-                        }) { }
+                        
                     } else {
                         // Quando a edição é uma exclusão, excluímos o Topic da Meeting e do Cloud.
                         for ii in 0...currMeeting.topics.count-1 {
@@ -427,16 +431,6 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                                 break
                             }
                         }
-                        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }
-                        }) { }
-                        CloudManager.shared.deleteRecords(recordIDs: [topics[i].record.recordID], perRecordCompletion: { (_, error) in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }
-                        }) { }
                     }
                 }
             }
@@ -469,12 +463,6 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             if topics[indexPath.section].topicDescription != "" {
                 // Adicionamos o Topic na Meeting.
                 currMeeting.addingNewTopic(CKRecord.Reference(recordID: topics[indexPath.section].record.recordID, action: .deleteSelf))
-                // Damos update na Meeting e no Topic criado.
-                CloudManager.shared.updateRecords(records: [topics[indexPath.section].record, currMeeting.record], perRecordCompletion: { (_, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                }) { }
             } else if indexPath.section != 0 {
                 // Quando a edição é uma exclusão, excluímos o Topic da Meeting e do Cloud.
                 for ii in 0...currMeeting.topics.count-1 {
@@ -483,11 +471,6 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                         break
                     }
                 }
-                CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                }) { }
                 CloudManager.shared.deleteRecords(recordIDs: [topics[indexPath.section].record.recordID], perRecordCompletion: { (_, error) in
                     if let error = error {
                         print(error.localizedDescription)
