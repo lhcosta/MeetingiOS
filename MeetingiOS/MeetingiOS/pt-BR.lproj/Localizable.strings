@@ -43,6 +43,10 @@
 "Welcome to Meetings" = "Bem-vindo ao Meetings";
 "Continue" = "Continuar";
 
+/*Finished Meeting View Controller -- EN*/
+"Topics discussed" = "Pautas discutidas";
+"Topics not discussed" = "Pautas não discutidas";
+
 //Titles - Onboarding
 "Create meetings" = "Crie reuniões";
 "Connect with your team" = "Conecte-se com seu time";
@@ -54,3 +58,6 @@
 "Be aware of what your coworkers want to talk" = "Esteja ciente sobre o que seus colegas querem falar";
 "Increase the productivity of your meetings" = "Aumente a produtividade das suas reuniões";
 "Have easy access to your meeting feedbacks" = "Tenha fácil acesso aos feedbacks das reuniões";
+
+//SearchBar - PlaceHolder
+"Search" = "Buscar";

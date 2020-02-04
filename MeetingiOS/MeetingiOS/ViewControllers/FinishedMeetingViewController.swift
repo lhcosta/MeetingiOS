@@ -34,7 +34,7 @@ class FinishedMeetingViewController: UIViewController {
         
         // MARK: Nav Controller Settings
         self.navigationItem.title = self.currMeeting.theme
-        self.setUpSearchBar(segmentedControlTitles: ["Topics Discussed", "Topics sot discussed"])
+        self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Topics discussed", comment: ""), NSLocalizedString("Topics not discussed", comment: "")])
         
         // MARK: Fetch dos topicos
         let topicIDs = currMeeting.topics.map({ (topic) -> CKRecord.ID in
