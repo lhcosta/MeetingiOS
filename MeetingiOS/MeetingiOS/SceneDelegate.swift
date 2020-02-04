@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
-                
+        
         if UserDefaults.standard.value(forKey: "newUser") as? Bool ?? true {
             let storyboard = UIStoryboard(name: "OnBoarding", bundle: nil)
             let rootVC = storyboard.instantiateInitialViewController() as! OnBoardingViewController
@@ -69,3 +69,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
+//MARK:- Adding Color Status Bar
+extension SceneDelegate {
+    
+    /// Adicionar cor ao background do status bar
+    func addColorStatusBar() {
+                
+        if let statusBarFrame = self.window?.windowScene?.statusBarManager?.statusBarFrame {
+            
+            let statusBarView = UIView(frame: statusBarFrame)
+            statusBarView.backgroundColor = UIColor(named: "NavigationBarColor")
+                        
+        }
+        
+    }
+    
+}

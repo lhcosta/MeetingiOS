@@ -17,14 +17,17 @@
 }
 
 - (void)setupCornerRadiusShadow {
+    [self setupShadow];
+    self.layer.cornerRadius = 5;
+}
+
+- (void) setupShadow {
     self.layer.shadowColor = [[UIColor alloc] initWithHexString:@"#00000029" alpha:1].CGColor;
     self.layer.masksToBounds = YES;
     self.layer.shadowOpacity = 0.2;
     self.layer.shadowRadius = 1;
     self.layer.shadowOffset = CGSizeMake(0, 1);
     self.clipsToBounds = false;
-    
-    self.layer.cornerRadius = 5;
 }
 
 @end

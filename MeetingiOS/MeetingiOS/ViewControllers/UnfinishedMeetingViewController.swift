@@ -79,6 +79,7 @@ class UnfinishedMeetingViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
             if let record = record?.values.first {
