@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -100,7 +100,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ck1-5D-b4d"/>
-                                    <barButtonItem title="Item" image="mirror" id="6rh-rZ-xC0">
+                                    <barButtonItem title="Item" image="botaoMirror" id="6rh-rZ-xC0">
                                         <connections>
                                             <action selector="espelharMeeting:" destination="ID9-zH-FfA" id="wc3-Ql-dg2"/>
                                         </connections>
@@ -123,6 +123,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
+                        <outlet property="buttonItem" destination="6rh-rZ-xC0" id="Wjd-4E-a1T"/>
                         <outlet property="mirrorButton" destination="X9q-nQ-8LI" id="0ea-HI-d3F"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                         <segue destination="UXK-3M-bfi" kind="show" identifier="conclusion" id="NlO-MH-F1x"/>
@@ -144,9 +145,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="botaoMirror" width="184" height="38"/>
         <image name="checkmark.square.fill" catalog="system" width="64" height="56"/>
         <image name="info.circle" catalog="system" width="64" height="60"/>
-        <image name="mirror" width="122" height="38"/>
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
