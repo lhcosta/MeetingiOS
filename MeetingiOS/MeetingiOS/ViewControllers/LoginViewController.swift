@@ -104,7 +104,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
             self.saveDefaults(user: user)
-            self.notificationPermission()
             self.goToNextVC()
             // Cria o record no Cloud
             CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
@@ -114,11 +113,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print("Successfully created user: ", record["name"]!)
                     print(record.recordID.recordName)
                     self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
+                    self.notificationPermission()
                 }
             }) {
                 print("Done")
             }
-            
         } else {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: -10, y: 5, width: 50, height: 50))
             activityIndicator.style = .medium
@@ -150,6 +149,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         
         userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
             print("===>\(permission)/\(String(describing: error))")
+            if permission {
+                CloudManager.shared.subscribe()
+            }
         })
         
         DispatchQueue.main.async {
