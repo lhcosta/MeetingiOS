@@ -26,26 +26,7 @@ import UIKit
         
         return contactCollectionView
     }
-    
-    /// Criando uma view de loading.
-    /// - Parameter message: texto para ser mostrado na alert de loading.
-    @objc func createAlertLoadingIndicator(message : String) -> UIAlertController {
-        
-        let alertLoading = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let loadingIndicator = UIActivityIndicatorView(style: .medium)
-        
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating()
-        
-        alertLoading.view.addSubview(loadingIndicator)
-        
-        loadingIndicator.centerYAnchor.constraint(equalTo: alertLoading.view.centerYAnchor).isActive = true
-        loadingIndicator.leadingAnchor.constraint(equalTo: alertLoading.view.leadingAnchor, constant: 20).isActive = true
-        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        return alertLoading
-    }
-    
+
     /// Pegando todos os usuários já cadastrados dos contatos selecionados.
     /// - Parameters:
     ///   - contacts: contatos selecionados.
@@ -103,5 +84,4 @@ import UIKit
             }
         }
     }
-
 }

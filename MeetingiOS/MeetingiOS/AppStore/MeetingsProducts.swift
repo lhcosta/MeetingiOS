@@ -11,5 +11,5 @@ import Foundation
 struct  MeetingsProducts {
     let month = "com.QuartetoFantastico.Meeting.iOS.month"
     let threeMonths = "com.QuartetoFantastico.Meeting.iOS.3month"
-    let year = "com.QuartetoFantastico.Meeting.iOS.year"
+    let sixMonths = "com.QuartetoFantastico.Meeting.iOS.6month"
 }

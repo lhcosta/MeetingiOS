@@ -15,8 +15,8 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var premiumBtn: UIButton!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
-    @IBOutlet weak var doneBtn: UIBarButtonItem!
     @IBOutlet weak var subscriptionView: UIView!
+    @IBOutlet weak var editButtonName : UIButton!
     
     //MARK:- Properties
     let defaults = UserDefaults.standard
@@ -28,59 +28,40 @@ class ProfileViewController: UITableViewController {
         super.viewDidLoad()
         
         self.isModalInPresentation = true
-        self.addShadowAndCornerInViews()
+        self.nameTF.delegate = self
         
-        fillTF()
+        self.nameTF.text = self.defaults.value(forKey: "givenName") as? String
+        self.emailTF.text = self.defaults.value(forKey: "email") as? String
+        
+        self.addShadowAndCornerInViews()        
+        
     }
     
     //MARK:- IBActions
-    
     @IBAction func didPressPremiumBtn(_ sender: Any) {
         
     }
-    
-    
+         
     @IBAction func didPressDone(_ sender: Any) {
+        
         let name = defaults.string(forKey: "givenName")
-        let email = defaults.string(forKey: "email")
-        var emailToUpdate: String?
+        
         var nameToUpdate: String?
         
-        if name != nameTF.text {
+        if name != nameTF.text && !(nameTF.text?.isEmpty ?? false) {
+            
             nameToUpdate = nameTF.text
-        }
-        
-        if email != emailTF.text {
-            emailToUpdate = emailTF.text
-        }
-        
-        User.updateUser(name: nameToUpdate, email: emailToUpdate) {
-            DispatchQueue.main.async {
-                if self.didComeFromLogin {
-                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                } else {
-                    self.dismiss(animated: true, completion: nil)
+            
+            User.updateUser(name: nameToUpdate) {
+                DispatchQueue.main.async {
+                    if self.didComeFromLogin {
+                        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         }
-    }
-    
-    @IBAction func nameChanged(_ sender: Any) {
         
-        if validateTextField(textField: nameTF) {
-            doneBtn.isEnabled = true
-        } else {
-            doneBtn.isEnabled = false
-        }
-    }
-    
-    @IBAction func emailChanged(_ sender: Any) {
-        
-        if validateEmail(email: emailTF) {
-            doneBtn.isEnabled = true
-        } else {
-            doneBtn.isEnabled = false
-        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK:- Methods
@@ -97,39 +78,6 @@ class ProfileViewController: UITableViewController {
         }
         
         return true
-    }
-    
-    /// Validates if text is in email format
-    ///
-    /// - Parameter email: textfield to be validated
-    /// - Returns: bool value indicating validation
-    private func validateEmail (email: UITextField) -> Bool {
-        
-        if !validateTextField(textField: email) {
-            return false
-        }
-        
-        let emailText = email.text!
-        
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        
-        if !emailTest.evaluate(with: emailText) {
-            return false
-        }
-        
-        return true
-    }
-    
-    /// Method used to fill name and email textfields with userdefaults
-    private func fillTF() {
-        if let name = defaults.string(forKey: "givenName") {
-            nameTF.text = name
-        }
-        
-        if let email = defaults.string(forKey: "email") {
-            emailTF.text = email
-        }
     }
     
     //MARK:- Table View
@@ -164,4 +112,30 @@ extension ProfileViewController {
         self.subscriptionView.setupCornerRadiusShadow()
         self.premiumBtn.setupCornerRadiusShadow()
     }
+}
+
+//MARK:- Change username
+extension ProfileViewController : UITextFieldDelegate {
+    
+    ///Editando o nome de usuário
+    @IBAction func didEditName(_ sender : Any) {
+        self.nameTF.isUserInteractionEnabled = true
+        self.nameTF.text = ""
+        self.nameTF.becomeFirstResponder()
+        self.editButtonName.isHidden = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        textField.isUserInteractionEnabled = false
+        self.editButtonName.isHidden = false
+        
+        if(textField.text?.count ?? 0 == 0) {
+            textField.text = self.defaults.value(forKey: "givenName") as? String
+        } 
+        
+        return true
+    }
+    
 }

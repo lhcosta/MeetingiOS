@@ -17,19 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        //        // Override point for customization after application launch.
-        //        let userNotCenter = UNUserNotificationCenter.current()
-        //        userNotCenter.delegate = self
-        //
-        //        userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
-        //            print("===>\(permission)/\(String(describing: error))")
-        //        })
-        //
-        //        DispatchQueue.main.async {
-        //            application.registerForRemoteNotifications()
-        //        }
-        
         return true
     }
     
@@ -55,10 +42,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         guard let meeting = CKQueryNotification(fromRemoteNotificationDictionary: notification.request.content.userInfo) else { return }
         guard let keys = meeting.recordFields else { return }
         guard let theme = keys["theme"] as? String else { return }
-        guard let begin = keys["initialDate"] as? Date else { return }
-        guard let end = keys["finalDate"] as? Date else { return }
+        guard let begin = keys["initialDate"] as? TimeInterval else { return }
+        guard let end = keys["finalDate"] as? TimeInterval else { return }
         
-        EventManager.saveMeeting(theme, starting: begin, ending: end)
+        let beginDate = Date(timeIntervalSinceReferenceDate: begin)
+        let endDate = Date(timeIntervalSinceReferenceDate: end)
+        
+        EventManager.saveMeeting(theme, starting: beginDate, ending: endDate)
     }
 }
 

@@ -120,7 +120,7 @@
 
 -(IBAction)confirmUpdateMeeting:(id)sender {
     if(_isMeetingModified || [self hasMoficationInParticipants]) 
-        [self updateMeeting];
+        [self updatingMeeting];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

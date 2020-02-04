@@ -1,1 +1,18 @@
 
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "4GF-bm-ybv"; */
+"4GF-bm-ybv.placeholder" = "Correo electronico";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "67l-RY-yDG"; */
+"67l-RY-yDG.placeholder" = "Nombre";
+
+/* Class = "UILabel"; text = "Free"; ObjectID = "cmh-zh-fGI"; */
+"cmh-zh-fGI.text" = "Libre";
+
+/* Class = "UILabel"; text = "Subscription"; ObjectID = "hwD-Ic-KU6"; */
+"hwD-Ic-KU6.text" = "Suscripción";
+
+/* Class = "UIButton"; normalTitle = "Upgrade to Premium"; ObjectID = "nDM-vt-dq8"; */
+"nDM-vt-dq8.normalTitle" = "Actualizar a Premium";
+
+/* Class = "UINavigationItem"; title = "Account"; ObjectID = "ym3-gE-Q5T"; */
+"ym3-gE-Q5T.title" = "Cuenta";

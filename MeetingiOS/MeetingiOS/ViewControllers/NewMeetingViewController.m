@@ -269,14 +269,6 @@
     }
 }
 
-//private func isLoggedIn() -> Bool{
-//    if let _ = defaults.value(forKey: "recordName") as? String {
-//        return true
-//    } else {
-//       return false
-//    }
-//}
-
 -(bool) isLoggedIn {
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
     
@@ -299,7 +291,8 @@
     }
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting...", "")];
+    UIAlertController* alertLoading = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Creating Meeting...", "") preferredStyle:UIAlertControllerStyleAlert];
+    [alertLoading addUIActivityIndicatorView];
     
     if(theme.length == 0) {
         
@@ -347,6 +340,7 @@
             
             NSLog(@"Create Record");
             [self.managerController updateUsersWithUsers:users meeting:self.meeting typeUpdate:(TypeUpdateUser)insertUser];
+            [EventManager saveMeeting:theme starting:self.meeting.initialDate ending:self.meeting.finalDate];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
