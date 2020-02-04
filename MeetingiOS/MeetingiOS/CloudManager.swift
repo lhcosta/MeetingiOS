@@ -122,22 +122,26 @@ import CloudKit
         database.add(operation)
     }
     
-    func subscribe(appCredentials: String) {
+    func subscribe() {
+        guard let appCredentials = UserDefaults.standard.string(forKey: "recordName") else { return }
         let userReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: appCredentials), action: .none)
         let predicate = NSPredicate(format: "%@ IN employees", userReference)
-        let subscription = CKQuerySubscription(recordType: "Meeting", predicate: predicate, options: .firesOnRecordCreation)
+        let subscription = CKQuerySubscription(recordType: "Meeting", predicate: predicate, options: [.firesOnRecordCreation])
         
         let notificationInfo = CKSubscription.NotificationInfo()
-        notificationInfo.desiredKeys = ["manager", "initialDate", "theme", "finalDate"]
+        notificationInfo.desiredKeys = ["initialDate", "theme", "finalDate"]
         notificationInfo.shouldBadge = true
-        
-        //TODO: Definir conteúdo da notificação localized String para internacionalizacao da notificacao
-        
+                
         subscription.notificationInfo = notificationInfo
         
-        self.database.save(subscription, completionHandler: { (_,error) in
+        let operation = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: nil)
+        
+        operation.modifySubscriptionsCompletionBlock = { (subs, _, error) in
+            print(subs?.count)
             print(error.debugDescription)
-        })
+        }
+        
+        database.add(operation)
     }
     
     //MARK: - MÉTODOS PARA AUXILIAR DESENVOLVIMENTO

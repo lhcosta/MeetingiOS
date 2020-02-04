@@ -271,14 +271,6 @@
     }
 }
 
-//private func isLoggedIn() -> Bool{
-//    if let _ = defaults.value(forKey: "recordName") as? String {
-//        return true
-//    } else {
-//       return false
-//    }
-//}
-
 -(bool) isLoggedIn {
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
     
@@ -349,6 +341,7 @@
             
             NSLog(@"Create Record");
             [self.managerController updateUsersWithUsers:users meeting:self.meeting typeUpdate:(TypeUpdateUser)insertUser];
+            [EventManager saveMeeting:theme starting:self.meeting.initialDate ending:self.meeting.finalDate];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
