@@ -34,7 +34,7 @@ import CloudKit
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         meetings.append([Meeting]())
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]
@@ -42,24 +42,14 @@ import CloudKit
         self.tableView.refreshControl = refreshControl
         self.tableView.keyboardDismissMode = .onDrag
         //self.tableView.setTableViewBackgroundGradient()
-                
-        //MARK:- Nav Controller Settings
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor(hexString: "#00000029").cgColor;
-        self.navigationController?.navigationBar.layer.masksToBounds = false;
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.2;
-        self.navigationController?.navigationBar.layer.shadowRadius = 1;
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1);
         
-    
-        self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(goToProfile))
-       
+        self.setupNavigationController()
+        
         self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
         // MARK: Query no CK
         guard let _ = defaults.string(forKey: "recordName") else { return }
         self.refreshingMeetings()
-    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,7 +116,7 @@ import CloudKit
             }
         }
     }
- 
+    
     /// Método que faz fetch de todas as reunioes
     /// - Parameters:
     ///   - predicateFormat: formato do predicate a ser realizado
@@ -162,7 +152,7 @@ import CloudKit
         if let _ = defaults.value(forKey: "recordName") as? String {
             return true
         } else {
-           return false
+            return false
         }
     }
     
@@ -190,7 +180,7 @@ import CloudKit
             DispatchQueue.main.asyncAfter(deadline: deadline) { 
                 self.refreshControl.endRefreshing()
             }
-
+            
         }
     }
     
@@ -237,7 +227,7 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
             let formattedDate = dateFormatter.string(from: date)
             cell.meetingDate.text = formattedDate
         } else {
-           cell.meetingDate.text = ""
+            cell.meetingDate.text = ""
         }
         
         cell.contentView.layer.cornerRadius = 5
@@ -257,7 +247,7 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
-
+        
         if meetingsArray[indexPath.section].finished {
             performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.section])
         } else {
@@ -283,10 +273,10 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
             guard let button = sender as? UIButton, let navigationController = segue.destination as? UINavigationController else {return}
             
             guard let viewController = navigationController.viewControllers.first as? DetailsTableViewController else {return}
-                        
+            
             //Reuniao identifica de acordo com a tag do botão.
             meeting = filterring ? self.filtered[button.tag] : self.meetingsToShow[button.tag]
-                
+            
             viewController.meeting = meeting
         }
     }
@@ -300,7 +290,7 @@ extension MyMeetingsViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text, !text.isEmpty {
             
             self.filtered = self.meetingsToShow.filter({ (meeting) -> Bool in
-
+                
                 return (meeting.theme.lowercased().contains(text.lowercased()) || meeting.managerName?.lowercased().contains(text.lowercased()) ?? false)
             })
             
@@ -314,3 +304,23 @@ extension MyMeetingsViewController: UISearchResultsUpdating {
     }
 }
 
+//MARK:- Nav Controller Settings
+extension MyMeetingsViewController {
+    
+    /// Configurando navigation controller
+    func setupNavigationController() {
+        
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor(hexString: "#00000029").cgColor;
+        self.navigationController?.navigationBar.layer.masksToBounds = false;
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.2;
+        self.navigationController?.navigationBar.layer.shadowRadius = 1;
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1);
+        
+        
+        self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(goToProfile))
+    }
+    
+    
+}
