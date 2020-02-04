@@ -73,7 +73,7 @@ class MeetingBrowserPeer: NSObject {
     /// - Parameter peerID: peer selecionado.
     /// - Parameter dataToSend: dados para ser enviados.
     func sendInviteFromPeer(peerID : MCPeerID, dataToSend : Data) {
-        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 60)
+        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 3600)
         self.dataToSend = dataToSend
     }
     
