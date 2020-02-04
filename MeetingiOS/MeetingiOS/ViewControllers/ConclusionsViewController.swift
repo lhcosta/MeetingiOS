@@ -37,21 +37,17 @@ class ConclusionsViewController: UIViewController {
         super.viewDidLoad()
         
         /// Adiciona os dados do Tópico no local indicado
-        if !fromUnfinishedMeeting {
-            
-            self.labelTopicTitle.text = topicToPresentConclusions.topicDescription
-            self.labelAuthorName.text = topicToPresentConclusions.authorName
-            
-            self.labelTimeDiscussed.text = String(describing: topicToPresentConclusions.duration)
-            
-        } else {
-            labelTopicTitle.isHidden = true
-            topicTextfield.isHidden = false
-            
-            self.topicTextfield.text = topicToPresentConclusions.topicDescription
-            
-        }
+//        if !fromUnfinishedMeeting {
+        self.labelAuthorName.text = topicToPresentConclusions.authorName
+        self.labelTimeDiscussed.text = String(describing: topicToPresentConclusions.duration)
+//        } else {
+////            labelTopicTitle.isHidden = true
+////            topicTextfield.isHidden = false
+//
+////            self.topicTextfield.text = topicToPresentConclusions.topicDescription
+//        }
         
+        self.labelTopicTitle.text = topicToPresentConclusions.topicDescription
         self.labelAuthorName.text = topicToPresentConclusions.authorName
         
         tableViewInfo.delegate = self
@@ -139,7 +135,6 @@ class ConclusionsViewController: UIViewController {
             self.view.frame.origin.y = 0
         }
     }
-    
 }
 
 

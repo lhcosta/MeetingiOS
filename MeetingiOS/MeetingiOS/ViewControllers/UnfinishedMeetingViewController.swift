@@ -64,16 +64,19 @@ class UnfinishedMeetingViewController: UIViewController {
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
         self.navigationItem.searchController?.searchBar.delegate = self
-//        self.navigationItem.searchController?.searchBar.showsCancelButton = true
         self.navigationItem.searchController?.searchBar.returnKeyType = .done
         
         tableViewTopics.delegate = self
         tableViewTopics.dataSource = self
         
         self.navigationItem.title = currMeeting.theme
-        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(createNewTopic)), animated: true)
         
         NotificationCenter.default.addObserver(self, selector: #selector(selectedTv(notification:)), name: Notification.Name(rawValue:"SelectedTV"), object: nil)
+        /// Dispara as funções de manipulação do teclado
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
     }
     
     
@@ -291,7 +294,25 @@ class UnfinishedMeetingViewController: UIViewController {
             self.view.setNeedsDisplay()
         }
     }
+    
+    
+    /// Eleva a tela para o teclado aparecer
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    /// Volta a tela para o normal sem o teclado
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
 }
+
 
 //MARK: - Table View Delegate/DataSource
 extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -421,6 +442,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         
         guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         cell.buttonInfo.isHidden = false
+        tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
     }
     
     
