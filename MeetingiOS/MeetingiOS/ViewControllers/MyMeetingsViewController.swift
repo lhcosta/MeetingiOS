@@ -23,8 +23,13 @@ import CloudKit
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
-        refreshControl.tintColor = .gray
         
+        if self.traitCollection.userInterfaceStyle == .dark {
+            refreshControl.tintColor = .white
+        } else {
+            refreshControl.tintColor = .gray
+        }
+    
         return refreshControl
     }()
     
@@ -41,6 +46,7 @@ import CloudKit
         
         self.tableView.refreshControl = refreshControl
         self.tableView.keyboardDismissMode = .onDrag
+        self.extendedLayoutIncludesOpaqueBars = true
         //self.tableView.setTableViewBackgroundGradient()
         
         self.setupNavigationController()
@@ -48,8 +54,8 @@ import CloudKit
         self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
         // MARK: Query no CK
         guard let _ = defaults.string(forKey: "recordName") else { return }
-        self.refreshingMeetings()
         
+        self.refreshingMeetings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +106,7 @@ import CloudKit
     ///   - arrayIndex: 0 ou 1 indicando array de reuniao futura ou passada
     ///   - meeting: reuniao a ser verificada
     private func validateMeeting(arrayIndex: Int, meeting: Meeting){
+        
         let recordIDs = meetings[arrayIndex].map({$0.record.recordID.recordName})
         
         if !recordIDs.contains(meeting.record.recordID.recordName) {
@@ -115,24 +122,6 @@ import CloudKit
                 self.meetings[arrayIndex].append(meeting)
             }
         }
-    }
-    
-    /// Método que faz fetch de todas as reunioes
-    /// - Parameters:
-    ///   - predicateFormat: formato do predicate a ser realizado
-    ///   - completion: completion final
-    private func refreshMeetings(predicateFormat: String, completion: @escaping (() -> Void)) {
-        Meeting.fetchMeetings(predicateFormat: predicateFormat, perRecordCompletion: { (meeting) in
-            self.appendMeeting(meeting: meeting)
-        }, finalCompletion: {
-            completion()
-        })
-    }
-    
-    /// Método para fazer refresh da table view
-    /// - Parameter refreshControl: default
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.refreshingMeetings()
     }
     
     @objc func goToProfile() {
@@ -156,33 +145,7 @@ import CloudKit
         }
     }
     
-    private func refreshingMeetings() {
-        
-        let deadline = DispatchTime.now() + .milliseconds(700)
-        
-        self.refreshMeetings(predicateFormat: "manager = %@"){
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: deadline) { 
-                self.refreshControl.endRefreshing()
-            }
-        }
-        
-        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
-            DispatchQueue.main.async {
-                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
-                self.tableView.reloadData()
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: deadline) { 
-                self.refreshControl.endRefreshing()
-            }
-            
-        }
-    }
+    
     
     //MARK: - IBActions
     
@@ -309,18 +272,57 @@ extension MyMeetingsViewController {
     
     /// Configurando navigation controller
     func setupNavigationController() {
-        
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor(hexString: "#00000029").cgColor;
-        self.navigationController?.navigationBar.layer.masksToBounds = false;
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.2;
-        self.navigationController?.navigationBar.layer.shadowRadius = 1;
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1);
-        
-        
+ 
+        self.navigationController?.navigationBar.setupShadow()
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(goToProfile))
     }
+}
+
+//MARK:- Manipulate Meetings
+extension MyMeetingsViewController {
     
+    /// Fetch das reuniões que usuários está participando tanto como manager e funcionário.
+    private func refreshingMeetings() {
+        
+        self.refreshMeetings(predicateFormat: "manager = %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+            }
+        }
+        
+        self.refreshMeetings(predicateFormat: "employees CONTAINS %@"){
+            DispatchQueue.main.async {
+                self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
+                self.tableView.reloadData()
+            }
+        }
+        
+        
+    }
     
+    /// Método que faz fetch de todas as reunioes
+    /// - Parameters:
+    ///   - predicateFormat: formato do predicate a ser realizado
+    ///   - completion: completion final
+    private func refreshMeetings(predicateFormat: String, completion: @escaping (() -> Void)) {
+        Meeting.fetchMeetings(predicateFormat: predicateFormat, perRecordCompletion: { (meeting) in
+            self.appendMeeting(meeting: meeting)
+        }, finalCompletion: {
+            completion()
+        })
+    }
+    
+    /// Método para fazer refresh da table view
+    /// - Parameter refreshControl: default
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+        self.refreshingMeetings()
+        
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
+    }
 }
