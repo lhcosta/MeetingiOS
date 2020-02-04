@@ -57,21 +57,15 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ykz-Ms-fXZ" userLabel="TF Stack View">
                                                                     <rect key="frame" x="0.0" y="17.5" width="307" height="42"/>
                                                                     <subviews>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="67l-RY-yDG">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="67l-RY-yDG">
                                                                             <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
                                                                             <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="18"/>
                                                                             <textInputTraits key="textInputTraits"/>
-                                                                            <connections>
-                                                                                <action selector="nameChanged:" destination="qoh-0J-yhU" eventType="editingChanged" id="G0J-LZ-3BW"/>
-                                                                            </connections>
                                                                         </textField>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4GF-bm-ybv">
                                                                             <rect key="frame" x="0.0" y="25" width="34.5" height="17"/>
                                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
-                                                                            <connections>
-                                                                                <action selector="emailChanged:" destination="qoh-0J-yhU" eventType="editingChanged" id="lhf-NG-G2v"/>
-                                                                            </connections>
                                                                         </textField>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -83,6 +77,9 @@
                                                                         <constraint firstAttribute="height" constant="26" id="w51-wo-9a6"/>
                                                                     </constraints>
                                                                     <state key="normal" image="square.and.pencil" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="didEditName:" destination="qoh-0J-yhU" eventType="touchUpInside" id="UMD-Tb-qJ1"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -200,8 +197,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="doneBtn" destination="TDs-1p-IJo" id="3Pi-rF-xk6"/>
-                        <outlet property="emailTF" destination="4GF-bm-ybv" id="8EM-jU-2af"/>
+                        <outlet property="editButtonName" destination="g20-8g-9G3" id="MS5-Yj-0VL"/>
+                        <outlet property="emailTF" destination="4GF-bm-ybv" id="KlO-Lo-pwz"/>
                         <outlet property="infoView" destination="O5s-s2-L6i" id="Arj-uh-ebv"/>
                         <outlet property="nameTF" destination="67l-RY-yDG" id="LaO-0E-iH5"/>
                         <outlet property="premiumBtn" destination="nDM-vt-dq8" id="yyo-Xw-9bE"/>
