@@ -11,9 +11,10 @@ import Foundation
 extension DetailsTableViewController {
     
     /// Atualização da reunião.
-    @objc func updateMeeting() {
-        
-        let loadingAlertIndicator = self.detailsManagerController.createAlertLoadingIndicator(message: NSLocalizedString("Meeting update...", comment: ""))
+    @objc func updatingMeeting() {
+    
+        let loadingAlertIndicator = UIAlertController(title: nil, message: NSLocalizedString("Meeting update...", comment: ""), preferredStyle: .alert)
+        loadingAlertIndicator.addUIActivityIndicatorView()
         
         self.present(loadingAlertIndicator, animated: true, completion: nil)
         
@@ -21,11 +22,13 @@ extension DetailsTableViewController {
             
             DispatchQueue.main.async {
                 
-                guard let name = self.meetingName?.text else {return}
+                if let name = self.meetingName?.text, !name.isEmpty {
+                    self.meeting.theme = name
+                }
+                
                 guard let numberOfTopics = Int(self.topicsPerPerson?.text ?? "1") else {return}
                 guard let initialDate = self.startsDate?.text, let finalDate = self.endesDate?.text else {return}
-                
-                self.meeting.theme = name
+            
                 self.meeting.limitTopic = Int64(numberOfTopics)
                 self.meeting.initialDate = self.formatter.date(from: initialDate)
                 self.meeting.finalDate = self.formatter.date(from: finalDate)

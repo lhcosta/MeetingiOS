@@ -89,6 +89,7 @@
 		A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1E2397EAF60097857F /* ContactManager.m */; };
 		A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */; };
 		A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */; };
+		A4F4548823E9EBBF00CFF2CE /* UIAlertController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
 		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */; };
@@ -108,9 +109,6 @@
 		492C04FF23A1587C00442814 /* ViewController+SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+SearchController.swift"; sourceTree = "<group>"; };
 		492C050323A1818500442814 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		492C050623A1819F00442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
-		492C050923A181A600442814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Profile.strings; sourceTree = "<group>"; };
-		492C050B23A181A700442814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Profile.strings"; sourceTree = "<group>"; };
-		492C050D23A181A700442814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Profile.strings; sourceTree = "<group>"; };
 		492C051123A2904800442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OnBoarding.storyboard; sourceTree = "<group>"; };
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
@@ -235,6 +233,10 @@
 		A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBarBackground.m"; sourceTree = "<group>"; };
 		A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerShadows.h"; sourceTree = "<group>"; };
 		A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerShadows.m"; sourceTree = "<group>"; };
+		A4F4548223E9DF7000CFF2CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Profile.strings; sourceTree = "<group>"; };
+		A4F4548423E9DF7300CFF2CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Profile.strings"; sourceTree = "<group>"; };
+		A4F4548623E9DF7600CFF2CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Profile.strings; sourceTree = "<group>"; };
+		A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Loading.swift"; sourceTree = "<group>"; };
 		A4F8226E23CD0B59006AE7C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		A4F8227023CD0B5C006AE7C8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
 		A4F8227223CD0B5E006AE7C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */,
 				A49229ED23A3323500FD95B9 /* ContactTableView.swift */,
 				A44CC31623D8FD67005ECFF6 /* DetailsNewMeetingManager.swift */,
+				A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */,
 				A44CC2FE23D77555005ECFF6 /* DatePickersSetup.swift */,
 				492C04FF23A1587C00442814 /* ViewController+SearchController.swift */,
 				A44CC31323D8FC6B005ECFF6 /* Contact */,
@@ -642,6 +645,7 @@
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
 				A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */,
 				A44CC31B23DB841F005ECFF6 /* DetailsTableViewController.m in Sources */,
+				A4F4548823E9EBBF00CFF2CE /* UIAlertController+Loading.swift in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
@@ -692,9 +696,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				492C050623A1819F00442814 /* Base */,
-				492C050923A181A600442814 /* en */,
-				492C050B23A181A700442814 /* pt-BR */,
-				492C050D23A181A700442814 /* es */,
+				A4F4548223E9DF7000CFF2CE /* en */,
+				A4F4548423E9DF7300CFF2CE /* pt-BR */,
+				A4F4548623E9DF7600CFF2CE /* es */,
 			);
 			name = Profile.storyboard;
 			sourceTree = "<group>";

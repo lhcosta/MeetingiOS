@@ -291,7 +291,8 @@
     }
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting...", "")];
+    UIAlertController* alertLoading = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Creating Meeting...", "") preferredStyle:UIAlertControllerStyleAlert];
+    [alertLoading addUIActivityIndicatorView];
     
     if(theme.length == 0) {
         
