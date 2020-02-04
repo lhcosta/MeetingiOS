@@ -78,6 +78,7 @@ class UnfinishedMeetingViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
             if let record = record?.values.first {
@@ -224,27 +225,12 @@ class UnfinishedMeetingViewController: UIViewController {
         
         showTvTableView()
         
-        
-        
         self.currMeeting.started = true
         CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
             if let error = error {
                 print(error.localizedDescription)
             }
         }) {}
-        
-        //        let encoder = JSONEncoder()
-        //        
-        //        self.currMeeting.selected_topics = self.topics.compactMap({ (topic) -> Topic? in
-        //            return topic.selectedForMeeting ? topic : nil
-        //        })
-        //        
-        //        do {
-        //            let data = try encoder.encode(self.currMeeting)
-        //            self.multipeer?.sendingDataFromPeer(data: data)
-        //        } catch {
-        //            print(error)
-        //        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

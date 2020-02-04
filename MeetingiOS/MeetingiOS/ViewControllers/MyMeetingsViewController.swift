@@ -43,7 +43,14 @@ import CloudKit
         self.tableView.keyboardDismissMode = .onDrag
         //self.tableView.setTableViewBackgroundGradient()
                 
-        // MARK: Nav Controller Settings
+        //MARK:- Nav Controller Settings
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor(hexString: "#00000029").cgColor;
+        self.navigationController?.navigationBar.layer.masksToBounds = false;
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.2;
+        self.navigationController?.navigationBar.layer.shadowRadius = 1;
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1);
+        
+    
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(goToProfile))
@@ -62,7 +69,7 @@ import CloudKit
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidAppear(animated)        
         self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)
     }
     
