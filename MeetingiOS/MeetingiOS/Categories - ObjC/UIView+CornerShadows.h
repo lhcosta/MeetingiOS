@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Definindo sombra e bordas arredondadas para a view.
 -(void) setupCornerRadiusShadow;
 
+/// Definir apenas sombra.
+- (void) setupShadow;
+
 @end
 
 NS_ASSUME_NONNULL_END

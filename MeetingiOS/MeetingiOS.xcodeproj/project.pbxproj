@@ -38,7 +38,6 @@
 		49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
 		49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
 		49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */; };
-		A40E5ADF23CF56160009C25C /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */; };
 		A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */; };
 		A4382C7523C2BD330021C814 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7423C2BD330021C814 /* LoginViewController.swift */; };
 		A4382C7723C2BD7E0021C814 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7623C2BD7E0021C814 /* ContactViewController.swift */; };
@@ -89,6 +88,7 @@
 		A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */; };
 		A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1E2397EAF60097857F /* ContactManager.m */; };
 		A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */; };
+		A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
 		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */; };
@@ -154,8 +154,6 @@
 		49F09AC62399A18700B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SelectAColor.strings"; sourceTree = "<group>"; };
 		49F09AC82399A18800B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SelectAColor.strings; sourceTree = "<group>"; };
 		49F09ACA2399A1B100B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SelectAColor.strings; sourceTree = "<group>"; };
-		A40E5ADD23CF56160009C25C /* UIView+CornerShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerShadows.h"; sourceTree = "<group>"; };
-		A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerShadows.m"; sourceTree = "<group>"; };
 		A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+NameMeetingValidation.h"; sourceTree = "<group>"; };
 		A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+NameMeetingValidation.m"; sourceTree = "<group>"; };
 		A4382C7423C2BD330021C814 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +233,8 @@
 		A4EB3C1E2397EAF60097857F /* ContactManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
 		A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBarBackground.h"; sourceTree = "<group>"; };
 		A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBarBackground.m"; sourceTree = "<group>"; };
+		A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerShadows.h"; sourceTree = "<group>"; };
+		A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerShadows.m"; sourceTree = "<group>"; };
 		A4F8226E23CD0B59006AE7C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		A4F8227023CD0B5C006AE7C8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
 		A4F8227223CD0B5E006AE7C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
@@ -486,9 +486,9 @@
 				A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */,
 				A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */,
 				A44CC30923D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.h */,
+				A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */,
+				A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */,
 				A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */,
-				A40E5ADD23CF56160009C25C /* UIView+CornerShadows.h */,
-				A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */,
 				A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */,
 				A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */,
 				A4EB3C1A2397DF9A0097857F /* NSString+NewFeatures.h */,
@@ -637,7 +637,6 @@
 				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
 				A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */,
-				A40E5ADF23CF56160009C25C /* UIView+CornerShadows.m in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
@@ -647,6 +646,7 @@
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				A44CC30D23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift in Sources */,
+				A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */,
 				49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */,
 				492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */,
 				497FB2BE23E8B934008059D9 /* PremiumTableTableViewController.swift in Sources */,
