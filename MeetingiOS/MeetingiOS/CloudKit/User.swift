@@ -95,41 +95,26 @@ import CloudKit
         }
     }
     
-    static func updateUser(name: String?, email: String?, completion: @escaping (() -> Void)) {
+    /// Alterando nome do usuário
+    /// - Parameters:
+    ///   - name: novo nome.
+    ///   - completion: término da atualização
+    static func updateUser(name: String?, completion: @escaping (() -> Void)) {
         
         guard let recordName = defaults.string(forKey: "recordName") else { return }
         let recordID = CKRecord.ID(recordName: recordName)
         let userCK = CKRecord(recordType: "User", recordID: recordID)
-        var emailExists = false
 
         if let name = name {
             userCK.setValue(name, forKey: "name")
         }
         
-        if let email = email {
-            let predicate = NSPredicate(format: "email = %@", email)
-            cloud.readRecords(recorType: "User", predicate: predicate, desiredKeys: ["recordName"], perRecordCompletion: { _ in
-                emailExists = true
-            }) {
-                if emailExists {
-                    print("email ja existente")
-                } else {
-                    userCK.setValue(email, forKey: "email")
-                    if let name = name {
-                        self.defaults.set(name, forKey: "givenName")
-                    }
-                    self.defaults.set(email, forKey: "email")
-                    performUpdate(record: userCK)
-                    completion()
-                }
-            }
-        } else {
-            if let name = name {
-                self.defaults.set(name, forKey: "givenName")
-                performUpdate(record: userCK)
-            }
-            completion()
+        if let name = name {
+            self.defaults.set(name, forKey: "givenName")
+            performUpdate(record: userCK)
         }
+        
+        completion()
     }
     
     static private func performUpdate(record: CKRecord) {

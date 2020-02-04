@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard (scene as? UIWindowScene) != nil else { return }
-                
+        guard let _ = (scene as? UIWindowScene) else { return }
+        
         if UserDefaults.standard.value(forKey: "newUser") as? Bool ?? true {
             let storyboard = UIStoryboard(name: "OnBoarding", bundle: nil)
             let rootVC = storyboard.instantiateInitialViewController() as! OnBoardingViewController
@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func setRootVC(rootVC: UIViewController) {        
         self.window?.rootViewController = rootVC
     }
-
+    
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
-
+        
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -69,3 +69,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
+//MARK:- Adding Color Status Bar
+extension SceneDelegate {
+    
+    /// Adicionar cor ao background do status bar
+    func addColorStatusBar() {
+                
+        if let statusBarFrame = self.window?.windowScene?.statusBarManager?.statusBarFrame {
+            
+            let statusBarView = UIView(frame: statusBarFrame)
+            statusBarView.backgroundColor = UIColor(named: "NavigationBarColor")
+                        
+        }
+        
+    }
+    
+}

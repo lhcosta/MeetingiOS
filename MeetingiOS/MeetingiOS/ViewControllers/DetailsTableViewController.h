@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *views;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, weak) IBOutlet UIView* contentViewCollection;
-
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* updateMeeting;
 
 /// Contatos selecionados.
 @property (nonatomic) ContactCollectionView* contactCollectionView;

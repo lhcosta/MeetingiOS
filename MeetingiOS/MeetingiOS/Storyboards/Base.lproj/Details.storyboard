@@ -43,7 +43,7 @@
                                                                 <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Work" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NXJ-O4-iXS">
                                                                     <rect key="frame" x="0.0" y="0.0" width="312.5" height="47"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="24"/>
-                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
                                                                 </textField>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGt-kq-1BV">
                                                                     <rect key="frame" x="313.5" y="0.0" width="20.5" height="47"/>
@@ -461,6 +461,7 @@
                         <outlet property="startDatePicker" destination="AfJ-bi-Sy7" id="RVk-Lv-eof"/>
                         <outlet property="startsDate" destination="FxW-dZ-QGI" id="HUm-Wv-KZr"/>
                         <outlet property="topicsPerPerson" destination="6hU-uh-UlW" id="wd8-G2-d3i"/>
+                        <outlet property="updateMeeting" destination="hyn-yI-5os" id="zTa-no-7Dg"/>
                         <outletCollection property="views" destination="FaJ-dD-vlX" id="KVJ-aU-a4G"/>
                         <outletCollection property="views" destination="txr-Ib-l90" id="CMs-G6-b5T"/>
                         <outletCollection property="views" destination="V7N-jt-evr" id="ewK-51-1vg"/>

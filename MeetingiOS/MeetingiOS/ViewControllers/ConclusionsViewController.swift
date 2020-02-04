@@ -161,7 +161,7 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
                     
                 cell.descriptionLabel.text = topicToPresentConclusions.topicPorque
                 
-                cell.backgroundColor = .groupTableViewBackground
+                cell.backgroundColor = UIColor(named: "ColorTableViewCell")
                 
                 return cell
             } else {
@@ -169,7 +169,7 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.viewControler = self
                 cell.conclusionTableView.delegate = cell
                 cell.conclusionTableView.dataSource = cell
-                cell.backgroundColor = .groupTableViewBackground
+                cell.backgroundColor = UIColor(named: "ColorTableViewCell")
                 
                 return cell
             }
@@ -190,7 +190,7 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
                     cell.descriptionLabel.text = topicToPresentConclusions.topicPorque
                 }
                 
-                cell.backgroundColor = .groupTableViewBackground
+                cell.backgroundColor = UIColor(named: "ColorTableViewCell")
                 
                 return cell
             } else {
@@ -206,7 +206,7 @@ extension ConclusionsViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.viewControler = self
                 cell.conclusionTableView.delegate = cell
                 cell.conclusionTableView.dataSource = cell
-                cell.backgroundColor = .groupTableViewBackground
+                cell.backgroundColor = UIColor(named: "ColorTableViewCell")
                 
                 return cell
             }

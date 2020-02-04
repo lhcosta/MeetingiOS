@@ -62,7 +62,9 @@
         
     _detailsManagerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_detailsManagerController setupCollectionViewContacts:_collectionParticipants];
-     [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_collectionParticipants setBackgroundColor:UIColor.clearColor]; 
+    [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_contentViewCollection setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]];
     
     [self setupViews];
     [self showLoadingView];
@@ -118,7 +120,7 @@
 
 -(IBAction)confirmUpdateMeeting:(id)sender {
     if(_isMeetingModified || [self hasMoficationInParticipants]) 
-        [self updateMeeting];
+        [self updatingMeeting];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -20,6 +20,8 @@
 		492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C051923A2907A00442814 /* OnBoardingViewController.swift */; };
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
 		497FB2AD23E207EB008059D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497FB2AC23E207EB008059D9 /* StoreKit.framework */; };
+		497FB2B423E4C1C3008059D9 /* Premium.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 497FB2B623E4C1C3008059D9 /* Premium.storyboard */; };
+		497FB2BE23E8B934008059D9 /* PremiumTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */; };
 		49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4652923D09FF6006D67D8 /* Login.storyboard */; };
 		49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A59B1323E0B993003F749C /* MeetingsProducts.swift */; };
 		49A59B1623E0BC9A003F749C /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A59B1523E0BC9A003F749C /* StoreManager.swift */; };
@@ -36,7 +38,6 @@
 		49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A82239982FA00B7DFD3 /* Contact.storyboard */; };
 		49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */; };
 		49F09AD02399A1CB00B7DFD3 /* SelectAColor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49F09AC32399A18000B7DFD3 /* SelectAColor.storyboard */; };
-		A40E5ADF23CF56160009C25C /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */; };
 		A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */; };
 		A4382C7523C2BD330021C814 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7423C2BD330021C814 /* LoginViewController.swift */; };
 		A4382C7723C2BD7E0021C814 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4382C7623C2BD7E0021C814 /* ContactViewController.swift */; };
@@ -86,6 +87,9 @@
 		A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C12239754D40097857F /* ContactCollectionView.m */; };
 		A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */; };
 		A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB3C1E2397EAF60097857F /* ContactManager.m */; };
+		A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */; };
+		A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */; };
+		A4F4548823E9EBBF00CFF2CE /* UIAlertController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
 		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
 		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */; };
@@ -105,14 +109,16 @@
 		492C04FF23A1587C00442814 /* ViewController+SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+SearchController.swift"; sourceTree = "<group>"; };
 		492C050323A1818500442814 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		492C050623A1819F00442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
-		492C050923A181A600442814 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Profile.strings; sourceTree = "<group>"; };
-		492C050B23A181A700442814 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Profile.strings"; sourceTree = "<group>"; };
-		492C050D23A181A700442814 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Profile.strings; sourceTree = "<group>"; };
 		492C051123A2904800442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OnBoarding.storyboard; sourceTree = "<group>"; };
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		497FB2AC23E207EB008059D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		497FB2B523E4C1C3008059D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Premium.storyboard; sourceTree = "<group>"; };
+		497FB2B823E4C1C6008059D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Premium.strings; sourceTree = "<group>"; };
+		497FB2BA23E4C1C8008059D9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Premium.strings"; sourceTree = "<group>"; };
+		497FB2BC23E4C1C9008059D9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Premium.strings; sourceTree = "<group>"; };
+		497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremiumTableTableViewController.swift; path = MeetingiOS/ViewControllers/PremiumTableTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		49A4652823D09FF6006D67D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		49A59B1323E0B993003F749C /* MeetingsProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsProducts.swift; sourceTree = "<group>"; };
 		49A59B1523E0BC9A003F749C /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -146,8 +152,6 @@
 		49F09AC62399A18700B7DFD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SelectAColor.strings"; sourceTree = "<group>"; };
 		49F09AC82399A18800B7DFD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SelectAColor.strings; sourceTree = "<group>"; };
 		49F09ACA2399A1B100B7DFD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SelectAColor.strings; sourceTree = "<group>"; };
-		A40E5ADD23CF56160009C25C /* UIView+CornerShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerShadows.h"; sourceTree = "<group>"; };
-		A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerShadows.m"; sourceTree = "<group>"; };
 		A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewMeetingViewController+NameMeetingValidation.h"; sourceTree = "<group>"; };
 		A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NewMeetingViewController+NameMeetingValidation.m"; sourceTree = "<group>"; };
 		A4382C7423C2BD330021C814 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +229,14 @@
 		A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+NewFeatures.m"; sourceTree = "<group>"; };
 		A4EB3C1D2397EAF60097857F /* ContactManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = ContactManager.h; sourceTree = "<group>"; };
 		A4EB3C1E2397EAF60097857F /* ContactManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
+		A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBarBackground.h"; sourceTree = "<group>"; };
+		A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBarBackground.m"; sourceTree = "<group>"; };
+		A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerShadows.h"; sourceTree = "<group>"; };
+		A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerShadows.m"; sourceTree = "<group>"; };
+		A4F4548223E9DF7000CFF2CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Profile.strings; sourceTree = "<group>"; };
+		A4F4548423E9DF7300CFF2CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Profile.strings"; sourceTree = "<group>"; };
+		A4F4548623E9DF7600CFF2CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Profile.strings; sourceTree = "<group>"; };
+		A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Loading.swift"; sourceTree = "<group>"; };
 		A4F8226E23CD0B59006AE7C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		A4F8227023CD0B5C006AE7C8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
 		A4F8227223CD0B5E006AE7C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
@@ -254,6 +266,7 @@
 			children = (
 				A44CC31923DB841F005ECFF6 /* DetailsTableViewController.h */,
 				A44CC31A23DB841F005ECFF6 /* DetailsTableViewController.m */,
+				497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */,
 				A44CC30C23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift */,
 				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
@@ -464,6 +477,7 @@
 				492C050723A1819F00442814 /* Profile.storyboard */,
 				492C051223A2904800442814 /* OnBoarding.storyboard */,
 				49A4652923D09FF6006D67D8 /* Login.storyboard */,
+				497FB2B623E4C1C3008059D9 /* Premium.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -471,10 +485,12 @@
 		A4EB3BEB239607CB0097857F /* Categories - ObjC */ = {
 			isa = PBXGroup;
 			children = (
+				A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */,
+				A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */,
 				A44CC30923D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.h */,
+				A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */,
+				A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */,
 				A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */,
-				A40E5ADD23CF56160009C25C /* UIView+CornerShadows.h */,
-				A40E5ADE23CF56160009C25C /* UIView+CornerShadows.m */,
 				A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */,
 				A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */,
 				A4EB3C1A2397DF9A0097857F /* NSString+NewFeatures.h */,
@@ -491,6 +507,7 @@
 				49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */,
 				A49229ED23A3323500FD95B9 /* ContactTableView.swift */,
 				A44CC31623D8FD67005ECFF6 /* DetailsNewMeetingManager.swift */,
+				A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */,
 				A44CC2FE23D77555005ECFF6 /* DatePickersSetup.swift */,
 				492C04FF23A1587C00442814 /* ViewController+SearchController.swift */,
 				A44CC31323D8FC6B005ECFF6 /* Contact */,
@@ -582,6 +599,7 @@
 				A4922A2423A728FB00FD95B9 /* SFProDisplay-Medium.ttf in Resources */,
 				A4922A2523A728FB00FD95B9 /* SFProDisplay-Black.ttf in Resources */,
 				A4BA9B1823CE276E00CCC2AF /* Details.storyboard in Resources */,
+				497FB2B423E4C1C3008059D9 /* Premium.storyboard in Resources */,
 				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
 				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
 				A4E1EA0923E34CFD00B2B32A /* OnboardingTableViewCell.xib in Resources */,
@@ -622,17 +640,20 @@
 				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
 				A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */,
-				A40E5ADF23CF56160009C25C /* UIView+CornerShadows.m in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
 				239153242391883E00479BB6 /* FinishedMeetingViewController.swift in Sources */,
 				A4EB3BE52395E3820097857F /* NewMeetingViewController.m in Sources */,
+				A4F4547B23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m in Sources */,
 				A44CC31B23DB841F005ECFF6 /* DetailsTableViewController.m in Sources */,
+				A4F4548823E9EBBF00CFF2CE /* UIAlertController+Loading.swift in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				A44CC30D23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift in Sources */,
+				A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */,
 				49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */,
 				492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */,
+				497FB2BE23E8B934008059D9 /* PremiumTableTableViewController.swift in Sources */,
 				A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */,
 				A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */,
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
@@ -675,9 +696,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				492C050623A1819F00442814 /* Base */,
-				492C050923A181A600442814 /* en */,
-				492C050B23A181A700442814 /* pt-BR */,
-				492C050D23A181A700442814 /* es */,
+				A4F4548223E9DF7000CFF2CE /* en */,
+				A4F4548423E9DF7300CFF2CE /* pt-BR */,
+				A4F4548623E9DF7600CFF2CE /* es */,
 			);
 			name = Profile.storyboard;
 			sourceTree = "<group>";
@@ -691,6 +712,17 @@
 				A4F8227223CD0B5E006AE7C8 /* es */,
 			);
 			name = OnBoarding.storyboard;
+			sourceTree = "<group>";
+		};
+		497FB2B623E4C1C3008059D9 /* Premium.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				497FB2B523E4C1C3008059D9 /* Base */,
+				497FB2B823E4C1C6008059D9 /* en */,
+				497FB2BA23E4C1C8008059D9 /* pt-BR */,
+				497FB2BC23E4C1C9008059D9 /* es */,
+			);
+			name = Premium.storyboard;
 			sourceTree = "<group>";
 		};
 		49A4652923D09FF6006D67D8 /* Login.storyboard */ = {

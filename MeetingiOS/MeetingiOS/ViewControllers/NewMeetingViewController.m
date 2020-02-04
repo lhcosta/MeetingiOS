@@ -11,9 +11,10 @@
 #import "NewMeetingViewController+NameMeetingValidation.h"
 #import "Contact.h"
 #import "ContactCollectionView.h"
-#import "UIView+CornerShadows.h"
 #import "TopicsPerPersonPickerView.h"
 #import "TypeUpdateUser.h"
+#import "UIViewController+StatusBarBackground.h"
+#import "UIView+CornerShadows.h"
 
 @interface NewMeetingViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
@@ -78,8 +79,9 @@
     
     _managerController = [[DetailsNewMeetingManager alloc] init];
     _contactCollectionView = [_managerController setupCollectionViewContacts:_collectionView];
-    [_collectionView setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]]; 
+    [_collectionView setBackgroundColor:UIColor.clearColor];
     [_contentViewCollection setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+    [_contentViewCollection setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]];
     
     [self setupViews];
         
@@ -89,7 +91,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+           
     if([_contactCollectionView.contacts count] != 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:0.5 animations:^{
@@ -118,10 +120,10 @@
         
         switch (view.tag) {
             case 1:
-                [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner]; 
+                [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
                 break;
             case 2:
-                [view setupCornerRadiusShadow:kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner];
+                [view setupCornerRadiusShadow:kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
                 break;
             default:
                 [view setupCornerRadiusShadow];
@@ -267,14 +269,6 @@
     }
 }
 
-//private func isLoggedIn() -> Bool{
-//    if let _ = defaults.value(forKey: "recordName") as? String {
-//        return true
-//    } else {
-//       return false
-//    }
-//}
-
 -(bool) isLoggedIn {
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
     
@@ -297,7 +291,8 @@
     }
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    UIAlertController* alertLoading = [_managerController createAlertLoadingIndicatorWithMessage:NSLocalizedString(@"Creating Meeting...", "")];
+    UIAlertController* alertLoading = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Creating Meeting...", "") preferredStyle:UIAlertControllerStyleAlert];
+    [alertLoading addUIActivityIndicatorView];
     
     if(theme.length == 0) {
         
@@ -345,6 +340,7 @@
             
             NSLog(@"Create Record");
             [self.managerController updateUsersWithUsers:users meeting:self.meeting typeUpdate:(TypeUpdateUser)insertUser];
+            [EventManager saveMeeting:theme starting:self.meeting.initialDate ending:self.meeting.finalDate];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
