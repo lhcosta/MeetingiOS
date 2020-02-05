@@ -18,7 +18,7 @@
             <objects>
                 <viewController storyboardIdentifier="unfinishedMeeting" modalPresentationStyle="fullScreen" id="ID9-zH-FfA" customClass="UnfinishedMeetingViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p7q-fI-btO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="28" width="374" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Vh-IY-nnt" id="JLj-gr-1tY">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3QQ-sb-bJW">
@@ -76,38 +76,40 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X9q-nQ-8LI">
-                                <rect key="frame" x="0.0" y="792" width="414" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="3vS-dY-mMU"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ck1-5D-b4d"/>
-                                    <barButtonItem image="botaoMirror" id="6rh-rZ-xC0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dla-rG-esW">
+                                <rect key="frame" x="0.0" y="600.5" width="375" height="66.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPe-4T-6Ca">
+                                        <rect key="frame" x="173" y="10" width="184" height="38"/>
+                                        <state key="normal" image="botaoMirror"/>
                                         <connections>
-                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" id="wc3-Ql-dg2"/>
+                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" eventType="touchUpInside" id="xoA-hI-xNq"/>
                                         </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" name="NavigationBarColor"/>
-                            </toolbar>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="NavigationBarColor"/>
+                                <constraints>
+                                    <constraint firstItem="oPe-4T-6Ca" firstAttribute="top" secondItem="dla-rG-esW" secondAttribute="top" constant="10" id="aVv-gi-F1Q"/>
+                                    <constraint firstAttribute="trailing" secondItem="oPe-4T-6Ca" secondAttribute="trailing" constant="18" id="qAh-9A-pSx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" id="2WT-QC-CZx"/>
+                            <constraint firstItem="dla-rG-esW" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" id="GoG-6Z-NrY"/>
+                            <constraint firstItem="dla-rG-esW" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="MAL-cp-CLP"/>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="OTe-fo-ZvA"/>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="Vvj-D4-nEK"/>
-                            <constraint firstItem="X9q-nQ-8LI" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="d7g-Vm-5Ac"/>
-                            <constraint firstItem="X9q-nQ-8LI" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" id="dpM-N6-sHM"/>
-                            <constraint firstItem="8yf-T9-PQA" firstAttribute="bottom" secondItem="X9q-nQ-8LI" secondAttribute="bottom" id="eU0-Fq-y8K"/>
-                            <constraint firstItem="X9q-nQ-8LI" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="r2Z-Xu-JRG"/>
+                            <constraint firstAttribute="bottom" secondItem="dla-rG-esW" secondAttribute="bottom" id="W0v-DE-9dZ"/>
+                            <constraint firstItem="dla-rG-esW" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="jxI-DF-aWZ"/>
+                            <constraint firstItem="dla-rG-esW" firstAttribute="height" secondItem="p7q-fI-btO" secondAttribute="height" multiplier="0.1" id="yLv-tj-Ex1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
-                        <outlet property="buttonItem" destination="6rh-rZ-xC0" id="Wjd-4E-a1T"/>
-                        <outlet property="mirrorButton" destination="X9q-nQ-8LI" id="0ea-HI-d3F"/>
+                        <outlet property="buttonItem" destination="oPe-4T-6Ca" id="sLF-bG-6Y0"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                         <segue destination="UXK-3M-bfi" kind="show" identifier="conclusion" id="NlO-MH-F1x"/>
                     </connections>
