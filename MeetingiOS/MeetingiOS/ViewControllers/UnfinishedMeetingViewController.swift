@@ -188,7 +188,7 @@ class UnfinishedMeetingViewController: UIViewController {
         
         guard let button = sender as? UIButton else { return }
         
-        guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
+        guard let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         
         let indexPath = tableViewTopics.indexPath(for: cell)
         
@@ -216,7 +216,7 @@ class UnfinishedMeetingViewController: UIViewController {
         
         guard let button = sender as? UIButton else { return }
         
-        if let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell {
+        if let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell {
             let indexPath = tableViewTopics.indexPath(for: cell)
             self.selectedTopicForInfo = topics[indexPath!.section]
             

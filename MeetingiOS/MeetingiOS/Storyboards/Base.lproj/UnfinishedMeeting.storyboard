@@ -35,7 +35,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3QQ-sb-bJW">
                                                     <rect key="frame" x="20" y="20" width="334" height="37"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="105-1b-AMg">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="105-1b-AMg">
                                                             <rect key="frame" x="0.0" y="1" width="40" height="34.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="KgH-OH-C2s"/>
@@ -47,11 +47,11 @@
                                                             </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Topic Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWC-TR-COq">
-                                                            <rect key="frame" x="55" y="8.5" width="239" height="20"/>
+                                                            <rect key="frame" x="55" y="8" width="239" height="21"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUL-qw-KJV">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUL-qw-KJV">
                                                             <rect key="frame" x="309" y="6.5" width="25" height="24"/>
                                                             <connections>
                                                                 <action selector="topicInfoButton:" destination="ID9-zH-FfA" eventType="touchUpInside" id="Gsf-ZX-JxL"/>
