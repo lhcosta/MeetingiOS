@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Tvs disponíveis para exibição da reunião.
 class TvsTableView: UITableView {
         
     override func awakeFromNib() {

@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-/// Model do Table View de TVs
+/// Model da Table View de TVs
 class TvsTableViewData: NSObject {
 
     weak var tableView : TvsTableView!
@@ -25,7 +25,6 @@ class TvsTableViewData: NSObject {
         
         self.tableView.backgroundColor = .black
         self.tableView.alpha = 0.6
-        self.tableView.isOpaque = false
         
     }
 
@@ -61,7 +60,6 @@ extension TvsTableViewData : UITableViewDelegate {
         let stackView = UIStackView(arrangedSubviews: [image, title])
         
         view.backgroundColor = .black
-        view.alpha = 0.6
         
         title.text = "Apple TVs"
         title.textAlignment = .center
@@ -91,7 +89,7 @@ extension TvsTableViewData : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+        return 80
     }
     
 }
@@ -99,6 +97,7 @@ extension TvsTableViewData : UITableViewDelegate {
 
 //MARK:- TvsTableViewConfig
 extension TvsTableViewData : FindTvsDelegate {
+    
     func sendNewTV(peerID: MCPeerID) {
         self.tvs.append(peerID)
         self.tableView.insertRows(at: [IndexPath(row: tvs.count - 1, section: 0)], with: .fade)

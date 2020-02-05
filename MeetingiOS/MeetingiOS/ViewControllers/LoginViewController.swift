@@ -119,13 +119,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 print("Done")
             }
         } else {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: -10, y: 5, width: 50, height: 50))
-            activityIndicator.style = .medium
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.startAnimating()
-            
             let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
-            loadingAlert.view.addSubview(activityIndicator)
+            loadingAlert.addUIActivityIndicatorView()
             
             self.present(loadingAlert, animated: true){
                 user.searchCredentials(record: userRecord){ _ in

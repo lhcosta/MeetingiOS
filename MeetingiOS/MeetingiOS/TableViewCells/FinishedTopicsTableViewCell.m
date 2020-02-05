@@ -20,7 +20,7 @@
     self.layer.shadowOffset = CGSizeMake(0, 1);
     self.clipsToBounds = false;
     
-    self.contentView.backgroundColor = UIColor.whiteColor;
+    self.contentView.backgroundColor = [UIColor colorNamed:@"ColorTableViewCell"];
     self.contentView.layer.cornerRadius = 5;
 }
 

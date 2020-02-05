@@ -14,24 +14,36 @@
 
 @class User;
 
+//MARK:- Inteface
 @interface DetailsTableViewController () <TopicsPerPersonPickerViewDelegate, DatePickersSetup>
 
+/// Contatos da reunião.
 @property (nonatomic) NSMutableArray<Contact*> *employees_contact;
+
+/// Criador da reunião.
 @property (nonatomic) User* manager;
+
+/// Criador da reunião que está visualizando.
 @property (nonatomic) BOOL isManager;
+
+/// Alterar Table View de acordo.
 @property (nonatomic) BOOL chooseNumberOfTopics;
 @property (nonatomic) BOOL chooseStartTime;
 @property (nonatomic) BOOL chooseEndTime;
+
+/// Gerenciador do picker view de seleção de tópicos.
 @property (nonatomic) TopicsPerPersonPickerView* topicsPickerView;
 
-//MARK:- Loading View
+/// Carregamento da view.
 @property (nonatomic) UIView *loadingView;
 @property (nonatomic) UIActivityIndicatorView* loadingIndicator;
 
 @end
 
+//MARK:- Implementation
 @implementation DetailsTableViewController
 
+//MARK:- Life Cycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if(_contactCollectionView) {
@@ -46,6 +58,7 @@
     
     //Nao realizar o dismiss com swipe
     [self setModalInPresentation:YES];
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     [self.view setBackgroundColor:[UIColor colorNamed:@"BackgroundColor"]];
     
@@ -118,7 +131,13 @@
     [self showCollectionViewContacts];
 }
 
+//MARK:- IBActions
 -(IBAction)confirmUpdateMeeting:(id)sender {
+    
+    if (![self.meetingName.text isEqualToString:self.meeting.theme] && (self.meetingName.text.length != 0)) {
+        _isMeetingModified = YES;
+    }
+    
     if(_isMeetingModified || [self hasMoficationInParticipants]) 
         [self updatingMeeting];
     

@@ -37,6 +37,7 @@
 
 @implementation NewMeetingViewController
 
+//MARK:- Life Cycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -53,6 +54,7 @@
     self.tableView.backgroundColor = [UIColor colorNamed:@"BackgroundColor"];
     
     _index_color = 1;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     //Iniciando nova reunião.
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
@@ -131,6 +133,7 @@
     }
 }
 
+//MARK:- Table View Config
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     switch (indexPath.section) {
@@ -245,7 +248,7 @@
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-
+//MARK:- Methods
 /// Atribuindo o delegate da view controller
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -283,6 +286,7 @@
     
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
     
+    //Usuário não cadastrado.
     if (!recordName || [recordName isEqualToString:@""]) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         UIViewController* loginVC = [storyboard instantiateInitialViewController];
@@ -291,9 +295,8 @@
     }
     
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
-    UIAlertController* alertLoading = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Creating Meeting...", "") preferredStyle:UIAlertControllerStyleAlert];
-    [alertLoading addUIActivityIndicatorView];
     
+    //Nome não definido
     if(theme.length == 0) {
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Meeting", "") message:NSLocalizedString(@"Choose a name for create a meeting.", "") preferredStyle:UIAlertControllerStyleAlert];
@@ -307,7 +310,9 @@
         return;
     }
     
-    [self.navigationItem.rightBarButtonItem setEnabled:NO];    
+    UIAlertController* alertLoading = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Creating Meeting...", "") preferredStyle:UIAlertControllerStyleAlert];
+    [alertLoading addUIActivityIndicatorView];
+    
     [self presentViewController:alertLoading animated:true completion:nil];
     
     CKRecordID* recordID = [[CKRecordID alloc] initWithRecordName:[NSUserDefaults.standardUserDefaults valueForKey:@"recordName"]];
@@ -356,6 +361,7 @@
     }];
 }
 
+//MARK:- IBActions
 - (void)chooseColorMeeting:(id)sender{
     [self performSegueWithIdentifier:@"SelectColor" sender:Nil];
 }

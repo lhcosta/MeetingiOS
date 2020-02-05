@@ -81,8 +81,8 @@ extension OnBoardingViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        //Utilizado um tamanho base e criamos o layout, depois adaptamos de acordo com o aumento
-        //ou diminuicao da altura de forma proporcional
+        /*Utilizado um tamanho base, criamos o layout e depois adaptamos de acordo com o aumento
+        ou diminuicao da altura de forma proporcional*/
         
         var height = CGFloat()
         let height_base : CGFloat = 812        

@@ -287,18 +287,18 @@
 		2391532523918E2400479BB6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				A4E1EA0E23E35D9500B2B32A /* OnboardingCells */,
-				A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */,
-				A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */,
-				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
-				23E7E12C2397D46900B99A09 /* UnfinishedTopicsTableViewCell.h */,
-				23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */,
-				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
-				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
+				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
 				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
 				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
+				A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */,
+				A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */,
 				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */,
-				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
+				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
+				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
+				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
+				A4E1EA0E23E35D9500B2B32A /* OnboardingCells */,
+				23E7E12C2397D46900B99A09 /* UnfinishedTopicsTableViewCell.h */,
+				23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -485,16 +485,16 @@
 		A4EB3BEB239607CB0097857F /* Categories - ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */,
-				A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */,
 				A44CC30923D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.h */,
-				A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */,
-				A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */,
 				A44CC30A23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m */,
 				A4284635239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.h */,
 				A4284636239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m */,
 				A4EB3C1A2397DF9A0097857F /* NSString+NewFeatures.h */,
 				A4EB3C1B2397DF9A0097857F /* NSString+NewFeatures.m */,
+				A4F4547E23E9B3A100CFF2CE /* UIView+CornerShadows.h */,
+				A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */,
+				A4F4547923E8C2C800CFF2CE /* UIViewController+StatusBarBackground.h */,
+				A4F4547A23E8C2C800CFF2CE /* UIViewController+StatusBarBackground.m */,
 			);
 			path = "Categories - ObjC";
 			sourceTree = "<group>";

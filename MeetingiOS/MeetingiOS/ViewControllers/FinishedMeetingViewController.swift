@@ -75,7 +75,6 @@ class FinishedMeetingViewController: UIViewController {
     
     
     @IBAction func infoButton(_ sender: Any) {
-        
         performSegue(withIdentifier: "conclusions", sender: sender)
     }
     
@@ -90,9 +89,11 @@ class FinishedMeetingViewController: UIViewController {
         if segue.identifier == "conclusions" {
             let vc = segue.destination as! ConclusionsViewController
             if let button = sender as? UIButton {
-                guard let cell = button.superview?.superview as? FinishedTopicsTableViewCell else {
+                
+                guard let cell = button.superview?.superview?.superview as? FinishedTopicsTableViewCell else {
                     return
                 }
+                
                 let indexPath = topicsTableView.indexPath(for: cell)
                 let topicsArray = self.filtering ? self.filtered : self.topicsToShow
                 vc.topicToPresentConclusions = topicsArray[indexPath!.section]

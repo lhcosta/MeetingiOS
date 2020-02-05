@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vTy-o5-exJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vTy-o5-exJ">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,16 +36,16 @@
                                                     <rect key="frame" x="19" y="26.666666666666671" width="342" height="67"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="SEA-Nr-hH5" userLabel="Labels SV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="299" height="67"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="298.66666666666669" height="67"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nks-1Y-QJY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="299" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="298.66666666666669" height="21"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="zeR-Ks-Uhb" userLabel="Date SV">
-                                                                    <rect key="frame" x="0.0" y="46" width="299" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="46" width="298.66666666666669" height="21"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fMk-nt-3ZS">
                                                                             <rect key="frame" x="0.0" y="2.3333333333333268" width="18" height="16.666666666666664"/>
@@ -55,7 +55,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCi-Lc-uLc">
-                                                                            <rect key="frame" x="30" y="0.0" width="269" height="21"/>
+                                                                            <rect key="frame" x="30" y="0.0" width="268.66666666666669" height="21"/>
                                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -70,13 +70,8 @@
                                                                 <constraint firstItem="nks-1Y-QJY" firstAttribute="leading" secondItem="SEA-Nr-hH5" secondAttribute="leading" id="pj0-Ii-Iuw"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1G-vB-Lds">
-                                                            <rect key="frame" x="318" y="21.333333333333329" width="24" height="24"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="8mp-o6-frV"/>
-                                                                <constraint firstAttribute="width" constant="24" id="Y41-6r-wTR"/>
-                                                            </constraints>
-                                                            <state key="normal" image="info.circle" catalog="system"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1G-vB-Lds">
+                                                            <rect key="frame" x="317.66666666666669" y="21.666666666666664" width="24.333333333333314" height="23.666666666666664"/>
                                                             <connections>
                                                                 <action selector="detailsOfMeeting:" destination="dcg-jt-bSn" eventType="touchUpInside" id="DxB-8y-apa"/>
                                                                 <action selector="didPressInfo:" destination="7fe-wl-nNI" eventType="touchUpInside" id="bQB-Ga-vaY"/>
@@ -227,7 +222,6 @@
     </scenes>
     <resources>
         <image name="clock" catalog="system" width="64" height="60"/>
-        <image name="info.circle" catalog="system" width="64" height="60"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

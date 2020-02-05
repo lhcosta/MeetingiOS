@@ -22,9 +22,6 @@
     //Retornando ao ultimo nome caso não seja preenchido
     if(textField.text.length == 0) {
         [textField setText:self.meeting.theme];
-    } else {
-        [self.meeting setTheme:textField.text];
-        self.isMeetingModified = true;
     }
     
     return YES;
@@ -40,5 +37,6 @@
     
     return YES;
 }
+
 
 @end
