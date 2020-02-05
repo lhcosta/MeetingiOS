@@ -427,7 +427,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             topicToBeEditedOnSearch = textField.text
         }
         
-        guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
+        guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         cell.buttonInfo.isHidden = false
         tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
     }
@@ -520,7 +520,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         } else {
             // Quando não estamos no modo de pesquisa, nós alteramos a array de Topics principal diretamente
             // Instanciamos uma tableViewCell a partir da superview do textField utilizado.
-            guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else {
+            guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
             let indexPath = tableViewTopics.indexPath(for: cell)!
