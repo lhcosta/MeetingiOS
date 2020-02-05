@@ -232,6 +232,7 @@ class UnfinishedMeetingViewController: UIViewController {
     @IBAction func espelharMeeting(_ sender: Any) {
         
         if usrIsManager {
+            currMeeting.selected_topics = []
             for idx in 1..<topics.count {
                 if topics[idx].selectedForMeeting {
                     currMeeting.selected_topics.append(topics[idx])
