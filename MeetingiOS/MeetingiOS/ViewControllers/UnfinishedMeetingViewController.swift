@@ -15,8 +15,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
-    @IBOutlet var mirrorButton: UIToolbar!
-    @IBOutlet weak var buttonItem: UIBarButtonItem!
+    @IBOutlet weak var buttonItem: UIButton!
+    
     
     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
@@ -129,10 +129,10 @@ class UnfinishedMeetingViewController: UIViewController {
         
         // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
         // Conforme o usuário foi quem criou ou não a Meeting.
-        if usrIsManager {
-            mirrorButton.isHidden = false
-        } else {
-            buttonItem.image = UIImage(named: "shareButton")
+        if !usrIsManager {
+            buttonItem.setImage(UIImage(named: "shareButton"), for: .normal)
+            
+                
 //            self.bgButtonImg = "square."
         }
         
