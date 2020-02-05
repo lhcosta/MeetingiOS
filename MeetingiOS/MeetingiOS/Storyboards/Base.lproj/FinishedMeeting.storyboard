@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mcd-M6-zaN">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mcd-M6-zaN">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,32 +35,32 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOu-eD-5Yh">
-                                                    <rect key="frame" x="30" y="16" width="284" height="38"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tm-QA-Jc5">
-                                                    <rect key="frame" x="324" y="20.5" width="30" height="29"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="IO3-PM-FDS"/>
-                                                        <constraint firstAttribute="width" constant="30" id="vlQ-1x-8JI"/>
-                                                    </constraints>
-                                                    <state key="normal" backgroundImage="info.circle" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="infoButton:" destination="mcd-M6-zaN" eventType="touchUpInside" id="cn5-qb-yAM"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1kg-Pi-MBR">
+                                                    <rect key="frame" x="20" y="5" width="334" height="60"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOu-eD-5Yh">
+                                                            <rect key="frame" x="0.0" y="19.5" width="294" height="21"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tm-QA-Jc5">
+                                                            <rect key="frame" x="304" y="18" width="30" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="vlQ-1x-8JI"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="infoButton:" destination="mcd-M6-zaN" eventType="touchUpInside" id="cn5-qb-yAM"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bOu-eD-5Yh" firstAttribute="leading" secondItem="pej-N8-ug5" secondAttribute="leadingMargin" constant="10" id="23K-gl-b7N"/>
-                                                <constraint firstItem="bOu-eD-5Yh" firstAttribute="top" secondItem="pej-N8-ug5" secondAttribute="topMargin" constant="5" id="GLQ-J1-eWd"/>
-                                                <constraint firstItem="3tm-QA-Jc5" firstAttribute="trailing" secondItem="pej-N8-ug5" secondAttribute="trailingMargin" id="HSh-Pk-zPi"/>
-                                                <constraint firstItem="3tm-QA-Jc5" firstAttribute="leading" secondItem="bOu-eD-5Yh" secondAttribute="trailing" constant="10" id="Iee-OR-5sq"/>
-                                                <constraint firstItem="3tm-QA-Jc5" firstAttribute="centerY" secondItem="pej-N8-ug5" secondAttribute="centerY" id="Mrt-hd-rjc"/>
-                                                <constraint firstAttribute="centerY" secondItem="pej-N8-ug5" secondAttribute="centerY" id="Wh5-iO-syX"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="bOu-eD-5Yh" secondAttribute="bottom" constant="5" id="pV2-gC-wAG"/>
+                                                <constraint firstAttribute="bottom" secondItem="1kg-Pi-MBR" secondAttribute="bottom" constant="5" id="Cd8-0O-2zP"/>
+                                                <constraint firstItem="1kg-Pi-MBR" firstAttribute="leading" secondItem="pej-N8-ug5" secondAttribute="leading" constant="20" id="JB8-TG-PHS"/>
+                                                <constraint firstAttribute="trailing" secondItem="1kg-Pi-MBR" secondAttribute="trailing" constant="20" id="lCG-dK-1lK"/>
+                                                <constraint firstItem="1kg-Pi-MBR" firstAttribute="top" secondItem="pej-N8-ug5" secondAttribute="top" constant="5" id="oy1-iw-kQY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="ColorTableViewCell"/>
@@ -344,7 +344,6 @@
     </scenes>
     <resources>
         <image name="circle.fill" catalog="system" width="64" height="60"/>
-        <image name="info.circle" catalog="system" width="64" height="60"/>
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
