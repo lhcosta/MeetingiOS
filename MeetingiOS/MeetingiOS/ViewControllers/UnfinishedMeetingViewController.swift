@@ -287,7 +287,7 @@ class UnfinishedMeetingViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+//                self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }
@@ -295,7 +295,7 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Volta a tela para o normal sem o teclado
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+//            self.view.frame.origin.y = 0
         }
     }
 }

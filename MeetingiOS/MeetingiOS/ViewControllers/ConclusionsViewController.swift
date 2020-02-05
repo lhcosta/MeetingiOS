@@ -94,10 +94,7 @@ class ConclusionsViewController: UIViewController {
     }
     
     /// Ação do botão Done para mandar a conclusiona para o Cloud
-    @objc func doneAction() {
-        
-        topicToPresentConclusions.topicDescription = self.topicTextfield.text!
-        
+    @objc func doneAction() {        
         
         CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
             if let error = error {
