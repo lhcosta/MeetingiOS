@@ -215,9 +215,10 @@ class UnfinishedMeetingViewController: UIViewController {
     @IBAction func topicInfoButton(_ sender: Any) {
         
         guard let button = sender as? UIButton else { return }
-        
+    
         if let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell {
             let indexPath = tableViewTopics.indexPath(for: cell)
+            
             self.selectedTopicForInfo = topics[indexPath!.section]
             
             performSegue(withIdentifier: "conclusion", sender: self)
@@ -234,12 +235,16 @@ class UnfinishedMeetingViewController: UIViewController {
         if usrIsManager {
             currMeeting.selected_topics = []
             for idx in 1..<topics.count {
+                
                 if topics[idx].selectedForMeeting {
+                    
                     currMeeting.selected_topics.append(topics[idx])
+                    
                 }
             }
             
             self.currMeeting.started = true
+            
             CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -247,14 +252,11 @@ class UnfinishedMeetingViewController: UIViewController {
             }) {}
             
             showTvTableView()
-        } else {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: -10, y: 5, width: 50, height: 50))
-            activityIndicator.style = .medium
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.startAnimating()
             
+        } else {
+        
             let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
-            loadingAlert.view.addSubview(activityIndicator)
+            loadingAlert.addUIActivityIndicatorView()
             
             self.present(loadingAlert, animated: true)
             
