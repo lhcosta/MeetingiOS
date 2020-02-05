@@ -21,11 +21,6 @@ class OnboardingTableViewCell: UITableViewCell {
         self.title.textColor = UIColor(named: "TitleColor")!
         self.descriptionText.textColor = UIColor(named: "DescriptionColor")!
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
     
 }
 

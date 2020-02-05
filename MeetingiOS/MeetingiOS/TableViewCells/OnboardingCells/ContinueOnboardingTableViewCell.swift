@@ -15,8 +15,7 @@ class ContinueOnboardingTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.continueButton.clipsToBounds = true
-        self.continueButton.layer.cornerRadius = 5  
+        self.continueButton.setupCornerRadiusShadow()
         self.continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
     }
 

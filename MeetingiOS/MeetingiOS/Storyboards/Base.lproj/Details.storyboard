@@ -135,13 +135,13 @@
                                                             <rect key="frame" x="20" y="15" width="334" height="43"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Starts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LEQ-UO-C6j">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="43"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="145.5" height="43"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Nov, 28 2019  3:00 PM" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FxW-dZ-QGI">
-                                                                    <rect key="frame" x="140" y="0.0" width="194" height="43"/>
+                                                                    <rect key="frame" x="150.5" y="0.0" width="183.5" height="43"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <color key="textColor" name="NewMeetingTextColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -203,13 +203,13 @@
                                                             <rect key="frame" x="20" y="15" width="334" height="43"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Endes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0mY-kv-ebT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="137" height="43"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="147.5" height="43"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Nov, 28 2019  3:00 PM" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="akg-em-m2H">
-                                                                    <rect key="frame" x="140" y="0.0" width="194" height="43"/>
+                                                                    <rect key="frame" x="150.5" y="0.0" width="183.5" height="43"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <color key="textColor" name="NewMeetingTextColor"/>
                                                                     <nil key="highlightedColor"/>

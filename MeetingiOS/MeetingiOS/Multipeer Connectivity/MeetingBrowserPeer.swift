@@ -14,8 +14,8 @@ protocol FindTvsDelegate : AnyObject {
     /// - Parameter peerID: identificador da TV.
     func sendNewTV(peerID : MCPeerID)
     
-    /// Removendo a TV que perdeu o conexão
-    /// - Parameter peerID: TV que perdeu a conexão
+    /// Removendo a TV que perdeu o conexão.
+    /// - Parameter peerID: identificador da TV.
     func removeTV(peerID : MCPeerID)
 }
 
@@ -35,21 +35,18 @@ class MeetingBrowserPeer: NSObject {
 
     /// Identificação do Peer
     private var peer : MCPeerID!
-    
-    //Data para ser enviado através dos peers
-    private var data : Data!
-    
-    /// Delegate para enviar as Tvs encontradas.
+        
+    /// Delegate para enviar as Tvs encontradas. Não pode ser weak, pois é utilizado dentro de uma método de outro delegate
     private var delegate : FindTvsDelegate?
     
     ///Peer que a sessao está conectada.
     private var connectedPeer : MCPeerID!
     
-    /// Dados da reunião para enviar
+    /// Dados da reunião para enviar.
     private var dataToSend : Data!
     
     /// Inicializando Multipeer
-    /// - Parameter delegate: quem vai receber as Tvs achadas.
+    /// - Parameter delegate: quem vai receber as Tvs encontradas.
     init<T : FindTvsDelegate>(_ delegate : T) {
         super.init()
         
@@ -97,6 +94,7 @@ extension MeetingBrowserPeer : MCNearbyServiceBrowserDelegate {
     
 }
 
+//MARK:- MCSessionDelegate
 extension MeetingBrowserPeer : MCSessionDelegate {
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -107,7 +105,8 @@ extension MeetingBrowserPeer : MCSessionDelegate {
                     try self.session.send(dataToSend, toPeers: [peerID], with: .reliable)
                 } catch let error {
                     print("Error -> \(error)")
-                }                
+                } 
+                
             break
             case .notConnected:
       

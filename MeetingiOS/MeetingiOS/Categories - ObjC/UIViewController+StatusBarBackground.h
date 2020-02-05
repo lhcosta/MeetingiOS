@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (StatusBarBackground)
 
-/// Adicionando cor ao background da status bar
+/// Adicionando cor ao background da status bar.
 /// @param color cor escolhida.
 /// @param view view para ser adicionado.
 - (void)addColorToStatusBarBackground:(UIColor *)color inView:(UIView*)view;
