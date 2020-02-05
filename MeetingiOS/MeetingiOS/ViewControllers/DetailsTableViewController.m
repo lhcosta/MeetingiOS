@@ -46,6 +46,7 @@
     
     //Nao realizar o dismiss com swipe
     [self setModalInPresentation:YES];
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     [self.view setBackgroundColor:[UIColor colorNamed:@"BackgroundColor"]];
     
@@ -119,6 +120,11 @@
 }
 
 -(IBAction)confirmUpdateMeeting:(id)sender {
+    
+    if (![self.meetingName.text isEqualToString:self.meeting.theme] && (self.meetingName.text.length != 0)) {
+        _isMeetingModified = YES;
+    }
+    
     if(_isMeetingModified || [self hasMoficationInParticipants]) 
         [self updatingMeeting];
     

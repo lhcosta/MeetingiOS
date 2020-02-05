@@ -53,6 +53,7 @@
     self.tableView.backgroundColor = [UIColor colorNamed:@"BackgroundColor"];
     
     _index_color = 1;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     //Iniciando nova reunião.
     CKRecord* record = [[CKRecord alloc] initWithRecordType:@"Meeting"];
