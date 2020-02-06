@@ -232,6 +232,7 @@ class UnfinishedMeetingViewController: UIViewController {
     @IBAction func espelharMeeting(_ sender: Any) {
         
         if usrIsManager {
+            currMeeting.selected_topics = []
             for idx in 1..<topics.count {
                 if topics[idx].selectedForMeeting {
                     currMeeting.selected_topics.append(topics[idx])
@@ -371,7 +372,8 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         cell.textFieldRight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textFieldHeight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textLabel?.font = font
-        cell.buttonInfo.isHidden = true
+        cell.buttonInfo.alpha = 0
+        cell.buttonInfo.isEnabled = false
         
         // Se não for gerente, não faz sentido termos o botão de check.
         if !usrIsManager {
@@ -428,7 +430,10 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         }
         
         guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
-        cell.buttonInfo.isHidden = false
+        if tableViewTopics.indexPath(for: cell)?.section != 0 {
+            cell.buttonInfo.alpha = 1
+            cell.buttonInfo.isEnabled = true
+        }
         tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
     }
     
@@ -582,7 +587,8 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                     cell.topicTextField.becomeFirstResponder()
                 }
             }
-            cell.buttonInfo.isHidden = true
+            cell.buttonInfo.alpha = 0
+            cell.buttonInfo.isEnabled = false
             return true
         }
     }
