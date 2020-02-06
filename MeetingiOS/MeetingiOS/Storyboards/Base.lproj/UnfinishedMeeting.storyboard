@@ -47,7 +47,7 @@
                                                             </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Topic Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWC-TR-COq">
-                                                            <rect key="frame" x="55" y="8" width="239" height="21"/>
+                                                            <rect key="frame" x="55" y="8.5" width="239" height="20"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>

@@ -63,7 +63,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
-                                                <segue destination="lkM-MO-ivL" kind="show" id="doi-M2-HwA"/>
+                                                <action selector="dismissViewController" destination="YnD-C9-UOt" eventType="touchUpInside" id="z32-yB-Jv5"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -88,16 +88,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKc-rS-SEt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1637.5999999999999" y="37.684729064039409"/>
-        </scene>
-        <!--MyMeetings-->
-        <scene sceneID="5FE-wY-zjr">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MyMeetings" id="lkM-MO-ivL" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="aeK-bd-1Jc"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="r4i-Mc-1YQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2292" y="38"/>
         </scene>
     </scenes>
 </document>
