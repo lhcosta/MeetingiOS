@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uO4-SB-ijz">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -42,21 +42,21 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" name="BackgroundColor"/>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNa-uL-Dhv">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNa-uL-Dhv">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" name="NavigationBarColor"/>
                                 <items>
-                                    <barButtonItem image="plus.circle.fill" catalog="system" id="fYk-od-4N3">
+                                    <barButtonItem image="plus.circle.fill" catalog="system" style="done" id="fYk-od-4N3">
                                         <connections>
                                             <action selector="addingNewContact:" destination="uO4-SB-ijz" id="hcD-ct-Jqy"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="New contact" id="BlV-uw-Dme">
+                                    <barButtonItem title="New contact" style="done" id="BlV-uw-Dme">
                                         <connections>
                                             <action selector="addingNewContact:" destination="uO4-SB-ijz" id="SQK-Kf-NTR"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" name="NavigationBarColor"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" name="NavigationBarColor"/>

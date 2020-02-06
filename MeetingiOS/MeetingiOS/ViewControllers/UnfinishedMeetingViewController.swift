@@ -15,7 +15,7 @@ class UnfinishedMeetingViewController: UIViewController {
     
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
-    @IBOutlet weak var buttonItem: UIButton!
+    @IBOutlet weak var buttonItem: UIBarButtonItem!
     
     
     //MARK: - Properties
@@ -32,7 +32,7 @@ class UnfinishedMeetingViewController: UIViewController {
     var usrIsManager = false
     
     /// Nome da imagem de fundo do botão de check dos Topics ("square" ou "checkmark.square.fill")
-//    var bgButtonImg: String!
+    //    var bgButtonImg: String!
     
     /// IndexPath utilizado para iniciar uma cell fora do delegate da tableView
     var indexPath: IndexPath!
@@ -58,6 +58,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     private var blurEffectView : UIVisualEffectView!
     
+    private var buttonToolbar : UIButton!
+    
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +78,6 @@ class UnfinishedMeetingViewController: UIViewController {
         /// Dispara as funções de manipulação do teclado
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         
     }
     
@@ -128,12 +129,13 @@ class UnfinishedMeetingViewController: UIViewController {
         }
         
         // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
-        // Conforme o usuário foi quem criou ou não a Meeting.
-        if !usrIsManager {
-            buttonItem.setImage(UIImage(named: "shareButton"), for: .normal)
-            
-                
-//            self.bgButtonImg = "square."
+        // Conforme o usuário foi quem criou ou não a Meeting.      
+        // Adicionando share button, quando não for o manager.
+        if !self.usrIsManager {
+            let shareButton = UIButton()
+            shareButton.addTarget(self, action: #selector(shareTopicsToMeeting), for: .touchUpInside)
+            shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
+            buttonItem.customView = shareButton
         }
         
         tableViewTopics.delegate = self
@@ -218,6 +220,7 @@ class UnfinishedMeetingViewController: UIViewController {
         
         if let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell {
             let indexPath = tableViewTopics.indexPath(for: cell)
+            
             self.selectedTopicForInfo = topics[indexPath!.section]
             
             performSegue(withIdentifier: "conclusion", sender: self)
@@ -231,48 +234,33 @@ class UnfinishedMeetingViewController: UIViewController {
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
-        if usrIsManager {
-            currMeeting.selected_topics = []
-            for idx in 1..<topics.count {
-                if topics[idx].selectedForMeeting {
-                    currMeeting.selected_topics.append(topics[idx])
-                }
-            }
+        currMeeting.selected_topics = []
+        for idx in 1..<topics.count {
             
-            self.currMeeting.started = true
-            CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }) {}
-            
-            showTvTableView()
-        } else {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: -10, y: 5, width: 50, height: 50))
-            activityIndicator.style = .medium
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.startAnimating()
-            
-            let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
-            loadingAlert.view.addSubview(activityIndicator)
-            
-            self.present(loadingAlert, animated: true)
-            
-            // Damos Update da Meeting e do Topic no Cloud
-            CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }) {
-                DispatchQueue.main.async {
-                    loadingAlert.dismiss(animated: true, completion: nil)
-                }
+            if topics[idx].selectedForMeeting {
+                
+                currMeeting.selected_topics.append(topics[idx])
+                
             }
         }
         
-
-   
+        self.currMeeting.started = true
+        
+        CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }) {}
+        
+        showTvTableView()
     }
+    
+    
+    
+    
+    
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let conclusionVC = segue.destination as? ConclusionsViewController {
@@ -288,15 +276,15 @@ class UnfinishedMeetingViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-//                self.view.frame.origin.y -= keyboardSize.height
+                //                self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }
-
+    
     /// Volta a tela para o normal sem o teclado
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y = 0
+            //            self.view.frame.origin.y = 0
         }
     }
 }
@@ -496,7 +484,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                                 }
                             }) { }
                         }
-        
+                        
                         CloudManager.shared.deleteRecords(recordIDs: [topics[i].record.recordID], perRecordCompletion: { (_, error) in
                             if let error = error {
                                 print(error.localizedDescription)
@@ -660,7 +648,7 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
 //MARK:- Show TVs to Mirror
 extension UnfinishedMeetingViewController : UIGestureRecognizerDelegate {
     
-    // Apresentar TVs disponiveis para espelhar.
+    /// Apresentar TVs disponiveis para espelhar.
     func showTvTableView() {
         
         let blurEffect = UIBlurEffect(style: .extraLight)
@@ -728,5 +716,33 @@ extension UnfinishedMeetingViewController : UIGestureRecognizerDelegate {
         
         return !isTouch
     }
+    
+}
+
+//MARK:- Enviar tópicos para a reunião quando não for manager
+private extension UnfinishedMeetingViewController {
+    
+    /// Enviando tópicos criados para a reunião.
+    @objc func shareTopicsToMeeting() {
+        
+        let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
+        loadingAlert.addUIActivityIndicatorView()
+        
+        self.present(loadingAlert, animated: true)
+        
+        // Damos Update da Meeting e do Topic no Cloud
+        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }) {
+            DispatchQueue.main.async {
+                loadingAlert.dismiss(animated: true, completion: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+        }
+    }
+    
     
 }

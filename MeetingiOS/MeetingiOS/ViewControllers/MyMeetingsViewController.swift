@@ -29,7 +29,7 @@ import CloudKit
         } else {
             refreshControl.tintColor = .gray
         }
-    
+        
         return refreshControl
     }()
     
@@ -66,7 +66,14 @@ import CloudKit
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)        
-        self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)
+        
+        ///Apresentando Onboarding - Primeiro Acesso
+        if  UserDefaults.standard.value(forKey: "newUser") as? Bool ?? true {
+            self.performSegue(withIdentifier: "Onboarding", sender: nil)
+            UserDefaults.standard.set(false, forKey: "newUser")
+        }
+        
+        self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)        
     }
     
     //MARK:- Methods
@@ -272,7 +279,7 @@ extension MyMeetingsViewController {
     
     /// Configurando navigation controller
     func setupNavigationController() {
- 
+        
         self.navigationController?.navigationBar.setupShadow()
         self.navigationItem.title = NSLocalizedString("My meetings", comment: "")
         self.navigationItem.hidesBackButton = true

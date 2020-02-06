@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ID9-zH-FfA">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B33-Ov-qw8">
-                                <rect key="frame" x="20" y="44" width="374" height="762.5"/>
+                                <rect key="frame" x="20" y="44" width="374" height="769"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="77" id="0Vh-IY-nnt" customClass="UnfinishedTopicsTableViewCell">
@@ -76,40 +76,34 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dla-rG-esW">
-                                <rect key="frame" x="0.0" y="806.5" width="414" height="89.5"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPe-4T-6Ca">
-                                        <rect key="frame" x="28" y="10" width="368" height="76"/>
-                                        <state key="normal" image="botaoMirror"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPj-Jy-FhQ">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="j85-4G-BsE"/>
+                                    <barButtonItem title="Item" image="botaoMirror" id="Enn-kh-HmM">
                                         <connections>
-                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" eventType="touchUpInside" id="xoA-hI-xNq"/>
+                                            <action selector="espelharMeeting:" destination="ID9-zH-FfA" id="cXP-Sa-VDP"/>
                                         </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" name="NavigationBarColor"/>
-                                <constraints>
-                                    <constraint firstItem="oPe-4T-6Ca" firstAttribute="top" secondItem="dla-rG-esW" secondAttribute="top" constant="10" id="aVv-gi-F1Q"/>
-                                    <constraint firstAttribute="trailing" secondItem="oPe-4T-6Ca" secondAttribute="trailing" constant="18" id="qAh-9A-pSx"/>
-                                </constraints>
-                            </view>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" name="NavigationBarColor"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="top" secondItem="8yf-T9-PQA" secondAttribute="top" id="2WT-QC-CZx"/>
-                            <constraint firstItem="dla-rG-esW" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" id="GoG-6Z-NrY"/>
-                            <constraint firstItem="dla-rG-esW" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="MAL-cp-CLP"/>
+                            <constraint firstItem="pPj-Jy-FhQ" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="Aji-4w-bx7"/>
+                            <constraint firstItem="pPj-Jy-FhQ" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" id="Nbb-pB-FEe"/>
                             <constraint firstItem="8yf-T9-PQA" firstAttribute="trailing" secondItem="B33-Ov-qw8" secondAttribute="trailing" constant="20" id="OTe-fo-ZvA"/>
                             <constraint firstItem="B33-Ov-qw8" firstAttribute="leading" secondItem="8yf-T9-PQA" secondAttribute="leading" constant="20" id="Vvj-D4-nEK"/>
-                            <constraint firstAttribute="bottom" secondItem="dla-rG-esW" secondAttribute="bottom" id="W0v-DE-9dZ"/>
-                            <constraint firstItem="dla-rG-esW" firstAttribute="trailing" secondItem="8yf-T9-PQA" secondAttribute="trailing" id="jxI-DF-aWZ"/>
-                            <constraint firstItem="dla-rG-esW" firstAttribute="height" secondItem="p7q-fI-btO" secondAttribute="height" multiplier="0.1" id="yLv-tj-Ex1"/>
+                            <constraint firstItem="pPj-Jy-FhQ" firstAttribute="top" secondItem="B33-Ov-qw8" secondAttribute="bottom" symbolic="YES" id="gwB-Et-xFR"/>
+                            <constraint firstItem="pPj-Jy-FhQ" firstAttribute="bottom" secondItem="8yf-T9-PQA" secondAttribute="bottom" id="oOC-8v-YdM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8yf-T9-PQA"/>
                     </view>
                     <navigationItem key="navigationItem" id="fTt-mX-iyb"/>
                     <connections>
-                        <outlet property="buttonItem" destination="oPe-4T-6Ca" id="sLF-bG-6Y0"/>
+                        <outlet property="buttonItem" destination="Enn-kh-HmM" id="6jp-Ze-OZp"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
                         <segue destination="UXK-3M-bfi" kind="show" identifier="conclusion" id="NlO-MH-F1x"/>
                     </connections>
