@@ -98,21 +98,21 @@
                                     <outlet property="delegate" destination="dcg-jt-bSn" id="Iut-r8-qua"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" name="NavigationBarColor"/>
                                 <items>
-                                    <barButtonItem image="plus.circle.fill" catalog="system" id="sqR-4e-h3r">
+                                    <barButtonItem image="plus.circle.fill" catalog="system" style="done" id="sqR-4e-h3r">
                                         <connections>
                                             <segue destination="RZ8-qU-0ri" kind="show" id="PfM-2M-zLR"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="New meeting" id="bQY-k5-1xX">
+                                    <barButtonItem title="New meeting" style="done" id="bQY-k5-1xX">
                                         <connections>
                                             <segue destination="RZ8-qU-0ri" kind="show" id="WKF-Nl-1bS"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" name="NavigationBarColor"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" name="BackgroundColor"/>
