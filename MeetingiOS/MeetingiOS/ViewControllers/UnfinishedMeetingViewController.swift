@@ -606,34 +606,21 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
         
         // Array sorted com o texto da searchBar.
         // é se o Topic contém, como prefixo, sufixo ou por inteiro, o texto escrito na searchBar.
-        let sorted = topics.sorted {
-            if $0.topicDescription.isEmpty || $1.topicDescription.isEmpty {
-                return false
+        var filteringTopics = [Topic]()
+        
+        self.topics.forEach {
+            if $0.topicDescription.lowercased().contains(searchText.lowercased()) {
+                filteringTopics.append($0)
             }
-            else if $0.topicDescription.lowercased() == searchBar.text!.lowercased() && $1.topicDescription.lowercased() != searchBar.text!.lowercased() {
-                return true
-            }
-            else if $0.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased()) && !$1.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased())  {
-                return true
-            }
-            else if $0.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased()) && $1.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased())
-                && $0.topicDescription.lowercased().count < $1.topicDescription.lowercased().count  {
-                return true
-            }
-            else if $0.topicDescription.lowercased().contains(searchBar.text!.lowercased()) && !$1.topicDescription.lowercased().contains(searchBar.text!.lowercased()) {
-                return true
-            }
-            else if $0.topicDescription.lowercased().contains(searchBar.text!.lowercased()) && $1.topicDescription.lowercased().contains(searchBar.text!.lowercased())
-                && $0.topicDescription.lowercased().count < $1.topicDescription.lowercased().count {
-                return true
-            }
-            return false
         }
         
-        searchedTopics = sorted
+        searchedTopics = filteringTopics.sorted(by: { (lhs, rhs) -> Bool in
+            lhs.topicDescription < rhs.topicDescription
+        })
+        
         // Um dos Topics é apenas um espaço em branco para adicionar um novo,
         // esse Topic não é necessário no modo de pesquisa.
-        searchedTopics.remove(at: 0)
+       // searchedTopics.remove(at: 0)
         tableViewTopics.reloadData()
     }
     
