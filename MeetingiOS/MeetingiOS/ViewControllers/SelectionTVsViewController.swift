@@ -28,11 +28,15 @@ class SelectionTVsViewController: UIViewController {
         view.addSubview(tvsTableView)
         
         NSLayoutConstraint.activate([
-            tvsTableView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
             tvsTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
             tvsTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tvsTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        6
+        if self.traitCollection.horizontalSizeClass == .regular {
+            tvsTableView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.6).isActive = true
+        }
+        
         
         tvsTableView.awakeFromNib()
         tvsTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +56,5 @@ class SelectionTVsViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             })
         }
-    }
-    
-    
+    }    
 }
