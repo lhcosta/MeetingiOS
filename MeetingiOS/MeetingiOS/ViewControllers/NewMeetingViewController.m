@@ -62,7 +62,25 @@
     
     _formatter = [[NSDateFormatter alloc] init];
     [_formatter setDateFormat:NSLocalizedString(@"dateFormat", "")];
-    _startsDateTime.text = _endesDateTime.text = [_formatter stringFromDate:NSDate.now];
+    
+    // 30 min a mais do horário atual stado no datePicker
+    NSDateComponents *components= [[NSDateComponents alloc] init];
+    [components setMinute:30];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *newDateStarts = [calendar dateByAddingComponents:components toDate:[NSDate date] options:0];
+    _startsDateTime.text = [_formatter stringFromDate:newDateStarts];
+    
+    // 10 min a mais do horário atual stado no datePicker
+    NSDateComponents *componentsEnd= [[NSDateComponents alloc] init];
+    [components setMinute:40];
+    NSCalendar *calendarEnd = [NSCalendar currentCalendar];
+    NSDate *newDateEnds = [calendar dateByAddingComponents:components toDate:[NSDate date] options:0];
+    _endesDateTime.text = [_formatter stringFromDate:newDateEnds];
+    
+    _startDatePicker.date = newDateStarts;
+    _finishDatePicker.date = newDateEnds;
+    
+    
     [self setupPickersWithStartDatePicker:_startDatePicker finishDatePicker:_finishDatePicker];
     
     _meeting = [[Meeting alloc] initWithRecord:record];

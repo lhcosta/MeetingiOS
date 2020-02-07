@@ -15,8 +15,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     //MARK: - IBOutlets
     @IBOutlet var tableViewTopics: UITableView!
-    @IBOutlet var mirrorButton: UIToolbar!
     @IBOutlet weak var buttonItem: UIBarButtonItem!
+    
     
     //MARK: - Properties
     /// Array que com os Topics que será exibido na Table View
@@ -32,7 +32,7 @@ class UnfinishedMeetingViewController: UIViewController {
     var usrIsManager = false
     
     /// Nome da imagem de fundo do botão de check dos Topics ("square" ou "checkmark.square.fill")
-//    var bgButtonImg: String!
+    //    var bgButtonImg: String!
     
     /// IndexPath utilizado para iniciar uma cell fora do delegate da tableView
     var indexPath: IndexPath!
@@ -47,20 +47,20 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
-    /// Conexão Multipeer
-    var multipeer : MeetingBrowserPeer?
-    
-    var meetingTeste : Meeting?
-    
     var selectedTopicForInfo: Topic?
     
-    private var tvsTableView : TvsTableView!
+    /// Loading inicial da view.
+    var loadingView : UIView!
     
-    private var blurEffectView : UIVisualEffectView!
+    var activeField: UITextField?
+    
+    private var buttonToolbar : UIButton!
     
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.loadingView = self.addInitialLoadingView()
         
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
@@ -72,17 +72,16 @@ class UnfinishedMeetingViewController: UIViewController {
         
         self.navigationItem.title = currMeeting.theme
         
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedTv(notification:)), name: Notification.Name(rawValue:"SelectedTV"), object: nil)
         /// Dispara as funções de manipulação do teclado
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.view.addSubview(loadingView)
         
         CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
             if let record = record?.values.first {
@@ -119,6 +118,12 @@ class UnfinishedMeetingViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.tableViewTopics.reloadData()
+                UIView.animate(withDuration: 0.5, animations: { 
+                    self.loadingView.alpha = 0
+                }) { (_) in
+                    self.loadingView.removeFromSuperview()
+                }
+
             }
         }
         
@@ -128,12 +133,13 @@ class UnfinishedMeetingViewController: UIViewController {
         }
         
         // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
-        // Conforme o usuário foi quem criou ou não a Meeting.
-        if usrIsManager {
-            mirrorButton.isHidden = false
-        } else {
-            buttonItem.image = UIImage(named: "shareButton")
-//            self.bgButtonImg = "square."
+        // Conforme o usuário foi quem criou ou não a Meeting.      
+        // Adicionando share button, quando não for o manager.
+        if !self.usrIsManager {
+            let shareButton = UIButton()
+            shareButton.addTarget(self, action: #selector(shareTopicsToMeeting), for: .touchUpInside)
+            shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
+            buttonItem.customView = shareButton
         }
         
         tableViewTopics.delegate = self
@@ -188,7 +194,7 @@ class UnfinishedMeetingViewController: UIViewController {
         
         guard let button = sender as? UIButton else { return }
         
-        guard let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
+        guard let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
         
         let indexPath = tableViewTopics.indexPath(for: cell)
         
@@ -216,11 +222,16 @@ class UnfinishedMeetingViewController: UIViewController {
         
         guard let button = sender as? UIButton else { return }
         
-        if let cell = button.superview?.superview as? UnfinishedTopicsTableViewCell {
+        if let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell {
             let indexPath = tableViewTopics.indexPath(for: cell)
-            self.selectedTopicForInfo = topics[indexPath!.section]
             
-            performSegue(withIdentifier: "conclusion", sender: self)
+            if isSearching {
+                self.selectedTopicForInfo = searchedTopics[indexPath?.section ?? 0]
+            } else {
+                self.selectedTopicForInfo = topics[indexPath?.section ?? 0]
+            }
+            
+            performSegue(withIdentifier: "conclusionUnfinished", sender: self)
         }
     }
     
@@ -231,72 +242,76 @@ class UnfinishedMeetingViewController: UIViewController {
     /// - Parameter sender: UIButton.
     @IBAction func espelharMeeting(_ sender: Any) {
         
-        if usrIsManager {
-            for idx in 1..<topics.count {
-                if topics[idx].selectedForMeeting {
-                    currMeeting.selected_topics.append(topics[idx])
-                }
-            }
+        currMeeting.selected_topics = []
+        for idx in 1..<topics.count {
             
-            self.currMeeting.started = true
-            CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }) {}
-            
-            showTvTableView()
-        } else {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: -10, y: 5, width: 50, height: 50))
-            activityIndicator.style = .medium
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.startAnimating()
-            
-            let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
-            loadingAlert.view.addSubview(activityIndicator)
-            
-            self.present(loadingAlert, animated: true)
-            
-            // Damos Update da Meeting e do Topic no Cloud
-            CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }) {
-                DispatchQueue.main.async {
-                    loadingAlert.dismiss(animated: true, completion: nil)
-                }
+            if topics[idx].selectedForMeeting {
+                
+                currMeeting.selected_topics.append(topics[idx])
+                
             }
         }
         
-
-   
+        self.currMeeting.started = true
+        
+        CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }) {}
+        
+        showTvTableView()
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let conclusionVC = segue.destination as? ConclusionsViewController {
-            conclusionVC.fromUnfinishedMeeting = true
-            conclusionVC.topicToPresentConclusions = self.selectedTopicForInfo
-            conclusionVC.meetingDidBegin = self.currMeeting.started
-            self.view.setNeedsDisplay()
+        
+        if segue.identifier == "SelectTV" {
+            
+            guard let viewController = segue.destination as? SelectionTVsViewController else {return}
+            viewController.meeting = self.currMeeting
+            
+        } else if segue.identifier == "conclusionUnfinished" {
+            if let navigation = segue.destination as? UINavigationController, let conclusionVC = navigation.viewControllers.first as? ConclusionsViewController {
+                
+                conclusionVC.fromUnfinishedMeeting = true
+                conclusionVC.topicToPresentConclusions = self.selectedTopicForInfo
+                conclusionVC.meetingDidBegin = self.currMeeting.started
+                self.view.setNeedsDisplay()
+            }
+            
         }
     }
     
     
     /// Eleva a tela para o teclado aparecer
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+    @objc func keyboardWillShow(notification: NSNotification){
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.tableViewTopics.isScrollEnabled = true
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height*1.2, right: 0.0)
+
+        self.tableViewTopics.contentInset = contentInsets
+        self.tableViewTopics.scrollIndicatorInsets = contentInsets
+
+        var aRect: CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeField = self.activeField {
+            if (!aRect.contains(activeField.frame.origin)){
+                self.tableViewTopics.scrollRectToVisible(activeField.frame, animated: true)
             }
         }
     }
 
-    /// Volta a tela para o normal sem o teclado
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
+    @objc func keyboardWillHide(notification: NSNotification){
+        //Once keyboard disappears, restore original positions
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height*1.2, right: 0.0)
+        self.tableViewTopics.contentInset = contentInsets
+        self.tableViewTopics.scrollIndicatorInsets = contentInsets
+        self.view.endEditing(true)
     }
 }
 
@@ -371,7 +386,6 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         cell.textFieldRight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textFieldHeight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textLabel?.font = font
-        cell.buttonInfo.isHidden = true
         
         // Se não for gerente, não faz sentido termos o botão de check.
         if !usrIsManager {
@@ -392,6 +406,9 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
             } else {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
             }
+            if indexPath.section == 0 {
+                cell.buttonInfo.isHidden = false
+            }
         } else {
             // Pegamos os dados da Array principal.
             cell.topicTextField.text = topics[indexPath.section].topicDescription
@@ -404,6 +421,10 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             } else {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+            }
+            
+            if indexPath.section == 0 {
+                cell.buttonInfo.isHidden = true
             }
         }
         return cell
@@ -427,9 +448,13 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             topicToBeEditedOnSearch = textField.text
         }
         
-        guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
-        cell.buttonInfo.isHidden = false
+        guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
+//        if tableViewTopics.indexPath(for: cell)?.section != 0 {
+//            cell.buttonInfo.alpha = 1
+//            cell.buttonInfo.isEnabled = true
+//        }
         tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
+        self.activeField = textField
     }
     
     
@@ -491,7 +516,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                                 }
                             }) { }
                         }
-        
+                        
                         CloudManager.shared.deleteRecords(recordIDs: [topics[i].record.recordID], perRecordCompletion: { (_, error) in
                             if let error = error {
                                 print(error.localizedDescription)
@@ -520,7 +545,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         } else {
             // Quando não estamos no modo de pesquisa, nós alteramos a array de Topics principal diretamente
             // Instanciamos uma tableViewCell a partir da superview do textField utilizado.
-            guard let cell = textField.superview?.superview as? UnfinishedTopicsTableViewCell else {
+            guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
             let indexPath = tableViewTopics.indexPath(for: cell)!
@@ -582,7 +607,8 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                     cell.topicTextField.becomeFirstResponder()
                 }
             }
-            cell.buttonInfo.isHidden = true
+//            cell.buttonInfo.alpha = 0
+//            cell.buttonInfo.isEnabled = false
             return true
         }
     }
@@ -654,73 +680,36 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
 //MARK:- Show TVs to Mirror
 extension UnfinishedMeetingViewController : UIGestureRecognizerDelegate {
     
-    // Apresentar TVs disponiveis para espelhar.
+    /// Apresentar TVs disponiveis para espelhar.
     func showTvTableView() {
-        
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTVsTableView(_:)))
-        tapGesture.delegate = self
-        
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.frame = self.view.bounds
-        
-        self.blurEffectView.addGestureRecognizer(tapGesture)
-        
-        self.navigationController?.view.addSubview(blurEffectView)
-        
-        tvsTableView = TvsTableView()
-        let tvsTableViewData = TvsTableViewData(tvsTableView)
-        
-        tvsTableView.awakeFromNib()
-        
-        self.multipeer = MeetingBrowserPeer(tvsTableViewData)
-        
-        blurEffectView.contentView.addSubview(tvsTableView)
-        
-        NSLayoutConstraint.activate([
-            tvsTableView.widthAnchor.constraint(equalTo: blurEffectView.widthAnchor, multiplier: 0.8),
-            tvsTableView.heightAnchor.constraint(equalTo: blurEffectView.heightAnchor, multiplier: 0.25),
-            tvsTableView.centerXAnchor.constraint(equalTo: blurEffectView.centerXAnchor),
-            tvsTableView.centerYAnchor.constraint(equalTo: blurEffectView.centerYAnchor)
-        ])
-        
-        tvsTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.performSegue(withIdentifier: "SelectTV", sender: nil)
     }
+}
+
+//MARK:- Enviar tópicos para a reunião quando não for manager
+private extension UnfinishedMeetingViewController {
     
-    /// Remover view ao realizar um tap na view.
-    /// - Parameter tapGesture: toque na tela.
-    @objc func dismissTVsTableView(_ tapGesture : UITapGestureRecognizer) {
+    /// Enviando tópicos criados para a reunião.
+    @objc func shareTopicsToMeeting() {
         
-        let location = tapGesture.location(in: self.blurEffectView)
+        let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
+        loadingAlert.addUIActivityIndicatorView()
         
-        if self.blurEffectView.frame.contains(location) {            
-            self.blurEffectView.removeFromSuperview()
-        }
+        self.present(loadingAlert, animated: true)
         
-    }
-    
-    /// Recebendo o peer selecionado através de uma notificação enviada.
-    /// - Parameter notification: notificacao enviada.
-    @objc private func selectedTv(notification : NSNotification) {
-        
-        guard let peerId = notification.object as? MCPeerID else {return}
-        
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(self.currMeeting) {
-            
-            self.multipeer?.sendInviteFromPeer(peerID: peerId, dataToSend: data)
-            print("Dados enviados")
+        // Damos Update da Meeting e do Topic no Cloud
+        CloudManager.shared.updateRecords(records: [currMeeting.record], perRecordCompletion: { (_, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }) {
+            DispatchQueue.main.async {
+                loadingAlert.dismiss(animated: true, completion: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
         }
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
-        let point = touch.location(in: self.blurEffectView)
-        
-        let isTouch = self.tvsTableView.frame.contains(point)
-        
-        return !isTouch
-    }
     
 }

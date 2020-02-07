@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vTy-o5-exJ">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vTy-o5-exJ">
+    <device id="retina6_5" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -98,21 +98,21 @@
                                     <outlet property="delegate" destination="dcg-jt-bSn" id="Iut-r8-qua"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkH-v3-ztq">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" name="NavigationBarColor"/>
                                 <items>
-                                    <barButtonItem image="plus.circle.fill" catalog="system" id="sqR-4e-h3r">
+                                    <barButtonItem image="plus.circle.fill" catalog="system" style="done" id="sqR-4e-h3r">
                                         <connections>
                                             <segue destination="RZ8-qU-0ri" kind="show" id="PfM-2M-zLR"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="New meeting" id="bQY-k5-1xX">
+                                    <barButtonItem title="New meeting" style="done" id="bQY-k5-1xX">
                                         <connections>
                                             <segue destination="RZ8-qU-0ri" kind="show" id="WKF-Nl-1bS"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" name="NavigationBarColor"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" name="BackgroundColor"/>
@@ -134,6 +134,8 @@
                         <segue destination="S76-Th-kPX" kind="show" identifier="unfinishedMeeting" id="0R0-Nv-dzE"/>
                         <segue destination="uQZ-zh-Ghq" kind="presentation" identifier="goToProfile" modalTransitionStyle="coverVertical" id="8hE-O8-eEQ"/>
                         <segue destination="NGr-rW-Se3" kind="show" identifier="MeetingDetails" id="ayp-bw-Ejw"/>
+                        <segue destination="qwW-Ux-f3u" kind="presentation" identifier="Onboarding" id="Cf9-wB-0TW"/>
+                        <segue destination="1Xa-oW-9Gs" kind="presentation" identifier="Login" id="jco-hh-ikF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu9-4R-dug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -158,7 +160,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQZ-qp-GqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="311"/>
+            <point key="canvasLocation" x="1336" y="196"/>
+        </scene>
+        <!--OnBoarding-->
+        <scene sceneID="WQp-Ba-kb0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OnBoarding" id="qwW-Ux-f3u" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="hWI-gJ-8qQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZAi-bp-DRZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1196" y="321"/>
         </scene>
         <!--Details-->
         <scene sceneID="cQH-kP-bLe">
@@ -218,6 +230,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6IY-7N-kn5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-362.31884057971018" y="137.94642857142856"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="1Hw-88-bBZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="1Xa-oW-9Gs" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="L3O-uI-Bm1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XFp-rP-bFC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1070" y="402"/>
         </scene>
     </scenes>
     <resources>

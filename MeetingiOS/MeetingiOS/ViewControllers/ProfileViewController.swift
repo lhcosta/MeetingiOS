@@ -62,11 +62,7 @@ class ProfileViewController: UITableViewController {
             nameToUpdate = nameTF.text
             
             User.updateUser(name: nameToUpdate) {
-                DispatchQueue.main.async {
-                    if self.didComeFromLogin {
-                        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                    }
-                }
+                self.dismiss(animated: true, completion: nil)
             }
         }
         

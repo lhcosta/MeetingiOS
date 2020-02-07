@@ -24,7 +24,7 @@ class OnBoardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "OnboardingTableViewCell", bundle: nil), forCellReuseIdentifier: "OnboardingCell")
@@ -36,6 +36,11 @@ class OnBoardingViewController: UIViewController {
         }
         
         self.view.backgroundColor = UIColor(named: "BackgroundColor")
+    }
+    
+    /// Pop view controller
+    @IBAction func dismissViewController() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

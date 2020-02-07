@@ -1,0 +1,27 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Section-3"; ObjectID = "0qa-fq-dVp"; */
+"0qa-fq-dVp.headerTitle" = "Section-3";
+
+/* Class = "UILabel"; text = "Author"; ObjectID = "1GH-MS-bdr"; */
+"1GH-MS-bdr.text" = "Author";
+
+/* Class = "UITextView"; text = "Não espeficado."; ObjectID = "GQ9-ty-oh7"; */
+"GQ9-ty-oh7.text" = "Não espeficado.";
+
+/* Class = "UITableViewSection"; headerTitle = "Section-1"; ObjectID = "OJD-Xe-m0X"; */
+"OJD-Xe-m0X.headerTitle" = "Section-1";
+
+/* Class = "UITextField"; placeholder = "New Conclusion"; ObjectID = "OcW-FN-YGF"; */
+"OcW-FN-YGF.placeholder" = "New Conclusion";
+
+/* Class = "UITableViewSection"; headerTitle = "Section-2"; ObjectID = "RbS-L3-HT1"; */
+"RbS-L3-HT1.headerTitle" = "Section-2";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "b5s-VV-jLh"; */
+"b5s-VV-jLh.text" = "00:00";
+
+/* Class = "UILabel"; text = "Topic Title"; ObjectID = "t9M-Ri-gKo"; */
+"t9M-Ri-gKo.text" = "Topic Title";
+
+/* Class = "UITableViewSection"; headerTitle = "Section-4"; ObjectID = "tsf-ak-Dk8"; */
+"tsf-ak-Dk8.headerTitle" = "Section-4";
