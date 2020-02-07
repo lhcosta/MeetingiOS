@@ -56,7 +56,9 @@
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
 		A47E234323ECF50E00A1C9CC /* TableViewNoResults.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47E234223ECF50E00A1C9CC /* TableViewNoResults.xib */; };
 		A47E234623ECF70600A1C9CC /* TableViewNoResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47E234523ECF70600A1C9CC /* TableViewNoResults.swift */; };
-		A47E234823ED9E4800A1C9CC /* Conclusion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47E234723ED9E4800A1C9CC /* Conclusion.storyboard */; };
+		A47E234923EDA17E00A1C9CC /* Conclusion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47E234B23EDA17E00A1C9CC /* Conclusion.storyboard */; };
+		A47E235323EDA1D300A1C9CC /* SelectionTVs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47E235223EDA1D300A1C9CC /* SelectionTVs.storyboard */; };
+		A47E235523EDA25A00A1C9CC /* SelectionTVsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47E235423EDA25A00A1C9CC /* SelectionTVsViewController.swift */; };
 		A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49229ED23A3323500FD95B9 /* ContactTableView.swift */; };
 		A4922A1F23A728FB00FD95B9 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */; };
 		A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */; };
@@ -184,7 +186,12 @@
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		A47E234223ECF50E00A1C9CC /* TableViewNoResults.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewNoResults.xib; sourceTree = "<group>"; };
 		A47E234523ECF70600A1C9CC /* TableViewNoResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNoResults.swift; sourceTree = "<group>"; };
-		A47E234723ED9E4800A1C9CC /* Conclusion.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conclusion.storyboard; sourceTree = "<group>"; };
+		A47E234A23EDA17E00A1C9CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Conclusion.storyboard; sourceTree = "<group>"; };
+		A47E234D23EDA18900A1C9CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Conclusion.strings; sourceTree = "<group>"; };
+		A47E234F23EDA18C00A1C9CC /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Conclusion.strings"; sourceTree = "<group>"; };
+		A47E235123EDA18F00A1C9CC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Conclusion.strings; sourceTree = "<group>"; };
+		A47E235223EDA1D300A1C9CC /* SelectionTVs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionTVs.storyboard; sourceTree = "<group>"; };
+		A47E235423EDA25A00A1C9CC /* SelectionTVsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTVsViewController.swift; sourceTree = "<group>"; };
 		A482CABB23E089D300C945E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
 		A482CABD23E089D500C945E1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Contact.strings"; sourceTree = "<group>"; };
 		A482CABF23E089D800C945E1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contact.strings; sourceTree = "<group>"; };
@@ -270,6 +277,7 @@
 		235E7B84238DA93500B59855 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A47E235423EDA25A00A1C9CC /* SelectionTVsViewController.swift */,
 				A44CC31923DB841F005ECFF6 /* DetailsTableViewController.h */,
 				A44CC31A23DB841F005ECFF6 /* DetailsTableViewController.m */,
 				497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */,
@@ -474,7 +482,8 @@
 				49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */,
 				49F09A72239982A600B7DFD3 /* FinishedMeeting.storyboard */,
 				49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */,
-				A47E234723ED9E4800A1C9CC /* Conclusion.storyboard */,
+				A47E234B23EDA17E00A1C9CC /* Conclusion.storyboard */,
+				A47E235223EDA1D300A1C9CC /* SelectionTVs.storyboard */,
 				49F09A82239982FA00B7DFD3 /* Contact.storyboard */,
 				49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */,
 				A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */,
@@ -612,7 +621,7 @@
 				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
 				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
 				A4E1EA0923E34CFD00B2B32A /* OnboardingTableViewCell.xib in Resources */,
-				A47E234823ED9E4800A1C9CC /* Conclusion.storyboard in Resources */,
+				A47E234923EDA17E00A1C9CC /* Conclusion.storyboard in Resources */,
 				A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */,
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
 				A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */,
@@ -634,6 +643,7 @@
 				A4922A2823A728FB00FD95B9 /* SFProDisplay-Regular.ttf in Resources */,
 				A4922A2623A728FB00FD95B9 /* SFProText-Light.ttf in Resources */,
 				49F09ACE2399A1C400B7DFD3 /* Contact.storyboard in Resources */,
+				A47E235323EDA1D300A1C9CC /* SelectionTVs.storyboard in Resources */,
 				49F09ACF2399A1C700B7DFD3 /* NewMeeting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,6 +655,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A47E235523EDA25A00A1C9CC /* SelectionTVsViewController.swift in Sources */,
 				A44CC31723D8FD67005ECFF6 /* DetailsNewMeetingManager.swift in Sources */,
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */,
@@ -833,6 +844,17 @@
 				49F09ACA2399A1B100B7DFD3 /* en */,
 			);
 			name = SelectAColor.storyboard;
+			sourceTree = "<group>";
+		};
+		A47E234B23EDA17E00A1C9CC /* Conclusion.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A47E234A23EDA17E00A1C9CC /* Base */,
+				A47E234D23EDA18900A1C9CC /* en */,
+				A47E234F23EDA18C00A1C9CC /* pt-BR */,
+				A47E235123EDA18F00A1C9CC /* es */,
+			);
+			name = Conclusion.storyboard;
 			sourceTree = "<group>";
 		};
 		A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */ = {
