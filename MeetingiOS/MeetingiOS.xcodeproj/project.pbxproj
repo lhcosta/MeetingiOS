@@ -57,6 +57,7 @@
 		A47E234923EDA17E00A1C9CC /* Conclusion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47E234B23EDA17E00A1C9CC /* Conclusion.storyboard */; };
 		A47E235323EDA1D300A1C9CC /* SelectionTVs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47E235223EDA1D300A1C9CC /* SelectionTVs.storyboard */; };
 		A47E235523EDA25A00A1C9CC /* SelectionTVsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47E235423EDA25A00A1C9CC /* SelectionTVsViewController.swift */; };
+		A47E235723EDDD3B00A1C9CC /* UIViewController+LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47E235623EDDD3B00A1C9CC /* UIViewController+LoadingView.swift */; };
 		A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49229ED23A3323500FD95B9 /* ContactTableView.swift */; };
 		A4922A1F23A728FB00FD95B9 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */; };
 		A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */; };
@@ -188,6 +189,7 @@
 		A47E235123EDA18F00A1C9CC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Conclusion.strings; sourceTree = "<group>"; };
 		A47E235223EDA1D300A1C9CC /* SelectionTVs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectionTVs.storyboard; sourceTree = "<group>"; };
 		A47E235423EDA25A00A1C9CC /* SelectionTVsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTVsViewController.swift; sourceTree = "<group>"; };
+		A47E235623EDDD3B00A1C9CC /* UIViewController+LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+LoadingView.swift"; sourceTree = "<group>"; };
 		A482CABB23E089D300C945E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
 		A482CABD23E089D500C945E1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Contact.strings"; sourceTree = "<group>"; };
 		A482CABF23E089D800C945E1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contact.strings; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 		A4EB3BFA239747000097857F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A47E235623EDDD3B00A1C9CC /* UIViewController+LoadingView.swift */,
 				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift */,
 				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewManager.swift */,
 				A44CC31823DA913D005ECFF6 /* TypeUpdateUser.h */,
@@ -662,6 +665,7 @@
 				A44CC31B23DB841F005ECFF6 /* DetailsTableViewController.m in Sources */,
 				A4F4548823E9EBBF00CFF2CE /* UIAlertController+Loading.swift in Sources */,
 				A4EB3C1F2397EAF60097857F /* ContactManager.m in Sources */,
+				A47E235723EDDD3B00A1C9CC /* UIViewController+LoadingView.swift in Sources */,
 				E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */,
 				E26A2BCD238D5BD700A956DE /* User.swift in Sources */,
 				A44CC30D23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift in Sources */,

@@ -49,6 +49,9 @@ class UnfinishedMeetingViewController: UIViewController {
     
     var selectedTopicForInfo: Topic?
     
+    /// Loading inicial da view.
+    var loadingView : UIView!
+    
     var activeField: UITextField?
     
     private var buttonToolbar : UIButton!
@@ -56,6 +59,8 @@ class UnfinishedMeetingViewController: UIViewController {
     /// currMeeting será substituído pela Meeting criada.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.loadingView = self.addInitialLoadingView()
         
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)
@@ -75,6 +80,8 @@ class UnfinishedMeetingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.view.addSubview(loadingView)
         
         CloudManager.shared.fetchRecords(recordIDs: [currMeeting.record.recordID], desiredKeys: nil) { (record, error) in
             if let record = record?.values.first {
@@ -111,6 +118,12 @@ class UnfinishedMeetingViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.tableViewTopics.reloadData()
+                UIView.animate(withDuration: 0.5, animations: { 
+                    self.loadingView.alpha = 0
+                }) { (_) in
+                    self.loadingView.removeFromSuperview()
+                }
+
             }
         }
         

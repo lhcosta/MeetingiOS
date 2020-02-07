@@ -12,7 +12,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-//    [_topicTextField becomeFirstResponder];
     
     self.backgroundColor = UIColor.clearColor;
     self.layer.masksToBounds = YES;
@@ -35,11 +34,6 @@
 
 - (BOOL)canBecomeFirstResponder {
     return YES;
-}
-
-
-- (BOOL)becomeFirstResponder {
-    return self.topicTextField.becomeFirstResponder;
 }
 
 @end

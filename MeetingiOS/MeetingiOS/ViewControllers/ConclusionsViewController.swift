@@ -34,6 +34,9 @@ class ConclusionsViewController: UITableViewController {
     /// Flag para saber se viemos da UnfinishedMeetingViewController
     var fromUnfinishedMeeting = false
     
+    /// Tópico modificado.
+    var isChangedTopic = false
+    
     var meetingDidBegin = true
     
     var activeField: UITextField?
@@ -45,7 +48,8 @@ class ConclusionsViewController: UITableViewController {
         
         self.conclusionManager = ConclusionInfoTableViewManager()
         self.descriptionManager = DescriptionTableViewManager()
-
+        self.descriptionManager.viewController = self
+        
         self.labelAuthorName.text = topicToPresentConclusions.authorName
         
         if let duration = topicToPresentConclusions.duration {
@@ -56,7 +60,7 @@ class ConclusionsViewController: UITableViewController {
         
         self.labelTopicTitle.text = topicToPresentConclusions.topicDescription
         self.labelAuthorName.text = topicToPresentConclusions.authorName
-
+        
         self.descriptionTextView.delegate = descriptionManager
         
         self.setupConclusionsAndDescription()
@@ -92,30 +96,33 @@ class ConclusionsViewController: UITableViewController {
     /// Ação do botão Done para mandar a conclusiona para o Cloud
     @objc func doneAction() {        
         
-        let loading = UIAlertController(title: nil, message: NSLocalizedString("Updating...", comment: ""), preferredStyle: .alert)
-        loading.addUIActivityIndicatorView()
-        
-        self.present(loading, animated: true, completion: nil)
-        
-        //Removendo último em branco
         self.topicToPresentConclusions.conclusions.removeLast()
         
-        CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
-            if let error = error {
-                print("Error Cloud: \(error)")
-            } else {
-                print("Conclusion Successifuly added!")
-                
-                DispatchQueue.main.async {
-                    loading.dismiss(animated: true, completion: {
-                        self.dismiss(animated: true, completion: nil)
-                    })
+        if self.isChangedTopic {
+            let loading = UIAlertController(title: nil, message: NSLocalizedString("Updating...", comment: ""), preferredStyle: .alert)
+            loading.addUIActivityIndicatorView()
+            
+            self.present(loading, animated: true, completion: nil)
+                        
+            CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
+                if let error = error {
+                    print("Error Cloud: \(error)")
+                } else {
+                    print("Conclusion Successifuly added!")
+                    
+                    DispatchQueue.main.async {
+                        loading.dismiss(animated: true, completion: {
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                    }
                 }
+            }) {
+                print("Done Request")
             }
-        }) {
-            print("Done Request")
+        } else {
+            self.dismiss(animated: true, completion: nil)
         }
-    
+        
     }
     
     /// Remove o teclado da tela
@@ -233,12 +240,12 @@ extension ConclusionsViewController {
         /// Section 2 -> Descrição    |      Section 3 -> Conslusões        
         descriptionTextView.isUserInteractionEnabled = fromUnfinishedMeeting && (topicToPresentConclusions.author?.recordID.recordName == UserDefaults.standard.value(forKey: "recordName") as? String)
         
-        if self.topicToPresentConclusions.topicDescription.isEmpty {
-            self.descriptionTextView.text = NSLocalizedString("Not specified", comment: "")
+        if self.topicToPresentConclusions.topicPorque.isEmpty {
+            self.descriptionTextView.text = NSLocalizedString("Not specified.", comment: "")
         } else {
             self.descriptionTextView.text = topicToPresentConclusions.topicPorque
         }
-
+        
         if !self.meetingDidBegin {
             conclusionManager.fromUnfinishedMeeting = true
             conclusionManager.meetingDidBegin = self.meetingDidBegin

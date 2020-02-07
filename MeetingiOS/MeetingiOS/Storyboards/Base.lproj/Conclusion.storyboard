@@ -148,7 +148,7 @@
                                                                         <constraint firstAttribute="width" constant="8" id="hJT-2B-o5S"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Não espeficado." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GQ9-ty-oh7">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GQ9-ty-oh7">
                                                                     <rect key="frame" x="13" y="0.0" width="321" height="76"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -211,9 +211,9 @@
                                                                                             <constraint firstAttribute="width" constant="8" id="3zq-xf-f04"/>
                                                                                         </constraints>
                                                                                     </imageView>
-                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Conclusion" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OcW-FN-YGF">
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Conclusion" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OcW-FN-YGF">
                                                                                         <rect key="frame" x="26" y="0.0" width="308" height="20"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                        <nil key="textColor"/>
                                                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                                                     </textField>
                                                                                 </subviews>

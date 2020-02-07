@@ -20,12 +20,12 @@ extension UIViewController {
         
         search.searchResultsUpdater = self as? UISearchResultsUpdating
         
-        if let titles = segmentedControlTitles, titles.count>0 {
+        if let titles = segmentedControlTitles, titles.count > 0 {
             search.searchBar.scopeButtonTitles = titles
             search.searchBar.showsScopeBar = true
         }
         
-        self.navigationItem.hidesSearchBarWhenScrolling = true
+        self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.searchController = search
 
         definesPresentationContext = true
