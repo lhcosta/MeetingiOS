@@ -140,6 +140,11 @@ class UnfinishedMeetingViewController: UIViewController {
                     shareButton.addTarget(self, action: #selector(self.shareTopicsToMeeting), for: .touchUpInside)
                     shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
                     self.buttonItem.customView = shareButton
+                    
+                    NSLayoutConstraint.activate([
+                        shareButton.widthAnchor.constraint(equalToConstant: 70),
+                        shareButton.heightAnchor.constraint(equalToConstant: 40)
+                    ])
                 }
                 
                 self.tableViewTopics.delegate = self
@@ -399,7 +404,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         } /*else {
          
          }*/
-        
+        cell.topicTextField.placeholder = NSLocalizedString("Topic's name", comment: "")
         // Verificamos se o usuário está em modo de pesquisa.
         if isSearching {
             // Pegamos os dados da Array do modo de pesquisa.

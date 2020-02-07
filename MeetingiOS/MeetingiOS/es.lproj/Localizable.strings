@@ -71,6 +71,9 @@
 "Not specified." = "No specificado.";
 "Updating..." = "Actualización...";
 
+// Unfinished Topics' Placeholder
+"Topic's name" = "Nombre del Tema";
+
 //Premium options
 "1 month" = "1 mes";
 "3 months" = "3 meses";
