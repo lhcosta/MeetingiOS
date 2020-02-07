@@ -105,17 +105,17 @@
                     <connections>
                         <outlet property="buttonItem" destination="Enn-kh-HmM" id="6jp-Ze-OZp"/>
                         <outlet property="tableViewTopics" destination="B33-Ov-qw8" id="8Ab-G9-apP"/>
-                        <segue destination="UXK-3M-bfi" kind="show" identifier="conclusion" id="NlO-MH-F1x"/>
+                        <segue destination="UXK-3M-bfi" kind="show" identifier="conclusionUnfinished" id="NlO-MH-F1x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8U-Za-ztu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="-338.16964285714283"/>
         </scene>
-        <!--conclusionStoryboard-->
+        <!--Conclusion-->
         <scene sceneID="dug-C7-s53">
             <objects>
-                <viewControllerPlaceholder storyboardName="FinishedMeeting" referencedIdentifier="conclusionStoryboard" id="UXK-3M-bfi" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Conclusion" id="UXK-3M-bfi" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qLs-UI-ks9"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJY-jD-t0A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

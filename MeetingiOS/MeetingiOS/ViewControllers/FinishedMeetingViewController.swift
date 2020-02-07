@@ -87,7 +87,10 @@ class FinishedMeetingViewController: UIViewController {
     ///   - sender: Default
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "conclusions" {
-            let vc = segue.destination as! ConclusionsViewController
+            guard let navigation = segue.destination as? UINavigationController else {return}
+            
+            guard let vc = navigation.viewControllers.first as? ConclusionsViewController else { return }
+            
             if let button = sender as? UIButton {
                 
                 guard let cell = button.superview?.superview?.superview as? FinishedTopicsTableViewCell else {

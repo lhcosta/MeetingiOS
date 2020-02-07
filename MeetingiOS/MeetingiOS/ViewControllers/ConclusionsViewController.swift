@@ -64,7 +64,7 @@ class ConclusionsViewController: UITableViewController {
         conclusionManager.conclusionTableView = conclusionTableView
         
         /// Configuração da Navigation - Título e ação do botão Done
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction))
         navigationItem.title = "Details"
         
         // Arredondando bordas da View
@@ -89,6 +89,11 @@ class ConclusionsViewController: UITableViewController {
     /// Ação do botão Done para mandar a conclusiona para o Cloud
     @objc func doneAction() {        
         
+        let loading = UIAlertController(title: nil, message: "Topic update...", preferredStyle: .alert)
+        loading.addUIActivityIndicatorView()
+        
+        self.present(loading, animated: true, completion: nil)
+        
         //Removendo último em branco
         self.topicToPresentConclusions.conclusions.removeLast()
         
@@ -99,13 +104,15 @@ class ConclusionsViewController: UITableViewController {
                 print("Conclusion Successifuly added!")
                 
                 DispatchQueue.main.async {
-                    self.navigationController!.popViewController(animated: true)
-                    
+                    loading.dismiss(animated: true, completion: {
+                        self.dismiss(animated: true, completion: nil)
+                    })
                 }
             }
         }) {
             print("Done Request")
         }
+    
     }
     
     /// Remove o teclado da tela

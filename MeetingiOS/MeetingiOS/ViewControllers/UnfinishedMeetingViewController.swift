@@ -223,7 +223,7 @@ class UnfinishedMeetingViewController: UIViewController {
             
             self.selectedTopicForInfo = topics[indexPath!.section]
             
-            performSegue(withIdentifier: "conclusion", sender: self)
+            performSegue(withIdentifier: "conclusionUnfinished", sender: self)
         }
     }
     
@@ -255,15 +255,10 @@ class UnfinishedMeetingViewController: UIViewController {
         showTvTableView()
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let conclusionVC = segue.destination as? ConclusionsViewController {
+        if let navigation = segue.destination as? UINavigationController, let conclusionVC = navigation.viewControllers.first as? ConclusionsViewController {
+            
             conclusionVC.fromUnfinishedMeeting = true
             conclusionVC.topicToPresentConclusions = self.selectedTopicForInfo
             conclusionVC.meetingDidBegin = self.currMeeting.started

@@ -56,6 +56,7 @@
 		A4533FF9238C67F00089257A /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4533FF8238C67F00089257A /* Meeting.swift */; };
 		A47E234323ECF50E00A1C9CC /* TableViewNoResults.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47E234223ECF50E00A1C9CC /* TableViewNoResults.xib */; };
 		A47E234623ECF70600A1C9CC /* TableViewNoResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47E234523ECF70600A1C9CC /* TableViewNoResults.swift */; };
+		A47E234823ED9E4800A1C9CC /* Conclusion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A47E234723ED9E4800A1C9CC /* Conclusion.storyboard */; };
 		A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49229ED23A3323500FD95B9 /* ContactTableView.swift */; };
 		A4922A1F23A728FB00FD95B9 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */; };
 		A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */; };
@@ -183,6 +184,7 @@
 		A4533FF8238C67F00089257A /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		A47E234223ECF50E00A1C9CC /* TableViewNoResults.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewNoResults.xib; sourceTree = "<group>"; };
 		A47E234523ECF70600A1C9CC /* TableViewNoResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNoResults.swift; sourceTree = "<group>"; };
+		A47E234723ED9E4800A1C9CC /* Conclusion.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conclusion.storyboard; sourceTree = "<group>"; };
 		A482CABB23E089D300C945E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
 		A482CABD23E089D500C945E1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Contact.strings"; sourceTree = "<group>"; };
 		A482CABF23E089D800C945E1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contact.strings; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				49F09A6A2399827100B7DFD3 /* MyMeetings.storyboard */,
 				49F09A72239982A600B7DFD3 /* FinishedMeeting.storyboard */,
 				49F09A7A239982C600B7DFD3 /* UnfinishedMeeting.storyboard */,
+				A47E234723ED9E4800A1C9CC /* Conclusion.storyboard */,
 				49F09A82239982FA00B7DFD3 /* Contact.storyboard */,
 				49F09A8A2399831800B7DFD3 /* NewMeeting.storyboard */,
 				A4BA9B1A23CE276E00CCC2AF /* Details.storyboard */,
@@ -609,6 +612,7 @@
 				A4922A2D23A728FB00FD95B9 /* SFProDisplay-Thin.ttf in Resources */,
 				A4922A2123A728FB00FD95B9 /* SFProDisplay-Ultralight.ttf in Resources */,
 				A4E1EA0923E34CFD00B2B32A /* OnboardingTableViewCell.xib in Resources */,
+				A47E234823ED9E4800A1C9CC /* Conclusion.storyboard in Resources */,
 				A4922A2023A728FB00FD95B9 /* SFProText-Heavy.ttf in Resources */,
 				49F09ACD2399A1C100B7DFD3 /* UnfinishedMeeting.storyboard in Resources */,
 				A4922A2323A728FB00FD95B9 /* SFProText-Regular.ttf in Resources */,
