@@ -20,6 +20,7 @@ class SelectionTVsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(dissmissViewController), name: Notification.Name("sendMeeting"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(selectedTv(notification:)), name: Notification.Name(rawValue:"SelectedTV"), object: nil)
         
         self.tvsTableView = TvsTableView()
@@ -32,16 +33,21 @@ class SelectionTVsViewController: UIViewController {
             tvsTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tvsTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        6
+        
         if self.traitCollection.horizontalSizeClass == .regular {
             tvsTableView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.6).isActive = true
+        } else {
+            tvsTableView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         }
-        
         
         tvsTableView.awakeFromNib()
         tvsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         self.multipeer = MeetingBrowserPeer(tvsTableViewData)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     /// Recebendo o peer selecionado através de uma notificação enviada.
@@ -52,9 +58,13 @@ class SelectionTVsViewController: UIViewController {
         
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.meeting) {
-            self.multipeer?.sendInviteFromPeer(peerID: peerId, dataToSend: data, completionHandler: {
-                self.dismiss(animated: true, completion: nil)
-            })
+            self.multipeer?.sendInviteFromPeer(peerID: peerId, dataToSend: data)
         }
-    }    
+    }   
+    
+    @objc private func dissmissViewController() {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }   
+    }
 }

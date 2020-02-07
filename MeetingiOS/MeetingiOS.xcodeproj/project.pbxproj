@@ -316,8 +316,6 @@
 				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
 				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
 				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
-				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */,
-				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
 				492B1F8923E9F49000106E79 /* OptionsTableViewCell.swift */,
 			);
 			path = TableViewCells;

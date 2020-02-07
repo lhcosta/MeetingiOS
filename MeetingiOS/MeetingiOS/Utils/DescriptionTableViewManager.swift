@@ -26,6 +26,11 @@ extension DescriptionTableViewManager: UITextViewDelegate {
         }
     }
 
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        viewController?.isChangedTopic = true
+        return true
+    }
+    
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         viewController?.isChangedTopic = true
         return true
