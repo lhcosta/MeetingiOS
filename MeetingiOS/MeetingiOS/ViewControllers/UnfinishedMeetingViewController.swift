@@ -699,7 +699,7 @@ extension UnfinishedMeetingViewController : UIGestureRecognizerDelegate {
         if let data = try? encoder.encode(self.currMeeting) {
             
             self.multipeer?.sendInviteFromPeer(peerID: peerId, dataToSend: data)
-            print("Dados enviados")
+            self.blurEffectView.removeFromSuperview()
         }
     }
     

@@ -13,8 +13,8 @@ import CloudKit
 class LoginViewController: UIViewController {
     
     let defaults = UserDefaults.standard
-    var goingToProfile = false
     @IBOutlet private weak var stackView : UIStackView!
+    var isMyMeeting = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         
         self.stackView.addArrangedSubview(signInButton)
     }
-
+    
     @objc private func signInButtonTapped() {
         //  Cria o provedor de autorização para obter as informações do Usuário
         let authorizationProvider = ASAuthorizationAppleIDProvider()
@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
         request.requestedScopes = [.email, .fullName]
         
         // Cria a controller responsável por efetuar o login
-
+        
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self as ASAuthorizationControllerDelegate
         authorizationController.presentationContextProvider = self as ASAuthorizationControllerPresentationContextProviding
@@ -61,16 +61,16 @@ class LoginViewController: UIViewController {
         let provider = ASAuthorizationAppleIDProvider()
         provider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
             switch(credentialState){
-            case .authorized:
-                print("Autorizado")
-                break
-            case .revoked:
-                print("Revogado")
-                break
-            case .notFound:
-                print("Nao Encontrado")
-                break
-            default: break
+                case .authorized:
+                    print("Autorizado")
+                    break
+                case .revoked:
+                    print("Revogado")
+                    break
+                case .notFound:
+                    print("Nao Encontrado")
+                    break
+                default: break
             }
         }
     }
@@ -84,7 +84,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             return
         }
         
-//        getAppleIDStatus(userIdentifier: appleIDCredential.user)
+        //        getAppleIDStatus(userIdentifier: appleIDCredential.user)
         
         print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
         
@@ -104,7 +104,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
             self.saveDefaults(user: user)
-            self.goToNextVC()
+            self.confirmLoginInApp()
             // Cria o record no Cloud
             CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
                 if let error = error {
@@ -129,14 +129,14 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     self.saveDefaults(user: user)
                     DispatchQueue.main.async {
                         loadingAlert.dismiss(animated: true, completion: nil)
-                        self.notificationPermission()
-                        self.goToNextVC()
+                        self.confirmLoginInApp()
                     }
                 }
             }
         }
     }
     
+    /// Permiti o recebimento de notificações.
     private func notificationPermission(){
         let application = UIApplication.shared
         let userNotCenter = UNUserNotificationCenter.current()
@@ -157,15 +157,14 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         }
     }
     
-    private func goToNextVC(){
-        if goingToProfile {
-            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-            let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
-            nextVC.didComeFromLogin = true
-            self.present(nextVC, animated: true, completion: nil)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+    private func confirmLoginInApp(){
+        self.dismiss(animated: true, completion: {
+            if self.isMyMeeting {
+                NotificationCenter.default.post(name: Notification.Name("UserLogin"), object: nil)
+            }
+            
+            self.notificationPermission()
+        })
     }
     
     private func saveDefaults(user: User) {
