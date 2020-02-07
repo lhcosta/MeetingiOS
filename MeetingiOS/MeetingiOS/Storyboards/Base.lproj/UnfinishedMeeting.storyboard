@@ -70,6 +70,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="ColorTableViewCell"/>
                                         <connections>
+                                            <outlet property="buttonInfo" destination="FUL-qw-KJV" id="bXy-fy-1qP"/>
                                             <outlet property="checkButton" destination="105-1b-AMg" id="xo4-cd-CWs"/>
                                             <outlet property="topicTextField" destination="qWC-TR-COq" id="MSM-2X-Ovh"/>
                                         </connections>
@@ -136,7 +137,7 @@
     </scenes>
     <resources>
         <image name="botaoMirror" width="184" height="38"/>
-        <image name="checkmark.rectangle.fill" catalog="system" width="64" height="46"/>
+        <image name="checkmark.rectangle.fill" catalog="system" width="32" height="32"/>
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
