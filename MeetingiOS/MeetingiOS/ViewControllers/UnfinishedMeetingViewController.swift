@@ -87,68 +87,72 @@ class UnfinishedMeetingViewController: UIViewController {
             if let record = record?.values.first {
                 self.currMeeting = Meeting(record: record)
             }
-        }
         
-        // Pegar Topics do Cloud.
-        var tempIDs: [CKRecord.ID] = []
-        for i in currMeeting.topics {
-            tempIDs.append(i.recordID)
-        }
-        self.topics = []
-        CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+            // Pegar Topics do Cloud.
+            var tempIDs: [CKRecord.ID] = []
+            for i in self.currMeeting.topics {
+                tempIDs.append(i.recordID)
             }
-            for i in records! {
-                let topic = Topic(record: i.value)
-                // Quando o usuário não é quem criou a Meeting só pegaremos os Topics cujo ele é o author
-                if !self.usrIsManager {
-                    if topic.author == CKRecord.Reference(recordID: CKRecord.ID(recordName: self.defaults.string(forKey: "recordName")!), action: .none) {
+            self.topics = []
+            CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                for i in records! {
+                    let topic = Topic(record: i.value)
+                    // Quando o usuário não é quem criou a Meeting só pegaremos os Topics cujo ele é o author
+                    if !self.usrIsManager {
+                        if topic.author == CKRecord.Reference(recordID: CKRecord.ID(recordName: self.defaults.string(forKey: "recordName")!), action: .none) {
+                            self.topics.append(topic)
+                        }
+                    } else {
+                        // Senão pegamos todos os Topics daquela Meeting.
                         self.topics.append(topic)
                     }
-                } else {
-                    // Senão pegamos todos os Topics daquela Meeting.
-                    self.topics.append(topic)
+                    
+                }
+                let newTopic = self.creatingTopicInstance()
+                self.topics.insert(newTopic, at: 0)
+                
+                DispatchQueue.main.async {
+                    self.tableViewTopics.reloadData()
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.loadingView.alpha = 0
+                    }) { (_) in
+                        self.loadingView.removeFromSuperview()
+                    }
+
+                }
+            }
+            
+            // Verificamos se a meeting selecionada foi criada pelo usuário
+            if CKRecord.ID(recordName: self.defaults.string(forKey: "recordName") ?? "") == self.currMeeting.manager?.recordID {
+                self.usrIsManager = true
+            }
+            
+            // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
+            // Conforme o usuário foi quem criou ou não a Meeting.
+            // Adicionando share button, quando não for o manager.
+            DispatchQueue.main.async {
+                if !self.usrIsManager {
+                    let shareButton = UIButton()
+                    shareButton.addTarget(self, action: #selector(self.shareTopicsToMeeting), for: .touchUpInside)
+                    shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
+                    self.buttonItem.customView = shareButton
                 }
                 
-            }
-            let newTopic = self.creatingTopicInstance()
-            self.topics.insert(newTopic, at: 0)
-            
-            DispatchQueue.main.async {
-                self.tableViewTopics.reloadData()
-                UIView.animate(withDuration: 0.5, animations: { 
-                    self.loadingView.alpha = 0
-                }) { (_) in
-                    self.loadingView.removeFromSuperview()
-                }
-
+                self.tableViewTopics.delegate = self
+                self.tableViewTopics.dataSource = self
             }
         }
-        
-        // Verificamos se a meeting selecionada foi criada pelo usuário
-        if CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? "") == currMeeting.manager?.recordID {
-            usrIsManager = true
-        }
-        
-        // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
-        // Conforme o usuário foi quem criou ou não a Meeting.      
-        // Adicionando share button, quando não for o manager.
-        if !self.usrIsManager {
-            let shareButton = UIButton()
-            shareButton.addTarget(self, action: #selector(shareTopicsToMeeting), for: .touchUpInside)
-            shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
-            buttonItem.customView = shareButton
-        }
-        
-        tableViewTopics.delegate = self
-        tableViewTopics.dataSource = self
     }
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
     
     /// Criamos um Topic com os dados do Usuário.
     func creatingTopicInstance() -> Topic {
@@ -622,34 +626,21 @@ extension UnfinishedMeetingViewController: UISearchBarDelegate {
         
         // Array sorted com o texto da searchBar.
         // é se o Topic contém, como prefixo, sufixo ou por inteiro, o texto escrito na searchBar.
-        let sorted = topics.sorted {
-            if $0.topicDescription.isEmpty || $1.topicDescription.isEmpty {
-                return false
+        var filteringTopics = [Topic]()
+        
+        self.topics.forEach {
+            if $0.topicDescription.lowercased().contains(searchText.lowercased()) {
+                filteringTopics.append($0)
             }
-            else if $0.topicDescription.lowercased() == searchBar.text!.lowercased() && $1.topicDescription.lowercased() != searchBar.text!.lowercased() {
-                return true
-            }
-            else if $0.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased()) && !$1.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased())  {
-                return true
-            }
-            else if $0.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased()) && $1.topicDescription.lowercased().hasPrefix(searchBar.text!.lowercased())
-                && $0.topicDescription.lowercased().count < $1.topicDescription.lowercased().count  {
-                return true
-            }
-            else if $0.topicDescription.lowercased().contains(searchBar.text!.lowercased()) && !$1.topicDescription.lowercased().contains(searchBar.text!.lowercased()) {
-                return true
-            }
-            else if $0.topicDescription.lowercased().contains(searchBar.text!.lowercased()) && $1.topicDescription.lowercased().contains(searchBar.text!.lowercased())
-                && $0.topicDescription.lowercased().count < $1.topicDescription.lowercased().count {
-                return true
-            }
-            return false
         }
         
-        searchedTopics = sorted
+        searchedTopics = filteringTopics.sorted(by: { (lhs, rhs) -> Bool in
+            lhs.topicDescription < rhs.topicDescription
+        })
+        
         // Um dos Topics é apenas um espaço em branco para adicionar um novo,
         // esse Topic não é necessário no modo de pesquisa.
-        searchedTopics.remove(at: 0)
+       // searchedTopics.remove(at: 0)
         tableViewTopics.reloadData()
     }
     
