@@ -17,15 +17,29 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var subscriptionView: UIView!
     @IBOutlet weak var editButtonName : UIButton!
+    @IBOutlet weak var subsType: UILabel!
     
     //MARK:- Properties
     let defaults = UserDefaults.standard
     let cloud = CloudManager.shared
     var didComeFromLogin = false
+    let store = StoreManager.shared
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.store.receiptValidation { (date) in
+            if let date = date{
+                if date > Date(timeIntervalSinceNow: 0) {
+                    DispatchQueue.main.async {
+                        self.subsType.text = "Premium"
+                        self.premiumBtn.isHidden = true
+                    }
+                }
+            }
+        }
+        
         
         self.isModalInPresentation = true
         self.nameTF.delegate = self
@@ -37,11 +51,6 @@ class ProfileViewController: UITableViewController {
         
     }
     
-    //MARK:- IBActions
-    @IBAction func didPressPremiumBtn(_ sender: Any) {
-        
-    }
-         
     @IBAction func didPressDone(_ sender: Any) {
         
         let name = defaults.string(forKey: "givenName")
@@ -85,10 +94,10 @@ class ProfileViewController: UITableViewController {
         super.tableView(tableView, heightForHeaderInSection: section)
         
         switch section {
-            case 1:
-                return 10
-            default:
-                break
+        case 1:
+            return 10
+        default:
+            break
         }
         
         return 30

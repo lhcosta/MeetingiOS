@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         
         self.stackView.addArrangedSubview(signInButton)
     }
-
+    
     @objc private func signInButtonTapped() {
         //  Cria o provedor de autorização para obter as informações do Usuário
         let authorizationProvider = ASAuthorizationAppleIDProvider()
@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
         request.requestedScopes = [.email, .fullName]
         
         // Cria a controller responsável por efetuar o login
-
+        
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self as ASAuthorizationControllerDelegate
         authorizationController.presentationContextProvider = self as ASAuthorizationControllerPresentationContextProviding
@@ -84,7 +84,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             return
         }
         
-//        getAppleIDStatus(userIdentifier: appleIDCredential.user)
+        //        getAppleIDStatus(userIdentifier: appleIDCredential.user)
         
         print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
         
@@ -137,19 +137,19 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         }
     }
     
-    private func notificationPermission(){
-        let application = UIApplication.shared
-        let userNotCenter = UNUserNotificationCenter.current()
-        userNotCenter.delegate = application.delegate as! AppDelegate
-        
-        userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
-            print("===>\(permission)/\(String(describing: error))")
-            if permission {
-                CloudManager.shared.subscribe()
-            }
-        })
-        
+    private func notificationPermission() {
         DispatchQueue.main.async {
+            let application = UIApplication.shared
+            let userNotCenter = UNUserNotificationCenter.current()
+            userNotCenter.delegate = application.delegate as! AppDelegate
+            
+            userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
+                print("===>\(permission)/\(String(describing: error))")
+                if permission {
+                    CloudManager.shared.subscribe()
+                }
+            })
+            
             application.registerForRemoteNotifications()
         }
     }
