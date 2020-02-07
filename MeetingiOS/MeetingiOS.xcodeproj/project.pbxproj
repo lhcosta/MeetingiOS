@@ -91,8 +91,8 @@
 		A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F4547F23E9B3A100CFF2CE /* UIView+CornerShadows.m */; };
 		A4F4548823E9EBBF00CFF2CE /* UIAlertController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4548723E9EBBF00CFF2CE /* UIAlertController+Loading.swift */; };
 		E219ACC52397DED5002CF585 /* SelectColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219ACC42397DED5002CF585 /* SelectColorViewController.swift */; };
-		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */; };
-		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */; };
+		E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewManager.swift */; };
+		E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift */; };
 		E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */; };
 		E26A2BCD238D5BD700A956DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26A2BCC238D5BD700A956DE /* User.swift */; };
 /* End PBXBuildFile section */
@@ -241,8 +241,8 @@
 		A4F8227023CD0B5C006AE7C8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/OnBoarding.strings"; sourceTree = "<group>"; };
 		A4F8227223CD0B5E006AE7C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OnBoarding.strings; sourceTree = "<group>"; };
 		E219ACC42397DED5002CF585 /* SelectColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorViewController.swift; sourceTree = "<group>"; };
-		E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
-		E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewManager.swift; sourceTree = "<group>"; };
+		E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclusionInfoTableViewManager.swift; sourceTree = "<group>"; };
 		E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConclusionTableViewCell.h; sourceTree = "<group>"; };
 		E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConclusionTableViewCell.m; sourceTree = "<group>"; };
 		E26A2BCC238D5BD700A956DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -287,12 +287,10 @@
 		2391532523918E2400479BB6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
 				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
 				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
 				A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */,
 				A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */,
-				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */,
 				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
 				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
 				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
@@ -502,6 +500,8 @@
 		A4EB3BFA239747000097857F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift */,
+				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewManager.swift */,
 				A44CC31823DA913D005ECFF6 /* TypeUpdateUser.h */,
 				A44CC30E23D8D4F7005ECFF6 /* MeetingDelegate.h */,
 				49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */,
@@ -637,7 +637,7 @@
 				A44CC31723D8FD67005ECFF6 /* DetailsNewMeetingManager.swift in Sources */,
 				A4533FF9238C67F00089257A /* Meeting.swift in Sources */,
 				492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */,
-				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewCell.swift in Sources */,
+				E23F1FC123A2D99F00B5C7FC /* DescriptionTableViewManager.swift in Sources */,
 				496C515C239893F2000EF74F /* EventManager.m in Sources */,
 				A49229EE23A3323500FD95B9 /* ContactTableView.swift in Sources */,
 				2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */,
@@ -661,7 +661,7 @@
 				49A59B1623E0BC9A003F749C /* StoreManager.swift in Sources */,
 				49BF5F9423DF652600DD56DC /* TableView+Gradient.swift in Sources */,
 				A4BCAD1823E4F46B00470E95 /* TvsTableView.swift in Sources */,
-				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift in Sources */,
+				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift in Sources */,
 				A4E1EA0823E34CFD00B2B32A /* OnboardingTableViewCell.swift in Sources */,
 				A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,

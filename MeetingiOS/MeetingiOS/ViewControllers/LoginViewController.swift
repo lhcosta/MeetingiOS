@@ -140,7 +140,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     private func notificationPermission(){
         let application = UIApplication.shared
         let userNotCenter = UNUserNotificationCenter.current()
-        userNotCenter.delegate = application.delegate as! AppDelegate
+        
+        DispatchQueue.main.async {
+            userNotCenter.delegate = application.delegate as! AppDelegate
+        }
         
         userNotCenter.requestAuthorization(options: [.providesAppNotificationSettings], completionHandler: { (permission, error) in
             print("===>\(permission)/\(String(describing: error))")

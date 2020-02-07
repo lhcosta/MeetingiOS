@@ -24,10 +24,10 @@ import CloudKit
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
         
-        if self.traitCollection.userInterfaceStyle == .dark {
+        if self.traitCollection.userInterfaceStyle == .unspecified {
             refreshControl.tintColor = .white
         } else {
-            refreshControl.tintColor = .gray
+            refreshControl.tintColor = .black
         }
         
         return refreshControl
