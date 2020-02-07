@@ -55,11 +55,11 @@ class PremiumOptionsTableViewController: UITableViewController {
         
         switch product.productIdentifier {
         case ids[0]:
-            productTitle = "1 month"
+            productTitle = NSLocalizedString("1 month", comment: "")
         case ids[1]:
-            productTitle = "3 months"
+            productTitle = NSLocalizedString("3 months", comment: "")
         case ids[2]:
-            productTitle = "6 months"
+            productTitle = NSLocalizedString("6 months", comment: "")
         default:
             print("erro")
         }
