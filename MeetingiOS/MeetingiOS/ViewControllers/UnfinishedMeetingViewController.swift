@@ -211,7 +211,11 @@ class UnfinishedMeetingViewController: UIViewController {
         if let cell = button.superview?.superview?.superview as? UnfinishedTopicsTableViewCell {
             let indexPath = tableViewTopics.indexPath(for: cell)
             
-            self.selectedTopicForInfo = topics[indexPath!.section]
+            if isSearching {
+                self.selectedTopicForInfo = searchedTopics[indexPath?.section ?? 0]
+            } else {
+                self.selectedTopicForInfo = topics[indexPath?.section ?? 0]
+            }
             
             performSegue(withIdentifier: "conclusionUnfinished", sender: self)
         }
@@ -354,8 +358,6 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         cell.textFieldRight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textFieldHeight.constant = (tableView.frame.size.height * 0.2) * 0.2
         cell.textLabel?.font = font
-        cell.buttonInfo.alpha = 0
-        cell.buttonInfo.isEnabled = false
         
         // Se não for gerente, não faz sentido termos o botão de check.
         if !usrIsManager {
@@ -376,6 +378,9 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
             } else {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
             }
+            if indexPath.section == 0 {
+                cell.buttonInfo.isHidden = false
+            }
         } else {
             // Pegamos os dados da Array principal.
             cell.topicTextField.text = topics[indexPath.section].topicDescription
@@ -388,6 +393,10 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             } else {
                 cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+            }
+            
+            if indexPath.section == 0 {
+                cell.buttonInfo.isHidden = true
             }
         }
         return cell
@@ -412,10 +421,10 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
         }
         
         guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else { return }
-        if tableViewTopics.indexPath(for: cell)?.section != 0 {
-            cell.buttonInfo.alpha = 1
-            cell.buttonInfo.isEnabled = true
-        }
+//        if tableViewTopics.indexPath(for: cell)?.section != 0 {
+//            cell.buttonInfo.alpha = 1
+//            cell.buttonInfo.isEnabled = true
+//        }
         tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
     }
     
@@ -569,8 +578,8 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                     cell.topicTextField.becomeFirstResponder()
                 }
             }
-            cell.buttonInfo.alpha = 0
-            cell.buttonInfo.isEnabled = false
+//            cell.buttonInfo.alpha = 0
+//            cell.buttonInfo.isEnabled = false
             return true
         }
     }
