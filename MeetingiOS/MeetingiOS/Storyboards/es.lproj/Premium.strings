@@ -1,15 +1,30 @@
 
-/* Class = "UILabel"; text = "Create unlimited meetings"; ObjectID = "0a3-L1-MSx"; */
-"0a3-L1-MSx.text" = "Create unlimited meetings";
+/* Class = "UILabel"; text = "•"; ObjectID = "81L-R5-QtP"; */
+"81L-R5-QtP.text" = "•";
 
-/* Class = "UILabel"; text = "Go premium"; ObjectID = "EPS-7y-nPj"; */
-"EPS-7y-nPj.text" = "Go premium";
+/* Class = "UILabel"; text = "Improve the experience of your meetings"; ObjectID = "IYS-VF-qsb"; */
+"IYS-VF-qsb.text" = "Mejore la experiencia de sus reuniones";
 
-/* Class = "UILabel"; text = "Benefits"; ObjectID = "WA1-xW-1nM"; */
-"WA1-xW-1nM.text" = "Benefits";
+/* Class = "UILabel"; text = "Create unlimited meetings"; ObjectID = "JF8-A9-mlc"; */
+"JF8-A9-mlc.text" = "Cree reuniones ilimitadas";
 
-/* Class = "UILabel"; text = "Improve the experience of your meetings!"; ObjectID = "ihU-IA-peE"; */
-"ihU-IA-peE.text" = "Improve the experience of your meetings!";
+/* Class = "UILabel"; text = "Label"; ObjectID = "MNp-2L-dKs"; */
+"MNp-2L-dKs.text" = "Label";
 
-/* Class = "UILabel"; text = "Have unlimited meeting invitations"; ObjectID = "xYj-hQ-8qs"; */
-"xYj-hQ-8qs.text" = "Have unlimited meeting invitations";
+/* Class = "UILabel"; text = "Have unlimited meeting invitations"; ObjectID = "cbc-bg-Psb"; */
+"cbc-bg-Psb.text" = "Tenga invitaciones ilimitadas a reuniones";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "oyf-3e-BgZ"; */
+"oyf-3e-BgZ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "pTz-mL-B1Y"; */
+"pTz-mL-B1Y.normalTitle" = "Seguir";
+
+/* Class = "UILabel"; text = "•"; ObjectID = "qJC-K9-FB9"; */
+"qJC-K9-FB9.text" = "•";
+
+/* Class = "UILabel"; text = "Benefits"; ObjectID = "srr-kx-sFA"; */
+"srr-kx-sFA.text" = "Beneficios";
+
+/* Class = "UILabel"; text = "Go Premium"; ObjectID = "zoe-Kd-T3K"; */
+"zoe-Kd-T3K.text" = "Hazte Premium";

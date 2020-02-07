@@ -39,4 +39,8 @@ class PremiumTableViewController: UITableViewController {
         store.purchaseProduct(productId: product.productIdentifier)
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func didPressCancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

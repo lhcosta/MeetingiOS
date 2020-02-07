@@ -120,14 +120,14 @@
 		492C050623A1819F00442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		492C051123A2904800442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OnBoarding.storyboard; sourceTree = "<group>"; };
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		49357CBA23EDFEFB00383CD3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Premium.strings; sourceTree = "<group>"; };
+		49357CBC23EDFEFD00383CD3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Premium.strings"; sourceTree = "<group>"; };
+		49357CBE23EDFEFF00383CD3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Premium.strings; sourceTree = "<group>"; };
 		4948220323EB5D6F00314F6B /* StoreManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManagerDelegate.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		497FB2AC23E207EB008059D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		497FB2B523E4C1C3008059D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Premium.storyboard; sourceTree = "<group>"; };
-		497FB2B823E4C1C6008059D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Premium.strings; sourceTree = "<group>"; };
-		497FB2BA23E4C1C8008059D9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Premium.strings"; sourceTree = "<group>"; };
-		497FB2BC23E4C1C9008059D9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Premium.strings; sourceTree = "<group>"; };
 		497FB2BD23E8B934008059D9 /* PremiumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremiumTableViewController.swift; path = MeetingiOS/ViewControllers/PremiumTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		49A4652823D09FF6006D67D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		49A59B1323E0B993003F749C /* MeetingsProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsProducts.swift; sourceTree = "<group>"; };
@@ -316,8 +316,6 @@
 				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
 				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
 				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
-				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */,
-				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
 				492B1F8923E9F49000106E79 /* OptionsTableViewCell.swift */,
 			);
 			path = TableViewCells;
@@ -751,9 +749,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				497FB2B523E4C1C3008059D9 /* Base */,
-				497FB2B823E4C1C6008059D9 /* en */,
-				497FB2BA23E4C1C8008059D9 /* pt-BR */,
-				497FB2BC23E4C1C9008059D9 /* es */,
+				49357CBA23EDFEFB00383CD3 /* en */,
+				49357CBC23EDFEFD00383CD3 /* pt-BR */,
+				49357CBE23EDFEFF00383CD3 /* es */,
 			);
 			name = Premium.storyboard;
 			sourceTree = "<group>";
