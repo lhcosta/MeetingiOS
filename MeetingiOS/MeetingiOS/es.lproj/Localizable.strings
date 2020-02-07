@@ -70,3 +70,6 @@
 "New conclusion" = "Nueva conclusión";
 "Not specified." = "No specificado.";
 "Updating..." = "Actualización...";
+
+// Unfinished Topics' Placeholder
+"Topic's name" = "Nombre del Tema";
