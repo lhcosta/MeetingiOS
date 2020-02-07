@@ -19,9 +19,7 @@ import CloudKit
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
     @objc var newMeeting: Meeting?
-    
-    private var noResultsTableView : TableViewNoResults!
-    
+        
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
@@ -346,17 +344,3 @@ extension MyMeetingsViewController {
     }
 }
 
-extension MyMeetingsViewController {
-    
-    func addNoResultsView() {
-        
-        if self.meetingsToShow.count == 0 {
-            
-            let viewNoResults = UIView(frame: CGRect(x: self.tableView.center.x, y: self.tableView.center.y, width: self.tableView.bounds.width, height: self.tableView.bounds.height))
-            viewNoResults.backgroundColor = .red
-            
-            self.tableView.backgroundView = viewNoResults
-        }
-    }
-    
-}

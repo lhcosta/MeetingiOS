@@ -39,6 +39,8 @@ class ConclusionsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.isModalInPresentation = true
+        
         self.conclusionManager = ConclusionInfoTableViewManager()
         self.descriptionManager = DescriptionTableViewManager()
 
@@ -65,7 +67,7 @@ class ConclusionsViewController: UITableViewController {
         
         /// Configuração da Navigation - Título e ação do botão Done
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction))
-        navigationItem.title = "Details"
+        navigationItem.title = NSLocalizedString("Details", comment: "")
         
         // Arredondando bordas da View
         self.viewTopic.setupCornerRadiusShadow()
@@ -89,7 +91,7 @@ class ConclusionsViewController: UITableViewController {
     /// Ação do botão Done para mandar a conclusiona para o Cloud
     @objc func doneAction() {        
         
-        let loading = UIAlertController(title: nil, message: "Topic update...", preferredStyle: .alert)
+        let loading = UIAlertController(title: nil, message: NSLocalizedString("Updating...", comment: ""), preferredStyle: .alert)
         loading.addUIActivityIndicatorView()
         
         self.present(loading, animated: true, completion: nil)
@@ -153,7 +155,7 @@ extension ConclusionsViewController {
             case 2,3:
                 title.font = UIFont(name: "SFProText-Bold", size: 17)    
                 title.textColor = UIColor(named: "ColorConclusionDescriptionHeader")
-                title.text = section == 2 ? "Description" : "Conclusion"
+                title.text = section == 2 ? NSLocalizedString("Description", comment: "") : NSLocalizedString("Conclusions", comment: "")
                 view.backgroundColor = UIColor(named: "ColorTableViewCell")
                 view.addSubview(title)
                 title.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
@@ -213,7 +215,7 @@ extension ConclusionsViewController {
         descriptionTextView.isUserInteractionEnabled = fromUnfinishedMeeting && (topicToPresentConclusions.author?.recordID.recordName == UserDefaults.standard.value(forKey: "recordName") as? String)
         
         if self.topicToPresentConclusions.topicDescription.isEmpty {
-            self.descriptionTextView.text = "Não especificado"
+            self.descriptionTextView.text = NSLocalizedString("Not specified", comment: "")
         } else {
             self.descriptionTextView.text = topicToPresentConclusions.topicPorque
         }

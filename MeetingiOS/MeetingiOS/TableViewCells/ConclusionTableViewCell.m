@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.textConclusion.placeholder = NSLocalizedString(@"New conclusion", "");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -62,3 +62,11 @@
 
 //SearchBar - PlaceHolder
 "Search" = "Buscar";
+
+//Conclusions View Controller
+"Description" = "Descripción";
+"Conclusions" = "Conclusiones";
+"Details" = "Detalles";
+"New conclusion" = "Nueva conclusión";
+"Not specified" = "No specificado";
+"Updating..." = "Actualización...";
