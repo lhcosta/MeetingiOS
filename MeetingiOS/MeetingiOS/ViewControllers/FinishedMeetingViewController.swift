@@ -64,7 +64,11 @@ class FinishedMeetingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.hidesSearchBarWhenScrolling = true
-        self.navigationController?.navigationBar.subviews[2].addSubview(topTimer(time: currMeeting.duration ?? "00:00"))
+        
+        self.navigationController?.navigationBar.subviews[2].addSubview(self.topTimer(time: self.currMeeting.duration ?? "00:00"))
+        UIView.animate(withDuration: 0.25) {
+            self.timerView?.alpha = 1
+        }
     }
     
     
@@ -112,8 +116,8 @@ class FinishedMeetingViewController: UIViewController {
     
     func topTimer(time: String) -> UIView {
 
-        let navigationBarHeight = CGFloat((self.navigationController?.navigationBar.subviews[3].frame.height)!)
-        let navigationBarWidth = CGFloat((self.navigationController?.navigationBar.subviews[3].frame.width)!)
+        let navigationBarHeight = CGFloat((self.navigationController?.navigationBar.subviews[2].frame.height)!)
+        let navigationBarWidth = CGFloat((self.navigationController?.navigationBar.subviews[2].frame.width)!)
         
         let clock = UIImageView(image: UIImage(named: "clock"))
         
@@ -122,16 +126,17 @@ class FinishedMeetingViewController: UIViewController {
         timeLabel.font = font
         timeLabel.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
         timeLabel.backgroundColor = .clear
-        timeLabel.textColor = .black
+        timeLabel.textColor = UIColor(named: "TitleColor")
         timeLabel.text = time
         timeLabel.sizeToFit()
         
-        let timerView = UIView(frame: CGRect(x: navigationBarWidth*0.95, y: navigationBarHeight*0.5, width: clock.frame.width*2 + timeLabel.frame.width, height: clock.frame.height))
+        let timerView = UIView(frame: CGRect(x: navigationBarWidth*0.95, y: navigationBarHeight*0.55, width: clock.frame.width*2 + timeLabel.frame.width, height: clock.frame.height))
         timerView.layer.anchorPoint  = CGPoint(x: 1.5, y: 1)
         timerView.backgroundColor = .clear
 
         timerView.addSubview(timeLabel)
         timerView.addSubview(clock)
+        timerView.alpha = 0
         
         self.timerView = timerView
         return timerView

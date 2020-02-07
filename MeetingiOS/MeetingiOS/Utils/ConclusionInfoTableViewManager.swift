@@ -62,6 +62,11 @@ extension ConclusionInfoTableViewManager: UITableViewDelegate, UITableViewDataSo
 
 extension ConclusionInfoTableViewManager: UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        viewControler.activeField = textField
+    }
+    
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.text = ""
     }
