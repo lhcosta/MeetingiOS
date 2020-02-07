@@ -39,6 +39,8 @@ class ConclusionsViewController: UITableViewController {
     
     var meetingDidBegin = true
     
+    var activeField: UITextField?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,12 +86,11 @@ class ConclusionsViewController: UITableViewController {
         view.addGestureRecognizer(tap)
         
         /// Dispara as funções de manipulação do teclado
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.topicToPresentConclusions.conclusions.append("")
     }
-    
     
     
     /// Ação do botão Done para mandar a conclusiona para o Cloud
@@ -129,21 +130,39 @@ class ConclusionsViewController: UITableViewController {
         view.endEditing(true)
     }
     
-    /// Eleva a tela para o teclado aparecer
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
     
-    /// Volta a tela para o normal sem o teclado
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
+//    @objc func keyboardWillShow(notification: NSNotification){
+//        //Need to calculate keyboard exact size due to Apple suggestions
+//        if let activeTableView = self.activeField?.superview?.superview as? UITableView {
+//            activeTableView.isScrollEnabled = true
+//            let info = notification.userInfo!
+//            let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+//            let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height*1.2, right: 0.0)
+//
+//            activeTableView.contentInset = contentInsets
+//            activeTableView.scrollIndicatorInsets = contentInsets
+//
+//            var aRect: CGRect = self.view.frame
+//            aRect.size.height -= keyboardSize!.height
+//            if let activeField = self.activeField {
+//                if (!aRect.contains(activeField.frame.origin)){
+//                    activeTableView.scrollRectToVisible(activeField.frame, animated: true)
+//                }
+//            }
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(notification: NSNotification){
+//        //Once keyboard disappears, restore original positions
+//        if let activeTableView = self.activeField?.superview?.superview as? UITableView {
+//            let info = notification.userInfo!
+//            let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+//            let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height*1.2, right: 0.0)
+//            activeTableView.contentInset = contentInsets
+//            activeTableView.scrollIndicatorInsets = contentInsets
+//            self.view.endEditing(true)
+//        }
+//    }
 }
 
 

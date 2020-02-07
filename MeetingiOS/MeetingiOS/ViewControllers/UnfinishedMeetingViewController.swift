@@ -52,6 +52,8 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Loading inicial da view.
     var loadingView : UIView!
     
+    var activeField: UITextField?
+    
     private var buttonToolbar : UIButton!
     
     /// currMeeting será substituído pela Meeting criada.
@@ -73,7 +75,6 @@ class UnfinishedMeetingViewController: UIViewController {
         /// Dispara as funções de manipulação do teclado
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
     
@@ -284,19 +285,33 @@ class UnfinishedMeetingViewController: UIViewController {
     
     
     /// Eleva a tela para o teclado aparecer
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                //                self.view.frame.origin.y -= keyboardSize.height
+    @objc func keyboardWillShow(notification: NSNotification){
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.tableViewTopics.isScrollEnabled = true
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height*1.2, right: 0.0)
+
+        self.tableViewTopics.contentInset = contentInsets
+        self.tableViewTopics.scrollIndicatorInsets = contentInsets
+
+        var aRect: CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeField = self.activeField {
+            if (!aRect.contains(activeField.frame.origin)){
+                self.tableViewTopics.scrollRectToVisible(activeField.frame, animated: true)
             }
         }
     }
-    
-    /// Volta a tela para o normal sem o teclado
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            //            self.view.frame.origin.y = 0
-        }
+
+    @objc func keyboardWillHide(notification: NSNotification){
+        //Once keyboard disappears, restore original positions
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height*1.2, right: 0.0)
+        self.tableViewTopics.contentInset = contentInsets
+        self.tableViewTopics.scrollIndicatorInsets = contentInsets
+        self.view.endEditing(true)
     }
 }
 
@@ -439,6 +454,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
 //            cell.buttonInfo.isEnabled = true
 //        }
         tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
+        self.activeField = textField
     }
     
     

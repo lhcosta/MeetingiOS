@@ -13,15 +13,18 @@
 		2391532923919F2E00479BB6 /* ConclusionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2391532823919F2E00479BB6 /* ConclusionsViewController.swift */; };
 		23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */; };
 		23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */; };
+		492B1F8823E9F3A000106E79 /* PremiumOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492B1F8723E9F3A000106E79 /* PremiumOptionsTableViewController.swift */; };
+		492B1F8A23E9F49000106E79 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492B1F8923E9F49000106E79 /* OptionsTableViewCell.swift */; };
 		492C050023A1587C00442814 /* ViewController+SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C04FF23A1587C00442814 /* ViewController+SearchController.swift */; };
 		492C050423A1818500442814 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C050323A1818500442814 /* ProfileViewController.swift */; };
 		492C050523A1819F00442814 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492C050723A1819F00442814 /* Profile.storyboard */; };
 		492C051023A2904800442814 /* OnBoarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492C051223A2904800442814 /* OnBoarding.storyboard */; };
 		492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C051923A2907A00442814 /* OnBoardingViewController.swift */; };
+		4948220423EB5D6F00314F6B /* StoreManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948220323EB5D6F00314F6B /* StoreManagerDelegate.swift */; };
 		496C515C239893F2000EF74F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C515B239893F2000EF74F /* EventManager.m */; };
 		497FB2AD23E207EB008059D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497FB2AC23E207EB008059D9 /* StoreKit.framework */; };
 		497FB2B423E4C1C3008059D9 /* Premium.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 497FB2B623E4C1C3008059D9 /* Premium.storyboard */; };
-		497FB2BE23E8B934008059D9 /* PremiumTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */; };
+		497FB2BE23E8B934008059D9 /* PremiumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FB2BD23E8B934008059D9 /* PremiumTableViewController.swift */; };
 		49A4652723D09FF6006D67D8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A4652923D09FF6006D67D8 /* Login.storyboard */; };
 		49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A59B1323E0B993003F749C /* MeetingsProducts.swift */; };
 		49A59B1623E0BC9A003F749C /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A59B1523E0BC9A003F749C /* StoreManager.swift */; };
@@ -110,11 +113,14 @@
 		23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnfinishedTopicsTableViewCell.m; sourceTree = "<group>"; };
 		23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishedTopicsTableViewCell.h; sourceTree = "<group>"; };
 		23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinishedTopicsTableViewCell.m; sourceTree = "<group>"; };
+		492B1F8723E9F3A000106E79 /* PremiumOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremiumOptionsTableViewController.swift; path = MeetingiOS/ViewControllers/PremiumOptionsTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		492B1F8923E9F49000106E79 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		492C04FF23A1587C00442814 /* ViewController+SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+SearchController.swift"; sourceTree = "<group>"; };
 		492C050323A1818500442814 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		492C050623A1819F00442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		492C051123A2904800442814 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OnBoarding.storyboard; sourceTree = "<group>"; };
 		492C051923A2907A00442814 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		4948220323EB5D6F00314F6B /* StoreManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManagerDelegate.swift; sourceTree = "<group>"; };
 		496C515A239893F2000EF74F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
 		496C515B239893F2000EF74F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		497FB2AC23E207EB008059D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -122,7 +128,7 @@
 		497FB2B823E4C1C6008059D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Premium.strings; sourceTree = "<group>"; };
 		497FB2BA23E4C1C8008059D9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Premium.strings"; sourceTree = "<group>"; };
 		497FB2BC23E4C1C9008059D9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Premium.strings; sourceTree = "<group>"; };
-		497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremiumTableTableViewController.swift; path = MeetingiOS/ViewControllers/PremiumTableTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		497FB2BD23E8B934008059D9 /* PremiumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremiumTableViewController.swift; path = MeetingiOS/ViewControllers/PremiumTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		49A4652823D09FF6006D67D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		49A59B1323E0B993003F749C /* MeetingsProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsProducts.swift; sourceTree = "<group>"; };
 		49A59B1523E0BC9A003F749C /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -277,8 +283,9 @@
 			children = (
 				A47E235423EDA25A00A1C9CC /* SelectionTVsViewController.swift */,
 				A44CC31923DB841F005ECFF6 /* DetailsTableViewController.h */,
+				492B1F8723E9F3A000106E79 /* PremiumOptionsTableViewController.swift */,
 				A44CC31A23DB841F005ECFF6 /* DetailsTableViewController.m */,
-				497FB2BD23E8B934008059D9 /* PremiumTableTableViewController.swift */,
+				497FB2BD23E8B934008059D9 /* PremiumTableViewController.swift */,
 				A44CC30C23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift */,
 				A4EB3BE32395E3820097857F /* NewMeetingViewController.h */,
 				A4EB3BE42395E3820097857F /* NewMeetingViewController.m */,
@@ -299,16 +306,19 @@
 		2391532523918E2400479BB6 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
-				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
 				A4C5BE8B23A2C105002BE4B9 /* ContactTableViewCell.swift */,
 				A4C5BE8C23A2C105002BE4B9 /* ContactTableViewCell.xib */,
-				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
-				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
 				49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */,
 				A4E1EA0E23E35D9500B2B32A /* OnboardingCells */,
 				23E7E12C2397D46900B99A09 /* UnfinishedTopicsTableViewCell.h */,
 				23E7E12D2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m */,
+				23E7E12F2397D5FE00B99A09 /* FinishedTopicsTableViewCell.h */,
+				23E7E1302397D5FE00B99A09 /* FinishedTopicsTableViewCell.m */,
+				E2637A7C239FDC3C006B732C /* ConclusionTableViewCell.h */,
+				E2637A7D239FDD13006B732C /* ConclusionTableViewCell.m */,
+				E23F1FC023A2D99F00B5C7FC /* DescriptionTableViewCell.swift */,
+				E23F1FC223A2DA4300B5C7FC /* ConclusionInfoTableViewCell.swift */,
+				492B1F8923E9F49000106E79 /* OptionsTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -318,6 +328,7 @@
 			children = (
 				49A59B1523E0BC9A003F749C /* StoreManager.swift */,
 				49A59B1323E0B993003F749C /* MeetingsProducts.swift */,
+				4948220323EB5D6F00314F6B /* StoreManagerDelegate.swift */,
 			);
 			path = AppStore;
 			sourceTree = "<group>";
@@ -671,8 +682,9 @@
 				A44CC30D23D8ADFA005ECFF6 /* DetailsTableViewController+UpdateMeeting.swift in Sources */,
 				A4F4548023E9B3A100CFF2CE /* UIView+CornerShadows.m in Sources */,
 				49A59B1423E0B993003F749C /* MeetingsProducts.swift in Sources */,
+				492B1F8A23E9F49000106E79 /* OptionsTableViewCell.swift in Sources */,
 				492C051A23A2907A00442814 /* OnBoardingViewController.swift in Sources */,
-				497FB2BE23E8B934008059D9 /* PremiumTableTableViewController.swift in Sources */,
+				497FB2BE23E8B934008059D9 /* PremiumTableViewController.swift in Sources */,
 				A4284637239982BF0044C33E /* NewMeetingViewController+NameMeetingValidation.m in Sources */,
 				A4C5BE9423A2E6B5002BE4B9 /* ContactCollectionViewCell.m in Sources */,
 				A4EB3C1C2397DF9A0097857F /* NSString+NewFeatures.m in Sources */,
@@ -682,6 +694,7 @@
 				A4BCAD1823E4F46B00470E95 /* TvsTableView.swift in Sources */,
 				E23F1FC323A2DA4300B5C7FC /* ConclusionInfoTableViewManager.swift in Sources */,
 				A4E1EA0823E34CFD00B2B32A /* OnboardingTableViewCell.swift in Sources */,
+				492B1F8823E9F3A000106E79 /* PremiumOptionsTableViewController.swift in Sources */,
 				A44CC30B23D889BA005ECFF6 /* DetailsTableViewController+TextFieldName.m in Sources */,
 				23E7E1312397D5FE00B99A09 /* FinishedTopicsTableViewCell.m in Sources */,
 				E2637A7E239FDD13006B732C /* ConclusionTableViewCell.m in Sources */,
@@ -693,6 +706,7 @@
 				23E7E12E2397D46900B99A09 /* UnfinishedTopicsTableViewCell.m in Sources */,
 				A44CC2FA23D615B1005ECFF6 /* TopicsPerPersonPickerView.m in Sources */,
 				49EB44E223871126002F434D /* AppDelegate.swift in Sources */,
+				4948220423EB5D6F00314F6B /* StoreManagerDelegate.swift in Sources */,
 				A4EB3C13239754D40097857F /* ContactCollectionView.m in Sources */,
 				A44CC2FF23D77555005ECFF6 /* DatePickersSetup.swift in Sources */,
 				A4382C7723C2BD7E0021C814 /* ContactViewController.swift in Sources */,
