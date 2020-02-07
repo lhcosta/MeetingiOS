@@ -32,6 +32,7 @@
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
 - (void) createMeetingInCloud;
+- (void) saveMeeting;
 
 @end
 
@@ -106,7 +107,7 @@
     [self setupViews];
         
     [self.navigationItem setTitle:NSLocalizedString(@"New meeting", "")];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createMeetingInCloud)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveMeeting)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -300,7 +301,7 @@
     }
 }
 
--(void) createMeetingInCloud {
+-(void) saveMeeting {
     
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
     
@@ -312,6 +313,22 @@
         return;
     }
     
+    [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
+        if (date && date > [NSDate dateWithTimeIntervalSinceNow:0]){
+            [self createMeetingInCloud];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Premium" bundle:nil];
+                UIViewController* premiumVC = [storyboard instantiateInitialViewController];
+                [self presentViewController:premiumVC animated:true completion:nil];
+                return;
+            });
+        }
+    }];
+}
+
+-(void) createMeetingInCloud {
+        
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     
     //Nome não definido
@@ -364,7 +381,6 @@
             NSLog(@"Create Record");
             [self.managerController updateUsersWithUsers:users meeting:self.meeting typeUpdate:(TypeUpdateUser)insertUser];
             [EventManager saveMeeting:theme starting:self.meeting.initialDate ending:self.meeting.finalDate];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
                 NSUInteger vcCount = [self.navigationController.viewControllers count];

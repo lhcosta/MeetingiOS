@@ -174,7 +174,7 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="didPressPremiumBtn:" destination="qoh-0J-yhU" eventType="touchUpInside" id="CJ8-I3-xzv"/>
+                                                        <segue destination="JAP-j1-bfc" kind="modal" id="XPZ-oY-4dG"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -202,12 +202,23 @@
                         <outlet property="infoView" destination="O5s-s2-L6i" id="Arj-uh-ebv"/>
                         <outlet property="nameTF" destination="67l-RY-yDG" id="LaO-0E-iH5"/>
                         <outlet property="premiumBtn" destination="nDM-vt-dq8" id="yyo-Xw-9bE"/>
+                        <outlet property="subsType" destination="cmh-zh-fGI" id="qc9-a5-NSN"/>
                         <outlet property="subscriptionView" destination="cu3-fL-d4r" id="gUp-RL-Wel"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8H-m7-tww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-321.73913043478262" y="97.767857142857139"/>
+        </scene>
+        <!--Premium-->
+        <scene sceneID="L5g-1c-hjf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Premium" id="JAP-j1-bfc" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="e4D-7f-2YR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EZF-Bq-b55" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371" y="98"/>
         </scene>
     </scenes>
     <resources>
