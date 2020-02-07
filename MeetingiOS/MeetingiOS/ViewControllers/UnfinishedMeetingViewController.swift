@@ -87,68 +87,77 @@ class UnfinishedMeetingViewController: UIViewController {
             if let record = record?.values.first {
                 self.currMeeting = Meeting(record: record)
             }
-        }
         
-        // Pegar Topics do Cloud.
-        var tempIDs: [CKRecord.ID] = []
-        for i in currMeeting.topics {
-            tempIDs.append(i.recordID)
-        }
-        self.topics = []
-        CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+            // Pegar Topics do Cloud.
+            var tempIDs: [CKRecord.ID] = []
+            for i in self.currMeeting.topics {
+                tempIDs.append(i.recordID)
             }
-            for i in records! {
-                let topic = Topic(record: i.value)
-                // Quando o usuário não é quem criou a Meeting só pegaremos os Topics cujo ele é o author
-                if !self.usrIsManager {
-                    if topic.author == CKRecord.Reference(recordID: CKRecord.ID(recordName: self.defaults.string(forKey: "recordName")!), action: .none) {
+            self.topics = []
+            CloudManager.shared.fetchRecords(recordIDs: tempIDs, desiredKeys: nil) { (records, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                for i in records! {
+                    let topic = Topic(record: i.value)
+                    // Quando o usuário não é quem criou a Meeting só pegaremos os Topics cujo ele é o author
+                    if !self.usrIsManager {
+                        if topic.author == CKRecord.Reference(recordID: CKRecord.ID(recordName: self.defaults.string(forKey: "recordName")!), action: .none) {
+                            self.topics.append(topic)
+                        }
+                    } else {
+                        // Senão pegamos todos os Topics daquela Meeting.
                         self.topics.append(topic)
                     }
-                } else {
-                    // Senão pegamos todos os Topics daquela Meeting.
-                    self.topics.append(topic)
+                    
+                }
+                let newTopic = self.creatingTopicInstance()
+                self.topics.insert(newTopic, at: 0)
+                
+                DispatchQueue.main.async {
+                    self.tableViewTopics.reloadData()
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.loadingView.alpha = 0
+                    }) { (_) in
+                        self.loadingView.removeFromSuperview()
+                    }
+
+                }
+            }
+            
+            // Verificamos se a meeting selecionada foi criada pelo usuário
+            if CKRecord.ID(recordName: self.defaults.string(forKey: "recordName") ?? "") == self.currMeeting.manager?.recordID {
+                self.usrIsManager = true
+            }
+            
+            // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
+            // Conforme o usuário foi quem criou ou não a Meeting.
+            // Adicionando share button, quando não for o manager.
+            DispatchQueue.main.async {
+                if !self.usrIsManager {
+                    let shareButton = UIButton()
+                    shareButton.addTarget(self, action: #selector(self.shareTopicsToMeeting), for: .touchUpInside)
+                    shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
+                    self.buttonItem.customView = shareButton
+                    
+                    NSLayoutConstraint.activate([
+                        shareButton.widthAnchor.constraint(equalToConstant: 70),
+                        shareButton.heightAnchor.constraint(equalToConstant: 40)
+                    ])
                 }
                 
-            }
-            let newTopic = self.creatingTopicInstance()
-            self.topics.insert(newTopic, at: 0)
-            
-            DispatchQueue.main.async {
-                self.tableViewTopics.reloadData()
-                UIView.animate(withDuration: 0.5, animations: { 
-                    self.loadingView.alpha = 0
-                }) { (_) in
-                    self.loadingView.removeFromSuperview()
-                }
-
+                self.tableViewTopics.delegate = self
+                self.tableViewTopics.dataSource = self
             }
         }
-        
-        // Verificamos se a meeting selecionada foi criada pelo usuário
-        if CKRecord.ID(recordName: defaults.string(forKey: "recordName") ?? "") == currMeeting.manager?.recordID {
-            usrIsManager = true
-        }
-        
-        // Escondemos os botões de selecionar Topic para a Meeting e o botão de mirror.
-        // Conforme o usuário foi quem criou ou não a Meeting.      
-        // Adicionando share button, quando não for o manager.
-        if !self.usrIsManager {
-            let shareButton = UIButton()
-            shareButton.addTarget(self, action: #selector(shareTopicsToMeeting), for: .touchUpInside)
-            shareButton.setImage(UIImage(named: "shareButton"), for: .normal)
-            buttonItem.customView = shareButton
-        }
-        
-        tableViewTopics.delegate = self
-        tableViewTopics.dataSource = self
     }
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
     
     /// Criamos um Topic com os dados do Usuário.
     func creatingTopicInstance() -> Topic {
@@ -395,7 +404,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         } /*else {
          
          }*/
-        
+        cell.topicTextField.placeholder = NSLocalizedString("Topic's name", comment: "")
         // Verificamos se o usuário está em modo de pesquisa.
         if isSearching {
             // Pegamos os dados da Array do modo de pesquisa.

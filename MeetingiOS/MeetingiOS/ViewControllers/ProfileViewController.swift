@@ -24,22 +24,27 @@ class ProfileViewController: UITableViewController {
     let cloud = CloudManager.shared
     var didComeFromLogin = false
     let store = StoreManager.shared
+    var loadingView: UIView?
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
+        self.showLoadingView()
         self.store.receiptValidation { (date) in
             if let date = date{
                 if date > Date(timeIntervalSinceNow: 0) {
                     DispatchQueue.main.async {
                         self.subsType.text = "Premium"
                         self.premiumBtn.isHidden = true
+                        self.removeLoadingView()
                     }
                 }
             }
+            DispatchQueue.main.async {
+                self.removeLoadingView()
+            }
         }
-        
         
         self.isModalInPresentation = true
         self.nameTF.delegate = self
@@ -83,6 +88,15 @@ class ProfileViewController: UITableViewController {
         }
         
         return true
+    }
+    
+    private func showLoadingView() {
+        loadingView = self.addInitialLoadingView()
+        self.view.addSubview(loadingView!)
+    }
+    
+    private func removeLoadingView() {
+        self.loadingView?.removeFromSuperview()
     }
     
     //MARK:- Table View

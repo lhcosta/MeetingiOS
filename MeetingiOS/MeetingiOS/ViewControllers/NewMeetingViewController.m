@@ -302,9 +302,8 @@
 }
 
 -(void) saveMeeting {
-    
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
-    
+
     //Usuário não cadastrado.
     if (!recordName || [recordName isEqualToString:@""]) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
@@ -312,7 +311,7 @@
         [self presentViewController:loginVC animated:true completion:nil];
         return;
     }
-    
+
     [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
         if (date && date > [NSDate dateWithTimeIntervalSinceNow:0]){
             [self createMeetingInCloud];
