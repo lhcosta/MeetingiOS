@@ -13,15 +13,27 @@ class PremiumOptionsTableViewController: UITableViewController {
     // MARK: - Properties
     private let store = StoreManager.shared
     private let ids = [MeetingsProducts().month, MeetingsProducts().threeMonths, MeetingsProducts().sixMonths]
+    var loadingView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoadingView()
         store.delegate = self
         store.getProducts()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         store.selectedProduct = nil
+    }
+    
+    // MARK: - Methods
+    private func showLoadingView() {
+        loadingView = self.addInitialLoadingView()
+        self.view.addSubview(loadingView!)
+    }
+    
+    private func removeLoadingView() {
+        self.loadingView?.removeFromSuperview()
     }
     
     // MARK: - Table view
@@ -71,9 +83,6 @@ class PremiumOptionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         store.selectedProduct = store.products[indexPath.section]
     }
-    
-    // MARK: - IBActions
-    
 }
 
 extension PremiumOptionsTableViewController: StoreManagerDelegate {
@@ -87,6 +96,7 @@ extension PremiumOptionsTableViewController: StoreManagerDelegate {
                 }
             }
             self.tableView.reloadData()
+            self.removeLoadingView()
         }
     }
 }

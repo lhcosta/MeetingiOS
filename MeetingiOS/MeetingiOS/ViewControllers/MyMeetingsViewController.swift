@@ -19,6 +19,7 @@ import CloudKit
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
     @objc var newMeeting: Meeting?
+    var loadingView: UIView?
         
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -39,6 +40,7 @@ import CloudKit
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showLoadingView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(showProfileWhenUserLogged), name: Notification.Name("UserLogin"), object: nil)
         
@@ -75,8 +77,7 @@ import CloudKit
                 self.refreshingMeetings()
             }
         }
-        
-        self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)        
+        self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)
     }
     
     deinit {
@@ -84,6 +85,15 @@ import CloudKit
     }
     
     //MARK:- Methods
+    
+    private func showLoadingView() {
+        loadingView = self.addInitialLoadingView()
+        self.navigationController?.view.addSubview(loadingView!)
+    }
+    
+    private func removeLoadingView() {
+        self.loadingView?.removeFromSuperview()
+    }
     
     /// Método para mostrar adicionar reunião que acabou de ser criada localmente
     private func showNewMeeting(){
@@ -123,12 +133,20 @@ import CloudKit
         
         let recordIDs = meetings[arrayIndex].map({$0.record.recordID.recordName})
         
+        var booleano: Bool
+        
+        if arrayIndex == 0 {
+            booleano = true
+        } else {
+            booleano = false
+        }
+        
         if !recordIDs.contains(meeting.record.recordID.recordName) {
             if let index = self.meetings[arrayIndex].firstIndex(where: { (oldMeeting) -> Bool in
                 if oldMeeting.initialDate! < meeting.initialDate! {
-                    return true
+                    return booleano
                 } else {
-                    return false
+                    return !booleano
                 }
             }) {
                 self.meetings[arrayIndex].insert(meeting, at: index)
@@ -176,7 +194,13 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.filterring ? self.filtered.count : self.meetingsToShow.count
+        let numSection = self.filterring ? self.filtered.count : self.meetingsToShow.count
+        
+        if numSection == 0 {
+            return 1
+        }
+        
+        return numSection
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -190,9 +214,16 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
+        
+        if meetingsArray.isEmpty {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmpty", for: indexPath)
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyMeetingsTableViewCell
         
-        let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
+        
         
         cell.meetingName.text = meetingsArray[indexPath.section].theme
         cell.detailsButton.tag = indexPath.section
@@ -257,7 +288,7 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if segue.identifier == "Login" {
             
-            guard let viewController = segue.destination as? LoginViewController else {return}
+            guard let viewController = segue.destination as? LoginViewController else { return }
             viewController.isMyMeeting = true
         }
     }
@@ -308,6 +339,7 @@ extension MyMeetingsViewController {
             DispatchQueue.main.async {
                 self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
                 self.tableView.reloadData()
+                self.removeLoadingView()
             }
         }
         
@@ -315,6 +347,7 @@ extension MyMeetingsViewController {
             DispatchQueue.main.async {
                 self.meetingsToShow = self.meetings[self.navigationItem.searchController?.searchBar.selectedScopeButtonIndex ?? 0]
                 self.tableView.reloadData()
+                self.removeLoadingView()
             }
         }
         

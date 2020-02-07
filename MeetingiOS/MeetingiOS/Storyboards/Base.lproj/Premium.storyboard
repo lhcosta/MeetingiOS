@@ -22,7 +22,7 @@
             <objects>
                 <tableViewController id="Akc-E2-4l1" customClass="PremiumOptionsTableViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="77" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Ek-Q4-XBI">
-                        <rect key="frame" x="0.0" y="0.0" width="386" height="251"/>
+                        <rect key="frame" x="0.0" y="0.0" width="386" height="260"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -101,7 +101,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
-                                <navigationItem id="TvW-Yc-Zdj"/>
+                                <navigationItem id="TvW-Yc-Zdj">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zB6-i6-oje">
+                                        <connections>
+                                            <action selector="didPressCancel:" destination="y2t-Y2-Vj8" id="anC-eE-qx5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
                             </items>
                         </navigationBar>
                         <sections>

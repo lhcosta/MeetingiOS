@@ -302,29 +302,29 @@
 }
 
 -(void) saveMeeting {
-    
-    NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
-    
-    //Usuário não cadastrado.
-    if (!recordName || [recordName isEqualToString:@""]) {
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-        UIViewController* loginVC = [storyboard instantiateInitialViewController];
-        [self presentViewController:loginVC animated:true completion:nil];
-        return;
-    }
-    
-    [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
-        if (date && date > [NSDate dateWithTimeIntervalSinceNow:0]){
-            [self createMeetingInCloud];
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Premium" bundle:nil];
-                UIViewController* premiumVC = [storyboard instantiateInitialViewController];
-                [self presentViewController:premiumVC animated:true completion:nil];
-                return;
-            });
-        }
-    }];
+    [self createMeetingInCloud];
+//    NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
+//
+//    //Usuário não cadastrado.
+//    if (!recordName || [recordName isEqualToString:@""]) {
+//        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+//        UIViewController* loginVC = [storyboard instantiateInitialViewController];
+//        [self presentViewController:loginVC animated:true completion:nil];
+//        return;
+//    }
+//
+//    [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
+//        if (date && date > [NSDate dateWithTimeIntervalSinceNow:0]){
+//            [self createMeetingInCloud];
+//        } else {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Premium" bundle:nil];
+//                UIViewController* premiumVC = [storyboard instantiateInitialViewController];
+//                [self presentViewController:premiumVC animated:true completion:nil];
+//                return;
+//            });
+//        }
+//    }];
 }
 
 -(void) createMeetingInCloud {
