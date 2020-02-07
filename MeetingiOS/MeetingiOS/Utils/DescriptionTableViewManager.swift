@@ -21,9 +21,14 @@ class DescriptionTableViewManager: NSObject {
 extension DescriptionTableViewManager: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if viewController?.topicToPresentConclusions.topicPorque.isEmpty ?? true {
+        if textView.text == NSLocalizedString("Not specified.", comment: ""){
             textView.text = ""
         }
+    }
+
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        viewController?.isChangedTopic = true
+        return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

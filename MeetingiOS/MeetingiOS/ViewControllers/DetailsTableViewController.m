@@ -203,21 +203,7 @@
 
 /// Apresentar view de loading.
 - (void) showLoadingView {
-    
-    _loadingView = [[UIView alloc] initWithFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height)]; 
-    [_loadingView setBackgroundColor: self.view.backgroundColor];
-    
-    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
-    
-    [_loadingIndicator setHidesWhenStopped:YES];
-    [_loadingIndicator startAnimating];
-    
-    [_loadingView addSubview:_loadingIndicator];
-    
-    [[_loadingIndicator.centerXAnchor constraintEqualToAnchor:_loadingView.centerXAnchor] setActive:YES];
-    [[_loadingIndicator.centerYAnchor constraintEqualToAnchor:_loadingView.centerYAnchor] setActive:YES];
-    [_loadingIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
+    _loadingView = [self addInitialLoadingView];
     [self.navigationController.view addSubview:_loadingView];
 }
 

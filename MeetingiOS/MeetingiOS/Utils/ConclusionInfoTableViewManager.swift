@@ -76,6 +76,7 @@ extension ConclusionInfoTableViewManager: UITextFieldDelegate {
             self.conclusionTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
             self.conclusionTableView.scrollToRow(at: IndexPath(row: index+1, section: 0), at: .bottom, animated: .random())
             textField.text = ""
+            viewControler.isChangedTopic = true
         }
         
         return true
