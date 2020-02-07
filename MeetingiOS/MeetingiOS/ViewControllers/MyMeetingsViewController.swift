@@ -19,15 +19,15 @@ import CloudKit
     fileprivate var filtered = [Meeting]()
     fileprivate var filterring = false
     @objc var newMeeting: Meeting?
-    
+        
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
         
-        if self.traitCollection.userInterfaceStyle == .dark {
-            refreshControl.tintColor = .white
-        } else {
+        if self.traitCollection.userInterfaceStyle == .light {
             refreshControl.tintColor = .gray
+        } else {
+            refreshControl.tintColor = .white
         }
         
         return refreshControl
@@ -40,6 +40,8 @@ import CloudKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showProfileWhenUserLogged), name: Notification.Name("UserLogin"), object: nil)
+        
         meetings.append([Meeting]())
         meetings.append([Meeting]())
         meetingsToShow = meetings[0]
@@ -47,15 +49,12 @@ import CloudKit
         self.tableView.refreshControl = refreshControl
         self.tableView.keyboardDismissMode = .onDrag
         self.extendedLayoutIncludesOpaqueBars = true
-        //self.tableView.setTableViewBackgroundGradient()
         
         self.setupNavigationController()
         
         self.setUpSearchBar(segmentedControlTitles: [NSLocalizedString("Future meetings", comment: ""), NSLocalizedString("Past meetings", comment: "")])
         // MARK: Query no CK
-        guard let _ = defaults.string(forKey: "recordName") else { return }
-        
-        self.refreshingMeetings()
+        guard let _ = defaults.string(forKey: "recordName") else { return }        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,9 +70,17 @@ import CloudKit
         if  UserDefaults.standard.value(forKey: "newUser") as? Bool ?? true {
             self.performSegue(withIdentifier: "Onboarding", sender: nil)
             UserDefaults.standard.set(false, forKey: "newUser")
+        } else {
+            if isLoggedIn() {
+                self.refreshingMeetings()
+            }
         }
         
         self.addColor(toStatusBarBackground: UIColor(named: "NavigationBarColor")!, in: self.navigationController!.view)        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK:- Methods
@@ -131,20 +138,22 @@ import CloudKit
         }
     }
     
+    /// Realizar login ou mostrar os dados do usuário.
     @objc func goToProfile() {
         if isLoggedIn(){
-            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-            let nextVC = storyboard.instantiateInitialViewController() as! ProfileViewController
-            self.present(nextVC, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "goToProfile", sender: nil)
         } else {
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let nextVC = storyboard.instantiateInitialViewController() as! LoginViewController
-            nextVC.goingToProfile = true
-            self.present(nextVC, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "Login", sender: nil)
         }
     }
     
-    private func isLoggedIn() -> Bool{
+    /// Apresentar a tela de login quando o usuário logar.
+    @objc func showProfileWhenUserLogged() {
+        self.performSegue(withIdentifier: "goToProfile", sender: nil)
+    }
+    
+    /// Usuário logado ou não.
+    private func isLoggedIn() -> Bool {
         if let _ = defaults.value(forKey: "recordName") as? String {
             return true
         } else {
@@ -152,10 +161,7 @@ import CloudKit
         }
     }
     
-    
-    
     //MARK: - IBActions
-    
     /// Detalhes da reunião.
     @IBAction func detailsOfMeeting(_ sender : UIButton) {
         self.performSegue(withIdentifier: "MeetingDetails", sender: sender)        
@@ -248,6 +254,11 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
             meeting = filterring ? self.filtered[button.tag] : self.meetingsToShow[button.tag]
             
             viewController.meeting = meeting
+            
+        } else if segue.identifier == "Login" {
+            
+            guard let viewController = segue.destination as? LoginViewController else {return}
+            viewController.isMyMeeting = true
         }
     }
 }
@@ -307,7 +318,6 @@ extension MyMeetingsViewController {
             }
         }
         
-        
     }
     
     /// Método que faz fetch de todas as reunioes
@@ -333,3 +343,4 @@ extension MyMeetingsViewController {
         }
     }
 }
+

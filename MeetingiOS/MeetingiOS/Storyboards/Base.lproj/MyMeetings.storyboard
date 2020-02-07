@@ -135,6 +135,7 @@
                         <segue destination="uQZ-zh-Ghq" kind="presentation" identifier="goToProfile" modalTransitionStyle="coverVertical" id="8hE-O8-eEQ"/>
                         <segue destination="NGr-rW-Se3" kind="show" identifier="MeetingDetails" id="ayp-bw-Ejw"/>
                         <segue destination="qwW-Ux-f3u" kind="presentation" identifier="Onboarding" id="Cf9-wB-0TW"/>
+                        <segue destination="1Xa-oW-9Gs" kind="presentation" identifier="Login" id="jco-hh-ikF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu9-4R-dug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -229,6 +230,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6IY-7N-kn5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-362.31884057971018" y="137.94642857142856"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="1Hw-88-bBZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="1Xa-oW-9Gs" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="L3O-uI-Bm1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XFp-rP-bFC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1070" y="402"/>
         </scene>
     </scenes>
     <resources>

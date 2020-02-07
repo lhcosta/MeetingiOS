@@ -21,7 +21,6 @@ class ProfileViewController: UITableViewController {
     //MARK:- Properties
     let defaults = UserDefaults.standard
     let cloud = CloudManager.shared
-    var didComeFromLogin = false
     
     //MARK:- View Lifecycle
     override func viewDidLoad() {
@@ -53,11 +52,7 @@ class ProfileViewController: UITableViewController {
             nameToUpdate = nameTF.text
             
             User.updateUser(name: nameToUpdate) {
-                DispatchQueue.main.async {
-                    if self.didComeFromLogin {
-                        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                    }
-                }
+                self.dismiss(animated: true, completion: nil)
             }
         }
         

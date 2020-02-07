@@ -47,16 +47,7 @@ class UnfinishedMeetingViewController: UIViewController {
     /// Será colocado no lugar do Topic correspondente do Array principal.
     var topicToBeEditedOnSearch: String!
     
-    /// Conexão Multipeer
-    var multipeer : MeetingBrowserPeer?
-    
-    var meetingTeste : Meeting?
-    
     var selectedTopicForInfo: Topic?
-    
-    private var tvsTableView : TvsTableView!
-    
-    private var blurEffectView : UIVisualEffectView!
     
     private var buttonToolbar : UIButton!
     
@@ -74,7 +65,6 @@ class UnfinishedMeetingViewController: UIViewController {
         
         self.navigationItem.title = currMeeting.theme
         
-        NotificationCenter.default.addObserver(self, selector: #selector(selectedTv(notification:)), name: Notification.Name(rawValue:"SelectedTV"), object: nil)
         /// Dispara as funções de manipulação do teclado
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -223,7 +213,7 @@ class UnfinishedMeetingViewController: UIViewController {
             
             self.selectedTopicForInfo = topics[indexPath!.section]
             
-            performSegue(withIdentifier: "conclusion", sender: self)
+            performSegue(withIdentifier: "conclusionUnfinished", sender: self)
         }
     }
     
@@ -256,18 +246,22 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let conclusionVC = segue.destination as? ConclusionsViewController {
-            conclusionVC.fromUnfinishedMeeting = true
-            conclusionVC.topicToPresentConclusions = self.selectedTopicForInfo
-            conclusionVC.meetingDidBegin = self.currMeeting.started
-            self.view.setNeedsDisplay()
+        
+        if segue.identifier == "SelectTV" {
+            
+            guard let viewController = segue.destination as? SelectionTVsViewController else {return}
+            viewController.meeting = self.currMeeting
+            
+        } else if segue.identifier == "conclusionUnfinished" {
+            if let navigation = segue.destination as? UINavigationController, let conclusionVC = navigation.viewControllers.first as? ConclusionsViewController {
+                
+                conclusionVC.fromUnfinishedMeeting = true
+                conclusionVC.topicToPresentConclusions = self.selectedTopicForInfo
+                conclusionVC.meetingDidBegin = self.currMeeting.started
+                self.view.setNeedsDisplay()
+            }
+            
         }
     }
     
@@ -650,73 +644,8 @@ extension UnfinishedMeetingViewController : UIGestureRecognizerDelegate {
     
     /// Apresentar TVs disponiveis para espelhar.
     func showTvTableView() {
-        
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTVsTableView(_:)))
-        tapGesture.delegate = self
-        
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.frame = self.view.bounds
-        
-        self.blurEffectView.addGestureRecognizer(tapGesture)
-        
-        self.navigationController?.view.addSubview(blurEffectView)
-        
-        tvsTableView = TvsTableView()
-        let tvsTableViewData = TvsTableViewData(tvsTableView)
-        
-        tvsTableView.awakeFromNib()
-        
-        self.multipeer = MeetingBrowserPeer(tvsTableViewData)
-        
-        blurEffectView.contentView.addSubview(tvsTableView)
-        
-        NSLayoutConstraint.activate([
-            tvsTableView.widthAnchor.constraint(equalTo: blurEffectView.widthAnchor, multiplier: 0.8),
-            tvsTableView.heightAnchor.constraint(equalTo: blurEffectView.heightAnchor, multiplier: 0.25),
-            tvsTableView.centerXAnchor.constraint(equalTo: blurEffectView.centerXAnchor),
-            tvsTableView.centerYAnchor.constraint(equalTo: blurEffectView.centerYAnchor)
-        ])
-        
-        tvsTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.performSegue(withIdentifier: "SelectTV", sender: nil)
     }
-    
-    /// Remover view ao realizar um tap na view.
-    /// - Parameter tapGesture: toque na tela.
-    @objc func dismissTVsTableView(_ tapGesture : UITapGestureRecognizer) {
-        
-        let location = tapGesture.location(in: self.blurEffectView)
-        
-        if self.blurEffectView.frame.contains(location) {            
-            self.blurEffectView.removeFromSuperview()
-        }
-        
-    }
-    
-    /// Recebendo o peer selecionado através de uma notificação enviada.
-    /// - Parameter notification: notificacao enviada.
-    @objc private func selectedTv(notification : NSNotification) {
-        
-        guard let peerId = notification.object as? MCPeerID else {return}
-        
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(self.currMeeting) {
-            
-            self.multipeer?.sendInviteFromPeer(peerID: peerId, dataToSend: data)
-            print("Dados enviados")
-        }
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
-        let point = touch.location(in: self.blurEffectView)
-        
-        let isTouch = self.tvsTableView.frame.contains(point)
-        
-        return !isTouch
-    }
-    
 }
 
 //MARK:- Enviar tópicos para a reunião quando não for manager
