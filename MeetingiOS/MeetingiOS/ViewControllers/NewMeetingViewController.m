@@ -317,9 +317,7 @@
             [self createMeetingInCloud];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Premium" bundle:nil];
-                UIViewController* premiumVC = [storyboard instantiateInitialViewController];
-                [self presentViewController:premiumVC animated:true completion:nil];
+                [self performSegueWithIdentifier:@"Premium" sender:Nil];
                 return;
             });
         }
