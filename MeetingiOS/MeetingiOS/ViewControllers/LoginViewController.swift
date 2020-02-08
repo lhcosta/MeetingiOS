@@ -89,7 +89,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             getAppleIDStatus(userIdentifier: appleIDCredential.user)
             
-            print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.fullName)), name: \(String(describing: appleIDCredential.fullName))")
+            print("AppleID Credential Authorization: userId: \(appleIDCredential.user)")
             
             self.loading = UIAlertController(title: "", message: "Loading...", preferredStyle: .alert)
             self.loading.addUIActivityIndicatorView()
