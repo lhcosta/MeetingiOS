@@ -137,7 +137,7 @@ import CloudKit
         let operation = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: nil)
         
         operation.modifySubscriptionsCompletionBlock = { (subs, _, error) in
-            print(subs?.count)
+            print(subs?.count.description)
             print(error.debugDescription)
         }
         

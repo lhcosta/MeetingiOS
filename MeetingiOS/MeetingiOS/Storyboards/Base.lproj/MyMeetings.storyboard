@@ -115,7 +115,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Meeting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rt5-y4-Q4Z">
                                                             <rect key="frame" x="0.0" y="59" width="116" height="22"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="116" id="Fec-Ow-dhE"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="116" id="Fec-Ow-dhE"/>
                                                                 <constraint firstAttribute="height" constant="22" id="Gxp-E6-6oE"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="18"/>
@@ -171,7 +171,7 @@
                         <outlet property="tableView" destination="81r-5o-ZG0" id="cbH-Qx-Vnr"/>
                         <segue destination="p8j-8A-NPN" kind="show" identifier="finishedMeeting" id="Q88-9u-Gbe"/>
                         <segue destination="S76-Th-kPX" kind="show" identifier="unfinishedMeeting" id="0R0-Nv-dzE"/>
-                        <segue destination="uQZ-zh-Ghq" kind="presentation" identifier="goToProfile" modalTransitionStyle="coverVertical" id="8hE-O8-eEQ"/>
+                        <segue destination="uQZ-zh-Ghq" kind="presentation" identifier="goToProfile" id="8hE-O8-eEQ"/>
                         <segue destination="NGr-rW-Se3" kind="show" identifier="MeetingDetails" id="ayp-bw-Ejw"/>
                         <segue destination="qwW-Ux-f3u" kind="presentation" identifier="Onboarding" id="Cf9-wB-0TW"/>
                         <segue destination="1Xa-oW-9Gs" kind="presentation" identifier="Login" id="jco-hh-ikF"/>

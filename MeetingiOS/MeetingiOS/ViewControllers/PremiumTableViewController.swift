@@ -13,12 +13,20 @@ class PremiumTableViewController: UITableViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var continueBtn: UIButton!
     private let store = StoreManager.shared
-    
+    var loadingView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.continueBtn.layer.cornerRadius = self.continueBtn.bounds.height * 0.1
-        self.continueBtn.clipsToBounds = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(removeLoading), name: Notification.Name(rawValue: "loadingPremiun"), object: nil)
+        
+        loadingView = self.addInitialLoadingView(frame: self.navigationController!.view.frame)
+        self.navigationController?.view.addSubview(loadingView)
+        self.continueBtn.setupCornerRadiusShadow()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Table view settings
@@ -42,5 +50,14 @@ class PremiumTableViewController: UITableViewController {
     
     @IBAction func didPressCancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func removeLoading() {
+        UIView.animate(withDuration: 1, animations: { 
+            self.loadingView.alpha = 0
+        }) { (_) in
+            self.loadingView.removeFromSuperview()
+        }
+        
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import CloudKit
 
 @objc class SelectColorViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView : UICollectionView!
     
     @IBOutlet weak var viewColorSelected: UIView!
@@ -77,17 +77,23 @@ extension SelectColorViewController: UICollectionViewDelegate, UICollectionViewD
 }
 
 extension SelectColorViewController: UICollectionViewDelegateFlowLayout {
-  
+    
     // Seta os espaços entre as celulas
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return collectionView.frame.width/CGFloat(colors.count)
+        return 30
     }
     
-    // Seta os espaços ente linhas
+    //Seta os espaços ente linhas
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        return collectionView.bounds.height/CGFloat(colors.count)
+        let numbersCells : CGFloat = 4
+        let spaceCells = itemSize.width * numbersCells
+        
+        return (collectionView.frame.width - spaceCells)/5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return itemSize
     }
 }
 

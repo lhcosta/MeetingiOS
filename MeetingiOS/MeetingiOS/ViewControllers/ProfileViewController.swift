@@ -91,7 +91,7 @@ class ProfileViewController: UITableViewController {
     }
     
     private func showLoadingView() {
-        loadingView = self.addInitialLoadingView()
+        loadingView = self.addInitialLoadingView(frame: self.view.frame)
         self.view.addSubview(loadingView!)
     }
     

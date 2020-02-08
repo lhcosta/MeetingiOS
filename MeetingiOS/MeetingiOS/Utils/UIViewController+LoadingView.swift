@@ -11,17 +11,9 @@ import Foundation
 extension UIViewController {
     
     /// Adicionando um loading inicial para a view controller.
-    @objc func addInitialLoadingView() -> UIView {
+    @objc func addInitialLoadingView(frame : CGRect) -> UIView {
         
-        var frameView = CGRect()
-        
-        if let frame = self.navigationController?.view.frame {
-            frameView = frame
-        } else {
-            frameView = self.view.frame
-        }
-        
-        let loadingView = UIView(frame: frameView)
+        let loadingView = UIView(frame: frame)
         loadingView.backgroundColor = self.view.backgroundColor
         
         let loadingIndicator = UIActivityIndicatorView(style: .large)

@@ -40,7 +40,10 @@ import CloudKit
     //MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showLoadingView()
+        
+        if isLoggedIn() {
+            self.showLoadingView()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(showProfileWhenUserLogged), name: Notification.Name("UserLogin"), object: nil)
         
@@ -87,8 +90,8 @@ import CloudKit
     //MARK:- Methods
     
     private func showLoadingView() {
-        loadingView = self.addInitialLoadingView()
-        self.navigationController?.view.addSubview(loadingView!)
+        loadingView = self.addInitialLoadingView(frame: self.view.frame)
+        self.view.addSubview(loadingView!)
     }
     
     private func removeLoadingView() {
