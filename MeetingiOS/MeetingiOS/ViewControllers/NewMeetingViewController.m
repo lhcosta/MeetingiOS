@@ -71,9 +71,7 @@
     _startsDateTime.text = [_formatter stringFromDate:newDateStarts];
     
     // 10 min a mais do horário atual stado no datePicker
-    NSDateComponents *componentsEnd= [[NSDateComponents alloc] init];
     [components setMinute:40];
-    NSCalendar *calendarEnd = [NSCalendar currentCalendar];
     NSDate *newDateEnds = [calendar dateByAddingComponents:components toDate:[NSDate date] options:0];
     _endesDateTime.text = [_formatter stringFromDate:newDateEnds];
     
@@ -302,8 +300,9 @@
 }
 
 -(void) saveMeeting {
+    
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
-
+    
     //Usuário não cadastrado.
     if (!recordName || [recordName isEqualToString:@""]) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
@@ -311,10 +310,14 @@
         [self presentViewController:loginVC animated:true completion:nil];
         return;
     }
+    
+    //[self.navigationItem.rightBarButtonItem setEnabled:NO];
 
     [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
-        if (date && date > [NSDate dateWithTimeIntervalSinceNow:0]){
-            [self createMeetingInCloud];
+        if (date > NSDate.now){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self createMeetingInCloud]; 
+            });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self performSegueWithIdentifier:@"Premium" sender:Nil];
