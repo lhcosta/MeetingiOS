@@ -20,7 +20,7 @@ import CloudKit
     fileprivate var filterring = false
     @objc var newMeeting: Meeting?
     var loadingView: UIView?
-        
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: .valueChanged)
@@ -256,17 +256,21 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
-        
-        if meetingsArray.count != 0 {
+        if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "cellEmpty" {
+            self.performSegue(withIdentifier: "NewMeeting", sender: nil)
+            
+        } else {
+            
+            let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
+            
             if meetingsArray[indexPath.section].finished {
                 performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.section])
             } else {
                 performSegue(withIdentifier: "unfinishedMeeting", sender: self.meetingsToShow[indexPath.section])
             }
-        } else {
-            performSegue(withIdentifier: "newMeeting", sender: self)
+            
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
