@@ -88,9 +88,7 @@ import CloudKit
             self.email = rec.value(forKey: "email") as? String
             self.name = rec.value(forKey: "name") as? String
             self.meetings = rec.value(forKey: "meetings") as? [CKRecord.Reference] ?? []
-            
-            print("\(String(describing: rec.value(forKey: "email") as? String))")
-            
+                        
             compleetion(true)
         }
     }
