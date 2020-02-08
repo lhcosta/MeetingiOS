@@ -46,7 +46,6 @@ class ProfileViewController: UITableViewController {
             }
         }
         
-        self.isModalInPresentation = true
         self.nameTF.delegate = self
         
         self.nameTF.text = self.defaults.value(forKey: "givenName") as? String

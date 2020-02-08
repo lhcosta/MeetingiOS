@@ -28,6 +28,7 @@
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
 @property (nonatomic) DetailsNewMeetingManager* managerController;
 @property (nonatomic) NSInteger index_color;
+@property (nonatomic) NSInteger numbersOfMeetings;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -103,14 +104,14 @@
     [_contentViewCollection setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]];
     
     [self setupViews];
-        
+    
     [self.navigationItem setTitle:NSLocalizedString(@"New meeting", "")];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveMeeting)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-           
+    
     if([_contactCollectionView.contacts count] != 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:0.5 animations:^{
@@ -311,24 +312,30 @@
         return;
     }
     
-    //[self.navigationItem.rightBarButtonItem setEnabled:NO];
-
-    [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
-        if (date > NSDate.now){
+    [self userCreateMeeting:^(BOOL isPossible) {
+        if (isPossible) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self createMeetingInCloud]; 
             });
         } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self performSegueWithIdentifier:@"Premium" sender:Nil];
-                return;
-            });
-        }
+            [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
+                if (date > NSDate.now){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self createMeetingInCloud]; 
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSegueWithIdentifier:@"Premium" sender:Nil];
+                        return;
+                    });
+                }
+            }];
+        }        
     }];
 }
 
 -(void) createMeetingInCloud {
-        
+    
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     
     //Nome não definido
@@ -433,5 +440,38 @@
     
     [finishDatePicker addTarget:self action:@selector(modifieEndTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
 }
+
+/// Pode criar tres reunioes gratis.
+/// @param completionHandler possibilidade de criar ou nao.
+-(void) userCreateMeeting:(void(^) (BOOL))completionHandler {
+    
+    NSString* recordName = [NSUserDefaults.standardUserDefaults valueForKey:@"recordName"];
+    CKRecord* record = [[CKRecord alloc] initWithRecordType:@"User" recordID:[[CKRecordID alloc]initWithRecordName:recordName]];
+    
+    self.numbersOfMeetings = 0;
+    
+    [CloudManager.shared fetchRecordsWithRecordIDs:@[record.recordID] desiredKeys:@[@"recordName"] finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
+        
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"manager = %@", records.allValues.firstObject.recordID];        
+        
+        if(!error) {
+            [CloudManager.shared readRecordsWithRecorType:@"Meeting" predicate:predicate desiredKeys:@[@"meetings"] perRecordCompletion:^(CKRecord * _Nonnull record) {
+                if (record) {
+                    self.numbersOfMeetings += 1;
+                }
+            } finalCompletion:^{
+                
+                if (self.numbersOfMeetings >= 3) {
+                    completionHandler(NO);
+                }  else {
+                    completionHandler(YES);
+                }
+            }];
+        }
+    }];
+    
+    
+} 
+
 
 @end
