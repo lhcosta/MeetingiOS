@@ -258,10 +258,14 @@ extension MyMeetingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let meetingsArray = self.filterring ? self.filtered : self.meetingsToShow
         
-        if meetingsArray[indexPath.section].finished {
-            performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.section])
+        if meetingsArray.count != 0 {
+            if meetingsArray[indexPath.section].finished {
+                performSegue(withIdentifier: "finishedMeeting", sender: self.meetingsToShow[indexPath.section])
+            } else {
+                performSegue(withIdentifier: "unfinishedMeeting", sender: self.meetingsToShow[indexPath.section])
+            }
         } else {
-            performSegue(withIdentifier: "unfinishedMeeting", sender: self.meetingsToShow[indexPath.section])
+            performSegue(withIdentifier: "newMeeting", sender: self)
         }
     }
     
