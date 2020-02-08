@@ -15,7 +15,7 @@
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    if(newString.length > 20)
+    if(newString.length > 30)
         return NO;
     
     return YES;
