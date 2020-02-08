@@ -174,7 +174,7 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="JAP-j1-bfc" kind="modal" id="XPZ-oY-4dG"/>
+                                                        <segue destination="JAP-j1-bfc" kind="show" id="XPZ-oY-4dG"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

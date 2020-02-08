@@ -15,9 +15,8 @@ class OptionsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.layer.cornerRadius = 10
-        self.clipsToBounds = true
-        self.selectionStyle = .none
+        self.contentView.setupCorners()
+        self.setupShadow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,9 +26,11 @@ class OptionsTableViewCell: UITableViewCell {
             self.timeLbl.textColor = .white
             self.priceLabel.textColor = .white
         } else {
-            self.contentView.backgroundColor = .white
-            self.timeLbl.textColor = .black
-            self.priceLabel.textColor = .black
+            self.contentView.backgroundColor = UIColor(named: "ColorTableViewCell")
+            if traitCollection.userInterfaceStyle == .light {
+                self.timeLbl.textColor = .black
+                self.priceLabel.textColor = .black
+            }
         }
        
     }

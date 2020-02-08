@@ -109,7 +109,7 @@
                 
                 [self.modifyName setHidden:YES];
                 
-                for (NSIndexPath* indexPath in self.tableView.indexPathsForVisibleRows) {
+                for (NSIndexPath* indexPath in  self.tableView.indexPathsForVisibleRows) {
                     if(indexPath.section == 3 && indexPath.row == 1) {
                         [[self.tableView cellForRowAtIndexPath:indexPath] setUserInteractionEnabled:YES];
                     } else {
@@ -203,7 +203,7 @@
 
 /// Apresentar view de loading.
 - (void) showLoadingView {
-    _loadingView = [self addInitialLoadingView];
+    _loadingView = [self addInitialLoadingViewWithFrame:self.navigationController.view.frame];
     [self.navigationController.view addSubview:_loadingView];
 }
 

@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Definir apenas sombra.
 - (void) setupShadow;
 
+/// Definir apenas bordas
+- (void) setupCorners;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -37,7 +37,7 @@ class MeetingBrowserPeer: NSObject {
     private var peer : MCPeerID!
         
     /// Delegate para enviar as Tvs encontradas. Não pode ser weak, pois é utilizado dentro de uma método de outro delegate
-    private var delegate : FindTvsDelegate?
+    private weak var delegate : FindTvsDelegate?
     
     ///Peer que a sessao está conectada.
     private var connectedPeer : MCPeerID!
@@ -57,7 +57,6 @@ class MeetingBrowserPeer: NSObject {
         self.session.delegate = self
         self.delegate = delegate
         self.serviceBrowser.startBrowsingForPeers()
-        
     }
         
     /// Parar a busca de peers.
@@ -69,11 +68,9 @@ class MeetingBrowserPeer: NSObject {
     /// Enviando convite para peer selecionado.
     /// - Parameter peerID: peer selecionado.
     /// - Parameter dataToSend: dados para ser enviados.
-    /// - Parameter completionHandler: término do envio de dados.
-    func sendInviteFromPeer(peerID : MCPeerID, dataToSend : Data, completionHandler: @escaping () -> Void) {
-        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 3600)
+    func sendInviteFromPeer(peerID : MCPeerID, dataToSend : Data) {
+        self.serviceBrowser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 1200)
         self.dataToSend = dataToSend
-        completionHandler()
     }
     
 }
@@ -105,6 +102,7 @@ extension MeetingBrowserPeer : MCSessionDelegate {
                 
                 do {
                     try self.session.send(dataToSend, toPeers: [peerID], with: .reliable)
+                    NotificationCenter.default.post(name: Notification.Name("sendMeeting"), object: nil)
                 } catch let error {
                     print("Error -> \(error)")
                 } 

@@ -60,7 +60,7 @@ class UnfinishedMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadingView = self.addInitialLoadingView()
+        self.loadingView = self.addInitialLoadingView(frame: self.view.frame)
         
         // SearchBar na NavigationBar
         self.setUpSearchBar(segmentedControlTitles: nil)

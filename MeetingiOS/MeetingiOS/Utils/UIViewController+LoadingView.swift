@@ -11,9 +11,9 @@ import Foundation
 extension UIViewController {
     
     /// Adicionando um loading inicial para a view controller.
-    @objc func addInitialLoadingView() -> UIView {
+    @objc func addInitialLoadingView(frame : CGRect) -> UIView {
         
-        let loadingView = UIView(frame: self.view.frame)
+        let loadingView = UIView(frame: frame)
         loadingView.backgroundColor = self.view.backgroundColor
         
         let loadingIndicator = UIActivityIndicatorView(style: .large)
