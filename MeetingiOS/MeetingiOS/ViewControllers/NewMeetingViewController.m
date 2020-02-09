@@ -312,26 +312,9 @@
         return;
     }
     
-    [self userCreateMeeting:^(BOOL isPossible) {
-        if (isPossible) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self createMeetingInCloud]; 
-            });
-        } else {
-            [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
-                if (date > NSDate.now){
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self createMeetingInCloud]; 
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self performSegueWithIdentifier:@"Premium" sender:Nil];
-                        return;
-                    });
-                }
-            }];
-        }        
-    }];
+    //Methods to implement subscription here.
+    
+    [self createMeetingInCloud];
 }
 
 -(void) createMeetingInCloud {
@@ -388,6 +371,7 @@
             NSLog(@"Create Record");
             [self.managerController updateUsersWithUsers:users meeting:self.meeting typeUpdate:(TypeUpdateUser)insertUser];
             [EventManager saveMeeting:theme starting:self.meeting.initialDate ending:self.meeting.finalDate];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSArray<UIViewController *>* viewControllers = self.navigationController.viewControllers;
                 NSUInteger vcCount = [self.navigationController.viewControllers count];
@@ -472,6 +456,31 @@
     
     
 } 
+
+//MARK:- Version 1.1 -> Subscription
+- (void) methodsToImplementInSubscription {
+    
+    [self userCreateMeeting:^(BOOL isPossible) {
+        if (isPossible) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self createMeetingInCloud]; 
+            });
+        } else {
+            [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
+                if (date > NSDate.now){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self createMeetingInCloud]; 
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSegueWithIdentifier:@"Premium" sender:Nil];
+                        return;
+                    });
+                }
+            }];
+        }        
+    }];
+}
 
 
 @end

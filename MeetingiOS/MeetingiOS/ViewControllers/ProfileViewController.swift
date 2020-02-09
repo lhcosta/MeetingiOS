@@ -29,22 +29,8 @@ class ProfileViewController: UITableViewController {
     //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        self.showLoadingView()
-        self.store.receiptValidation { (date) in
-            if let date = date{
-                if date > Date(timeIntervalSinceNow: 0) {
-                    DispatchQueue.main.async {
-                        self.subsType.text = "Premium"
-                        self.premiumBtn.isHidden = true
-                        self.removeLoadingView()
-                    }
-                }
-            }
-            DispatchQueue.main.async {
-                self.removeLoadingView()
-            }
-        }
+        
+        //Methods to implement subscription here.
         
         self.nameTF.delegate = self
         
@@ -103,10 +89,10 @@ class ProfileViewController: UITableViewController {
         super.tableView(tableView, heightForHeaderInSection: section)
         
         switch section {
-        case 1:
-            return 10
-        default:
-            break
+            case 1:
+                return 10
+            default:
+                break
         }
         
         return 30
@@ -127,8 +113,8 @@ extension ProfileViewController {
     /// Adicionando bordas e sombra para as views.
     func addShadowAndCornerInViews() {
         self.infoView.setupCornerRadiusShadow()
-        self.subscriptionView.setupCornerRadiusShadow()
-        self.premiumBtn.setupCornerRadiusShadow()
+//        self.subscriptionView.setupCornerRadiusShadow()
+//        self.premiumBtn.setupCornerRadiusShadow()
     }
 }
 
@@ -157,3 +143,27 @@ extension ProfileViewController : UITextFieldDelegate {
     }
     
 }
+
+//MARK:- Version 1.1 -> Subscriptions
+extension ProfileViewController {
+    
+    private func methodsToImplementSubscription() {
+        self.showLoadingView()
+        self.store.receiptValidation { (date) in
+            if let date = date{
+                if date > Date(timeIntervalSinceNow: 0) {
+                    DispatchQueue.main.async {
+                        self.subsType.text = "Premium"
+                        self.premiumBtn.isHidden = true
+                        self.removeLoadingView()
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                self.removeLoadingView()
+            }
+        }
+    }
+    
+}
+
