@@ -50,7 +50,7 @@ import CloudKit
     /// O Porquê do Topic ter sido feito pelo author
     var topicPorque: String! {
         set { self.record["topicPorque"] = newValue }
-        get { return self.record.value(forKey: "topicPorque") as? String ?? "Não especificado." }
+        get { return self.record.value(forKey: "topicPorque") as? String ?? NSLocalizedString("Not specified.", comment: "") }
     }
     
     
