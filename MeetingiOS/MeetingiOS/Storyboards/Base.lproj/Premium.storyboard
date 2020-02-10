@@ -22,7 +22,7 @@
         <scene sceneID="KiB-sG-PwD">
             <objects>
                 <tableViewController id="Akc-E2-4l1" customClass="PremiumOptionsTableViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="77" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Ek-Q4-XBI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="77" estimatedRowHeight="-1" sectionHeaderHeight="29" sectionFooterHeight="29" id="5Ek-Q4-XBI">
                         <rect key="frame" x="0.0" y="0.0" width="347" height="260"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

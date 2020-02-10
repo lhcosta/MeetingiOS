@@ -28,6 +28,7 @@
 @property (nonatomic, nonnull) NSDateFormatter* formatter;
 @property (nonatomic) DetailsNewMeetingManager* managerController;
 @property (nonatomic) NSInteger index_color;
+@property (nonatomic) NSInteger numbersOfMeetings;
 
 //MARK:- Methods
 ///Criando a reunião no Cloud Kit.
@@ -71,9 +72,7 @@
     _startsDateTime.text = [_formatter stringFromDate:newDateStarts];
     
     // 10 min a mais do horário atual stado no datePicker
-    NSDateComponents *componentsEnd= [[NSDateComponents alloc] init];
     [components setMinute:40];
-    NSCalendar *calendarEnd = [NSCalendar currentCalendar];
     NSDate *newDateEnds = [calendar dateByAddingComponents:components toDate:[NSDate date] options:0];
     _endesDateTime.text = [_formatter stringFromDate:newDateEnds];
     
@@ -105,14 +104,14 @@
     [_contentViewCollection setBackgroundColor:[UIColor colorNamed:@"ContactCollectionColor"]];
     
     [self setupViews];
-        
+    
     [self.navigationItem setTitle:NSLocalizedString(@"New meeting", "")];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveMeeting)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-           
+    
     if([_contactCollectionView.contacts count] != 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:0.5 animations:^{
@@ -302,8 +301,9 @@
 }
 
 -(void) saveMeeting {
+    
     NSString* recordName = [NSUserDefaults.standardUserDefaults stringForKey:@"recordName"];
-
+    
     //Usuário não cadastrado.
     if (!recordName || [recordName isEqualToString:@""]) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
@@ -311,23 +311,31 @@
         [self presentViewController:loginVC animated:true completion:nil];
         return;
     }
-
-    [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
-        if (date && date > [NSDate dateWithTimeIntervalSinceNow:0]){
-            [self createMeetingInCloud];
-        } else {
+    
+    [self userCreateMeeting:^(BOOL isPossible) {
+        if (isPossible) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Premium" bundle:nil];
-                UIViewController* premiumVC = [storyboard instantiateInitialViewController];
-                [self presentViewController:premiumVC animated:true completion:nil];
-                return;
+                [self createMeetingInCloud]; 
             });
-        }
+        } else {
+            [StoreManager.shared receiptValidationWithCompletionHandler:^(NSDate * _Nullable date) {
+                if (date > NSDate.now){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self createMeetingInCloud]; 
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSegueWithIdentifier:@"Premium" sender:Nil];
+                        return;
+                    });
+                }
+            }];
+        }        
     }];
 }
 
 -(void) createMeetingInCloud {
-        
+    
     NSString* theme =  [_nameMetting.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
     
     //Nome não definido
@@ -432,5 +440,38 @@
     
     [finishDatePicker addTarget:self action:@selector(modifieEndTimeWithDatePicker:) forControlEvents:UIControlEventValueChanged];
 }
+
+/// Pode criar tres reunioes gratis.
+/// @param completionHandler possibilidade de criar ou nao.
+-(void) userCreateMeeting:(void(^) (BOOL))completionHandler {
+    
+    NSString* recordName = [NSUserDefaults.standardUserDefaults valueForKey:@"recordName"];
+    CKRecord* record = [[CKRecord alloc] initWithRecordType:@"User" recordID:[[CKRecordID alloc]initWithRecordName:recordName]];
+    
+    self.numbersOfMeetings = 0;
+    
+    [CloudManager.shared fetchRecordsWithRecordIDs:@[record.recordID] desiredKeys:@[@"recordName"] finalCompletion:^(NSDictionary<CKRecordID *,CKRecord *> * _Nullable records, NSError * _Nullable error) {
+        
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"manager = %@", records.allValues.firstObject.recordID];        
+        
+        if(!error) {
+            [CloudManager.shared readRecordsWithRecorType:@"Meeting" predicate:predicate desiredKeys:@[@"meetings"] perRecordCompletion:^(CKRecord * _Nonnull record) {
+                if (record) {
+                    self.numbersOfMeetings += 1;
+                }
+            } finalCompletion:^{
+                
+                if (self.numbersOfMeetings >= 3) {
+                    completionHandler(NO);
+                }  else {
+                    completionHandler(YES);
+                }
+            }];
+        }
+    }];
+    
+    
+} 
+
 
 @end

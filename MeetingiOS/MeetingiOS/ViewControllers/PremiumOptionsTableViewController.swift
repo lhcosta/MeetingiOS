@@ -27,7 +27,6 @@ class PremiumOptionsTableViewController: UITableViewController {
     // MARK: - Table view
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print(store.products.count)
         return store.products.count
     }
     

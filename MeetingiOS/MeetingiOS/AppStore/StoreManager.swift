@@ -41,10 +41,12 @@ import StoreKit
     /// Método que realiza a compra do produto
     /// - Parameter productId: ID do produto cadastrado na App Store
     func purchaseProduct(productId: String) {
+        
         guard let productToPurchase = products.filter({$0.productIdentifier == productId}).first else { return }
         
         let payment = SKPayment(product: productToPurchase)
         paymentQueue.add(payment)
+        
     }
     
     /// Método para restaurar status de assinatura do usuário
@@ -111,7 +113,12 @@ import StoreKit
             
             if let expirationDate = lastReceipt["expires_date"] as? String {
                 if let date = formatter.date(from: expirationDate){
-                    return date
+                    
+                    var addOneHour = date.timeIntervalSinceNow
+                    addOneHour += (60*60)
+                    let newDate = Date(timeIntervalSinceNow: addOneHour)
+                    
+                    return newDate
                 }
             }
             

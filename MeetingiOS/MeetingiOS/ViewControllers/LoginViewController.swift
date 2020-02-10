@@ -15,6 +15,12 @@ class LoginViewController: UIViewController {
     let defaults = UserDefaults.standard
     @IBOutlet private weak var stackView : UIStackView!
     var isMyMeeting = false
+    var loading : UIAlertController!
+    
+    var authorizationProvider : ASAuthorizationAppleIDProvider!
+    
+    /// Usuário
+    private var user : User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +48,7 @@ class LoginViewController: UIViewController {
     
     @objc private func signInButtonTapped() {
         //  Cria o provedor de autorização para obter as informações do Usuário
-        let authorizationProvider = ASAuthorizationAppleIDProvider()
+        self.authorizationProvider = ASAuthorizationAppleIDProvider()
         let request = authorizationProvider.createRequest()
         // Especifíca quais informações pedir autorização
         request.requestedScopes = [.email, .fullName]
@@ -51,15 +57,13 @@ class LoginViewController: UIViewController {
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self as ASAuthorizationControllerDelegate
-        authorizationController.presentationContextProvider = self as ASAuthorizationControllerPresentationContextProviding
+        authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
         
     }
     
     func getAppleIDStatus(userIdentifier: String) {
-        
-        let provider = ASAuthorizationAppleIDProvider()
-        provider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
+        self.authorizationProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
             switch(credentialState){
                 case .authorized:
                     print("Autorizado")
@@ -80,60 +84,38 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     
     // Após obter a autoriização é possíivel obter as informações necessárias (email, fullname)
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            return
-        }
         
-        //        getAppleIDStatus(userIdentifier: appleIDCredential.user)
-        
-        print("AppleID Credential Authorization: userId: \(appleIDCredential.user), email: \(String(describing: appleIDCredential.email)), name: \(String(describing: appleIDCredential.fullName))")
-        
-        // Criação do Record na tabela de Usuários no Cloud
-        let userRecord = CKRecord(recordType: "User", recordID: CKRecord.ID(recordName: appleIDCredential.user))
-        
-        // Passagem do record no construtor da Struct
-        let user = User.init(record: userRecord)
-        
-        let givenName = appleIDCredential.fullName?.givenName
-        let familyName = appleIDCredential.fullName?.familyName
-        
-        // Se email = nil, faz-se o fetch dos dados do Usuário com base no appleIDCredential
-        if let email = appleIDCredential.email {
-            // Popula o Record na Struct User
-            user.email = String(describing: email)
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
-            user.name = "\(String(describing: givenName!)) \(String(describing: familyName!))"
-            self.saveDefaults(user: user)
-            self.confirmLoginInApp()
-            // Cria o record no Cloud
-            CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
+            getAppleIDStatus(userIdentifier: appleIDCredential.user)
+            
+            print("AppleID Credential Authorization: userId: \(appleIDCredential.user)")
+            
+            self.loading = UIAlertController(title: "", message: "Loading...", preferredStyle: .alert)
+            self.loading.addUIActivityIndicatorView()
+            self.present(self.loading, animated: true, completion: nil)
+            
+            //Verificando a existencia do usuario no database
+            CloudManager.shared.fetchRecords(recordIDs: [CKRecord.ID(recordName: appleIDCredential.user)], desiredKeys: ["recordName"]) { (records, error) in
+                
                 if let error = error {
-                    print("Error: \(error)")
-                } else {
-                    print("Successfully created user: ", record["name"]!)
-                    print(record.recordID.recordName)
-                    self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
-                    self.notificationPermission()
+                    print("User Login -> \(error)")
                 }
-            }) {
-                print("Done")
-            }
-        } else {
-            let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
-            loadingAlert.addUIActivityIndicatorView()
-            
-            self.present(loadingAlert, animated: true){
-                user.searchCredentials(record: userRecord){ _ in
-                    print("User Email: \(String(describing: user.email))")
-                    self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
-                    self.saveDefaults(user: user)
-                    DispatchQueue.main.async {
-                        loadingAlert.dismiss(animated: true, completion: nil)
+                
+                if let record = records?.first?.value {
+                    self.user = User(record: record)
+                    self.user.searchCredentials(record: record) { (_) in
+                        self.saveDefaults(user: self.user)
                         self.confirmLoginInApp()
                     }
+                } else {
+                    self.createNewUserInCloud(appleIDCredential: appleIDCredential)
                 }
             }
+            
+            
         }
+        
     }
     
     /// Permiti o recebimento de notificações.
@@ -169,20 +151,60 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
     
     private func confirmLoginInApp(){
-        self.dismiss(animated: true, completion: {
-            if self.isMyMeeting {
-                NotificationCenter.default.post(name: Notification.Name("UserLogin"), object: nil)
+        DispatchQueue.main.async {
+            self.loading.dismiss(animated: true) { 
+                self.dismiss(animated: true, completion: {
+                    if self.isMyMeeting {
+                        NotificationCenter.default.post(name: Notification.Name("UserLogin"), object: nil)
+                    }
+                })
             }
-            
-            self.notificationPermission()
-        })
+        }
     }
     
     private func saveDefaults(user: User) {
+        self.defaults.set(user.record.recordID.recordName, forKey: "recordName")
         self.defaults.set(user.name, forKey: "givenName")
         self.defaults.set(user.email, forKey: "email")
     }
     
+    /// Criando o usuário não existente no Cloud
+    private func createNewUserInCloud(appleIDCredential : ASAuthorizationAppleIDCredential) {
+        
+        // Criação do Record na tabela de Usuários no Cloud
+        let userRecord = CKRecord(recordType: "User", recordID: CKRecord.ID(recordName: appleIDCredential.user))
+        
+        // Passagem do record no construtor da Struct
+        self.user = User(record: userRecord)
+        
+        if let email = appleIDCredential.email {
+            user.email = email
+        }
+        
+        // Popula o Record na Struct User
+        if let name = appleIDCredential.fullName?.givenName {
+            user.name = name
+        }
+        
+        if let familyName = appleIDCredential.fullName?.familyName {
+            user.name?.append(contentsOf: " \(familyName)")
+        }
+        
+        self.saveDefaults(user: user)
+        
+        // Cria o record no Cloud
+        CloudManager.shared.createRecords(records: [userRecord], perRecordCompletion: { (record, error) in
+            if let error = error {
+                print("Error: \(error)")
+            } else {
+                print("Successfully created user: ")
+                self.notificationPermission()
+            }
+        }) {
+            self.confirmLoginInApp()
+            print("Done")
+        }
+    }
     
     // Para tratar erros
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -195,3 +217,4 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
         return self.view.window!
     }
 }
+

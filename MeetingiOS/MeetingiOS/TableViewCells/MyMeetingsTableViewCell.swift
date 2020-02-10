@@ -17,6 +17,7 @@ class MyMeetingsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.setupCornerRadiusShadow()
         
     }
 

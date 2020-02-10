@@ -423,6 +423,7 @@
                         <outletCollection property="views" destination="J9o-pP-nPt" id="m6H-wZ-YAU"/>
                         <segue destination="oSk-dV-1av" kind="show" identifier="SelectContacts" id="5Uv-LT-x5v"/>
                         <segue destination="Tam-Xa-hCQ" kind="show" identifier="SelectColor" id="E6j-Xv-szd"/>
+                        <segue destination="uqr-te-fwY" kind="show" identifier="Premium" id="2ei-vI-Nq1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjd-2v-gf4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -448,6 +449,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVX-xy-bi6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1942" y="29"/>
+        </scene>
+        <!--Premium-->
+        <scene sceneID="9LO-XM-Ynx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Premium" id="uqr-te-fwY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fkw-Ol-oQ2"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sVN-iB-BVY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2135" y="-74"/>
         </scene>
     </scenes>
     <resources>
