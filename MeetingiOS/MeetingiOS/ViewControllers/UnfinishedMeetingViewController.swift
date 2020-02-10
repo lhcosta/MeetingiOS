@@ -404,7 +404,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
         } /*else {
          
          }*/
-        cell.topicTextField.placeholder = NSLocalizedString("Topic's name", comment: "")
+        cell.topicTextField.placeholder = NSLocalizedString("Topic name", comment: "")
         // Verificamos se o usuário está em modo de pesquisa.
         if isSearching {
             // Pegamos os dados da Array do modo de pesquisa.
