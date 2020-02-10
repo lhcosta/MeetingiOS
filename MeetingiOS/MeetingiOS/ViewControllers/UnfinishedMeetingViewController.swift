@@ -688,7 +688,7 @@ private extension UnfinishedMeetingViewController {
     /// Enviando tópicos criados para a reunião.
     @objc func shareTopicsToMeeting() {
         
-        let loadingAlert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
+        let loadingAlert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
         loadingAlert.addUIActivityIndicatorView()
         
         self.present(loadingAlert, animated: true)

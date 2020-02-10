@@ -199,9 +199,6 @@
 		A482CABB23E089D300C945E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Contact.strings; sourceTree = "<group>"; };
 		A482CABD23E089D500C945E1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Contact.strings"; sourceTree = "<group>"; };
 		A482CABF23E089D800C945E1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contact.strings; sourceTree = "<group>"; };
-		A482CAC223E09D6300C945E1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MyMeetings.strings; sourceTree = "<group>"; };
-		A482CAC423E09D6600C945E1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MyMeetings.strings"; sourceTree = "<group>"; };
-		A482CAC623E09D6900C945E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyMeetings.strings; sourceTree = "<group>"; };
 		A49229ED23A3323500FD95B9 /* ContactTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableView.swift; sourceTree = "<group>"; };
 		A4922A1023A728FB00FD95B9 /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
 		A4922A1123A728FB00FD95B9 /* SFProText-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Heavy.ttf"; sourceTree = "<group>"; };
@@ -218,6 +215,9 @@
 		A4922A1C23A728FB00FD95B9 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		A4922A1D23A728FB00FD95B9 /* SFProDisplay-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Heavy.ttf"; sourceTree = "<group>"; };
 		A4922A1E23A728FB00FD95B9 /* SFProDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Thin.ttf"; sourceTree = "<group>"; };
+		A4B49D0023F1E9F90012E072 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyMeetings.strings; sourceTree = "<group>"; };
+		A4B49D0223F1E9FB0012E072 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MyMeetings.strings"; sourceTree = "<group>"; };
+		A4B49D0423F1E9FE0012E072 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MyMeetings.strings; sourceTree = "<group>"; };
 		A4BA9B1923CE276E00CCC2AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Details.storyboard; sourceTree = "<group>"; };
 		A4BCAD0E23E4A3B900470E95 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		A4BCAD1023E4A3BC00470E95 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Login.strings"; sourceTree = "<group>"; };
@@ -792,9 +792,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				49F09A6F2399827800B7DFD3 /* Base */,
-				A482CAC223E09D6300C945E1 /* es */,
-				A482CAC423E09D6600C945E1 /* pt-BR */,
-				A482CAC623E09D6900C945E1 /* en */,
+				A4B49D0023F1E9F90012E072 /* en */,
+				A4B49D0223F1E9FB0012E072 /* pt-BR */,
+				A4B49D0423F1E9FE0012E072 /* es */,
 			);
 			name = MyMeetings.storyboard;
 			sourceTree = "<group>";

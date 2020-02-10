@@ -86,8 +86,8 @@ class ConclusionsViewController: UITableViewController {
         view.addGestureRecognizer(tap)
         
         /// Dispara as funções de manipulação do teclado
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.topicToPresentConclusions.conclusions.append("")
     }
@@ -103,7 +103,7 @@ class ConclusionsViewController: UITableViewController {
             loading.addUIActivityIndicatorView()
             
             self.present(loading, animated: true, completion: nil)
-                        
+            
             CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
                 if let error = error {
                     print("Error Cloud: \(error)")
@@ -131,38 +131,38 @@ class ConclusionsViewController: UITableViewController {
     }
     
     
-//    @objc func keyboardWillShow(notification: NSNotification){
-//        //Need to calculate keyboard exact size due to Apple suggestions
-//        if let activeTableView = self.activeField?.superview?.superview as? UITableView {
-//            activeTableView.isScrollEnabled = true
-//            let info = notification.userInfo!
-//            let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-//            let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height*1.2, right: 0.0)
-//
-//            activeTableView.contentInset = contentInsets
-//            activeTableView.scrollIndicatorInsets = contentInsets
-//
-//            var aRect: CGRect = self.view.frame
-//            aRect.size.height -= keyboardSize!.height
-//            if let activeField = self.activeField {
-//                if (!aRect.contains(activeField.frame.origin)){
-//                    activeTableView.scrollRectToVisible(activeField.frame, animated: true)
-//                }
-//            }
-//        }
-//    }
-//
-//    @objc func keyboardWillHide(notification: NSNotification){
-//        //Once keyboard disappears, restore original positions
-//        if let activeTableView = self.activeField?.superview?.superview as? UITableView {
-//            let info = notification.userInfo!
-//            let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-//            let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height*1.2, right: 0.0)
-//            activeTableView.contentInset = contentInsets
-//            activeTableView.scrollIndicatorInsets = contentInsets
-//            self.view.endEditing(true)
-//        }
-//    }
+    //    @objc func keyboardWillShow(notification: NSNotification){
+    //        //Need to calculate keyboard exact size due to Apple suggestions
+    //        if let activeTableView = self.activeField?.superview?.superview as? UITableView {
+    //            activeTableView.isScrollEnabled = true
+    //            let info = notification.userInfo!
+    //            let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+    //            let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height*1.2, right: 0.0)
+    //
+    //            activeTableView.contentInset = contentInsets
+    //            activeTableView.scrollIndicatorInsets = contentInsets
+    //
+    //            var aRect: CGRect = self.view.frame
+    //            aRect.size.height -= keyboardSize!.height
+    //            if let activeField = self.activeField {
+    //                if (!aRect.contains(activeField.frame.origin)){
+    //                    activeTableView.scrollRectToVisible(activeField.frame, animated: true)
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    //    @objc func keyboardWillHide(notification: NSNotification){
+    //        //Once keyboard disappears, restore original positions
+    //        if let activeTableView = self.activeField?.superview?.superview as? UITableView {
+    //            let info = notification.userInfo!
+    //            let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+    //            let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height*1.2, right: 0.0)
+    //            activeTableView.contentInset = contentInsets
+    //            activeTableView.scrollIndicatorInsets = contentInsets
+    //            self.view.endEditing(true)
+    //        }
+    //    }
 }
 
 
@@ -239,13 +239,15 @@ extension ConclusionsViewController {
         
         /// Section 2 -> Descrição    |      Section 3 -> Conslusões        
         descriptionTextView.isUserInteractionEnabled = fromUnfinishedMeeting && (topicToPresentConclusions.author?.recordID.recordName == UserDefaults.standard.value(forKey: "recordName") as? String)
-        
-        if self.topicToPresentConclusions.topicPorque.isEmpty {
-            self.descriptionTextView.text = NSLocalizedString("Not specified.", comment: "")
+    
+        if topicToPresentConclusions.topicPorque.isEmpty {
+             self.descriptionTextView.text = NSLocalizedString("Not specified.", comment: "")
+            self.descriptionTextView.textColor = .placeholderText
         } else {
             self.descriptionTextView.text = topicToPresentConclusions.topicPorque
+            self.descriptionTextView.textColor = .label
         }
-        
+    
         if !self.meetingDidBegin {
             conclusionManager.fromUnfinishedMeeting = true
             conclusionManager.meetingDidBegin = self.meetingDidBegin

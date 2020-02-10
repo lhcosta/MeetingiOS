@@ -148,11 +148,11 @@
                                                                         <constraint firstAttribute="width" constant="8" id="hJT-2B-o5S"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GQ9-ty-oh7">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rb3-cK-JFe">
                                                                     <rect key="frame" x="13" y="0.0" width="321" height="76"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
                                                             </subviews>
@@ -213,7 +213,7 @@
                                                                                     </imageView>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Conclusion" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OcW-FN-YGF">
                                                                                         <rect key="frame" x="26" y="0.0" width="308" height="20"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
                                                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                                                     </textField>
                                                                                 </subviews>
@@ -265,7 +265,7 @@
                     <connections>
                         <outlet property="conclusionTableView" destination="oyA-0N-tZj" id="ttD-Ve-iaR"/>
                         <outlet property="contentViewConclusionTableView" destination="X16-j2-CYx" id="nKD-pC-bGr"/>
-                        <outlet property="descriptionTextView" destination="GQ9-ty-oh7" id="TXy-WQ-po8"/>
+                        <outlet property="descriptionTextView" destination="Rb3-cK-JFe" id="s0l-bI-tEM"/>
                         <outlet property="descriptionView" destination="d9E-zy-rqY" id="JFr-fb-1G3"/>
                         <outlet property="labelAuthorName" destination="1GH-MS-bdr" id="GBL-OX-D0F"/>
                         <outlet property="labelTimeDiscussed" destination="b5s-VV-jLh" id="Zcx-NP-1Ij"/>
