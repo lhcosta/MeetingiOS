@@ -50,7 +50,7 @@ import CloudKit
     /// O Porquê do Topic ter sido feito pelo author
     var topicPorque: String! {
         set { 
-            if newValue != NSLocalizedString("Not specified.", comment: "") && !newValue.isEmpty {
+            if newValue != NSLocalizedString("Not specified.", comment: "") {
                 self.record["topicPorque"] = newValue
             }
         }

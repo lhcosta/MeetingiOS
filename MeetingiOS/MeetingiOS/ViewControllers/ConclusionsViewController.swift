@@ -104,6 +104,8 @@ class ConclusionsViewController: UITableViewController {
             
             self.present(loading, animated: true, completion: nil)
             
+            topicToPresentConclusions.topicPorque = self.descriptionTextView.text
+            
             CloudManager.shared.updateRecords(records: [topicToPresentConclusions.record], perRecordCompletion: { (record, error) in
                 if let error = error {
                     print("Error Cloud: \(error)")
