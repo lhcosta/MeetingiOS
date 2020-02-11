@@ -253,14 +253,20 @@ class UnfinishedMeetingViewController: UIViewController {
         
         currMeeting.selected_topics = []
         for idx in 1..<topics.count {
-            
             if topics[idx].selectedForMeeting {
-                
                 currMeeting.selected_topics.append(topics[idx])
-                
             }
         }
         
+        self.currMeeting.selected_topics.sort { (lhs, rhs) -> Bool in
+            if let lhsDate = lhs.record.creationDate, let rhsDate = rhs.record.creationDate {
+                return lhsDate < rhsDate
+            }
+            
+            return false
+        }
+        
+            
         self.currMeeting.started = true
         
         CloudManager.shared.updateRecords(records: [self.currMeeting.record], perRecordCompletion: { (record, error) in

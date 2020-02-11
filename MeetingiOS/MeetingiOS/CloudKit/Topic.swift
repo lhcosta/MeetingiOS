@@ -58,6 +58,10 @@ import CloudKit
         get { return self.record.value(forKey: "topicPorque") as? String ?? ""}
     }
     
+    /// Debug
+    override var debugDescription: String {
+        return topicDescription
+    }
     
     /// Conclusões enviadas pelos funcionários/gerente durante a reunião (quando já discutida?)
     var conclusions: [String] {
