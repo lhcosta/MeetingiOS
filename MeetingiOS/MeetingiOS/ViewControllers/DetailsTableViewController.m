@@ -10,7 +10,7 @@
 #import "UIView+CornerShadows.h"
 #import "TopicsPerPersonPickerView.h"
 #import "DetailsTableViewController+TextFieldName.h"
-#import <MeetingiOS-Swift.h>
+#import <Meeting_minutes_-Swift.h>
 
 @class User;
 

@@ -7,7 +7,7 @@
 //
 
 #import "NewMeetingViewController.h"
-#import <MeetingiOS-Swift.h>
+#import <Meeting_minutes_-Swift.h>
 #import "NewMeetingViewController+NameMeetingValidation.h"
 #import "Contact.h"
 #import "ContactCollectionView.h"
