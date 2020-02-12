@@ -7,7 +7,7 @@
 //
 
 #import "DetailsTableViewController+TextFieldName.h"
-#import <Meeting_minutes_-Swift.h>
+#import <Meeting-Swift.h>
 
 @class Meeting;
 
