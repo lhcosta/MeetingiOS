@@ -7,7 +7,7 @@
 //
 
 #import "UIView+CornerShadows.h"
-#import <Meeting_minutes_-Swift.h>
+#import <Meeting-Swift.h>
 
 @implementation UIView (CornerShadows)
 
