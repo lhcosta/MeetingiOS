@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HWP-hG-vEw">
-    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -14,14 +14,14 @@
             <objects>
                 <viewController id="akh-QK-HWq" customClass="SelectColorViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0U2-ND-NaL">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X16-iu-ar5">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="633"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="525"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSu-GP-Jsn">
-                                        <rect key="frame" x="309" y="241.5" width="150" height="150"/>
+                                        <rect key="frame" x="132" y="187.5" width="150" height="150"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="3F7-Km-Xv5"/>
@@ -36,10 +36,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6I-zi-g7V">
-                                <rect key="frame" x="0.0" y="633" width="768" height="341"/>
+                                <rect key="frame" x="0.0" y="525" width="414" height="283"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ofX-QH-Iaq">
-                                        <rect key="frame" x="165" y="40" width="438" height="256"/>
+                                        <rect key="frame" x="62" y="30" width="290" height="212.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ApI-Lg-ceR">
                                             <size key="itemSize" width="50" height="50"/>
@@ -93,6 +93,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Pick a color" largeTitleDisplayMode="never" id="5tS-aP-E6d">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="iCL-xg-1JP">
+                            <color key="tintColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="sendSelectedColor" destination="akh-QK-HWq" id="yRo-fe-yz7"/>
                             </connections>
@@ -107,13 +108,13 @@
             </objects>
             <point key="canvasLocation" x="1205.7971014492755" y="75.669642857142847"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="T7O-wz-riX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HWP-hG-vEw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HWP-hG-vEw" customClass="NavController" customModule="Meeting" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="jSZ-xp-5iD">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" name="NavigationBarColor"/>
                         <textAttributes key="titleTextAttributes">
@@ -144,5 +145,4 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <color key="tintColor" name="MeetingColor"/>
 </document>

@@ -12,8 +12,7 @@ class NavController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar
-
+        self.navigationBar.tintColor = UIColor(named: "BarButtonColor")
         // Do any additional setup after loading the view.
     }
     

@@ -485,10 +485,10 @@
             </objects>
             <point key="canvasLocation" x="2872.4637681159425" y="-68.973214285714278"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="405-MP-G7p">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jvK-K9-OpN" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jvK-K9-OpN" customClass="NavController" customModule="Meeting" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="BKc-Zo-hM5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -521,5 +521,4 @@
             <color red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <color key="tintColor" name="MeetingColor"/>
 </document>

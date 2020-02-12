@@ -293,6 +293,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="EfI-mh-3MO">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WMv-vt-PcW">
+                            <color key="tintColor" name="BarButtonColor"/>
                             <connections>
                                 <action selector="didPressCancel:" destination="y2t-Y2-Vj8" id="wZN-e1-e1k"/>
                             </connections>
@@ -306,10 +307,10 @@
             </objects>
             <point key="canvasLocation" x="170.40000000000001" y="-46.551724137931039"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="1yk-dv-BaP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pmj-iz-S3v" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pmj-iz-S3v" customClass="NavController" customModule="Meeting" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HeL-El-Xu6">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -329,6 +330,9 @@
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="BarButtonColor">
+            <color red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ColorTableViewCell">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -336,5 +340,4 @@
             <color red="0.0" green="0.24699999392032623" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <color key="tintColor" name="MeetingColor"/>
 </document>

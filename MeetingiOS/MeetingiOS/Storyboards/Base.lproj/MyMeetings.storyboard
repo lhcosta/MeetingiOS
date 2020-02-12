@@ -246,10 +246,10 @@
             </objects>
             <point key="canvasLocation" x="1310.144927536232" y="72.991071428571431"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="wmy-rH-uo1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="vTy-o5-exJ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="vTy-o5-exJ" customClass="NavController" customModule="Meeting" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GYS-hu-iJV">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -305,5 +305,4 @@
     <inferredMetricsTieBreakers>
         <segue reference="xaa-UT-uet"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" name="MeetingColor"/>
 </document>
