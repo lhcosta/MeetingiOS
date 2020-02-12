@@ -469,6 +469,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
 //            cell.buttonInfo.isEnabled = true
 //        }
         tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
+        self.indexPath = tableViewTopics.indexPath(for: cell)
         self.activeField = textField
     }
     
@@ -563,7 +564,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
-            let indexPath = tableViewTopics.indexPath(for: cell)!
+            let indexPath = tableViewTopics.indexPath(for: cell) ?? self.indexPath!
             topics[indexPath.section].topicDescription = textField.text!
             // Se a edição não resultou em um Topic vazio, adicionamos ele no Cloud.
             if topics[indexPath.section].topicDescription != "" {
