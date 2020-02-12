@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "49EB44DD23871126002F434D"
-               BuildableName = "Meeting minutes..app"
+               BuildableName = "Meeting.app"
                BlueprintName = "MeetingiOS"
                ReferencedContainer = "container:MeetingiOS.xcodeproj">
             </BuildableReference>
@@ -34,7 +34,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "pt-BR"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -46,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "49EB44DD23871126002F434D"
-            BuildableName = "Meeting minutes..app"
+            BuildableName = "Meeting.app"
             BlueprintName = "MeetingiOS"
             ReferencedContainer = "container:MeetingiOS.xcodeproj">
          </BuildableReference>
@@ -63,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "49EB44DD23871126002F434D"
-            BuildableName = "Meeting minutes..app"
+            BuildableName = "Meeting.app"
             BlueprintName = "MeetingiOS"
             ReferencedContainer = "container:MeetingiOS.xcodeproj">
          </BuildableReference>

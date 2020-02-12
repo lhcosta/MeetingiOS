@@ -18,7 +18,7 @@
         <!--Profile View Controller-->
         <scene sceneID="8g2-lb-51r">
             <objects>
-                <tableViewController modalPresentationStyle="pageSheet" id="qoh-0J-yhU" customClass="ProfileViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="pageSheet" id="qoh-0J-yhU" customClass="ProfileViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Msv-MN-Ghb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,9 +28,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" name="NavigationBarColor"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" name="MeetingColor"/>
+                            </textAttributes>
                             <items>
                                 <navigationItem title="Account" id="ym3-gE-Q5T">
                                     <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="TDs-1p-IJo">
+                                        <color key="tintColor" name="MeetingColor"/>
                                         <connections>
                                             <action selector="didPressDone:" destination="qoh-0J-yhU" id="2BP-0Z-iX8"/>
                                         </connections>
@@ -55,15 +59,15 @@
                                                             <rect key="frame" x="17" y="0.0" width="346" height="77"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ykz-Ms-fXZ" userLabel="TF Stack View">
-                                                                    <rect key="frame" x="0.0" y="17.5" width="307" height="42"/>
+                                                                    <rect key="frame" x="0.0" y="17" width="307" height="43"/>
                                                                     <subviews>
                                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="67l-RY-yDG">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="21"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="51" height="22"/>
                                                                             <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="18"/>
                                                                             <textInputTraits key="textInputTraits"/>
                                                                         </textField>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4GF-bm-ybv">
-                                                                            <rect key="frame" x="0.0" y="25" width="34.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="26" width="35.5" height="17"/>
                                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
                                                                         </textField>
@@ -122,13 +126,13 @@
                                                             <rect key="frame" x="17" y="0.0" width="343" height="77"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Subscription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwD-Ic-KU6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="77"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="77"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmh-zh-fGI">
-                                                                    <rect key="frame" x="112" y="0.0" width="231" height="77"/>
+                                                                    <rect key="frame" x="117" y="0.0" width="226" height="77"/>
                                                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
                                                                     <color key="textColor" red="0.69019607843137254" green="0.69019607843137254" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -228,6 +232,9 @@
         </namedColor>
         <namedColor name="ColorTableViewCell">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MeetingColor">
+            <color red="0.0" green="0.24699999392032623" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NavigationBarColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -18,7 +18,7 @@
         <!--Conclusions View Controller-->
         <scene sceneID="6lp-lR-eXb">
             <objects>
-                <tableViewController storyboardIdentifier="conclusionStoryboard" id="CSx-pl-DoB" customClass="ConclusionsViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="conclusionStoryboard" id="CSx-pl-DoB" customClass="ConclusionsViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xPP-5Z-1Ar">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,4 +321,5 @@
             <color red="0.23499999940395355" green="0.23499999940395355" blue="0.2630000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <color key="tintColor" name="MeetingColor"/>
 </document>

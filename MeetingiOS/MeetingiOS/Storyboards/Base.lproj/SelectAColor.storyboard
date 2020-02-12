@@ -12,7 +12,7 @@
         <!--Pick a color-->
         <scene sceneID="Gnh-I9-XR3">
             <objects>
-                <viewController id="akh-QK-HWq" customClass="SelectColorViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="akh-QK-HWq" customClass="SelectColorViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0U2-ND-NaL">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,4 +144,5 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <color key="tintColor" name="MeetingColor"/>
 </document>
