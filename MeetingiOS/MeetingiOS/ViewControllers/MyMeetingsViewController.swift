@@ -137,24 +137,35 @@ import CloudKit
         let recordIDs = meetings[arrayIndex].map({$0.record.recordID.recordName})
         
         var booleano: Bool
+        var otherIndex: Int
         
         if arrayIndex == 0 {
             booleano = true
+            otherIndex = 1
         } else {
             booleano = false
+            otherIndex = 0
         }
         
         if !recordIDs.contains(meeting.record.recordID.recordName) {
             if let index = self.meetings[arrayIndex].firstIndex(where: { (oldMeeting) -> Bool in
                 if oldMeeting.initialDate! < meeting.initialDate! {
-                    return booleano
-                } else {
                     return !booleano
+                } else {
+                    return booleano
                 }
             }) {
                 self.meetings[arrayIndex].insert(meeting, at: index)
             } else {
                 self.meetings[arrayIndex].append(meeting)
+            }
+            
+            self.meetings[otherIndex].removeAll { (meet) -> Bool in
+                if meet.record.recordID.recordName == meeting.record.recordID.recordName {
+                    return true
+                }
+                
+                return false
             }
         }
     }

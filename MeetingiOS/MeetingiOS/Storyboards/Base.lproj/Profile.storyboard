@@ -18,7 +18,7 @@
         <!--Profile View Controller-->
         <scene sceneID="8g2-lb-51r">
             <objects>
-                <tableViewController modalPresentationStyle="pageSheet" id="qoh-0J-yhU" customClass="ProfileViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="pageSheet" id="qoh-0J-yhU" customClass="ProfileViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Msv-MN-Ghb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,9 +28,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" name="NavigationBarColor"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" name="MeetingColor"/>
+                            </textAttributes>
                             <items>
                                 <navigationItem title="Account" id="ym3-gE-Q5T">
                                     <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="TDs-1p-IJo">
+                                        <color key="tintColor" name="BarButtonColor"/>
                                         <connections>
                                             <action selector="didPressDone:" destination="qoh-0J-yhU" id="2BP-0Z-iX8"/>
                                         </connections>
@@ -226,8 +230,14 @@
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="BarButtonColor">
+            <color red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ColorTableViewCell">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MeetingColor">
+            <color red="0.0" green="0.24699999392032623" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NavigationBarColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

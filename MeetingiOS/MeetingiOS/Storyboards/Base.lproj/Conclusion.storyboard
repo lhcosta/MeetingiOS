@@ -18,7 +18,7 @@
         <!--Conclusions View Controller-->
         <scene sceneID="6lp-lR-eXb">
             <objects>
-                <tableViewController storyboardIdentifier="conclusionStoryboard" id="CSx-pl-DoB" customClass="ConclusionsViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="conclusionStoryboard" id="CSx-pl-DoB" customClass="ConclusionsViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xPP-5Z-1Ar">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -278,10 +278,10 @@
             </objects>
             <point key="canvasLocation" x="4786.9565217391309" y="573.88392857142856"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="rTI-Zc-H9e">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DOV-dk-cBw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DOV-dk-cBw" customClass="NavController" customModule="Meeting" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="vrf-lo-Pzq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="xBp-qK-UJ0">

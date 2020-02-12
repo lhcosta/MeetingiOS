@@ -7,7 +7,7 @@
 //
 
 #import "Contact.h"
-#import <Meeting_minutes_-Swift.h>
+#import <Meeting-Swift.h>
 
 @implementation Contact
 

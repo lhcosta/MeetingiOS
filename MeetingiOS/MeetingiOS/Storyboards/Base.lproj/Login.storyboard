@@ -19,7 +19,7 @@
         <!--Login View Controller-->
         <scene sceneID="BBL-aF-LFL">
             <objects>
-                <viewController id="DeE-jB-R7u" customClass="LoginViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DeE-jB-R7u" customClass="LoginViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0aL-rg-EJq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

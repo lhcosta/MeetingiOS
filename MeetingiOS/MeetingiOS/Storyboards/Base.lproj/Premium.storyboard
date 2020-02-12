@@ -21,13 +21,13 @@
         <!--Premium Options Table View Controller-->
         <scene sceneID="KiB-sG-PwD">
             <objects>
-                <tableViewController id="Akc-E2-4l1" customClass="PremiumOptionsTableViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Akc-E2-4l1" customClass="PremiumOptionsTableViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="77" estimatedRowHeight="-1" sectionHeaderHeight="29" sectionFooterHeight="29" id="5Ek-Q4-XBI">
                         <rect key="frame" x="0.0" y="0.0" width="347" height="260"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" id="8gC-qE-ktp" customClass="OptionsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" id="8gC-qE-ktp" customClass="OptionsTableViewCell" customModule="Meeting_minutes_" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="347" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8gC-qE-ktp" id="UBN-9N-7d9">
@@ -93,7 +93,7 @@
         <!--Premium Table View Controller-->
         <scene sceneID="l6K-K5-sie">
             <objects>
-                <tableViewController id="y2t-Y2-Vj8" customClass="PremiumTableViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="y2t-Y2-Vj8" customClass="PremiumTableViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6jd-HW-rOd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,6 +293,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="EfI-mh-3MO">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WMv-vt-PcW">
+                            <color key="tintColor" name="BarButtonColor"/>
                             <connections>
                                 <action selector="didPressCancel:" destination="y2t-Y2-Vj8" id="wZN-e1-e1k"/>
                             </connections>
@@ -306,10 +307,10 @@
             </objects>
             <point key="canvasLocation" x="170.40000000000001" y="-46.551724137931039"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="1yk-dv-BaP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pmj-iz-S3v" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pmj-iz-S3v" customClass="NavController" customModule="Meeting" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HeL-El-Xu6">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -328,6 +329,9 @@
     <resources>
         <namedColor name="BackgroundColor">
             <color red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BarButtonColor">
+            <color red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ColorTableViewCell">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
