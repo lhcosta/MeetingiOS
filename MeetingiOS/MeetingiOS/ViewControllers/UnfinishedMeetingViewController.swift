@@ -178,23 +178,23 @@ class UnfinishedMeetingViewController: UIViewController {
     }
     
     
-    @objc func createNewTopic() {
-        
-        self.indexPath = IndexPath(row: 0, section: 0)
-        tableViewTopics.scrollToRow(at: self.indexPath, at: .none, animated: true)
-        
-        if let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as? UnfinishedTopicsTableViewCell {
-            if self.indexPath.section != 0 {
-                let newTopic = creatingTopicInstance()
-                topics.append(newTopic)
-                tableViewTopics.reloadData()
-            }
-            if usrIsManager {
-                newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-            }
-            newTopicCell.topicTextField.becomeFirstResponder()
-        }
-    }
+//    @objc func createNewTopic() {
+//
+//        self.indexPath = IndexPath(row: 0, section: 0)
+//        tableViewTopics.scrollToRow(at: self.indexPath, at: .none, animated: true)
+//
+//        if let newTopicCell = tableViewTopics.cellForRow(at: self.indexPath) as? UnfinishedTopicsTableViewCell {
+//            if self.indexPath.section != 0 {
+//                let newTopic = creatingTopicInstance()
+//                topics.append(newTopic)
+//                tableViewTopics.reloadData()
+//            }
+//            if usrIsManager {
+//                newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+//            }
+//            newTopicCell.topicTextField.becomeFirstResponder()
+//        }
+//    }
     
     
     /// Check mark, só para o gerente, que decide se o Topic atual irá para a Meeting.
@@ -462,8 +462,9 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
 //            cell.buttonInfo.alpha = 1
 //            cell.buttonInfo.isEnabled = true
 //        }
-        tableViewTopics.scrollToRow(at: tableViewTopics.indexPath(for: cell)!, at: .bottom, animated: true)
+//        tableViewTopics.isScrollEnabled = false
         self.activeField = textField
+        self.indexPath = tableViewTopics.indexPath(for: cell)
     }
     
     
@@ -548,8 +549,8 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             for i in temp {
                 topics.remove(at: i)
             }
-            
             tableViewTopics.reloadData()
+            
             return true
         } else {
             // Quando não estamos no modo de pesquisa, nós alteramos a array de Topics principal diretamente
@@ -557,7 +558,7 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
-            let indexPath = tableViewTopics.indexPath(for: cell)!
+            let indexPath = tableViewTopics.indexPath(for: cell) ?? self.indexPath!
             topics[indexPath.section].topicDescription = textField.text!
             // Se a edição não resultou em um Topic vazio, adicionamos ele no Cloud.
             if topics[indexPath.section].topicDescription != "" {
@@ -602,7 +603,6 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             for i in temp {
                 topics.remove(at: i)
             }
-            tableViewTopics.reloadData()
             
             // Verificamos se o novo Topic não foi vazio e criamos um novo espaço na tableView para a criação
             // de outro Topic.
@@ -616,8 +616,8 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
                     cell.topicTextField.becomeFirstResponder()
                 }
             }
-//            cell.buttonInfo.alpha = 0
-//            cell.buttonInfo.isEnabled = false
+            tableViewTopics.reloadData()
+            
             return true
         }
     }
