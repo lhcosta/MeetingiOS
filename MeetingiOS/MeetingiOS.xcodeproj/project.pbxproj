@@ -135,7 +135,7 @@
 		49BC44C4239FD913007A85E2 /* MyMeetingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMeetingsTableViewCell.swift; sourceTree = "<group>"; };
 		49BF5F9323DF652600DD56DC /* TableView+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Gradient.swift"; sourceTree = "<group>"; };
 		49CB4C46238D6C6500DFDAD4 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudManager.swift; path = MeetingiOS/CloudManager.swift; sourceTree = SOURCE_ROOT; };
-		49EB44DE23871126002F434D /* Meeting minutes..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meeting minutes..app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49EB44DE23871126002F434D /* Meeting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meeting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EB44E123871126002F434D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49EB44E323871126002F434D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		49EB44ED23871128002F434D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 		49EB44DF23871126002F434D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				49EB44DE23871126002F434D /* Meeting minutes..app */,
+				49EB44DE23871126002F434D /* Meeting.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -570,7 +570,7 @@
 			);
 			name = MeetingiOS;
 			productName = MeetingiOS;
-			productReference = 49EB44DE23871126002F434D /* Meeting minutes..app */;
+			productReference = 49EB44DE23871126002F434D /* Meeting.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1013,9 +1013,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.QuartetoFantastico.Meeting.iOS;
-				PRODUCT_NAME = "Meeting minutes.";
+				PRODUCT_NAME = Meeting;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeetingiOS/ViewControllers/MeetingiOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1039,9 +1039,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.QuartetoFantastico.Meeting.iOS;
-				PRODUCT_NAME = "Meeting minutes.";
+				PRODUCT_NAME = Meeting;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeetingiOS/ViewControllers/MeetingiOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

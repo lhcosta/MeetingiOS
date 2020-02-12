@@ -563,7 +563,9 @@ extension UnfinishedMeetingViewController: UITextFieldDelegate {
             guard let cell = textField.superview?.superview?.superview as? UnfinishedTopicsTableViewCell else {
                 return false
             }
+            
             let indexPath = tableViewTopics.indexPath(for: cell)!
+            
             topics[indexPath.section].topicDescription = textField.text!
             // Se a edição não resultou em um Topic vazio, adicionamos ele no Cloud.
             if topics[indexPath.section].topicDescription != "" {
