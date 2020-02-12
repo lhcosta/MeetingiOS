@@ -72,7 +72,7 @@ class ConclusionsViewController: UITableViewController {
         conclusionManager.conclusionTableView = conclusionTableView
         
         /// Configuração da Navigation - Título e ação do botão Done
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action:  #selector(doneAction))
         navigationItem.title = NSLocalizedString("Details", comment: "")
         
         // Arredondando bordas da View

@@ -19,7 +19,7 @@
         <!--MyMeetingsViewController-->
         <scene sceneID="Gzg-nY-hfr">
             <objects>
-                <viewController storyboardIdentifier="MyMeetings" title="MyMeetingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dcg-jt-bSn" customClass="MyMeetingsViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyMeetings" title="MyMeetingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dcg-jt-bSn" customClass="MyMeetingsViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H9D-fS-AW6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
                                 <rect key="frame" x="17" y="88" width="380" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="120" id="7fe-wl-nNI" customClass="MyMeetingsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="120" id="7fe-wl-nNI" customClass="MyMeetingsTableViewCell" customModule="Meeting_minutes_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="380" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7fe-wl-nNI" id="b41-Ck-Xgl">
@@ -95,7 +95,7 @@
                                             <outlet property="meetingName" destination="nks-1Y-QJY" id="Jaj-1M-pad"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellEmpty" rowHeight="120" id="0eo-UG-MM3" customClass="MyMeetingsTableViewCell" customModule="MeetingiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellEmpty" rowHeight="120" id="0eo-UG-MM3" customClass="MyMeetingsTableViewCell" customModule="Meeting_minutes_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="148" width="380" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0eo-UG-MM3" id="z6U-HB-1LP">
@@ -302,4 +302,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="xaa-UT-uet"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" name="MeetingColor"/>
 </document>

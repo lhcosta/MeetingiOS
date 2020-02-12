@@ -12,7 +12,7 @@
         <!--Contact View Controller-->
         <scene sceneID="OXq-ky-G1j">
             <objects>
-                <viewController id="uO4-SB-ijz" customClass="ContactViewController" customModule="MeetingiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uO4-SB-ijz" customClass="ContactViewController" customModule="Meeting_minutes_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wj6-aE-PQJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
