@@ -190,7 +190,7 @@ class UnfinishedMeetingViewController: UIViewController {
                 tableViewTopics.reloadData()
             }
             if usrIsManager {
-                newTopicCell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                newTopicCell.checkButton.setBackgroundImage(UIImage(named: "checkMark"), for: .normal)
             }
             newTopicCell.topicTextField.becomeFirstResponder()
         }
@@ -208,10 +208,10 @@ class UnfinishedMeetingViewController: UIViewController {
         let indexPath = tableViewTopics.indexPath(for: cell)
         
         if topics[indexPath!.section].selectedForMeeting {
-            button.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "checkMarkUn"), for: .normal)
             topics[indexPath!.section].selectedForMeeting = false
         } else {
-            button.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "checkMark"), for: .normal)
             topics[indexPath!.section].selectedForMeeting = true
         }
         
@@ -322,8 +322,7 @@ class UnfinishedMeetingViewController: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification){
         //Once keyboard disappears, restore original positions
         let info = notification.userInfo!
-        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-        let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height*1.2, right: 0.0)
+        let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         self.tableViewTopics.contentInset = contentInsets
         self.tableViewTopics.scrollIndicatorInsets = contentInsets
         self.view.endEditing(true)
@@ -368,7 +367,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     
     /// Espaçamento de cada section.
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return tableView.frame.height * 0.03
+        return tableView.frame.height * 0.06
     }
     
     
@@ -417,9 +416,9 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
             cell.topicTextField.text = searchedTopics[indexPath.section].topicDescription
             // Verificamos o estado do Topic para alterar o botão de check (selectedForMeeting true ou false)
             if searchedTopics[indexPath.section].selectedForMeeting {
-                cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                cell.checkButton.setBackgroundImage(UIImage(named: "checkMark"), for: .normal)
             } else {
-                cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+                cell.checkButton.setBackgroundImage(UIImage(named: "checkMarkUn"), for: .normal)
             }
             if indexPath.section == 0 {
                 cell.buttonInfo.isHidden = false
@@ -433,9 +432,9 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
                 cell.textFieldLeft.priority = UILayoutPriority(998)
             }
             if topics[indexPath.section].selectedForMeeting {
-                cell.checkButton.setBackgroundImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                cell.checkButton.setBackgroundImage(UIImage(named: "checkMark"), for: .normal)
             } else {
-                cell.checkButton.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
+                cell.checkButton.setBackgroundImage(UIImage(named: "checkMarkUn"), for: .normal)
             }
             
             if indexPath.section == 0 {
@@ -447,7 +446,7 @@ extension UnfinishedMeetingViewController: UITableViewDelegate, UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.size.height * 0.2
+        return tableView.frame.size.height * 0.16
     }
 }
 
